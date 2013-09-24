@@ -24,10 +24,7 @@ public class DateiVerwaltung {
 	}
 	
 	public boolean dateiSchreiben(Zug zug){
-		String ergebnis = "<freigabe>" + zug.getFreigabe() + "</freigabe>";
-		ergebnis += "\r\n<satzstatus>" + zug.getSatzstatus() + "</satzstatus>";
-		ergebnis += "\r\n<gegnerzug>" + zug.getGegnerzug() + "</gegnerzug>";
-		ergebnis += "\r\n<sieger>" + zug.getSieger() + "</sieger>";
+		String ergebnis = ""+zug.getGegnerzug();
 		try{
 			bufferedWriter.write(ergebnis);
 			return true;
