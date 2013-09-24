@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <FlowPane layoutX="11.0" layoutY="38.0" prefHeight="387.9999000000025" prefWidth="449.0" styleClass="spielfeld" />
+    <Circle id="6a" fill="DODGERBLUE" layoutX="41.0" layoutY="79.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="6b" fill="DODGERBLUE" layoutX="102.0" layoutY="79.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="6c" fill="DODGERBLUE" layoutX="167.0" layoutY="79.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="6d" fill="DODGERBLUE" layoutX="234.0" layoutY="79.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="6e" fill="DODGERBLUE" layoutX="300.0" layoutY="79.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5a" fill="DODGERBLUE" layoutX="41.0" layoutY="140.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5b" fill="DODGERBLUE" layoutX="102.0" layoutY="140.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5c" fill="DODGERBLUE" layoutX="167.0" layoutY="140.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5d" fill="DODGERBLUE" layoutX="234.0" layoutY="140.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5e" fill="DODGERBLUE" layoutX="300.0" layoutY="140.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4a" fill="DODGERBLUE" layoutX="41.0" layoutY="203.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4b" fill="DODGERBLUE" layoutX="102.0" layoutY="203.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4c" fill="DODGERBLUE" layoutX="167.0" layoutY="203.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4d" fill="DODGERBLUE" layoutX="234.0" layoutY="203.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4e" fill="DODGERBLUE" layoutX="300.0" layoutY="203.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3a" fill="DODGERBLUE" layoutX="41.0" layoutY="264.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3b" fill="DODGERBLUE" layoutX="102.0" layoutY="264.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3c" fill="DODGERBLUE" layoutX="167.0" layoutY="264.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3d" fill="DODGERBLUE" layoutX="234.0" layoutY="264.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3e" fill="DODGERBLUE" layoutX="300.0" layoutY="264.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2a" fill="DODGERBLUE" layoutX="41.0" layoutY="324.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2b" fill="DODGERBLUE" layoutX="102.0" layoutY="324.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2c" fill="DODGERBLUE" layoutX="167.0" layoutY="324.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2d" fill="DODGERBLUE" layoutX="234.0" layoutY="324.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2e" fill="DODGERBLUE" layoutX="300.0" layoutY="324.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1a" fill="DODGERBLUE" layoutX="41.0" layoutY="384.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1b" fill="DODGERBLUE" layoutX="102.0" layoutY="384.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1c" fill="DODGERBLUE" layoutX="167.0" layoutY="384.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1d" fill="DODGERBLUE" layoutX="234.0" layoutY="384.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1e" fill="DODGERBLUE" layoutX="300.0" layoutY="384.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="6f" fill="DODGERBLUE" layoutX="365.0" layoutY="79.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5f" fill="DODGERBLUE" layoutX="365.0" layoutY="140.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4f" fill="DODGERBLUE" layoutX="365.0" layoutY="203.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3f" fill="DODGERBLUE" layoutX="365.0" layoutY="264.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2f" fill="DODGERBLUE" layoutX="365.0" layoutY="324.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1f" fill="DODGERBLUE" layoutX="365.0" layoutY="384.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="6g" fill="DODGERBLUE" layoutX="427.0" layoutY="79.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="5g" fill="DODGERBLUE" layoutX="427.0" layoutY="140.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="4g" fill="DODGERBLUE" layoutX="427.0" layoutY="203.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="3g" fill="DODGERBLUE" layoutX="427.0" layoutY="264.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="2g" fill="DODGERBLUE" layoutX="427.0" layoutY="324.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle id="1g" fill="DODGERBLUE" layoutX="427.0" layoutY="384.0" radius="26.500000408934284" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="96.5" layoutX="513.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" styleClass="spielanzeige" width="200.00001525878906" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.000099999997474" layoutX="513.0" layoutY="171.0" stroke="BLACK" strokeType="INSIDE" styleClass="heim" width="200.00001525878906" />
+    <Circle fill="DODGERBLUE" layoutX="533.0" layoutY="191.0" radius="19.000049999998737" stroke="BLACK" strokeType="INSIDE" styleClass="heimKreis" />
+    <Text layoutX="567.0" layoutY="198.0" scaleX="0.9837810018841553" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" text="blutwurst1" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.000099999997474" layoutX="513.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" styleClass="gast" width="200.00001525878906" />
+    <Circle fill="DODGERBLUE" layoutX="533.0" layoutY="240.0" radius="19.000049999998737" stroke="BLACK" strokeType="INSIDE" styleClass="gastKreis" />
+    <Text layoutX="570.0" layoutY="246.0" scaleX="1.1812728498387288" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" text="Gast" />
+    <Text layoutX="533.0" layoutY="402.0" scaleX="1.2611762939834774" scaleY="1.297882586542054" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="gesamt" text="Gesamt" />
+    <Text layoutX="522.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satzstaus:" textAlignment="LEFT" />
+    <Text layoutX="522.0" layoutY="85.0" scaleX="1.0" scaleY="0.891542288557214" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Runde:" />
+    <Text layoutX="520.0" layoutY="105.0" scaleX="0.8848803835553889" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Spiel:" />
+    <Text layoutX="522.0" layoutY="127.0" scaleX="0.9728723600309609" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satz:" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="21.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="750.0" />
+    <Text layoutX="324.0" layoutY="16.0" scaleX="0.9662648288740485" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4Gewinnt - blutwurst1 " />
+    <Label id="satzstatus" layoutX="691.0" layoutY="49.0" styleClass="anzeigentext" text="0" />
+    <Label id="runde" layoutX="691.0" layoutY="69.0" styleClass="anzeigentext" text="0" />
+    <Label id="spiel" layoutX="691.0" layoutY="90.0" styleClass="anzeigentext" text="0" />
+    <Label id="satz" layoutX="691.0" layoutY="111.0" styleClass="anzeigentext" text="0" />
+    <Label id="heim" layoutX="689.0" layoutY="180.0" styleClass="spielstandHeim" text="0" />
+    <Label id="gast" layoutX="688.0" layoutY="225.0" styleClass="spielstandGast" text="0" />
+    <Label id="gesamt" layoutX="687.0" layoutY="380.0" prefHeight="30.5" styleClass="gesamt" text="0" />
+  </children>
+  <stylesheets>
+    <URL value="/SpielStyle.css" />
+  </stylesheets>
+</AnchorPane>
