@@ -23,7 +23,7 @@ public class HSQLConnection {
 			
 		}
 	}
-	public 
+//	public 
 //	public DBObject executeQuery(String query,String table){
 //		if(!query.contains("timestamp")){
 //			
