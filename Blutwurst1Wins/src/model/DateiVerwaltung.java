@@ -2,6 +2,7 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,22 +12,15 @@ public class DateiVerwaltung {
 	private FileReader fileReader;
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
+	private String pfad;
 	
-	public DateiVerwaltung(String pfad){
-		try{
-			fileWriter = new FileWriter(pfad);
-			fileReader = new FileReader(pfad);
-			bufferedReader = new BufferedReader(fileReader);
-			bufferedWriter = new BufferedWriter(fileWriter);
-		}catch(IOException ex){
-			
-		}
+	public DateiVerwaltung(String pfad){		
+		this.pfad = pfad;
 	}
 	
-	public boolean dateiSchreiben(Zug zug){
-		String ergebnis = ""+zug.getGegnerzug();
+	public boolean dateiSchreiben(String zug){
 		try{
-			bufferedWriter.write(ergebnis);
+			bufferedWriter.write(zug);
 			return true;
 		}catch(IOException ex){
 			ex.printStackTrace();
@@ -35,6 +29,21 @@ public class DateiVerwaltung {
 	}
 	
 	public Zug dateiLesen(){
+		File file = new File(pfad);
+		while(!file.exists()){
+			try{
+				Thread.sleep(30);
+			}catch(InterruptedException ex){
+				ex.printStackTrace();
+			}
+		}
+		try{
+			fileReader = new FileReader(file);
+			bufferedReader = new BufferedReader(fileReader);
+		}catch(IOException ex){
+			ex.printStackTrace();
+		}
+		
 		String zeile = "";
 		boolean freigabe = false;
 		int satzstatus = -1;
@@ -72,6 +81,9 @@ public class DateiVerwaltung {
 						break;
 				}
 			}
+			
+			bufferedReader.close();
+			fileReader.close();
 			
 			return new Zug(freigabe,satzstatus,gegnerzug,sieger);
 			

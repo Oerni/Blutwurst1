@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 public class Model {
 	private Stage stage = new Stage();
 	private HSQLConnection dbconnect = new HSQLConnection();
-	private Spieler gegner = new Spieler("Gegner");
-	private Spieler selbst = new Spieler("blutwurst1");
+	private Spieler gegner;
+	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung = new DateiVerwaltung("");
 	private String pfad;
 	private Stack<Zug> spielverlauf = new Stack<Zug>();
@@ -17,6 +17,21 @@ public class Model {
 		this.stage = stage;
 	}
 	
+	public void setSpieler(int eigeneKennzeichnung){
+		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
+		switch(eigeneKennzeichnung){
+			case Spieler.SPIELER_O:
+				gegner = new Spieler("Gegner",Spieler.SPIELER_X);
+				break;
+			case Spieler.SPIELER_X:
+				gegner = new Spieler("Gegner",Spieler.SPIELER_O);
+				break;
+		}
+	}
+	
+	public int getEigeneKennzeichnung(){
+		return selbst.getKennzeichnung();
+	}
 //	Zug-Informationen
 	
 
@@ -47,10 +62,11 @@ public class Model {
 	}
 	public void zugAnServer(Zug zug){
 		zug.setSpieler(selbst);
-		dateiverwaltung.dateiSchreiben(zug);
+		dateiverwaltung.dateiSchreiben(""+zug.getGegnerzug());
 	}
 	
 	public void speichern(){
-		
+		selbst.speichern();
+		gegner.speichern();
 	}
 }
