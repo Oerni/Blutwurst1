@@ -20,7 +20,7 @@ public class HSQLConnection {
 			connection = DriverManager.getConnection("jdbc:hsqldb:file:home/blutwurst/trash/hsql", "root", "blutwurst1");
 			statement = connection.createStatement();
 		}catch(SQLException ex){
-			
+			ex.printStackTrace();
 		}
 	}
 //	public 
