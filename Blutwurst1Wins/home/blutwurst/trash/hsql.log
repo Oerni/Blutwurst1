@@ -1,6 +1,0 @@
-/*C3*/SET SCHEMA PUBLIC
-DROP TABLE spieler
-create table spieler (id INTEGER PRIMARY KEY, name varchar(128), satzpunktzahl integer, spielpunktzahl integer)
-drop table spieler
-create table spieler (id integer primary key, name varchar(128), satzpunktzahl integer, spielpunktzahl integer, timestamp time)
-DISCONNECT

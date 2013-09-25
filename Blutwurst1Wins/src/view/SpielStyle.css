@@ -1,0 +1,64 @@
+
+
+.spielfeld {
+	-fx-background-color: #0099FF;
+}
+
+
+.spielanzeige {
+	-fx-fill: #0099FF;
+}
+
+
+.heim{
+	-fx-fill: #FFFF99;
+	-fx-stroke: white;
+}
+
+.gast{
+	-fx-fill: #FFFFFF;
+	-fx-stroke: white;
+}
+
+.kreis{
+	-fx-fill: #FFFFFF;	
+}
+
+.heimKreis{
+	-fx-fill: #33CC66;
+}
+
+.gastKreis{
+	-fx-fill: #FF3333;
+}
+
+.teamName{
+	-fx-font-size: 18px;
+}
+
+.gesamt{
+	-fx-font-size: 24px;
+	-fx-fill: #0099FF;
+	-fx-text-fill: #0099FF;
+}
+
+.spielstandHeim{
+	-fx-fill: #33CC66;
+	-fx-font-size: 24px;
+	-fx-text-fill: #33CC66;
+	
+}
+
+.spielstandGast{
+	-fx-fill: #FF3333;
+	-fx-font-size: 24px;
+	-fx-text-fill: #FF3333;
+	
+}
+
+.anzeigentext{
+	-fx-fill: #FFFFFF;
+	-fx-font-size: 20px;
+	-fx-text-fill: white;
+}
+

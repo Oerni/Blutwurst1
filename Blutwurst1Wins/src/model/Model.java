@@ -2,6 +2,8 @@ package model;
 
 import java.util.Stack;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Model {

@@ -1,16 +1,17 @@
 package controller;
 
+import view.SpielView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import model.Model;
 import model.Spieler;
 import model.Zug;
-import view.SpielView;
+
 
 public class SpielVC {
 	private Model model;
 	private SpielView view;
-	
+
 	public SpielVC(Model model){
 		this.model = model;
 		this.view = new SpielView();
@@ -22,11 +23,14 @@ public class SpielVC {
 //		view.getEigenerPunktestandLabel().setText(""+model.getEigeneSatzpunkte());
 //		view.getGegnerPunktestandLabel().setText(""+model.getGegnerSatzpunkte());
 //		
-		view.getZuruecksetzenButton().setOnAction(new ZuruecksetzenBtnEventHandler());
+//		view.getZuruecksetzenButton().setOnAction(new ZuruecksetzenBtnEventHandler());
 		
 		spielstart();
 	}
-	
+	public SpielVC(){
+		this.view = new SpielView();
+	}
+
 	public void spielstart() {
 		
 	}
@@ -68,7 +72,7 @@ public class SpielVC {
 		// Zug berechnen
 		berechneEigenenZug();
 		
-		// berechneten Zug an Server übergeben
+		// berechneten Zug an Server uebergeben
 		model.zugAnServer(eigenerZug);
 	}
 	
@@ -88,10 +92,4 @@ public class SpielVC {
 
 	}
 
-	class ZuruecksetzenBtnEventHandler implements EventHandler<ActionEvent>{
-		@Override
-		public void handle(ActionEvent arg0) {
-			
-		}
-	}
 }
