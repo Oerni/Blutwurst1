@@ -2,26 +2,20 @@ package model;
 
 import java.util.Stack;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Model {
-	private Stage stage = new Stage();
+	private Stage stage;
 	private HSQLConnection dbconnect = new HSQLConnection();
 	private Spieler gegner;
 	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung = new DateiVerwaltung("");
-	private String pfad;
 	private Stack<Zug> spielverlauf = new Stack<Zug>();
 	
 	public Model(Stage stage){
 		this.stage = stage;
 	}
 	
-	public Model(){
-		
-	}
 	public void setSpieler(int eigeneKennzeichnung){
 		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
 		switch(eigeneKennzeichnung){

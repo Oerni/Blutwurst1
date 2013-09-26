@@ -43,17 +43,6 @@ public class SpielVC {
 		}catch(IOException ex){
 			
 		}
-//		this.view = new SpielView();
-		
-//		SpielerKennzeichnung setzen
-		
-//		view.getEigenerNameLabel().setText(model.getEigenenNamen());
-//		view.getGegnerNameLabel().setText(model.getGegnerNamen());
-//		view.getEigenerPunktestandLabel().setText(""+model.getEigeneSatzpunkte());
-//		view.getGegnerPunktestandLabel().setText(""+model.getGegnerSatzpunkte());
-//		
-//		view.getZuruecksetzenButton().setOnAction(new ZuruecksetzenBtnEventHandler());
-		
 		spielstart();
 	}
 	
@@ -63,30 +52,9 @@ public class SpielVC {
 		primaryStage.show();
 		System.out.println(runde.getText()+", "+satzstatus.getText());
 	}
-
-//	@FXML
-//	private Label runde;
-//	
-//	public SpielVC(Model model){
-//		
-//		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielView.fxml"));
-////		fxmlLoader.setController(this);
-//		
-//		try{
-//			fxmlLoader.load();
-//			System.out.println(runde.getText());
-//		}catch(IOException ex){
-//			ex.printStackTrace();
-//		}
-//	}
-
 	public void spielstart() {
 		
 	}
-
-//	public void show(){
-//		view.show(model.getPrimaryStage());
-//	}
 	
 	public void zugDurchfuehren(){
 		// Zug des Gegners interpretieren
