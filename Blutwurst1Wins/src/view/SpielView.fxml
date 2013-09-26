@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
     <FlowPane layoutX="8.0" layoutY="39.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld" />
     <Circle fx:id="a6" fill="DODGERBLUE" layoutX="41.0" layoutY="73.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
@@ -77,11 +77,18 @@
     <Label fx:id="gesamt" layoutX="687.0" layoutY="380.0" prefHeight="30.5" styleClass="gesamt" text="0" />
     <Button fx:id="startButton" layoutX="530.0" layoutY="283.0" mnemonicParsing="false" onAction="#spielStarten" prefHeight="32.0" prefWidth="73.0" text="Start" textAlignment="CENTER" textFill="BLACK" visible="true" />
     <Button fx:id="resetButton" layoutX="611.0" layoutY="283.0" mnemonicParsing="false" onAction="#spielZuruecksetzen" prefHeight="32.0" prefWidth="73.0" text="Reset" textAlignment="CENTER" textFill="BLACK" visible="true" />
-    <Button fx:id="statistikButton" layoutX="7.0" layoutY="425.0" mnemonicParsing="false" onAction="#statistikAnzeigen" prefHeight="20.0" prefWidth="67.529296875" text="Statistik" textAlignment="CENTER" textFill="BLACK" visible="true">
+    <Button fx:id="statistikButton" layoutX="7.0" layoutY="455.0" mnemonicParsing="false" onAction="#statistikAnzeigen" prefHeight="20.0" prefWidth="67.529296875" text="Statistik" textAlignment="CENTER" textFill="BLACK" visible="true">
       <font>
         <Font size="11.0" />
       </font>
     </Button>
+    <Button fx:id="aButton" layoutX="26.0" layoutY="420.0" mnemonicParsing="false" text="A" />
+    <Button fx:id="bButton" layoutX="88.0" layoutY="420.0" mnemonicParsing="false" text="B" />
+    <Button fx:id="cButton" layoutX="151.0" layoutY="421.0" mnemonicParsing="false" text="C" />
+    <Button fx:id="dButton" layoutX="213.0" layoutY="422.0" mnemonicParsing="false" text="D" />
+    <Button fx:id="eButton" layoutX="277.0" layoutY="423.0" mnemonicParsing="false" text="E" />
+    <Button fx:id="fButton" layoutX="341.0" layoutY="423.0" mnemonicParsing="false" text="F" />
+    <Button fx:id="gButton" layoutX="403.0" layoutY="423.0" mnemonicParsing="false" text="G" />
   </children>
   <stylesheets>
     <URL value="@SpielStyle.css" />
