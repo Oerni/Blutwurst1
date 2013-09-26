@@ -1,6 +1,8 @@
-package view;
+package controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,7 @@ public class SpielVC {
 	
 	public SpielVC(Model model){
 		this.model = model;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielView.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SpielView.fxml"));
 		fxmlLoader.setController(this);
 		try{
 			Pane pane = (Pane)fxmlLoader.load();

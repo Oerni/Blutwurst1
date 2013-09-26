@@ -1,5 +1,6 @@
-package view;
+package application;
 	
+import controller.SpielVC;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Model;
