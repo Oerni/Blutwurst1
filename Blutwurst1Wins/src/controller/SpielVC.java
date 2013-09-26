@@ -1,14 +1,14 @@
 package controller;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Model;
@@ -18,8 +18,10 @@ import model.Zug;
 
 public class SpielVC {
 	private Model model;
-//	private SpielView view;
 	private Scene scene;
+	
+	private final Color eigeneFarbe = Color.web("0x33CC66");
+	private final Color gegnerFarbe = Color.web("0xFF3333");
 	
 	@FXML
 	private Label satzstatus;
@@ -120,7 +122,24 @@ public class SpielVC {
 	@FXML
 	private Circle g6;
 	
+	private Circle feld[][] = new Circle[7][6];
+	@FXML
+	private Button aButton;
+	@FXML
+	private Button bButton;
+	@FXML
+	private Button cButton;
+	@FXML
+	private Button dButton;
+	@FXML
+	private Button eButton;
+	@FXML
+	private Button fButton;
+	@FXML
+	private Button gButton;
+	
 	public SpielVC(Model model){
+		
 		this.model = model;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SpielView.fxml"));
 		fxmlLoader.setController(this);
@@ -130,6 +149,49 @@ public class SpielVC {
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+		
+		feld[0][0] = a1;
+		feld[1][0] = b1;
+		feld[2][0] = c1;
+		feld[3][0] = d1;
+		feld[4][0] = e1;
+		feld[5][0] = f1;
+		feld[6][0] = g1;
+		feld[0][1] = a2;
+		feld[1][1] = b2;
+		feld[2][1] = c2;
+		feld[3][1] = d2;
+		feld[4][1] = e2;
+		feld[5][1] = f2;
+		feld[6][1] = g2;
+		feld[0][2] = a3;
+		feld[1][2] = b3;
+		feld[2][2] = c3;
+		feld[3][2] = d3;
+		feld[4][2] = e3;
+		feld[5][2] = f3;
+		feld[6][2] = g3;
+		feld[0][3] = a4;
+		feld[1][3] = b4;
+		feld[2][3] = c4;
+		feld[3][3] = d4;
+		feld[4][3] = e4;
+		feld[5][3] = f4;
+		feld[6][3] = g4;
+		feld[0][4] = a5;
+		feld[1][4] = b5;
+		feld[2][4] = c5;
+		feld[3][4] = d5;
+		feld[4][4] = e5;
+		feld[5][4] = f5;
+		feld[6][4] = g5;
+		feld[0][5] = a6;
+		feld[1][5] = b6;
+		feld[2][5] = c6;
+		feld[3][5] = d6;
+		feld[4][5] = e6;
+		feld[5][5] = f6;
+		feld[6][5] = g6;
 	}
 	
 	public void show(){
@@ -198,18 +260,91 @@ public class SpielVC {
 //	Drücken des Spiel-Starten Buttons
 	@FXML
 	public void spielStarten(){
-		System.out.println("Spiel gestartet");
+
 	}
 	
 //	Drücken des Spiel zurücksetzen Buttons
 	@FXML
 	public void spielZuruecksetzen(){
-		System.out.println("Spiel zurückgesetzt");
+		for(int i=0;i<7;i++)
+			for(int j=0;j<6;j++)
+				feld[i][j].setFill(Color.WHITE);
+		model.zuruecksetzen();
 	}
 	
 //	Drücken des Statistik anzeigen Buttons
 	@FXML
 	public void statistikAnzeigen(){
 		System.out.println("Statistik anzeigen");
+	}
+	
+	Color aktuelleFarbe;
+	@FXML
+	public void inAHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(0);
+		faerben(0,ergebnis);
+	}
+	@FXML
+	public void inBHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(1);
+		faerben(1,ergebnis);
+	}
+	@FXML
+	public void inCHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(2);
+		faerben(2,ergebnis);
+	}
+	@FXML
+	public void inDHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(3);
+		faerben(3,ergebnis);
+	}
+	@FXML
+	public void inEHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(4);
+		faerben(4,ergebnis);
+	}
+	@FXML
+	public void inFHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(5);
+		faerben(5,ergebnis);
+	}
+	@FXML
+	public void inGHinzufuegen(){
+		if(model.getAktuellerSpieler() == 'X')
+			aktuelleFarbe = eigeneFarbe;
+		else
+			aktuelleFarbe = gegnerFarbe;
+		int ergebnis = model.chipEinwerfen(6);
+		faerben(6,ergebnis);
+	}
+	
+	private void faerben(int spalte,int zeile){
+		feld[spalte][zeile].setFill(aktuelleFarbe);
+//		a1.setFill(aktuelleFarbe);
 	}
 }

@@ -11,11 +11,28 @@ public class Model {
 	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung = new DateiVerwaltung("");
 	private Stack<Zug> spielverlauf = new Stack<Zug>();
+	private char aktuellerSpieler = 'X';
+	private Spielfeld spielfeld = new Spielfeld();
 	
 	public Model(Stage stage){
 		this.stage = stage;
 	}
 	
+	public int chipEinwerfen(int spalte){
+		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
+		if(aktuellerSpieler == 'X')
+			aktuellerSpieler = 'O';
+		else
+			aktuellerSpieler = 'X';
+		return ergebnis;
+	}
+	public char getAktuellerSpieler(){
+		return aktuellerSpieler;
+	}
+	
+	public void zuruecksetzen(){
+		spielfeld = new Spielfeld();
+	}
 	public void setSpieler(int eigeneKennzeichnung){
 		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
 		switch(eigeneKennzeichnung){
