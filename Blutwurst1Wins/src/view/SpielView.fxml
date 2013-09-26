@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.SpielVC">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
   <children>
     <FlowPane layoutX="11.0" layoutY="38.0" prefHeight="387.9999000000025" prefWidth="449.0" styleClass="spielfeld" />
     <Circle fx:id="6a" fill="DODGERBLUE" layoutX="41.0" layoutY="79.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />

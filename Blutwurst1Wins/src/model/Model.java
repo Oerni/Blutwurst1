@@ -19,6 +19,9 @@ public class Model {
 		this.stage = stage;
 	}
 	
+	public Model(){
+		
+	}
 	public void setSpieler(int eigeneKennzeichnung){
 		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
 		switch(eigeneKennzeichnung){

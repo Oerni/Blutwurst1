@@ -1,8 +1,13 @@
-package controller;
+package view;
 
-import view.SpielView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import java.io.IOException;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import model.Model;
 import model.Spieler;
 import model.Zug;
@@ -10,11 +15,35 @@ import model.Zug;
 
 public class SpielVC {
 	private Model model;
-	private SpielView view;
-
+//	private SpielView view;
+	private Scene scene;
+	
+	@FXML
+	private Label satzstatus;
+	@FXML
+	private Label runde;
+	@FXML
+	private Label spiel;
+	@FXML
+	private Label satz;
+	@FXML
+	private Label spielstandHeim;
+	@FXML
+	private Label spielstandGast;
+	@FXML
+	private Label gesamt;
+	
 	public SpielVC(Model model){
 		this.model = model;
-		this.view = new SpielView();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielView.fxml"));
+		fxmlLoader.setController(this);
+		try{
+			Pane pane = (Pane)fxmlLoader.load();
+			scene = new Scene(pane);
+		}catch(IOException ex){
+			
+		}
+//		this.view = new SpielView();
 		
 //		SpielerKennzeichnung setzen
 		
@@ -27,17 +56,37 @@ public class SpielVC {
 		
 		spielstart();
 	}
-	public SpielVC(){
-		this.view = new SpielView();
+	
+	public void show(){
+		Stage primaryStage = model.getPrimaryStage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		System.out.println(runde.getText()+", "+satzstatus.getText());
 	}
+
+//	@FXML
+//	private Label runde;
+//	
+//	public SpielVC(Model model){
+//		
+//		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielView.fxml"));
+////		fxmlLoader.setController(this);
+//		
+//		try{
+//			fxmlLoader.load();
+//			System.out.println(runde.getText());
+//		}catch(IOException ex){
+//			ex.printStackTrace();
+//		}
+//	}
 
 	public void spielstart() {
 		
 	}
 
-	public void show(){
-		view.show(model.getPrimaryStage());
-	}
+//	public void show(){
+//		view.show(model.getPrimaryStage());
+//	}
 	
 	public void zugDurchfuehren(){
 		// Zug des Gegners interpretieren
