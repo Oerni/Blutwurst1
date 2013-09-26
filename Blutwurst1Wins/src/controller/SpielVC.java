@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Model;
 import model.Spieler;
@@ -34,6 +35,90 @@ public class SpielVC {
 	private Label spielstandGast;
 	@FXML
 	private Label gesamt;
+	@FXML
+	private Circle a1;
+	@FXML
+	private Circle a2;
+	@FXML
+	private Circle a3;
+	@FXML
+	private Circle a4;
+	@FXML
+	private Circle a5;
+	@FXML
+	private Circle a6;
+	@FXML
+	private Circle b1;
+	@FXML
+	private Circle b2;
+	@FXML
+	private Circle b3;
+	@FXML
+	private Circle b4;
+	@FXML
+	private Circle b5;
+	@FXML
+	private Circle b6;
+	@FXML
+	private Circle c1;
+	@FXML
+	private Circle c2;
+	@FXML
+	private Circle c3;
+	@FXML
+	private Circle c4;
+	@FXML
+	private Circle c5;
+	@FXML
+	private Circle c6;
+	@FXML
+	private Circle d1;
+	@FXML
+	private Circle d2;
+	@FXML
+	private Circle d3;
+	@FXML
+	private Circle d4;
+	@FXML
+	private Circle d5;
+	@FXML
+	private Circle d6;
+	@FXML
+	private Circle e1;
+	@FXML
+	private Circle e2;
+	@FXML
+	private Circle e3;
+	@FXML
+	private Circle e4;
+	@FXML
+	private Circle e5;
+	@FXML
+	private Circle e6;
+	@FXML
+	private Circle f1;
+	@FXML
+	private Circle f2;
+	@FXML
+	private Circle f3;
+	@FXML
+	private Circle f4;
+	@FXML
+	private Circle f5;
+	@FXML
+	private Circle f6;
+	@FXML
+	private Circle g1;
+	@FXML
+	private Circle g2;
+	@FXML
+	private Circle g3;
+	@FXML
+	private Circle g4;
+	@FXML
+	private Circle g5;
+	@FXML
+	private Circle g6;
 	
 	public SpielVC(Model model){
 		this.model = model;
@@ -43,7 +128,7 @@ public class SpielVC {
 			Pane pane = (Pane)fxmlLoader.load();
 			scene = new Scene(pane);
 		}catch(IOException ex){
-			
+			ex.printStackTrace();
 		}
 	}
 	
