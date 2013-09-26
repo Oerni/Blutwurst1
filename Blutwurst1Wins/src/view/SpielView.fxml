@@ -82,13 +82,13 @@
         <Font size="11.0" />
       </font>
     </Button>
-    <Button fx:id="aButton" layoutX="26.0" layoutY="420.0" mnemonicParsing="false" text="A" />
-    <Button fx:id="bButton" layoutX="88.0" layoutY="420.0" mnemonicParsing="false" text="B" />
-    <Button fx:id="cButton" layoutX="151.0" layoutY="421.0" mnemonicParsing="false" text="C" />
-    <Button fx:id="dButton" layoutX="213.0" layoutY="422.0" mnemonicParsing="false" text="D" />
-    <Button fx:id="eButton" layoutX="277.0" layoutY="423.0" mnemonicParsing="false" text="E" />
-    <Button fx:id="fButton" layoutX="341.0" layoutY="423.0" mnemonicParsing="false" text="F" />
-    <Button fx:id="gButton" layoutX="403.0" layoutY="423.0" mnemonicParsing="false" text="G" />
+    <Button fx:id="aButton" layoutX="26.0" layoutY="420.0" onAction="#inAHinzufuegen" mnemonicParsing="false" text="A" />
+    <Button fx:id="bButton" layoutX="88.0" layoutY="420.0" onAction="#inBHinzufuegen" mnemonicParsing="false" text="B" />
+    <Button fx:id="cButton" layoutX="151.0" layoutY="420.0" onAction="#inCHinzufuegen" mnemonicParsing="false" text="C" />
+    <Button fx:id="dButton" layoutX="213.0" layoutY="420.0" onAction="#inDHinzufuegen" mnemonicParsing="false" text="D" />
+    <Button fx:id="eButton" layoutX="277.0" layoutY="420.0" onAction="#inEHinzufuegen" mnemonicParsing="false" text="E" />
+    <Button fx:id="fButton" layoutX="341.0" layoutY="420.0" onAction="#inFHinzufuegen" mnemonicParsing="false" text="F" />
+    <Button fx:id="gButton" layoutX="403.0" layoutY="420.0" onAction="#inGHinzufuegen" mnemonicParsing="false" text="G" />
   </children>
   <stylesheets>
     <URL value="@SpielStyle.css" />
