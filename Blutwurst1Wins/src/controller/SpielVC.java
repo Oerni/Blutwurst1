@@ -45,7 +45,6 @@ public class SpielVC {
 		}catch(IOException ex){
 			
 		}
-		spielstart();
 	}
 	
 	public void show(){
@@ -110,5 +109,22 @@ public class SpielVC {
 	private void reagiereAufGewinnSituation() {
 
 	}
-
+	
+//	Drücken des Spiel-Starten Buttons
+	@FXML
+	public void spielStarten(){
+		System.out.println("Spiel gestartet");
+	}
+	
+//	Drücken des Spiel zurücksetzen Buttons
+	@FXML
+	public void spielZuruecksetzen(){
+		System.out.println("Spiel zurückgesetzt");
+	}
+	
+//	Drücken des Statistik anzeigen Buttons
+	@FXML
+	public void statistikAnzeigen(){
+		System.out.println("Statistik anzeigen");
+	}
 }

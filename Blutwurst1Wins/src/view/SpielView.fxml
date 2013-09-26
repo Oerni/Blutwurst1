@@ -75,9 +75,9 @@
     <Label fx:id="spielstandHeim" layoutX="689.0" layoutY="180.0" styleClass="spielstandHeim" text="0" />
     <Label fx:id="spielstandGast" layoutX="688.0" layoutY="225.0" styleClass="spielstandGast" text="0" />
     <Label fx:id="gesamt" layoutX="687.0" layoutY="380.0" prefHeight="30.5" styleClass="gesamt" text="0" />
-    <Button fx:id="startButton" layoutX="530.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="Start" textAlignment="CENTER" textFill="BLACK" visible="true" />
-    <Button fx:id="resetButton" layoutX="611.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="Reset" textAlignment="CENTER" textFill="BLACK" visible="true" />
-    <Button fx:id="statistikButton" layoutX="7.0" layoutY="425.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="67.529296875" text="Statistik" textAlignment="CENTER" textFill="BLACK" visible="true">
+    <Button fx:id="startButton" onAction="#spielStarten" layoutX="530.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="Start" textAlignment="CENTER" textFill="BLACK" visible="true" />
+    <Button fx:id="resetButton" onAction="#spielZuruecksetzen" layoutX="611.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="Reset" textAlignment="CENTER" textFill="BLACK" visible="true" />
+    <Button fx:id="statistikButton" onAction="#statistikAnzeigen" layoutX="7.0" layoutY="425.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="67.529296875" text="Statistik" textAlignment="CENTER" textFill="BLACK" visible="true">
       <font>
         <Font size="11.0" />
       </font>
