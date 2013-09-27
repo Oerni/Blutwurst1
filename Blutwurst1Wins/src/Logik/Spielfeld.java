@@ -1,4 +1,4 @@
-package model;
+package Logik;
 
 public class Spielfeld {
 	private char spielfeld[][] = new char[7][6];

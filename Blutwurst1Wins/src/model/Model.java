@@ -2,6 +2,7 @@ package model;
 
 import java.util.Stack;
 
+import Logik.Spielfeld;
 import javafx.stage.Stage;
 
 public class Model {
