@@ -5,10 +5,6 @@
 }
 
 
-.spielanzeige {
-	-fx-fill: #0099FF;
-}
-
 
 .heim{
 	-fx-fill: #FFFF99;
@@ -57,8 +53,8 @@
 }
 
 .anzeigentext{
-	-fx-fill: #FFFFFF;
+	-fx-fill: #0099FF;
 	-fx-font-size: 20px;
-	-fx-text-fill: white;
+	-fx-text-fill: #0099FF;
 }
 
