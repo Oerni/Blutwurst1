@@ -87,7 +87,7 @@
         <Image url="@icons/HilfeButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="spielfeldButton.png" fx:id="spielfeldButton" layoutX="236.0" layoutY="31.0">
+    <ImageView id="spielfeldButtonOrange.png" fx:id="spielfeldButtonOrange" layoutX="236.0" layoutY="31.0">
       <image>
         <Image url="@icons/spielfeldButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
