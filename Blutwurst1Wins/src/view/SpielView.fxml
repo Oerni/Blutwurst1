@@ -89,7 +89,7 @@
     </ImageView>
     <ImageView id="spielfeldButton.png" fx:id="spielfeldButton" layoutX="236.0" layoutY="31.0">
       <image>
-        <Image url="@icons/spielfeldButton.png" preserveRatio="true" smooth="true" />
+        <Image url="@icons/spielfeldButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <ImageView id="spielregelnButton.png" fx:id="spielregelnButton" layoutX="378.0" layoutY="34.0">
