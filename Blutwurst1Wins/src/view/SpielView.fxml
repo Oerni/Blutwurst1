@@ -82,22 +82,22 @@
     <Button fx:id="eButton" layoutX="277.0" layoutY="472.0" mnemonicParsing="false" onAction="#inEHinzufuegen" text="E" />
     <Button fx:id="fButton" layoutX="341.0" layoutY="472.0" mnemonicParsing="false" onAction="#inFHinzufuegen" text="F" />
     <Button fx:id="gButton" layoutX="403.0" layoutY="472.0" mnemonicParsing="false" onAction="#inGHinzufuegen" text="G" />
-    <ImageView id="HilfeButton.png" fx:id="hilfeButton" layoutX="314.0" layoutY="37.0">
+    <ImageView id="HilfeButton.png" fx:id="hilfeButton" layoutX="314.0" layoutY="37.0" onMouseClicked="#hilfeAnzeigen">
       <image>
         <Image url="@icons/HilfeButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="spielfeldButtonOrange.png" fx:id="spielfeldButtonOrange" layoutX="236.0" layoutY="31.0">
+    <ImageView id="spielfeldButtonOrange.png" fx:id="spielfeldButtonOrange" layoutX="236.0" layoutY="31.0" onMouseClicked="#spielfeldAnzeigen">
       <image>
         <Image url="@icons/spielfeldButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="spielregelnButton.png" fx:id="spielregelnButton" layoutX="378.0" layoutY="34.0">
+    <ImageView id="spielregelnButton.png" fx:id="spielregelnButton" layoutX="378.0" layoutY="34.0" onMouseClicked="#spielregelnAnzeigen">
       <image>
         <Image url="@icons/spielregelnButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="resetButton.png" fx:id="resetButton" layoutX="86.0" layoutY="36.0">
+    <ImageView id="resetButton.png" fx:id="resetButton" layoutX="86.0" layoutY="36.0" onMouseClicked="#resetMenuAnzeigen" visible="true">
       <image>
         <Image url="@icons/resetButton.png" preserveRatio="true" smooth="true" />
       </image>
@@ -110,6 +110,35 @@
     <ImageView id="startButton.png" fx:id="startButton" layoutX="15.0" layoutY="34.0" onMouseClicked="#spielStarten">
       <image>
         <Image url="@icons/startButton.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <!-- Reset Menu begins -->
+    <AnchorPane fx:id="resetMenu" layoutX="219.0" layoutY="183.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Button id="resetSatzButton" layoutX="26.0" layoutY="83.0" mnemonicParsing="false" onAction="#resetSatz" text="Der Satz" />
+        <Button id="resetSpielButton" layoutX="111.0" layoutY="84.0" mnemonicParsing="false" onAction="#resetSpiel" text="Das Spiel" />
+        <Button id="resetRundeButton" layoutX="200.0" layoutY="84.0" mnemonicParsing="false" onAction="#resetRunde" text="Die Runde" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset" />
+        <Button id="closeResetMenuButton" layoutX="286.0" layoutY="3.0" mnemonicParsing="false" onAction="#resetMenuSchließen" text="X" textAlignment="CENTER">
+          <font>
+            <Font size="10.0" />
+          </font>
+        </Button>
+        <Text layoutX="59.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Was soll zurückgesetzt werden?" textAlignment="CENTER" />
+      </children>
+    </AnchorPane>
+    <ImageView id="resetButtonOrange.png" fx:id="resetButtonOrange" layoutX="79.0" layoutY="29.0" visible="false">
+      <image>
+        <Image url="@icons/resetButtonOrange.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="spielfeldButton.png" fx:id="spielfeldButton" layoutX="238.0" layoutY="30.0" visible="false">
+      <image>
+        <Image url="@icons/spielfeldButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
   </children>

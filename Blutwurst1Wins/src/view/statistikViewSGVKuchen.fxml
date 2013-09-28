@@ -30,7 +30,7 @@
         <Image url="@icons/gewinnVerlustKuchenButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="startGewinnVerlustKuchenButtonOrange.png" fx:id="startGewinnVerlustKuchenButtonOrange" layoutX="481.0" layoutY="143.0">
+    <ImageView id="startGewinnVerlustKuchenButtonOrange.png" fx:id="startGewinnVerlustKuchenButtonOrange" layoutX="481.0" layoutY="143.0" visible="false">
       <image>
         <Image url="@icons/startGewinnVerlustKuchenButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
@@ -45,7 +45,7 @@
         <Image url="@icons/spielhistorieButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <Text layoutX="197.0" layoutY="446.0" scaleX="0.29874160933715715" scaleY="1.000007972955734" strokeType="OUTSIDE" strokeWidth="0.0" text="Info: Dieses Diagramm zeigt an wie viel Prozent derjenigen, die das Spiel begonnen haben, die das Spiel gewonnen bzw. verloren." />
+    <Text layoutX="478.0" layoutY="418.0" scaleX="1.0306680848972887" scaleY="2.416634573293584" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" />
     <ImageView id="statistikButtonOrange.png" fx:id="statistikButtonOrange" layoutX="150.0" layoutY="36.0">
       <image>
         <Image url="@icons/statistikButtonOrange.png" preserveRatio="true" smooth="true" />
@@ -57,6 +57,31 @@
       </image>
     </ImageView>
     <PieChart id="PieChart" fx:id="startGewinnVerlustKuchenDiagramm" layoutX="53.0" layoutY="143.0" prefHeight="285.0" prefWidth="361.0" title="Pie" />
+    <ImageView id="startGewinnVerlustKuchenButton.png" fx:id="startGewinnVerlustKuchenButton" layoutX="478.0" layoutY="140.0" visible="true">
+      <image>
+        <Image url="@icons/startGewinnVerlustKuchenButton.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="spielhistorieButtonOrange.png" fx:id="spielhistorieButtonOrange" layoutX="484.0" layoutY="241.0" visible="false">
+      <image>
+        <Image url="@icons/spielhistorieButtonOrange.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="resetButtonGrau.png" fx:id="resetButtonGrau" layoutX="87.0" layoutY="38.0">
+      <image>
+        <Image url="@icons/resetButtonGrau.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="startButtonGrau.png" fx:id="startButtonGrau" layoutX="15.0" layoutY="39.0">
+      <image>
+        <Image url="@icons/startButtonGrau.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="gewinnVerlustKuchenOrange.png" fx:id="gewinnVerlustKuchenButtonOrange" fitHeight="38.0" fitWidth="179.00001525878906" layoutX="482.0" layoutY="99.0" visible="true">
+      <image>
+        <Image url="@icons/gewinnVerlustKuchenOrange.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
   </children>
   <stylesheets>
     <URL value="@SpielStyle.css" />
