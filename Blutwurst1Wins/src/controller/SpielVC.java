@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -445,5 +446,20 @@ public class SpielVC {
 		startGewinnVerlustKuchenButtonOrange.setVisible(false);
 		gewinnVerlustKuchenButtonOrange.setVisible(false);
 
+	}
+	
+	@FXML
+	public void resetMenuSchliessen(){
+		
+	}
+	
+	@FXML
+	public void mouseOver(){
+		scene.setCursor(Cursor.HAND);
+	}
+	
+	@FXML
+	public void mouseExit(){
+		scene.setCursor(Cursor.DEFAULT);
 	}
 }
