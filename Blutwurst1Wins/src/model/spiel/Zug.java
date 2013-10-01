@@ -1,4 +1,4 @@
-package model;
+package model.spiel;
 
 public class Zug {
 	private Spieler spieler;

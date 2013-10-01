@@ -14,13 +14,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import model.Model;
-import model.Spieler;
-import model.Zug;
+import model.spiel.SpielModel;
+import model.spiel.Spieler;
+import model.spiel.Zug;
+import model.statistik.StatistikModel;
 
 
 public class SpielVC {
-	private Model model;
+	private SpielModel model;
 	private Scene scene;
 	
 	private final Color eigeneFarbe = Color.web("0x33CC66");
@@ -147,7 +148,7 @@ public class SpielVC {
 	private ImageView spielfeldButtonOrange, resetButtonOrange, spielhistorieButtonOrange, startGewinnVerlustKuchenButtonOrange, gewinnVerlustKuchenButtonOrange;
 	
 	
-	public SpielVC(Model model){
+	public SpielVC(SpielModel model){
 		
 		this.model = model;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SpielView.fxml"));
@@ -277,7 +278,8 @@ public class SpielVC {
 //	Dr�cken des Statistik anzeigen Buttons
 	@FXML
 	public void statistikAnzeigen(){
-		
+		StatistikModel sModel = new StatistikModel(new Stage());
+		new StatistikViewController(sModel).show();
 	}
 	
 	Color aktuelleFarbe;
@@ -405,10 +407,10 @@ public class SpielVC {
 		
 	}
 	//Spielregeln anzeigen
-		@FXML
-		public void spielregelnAnzeigen(){
+	@FXML
+	public void spielregelnAnzeigen(){
 			
-		}
+	}
 	
 	//Methoden der View: Statistik	
 		

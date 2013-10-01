@@ -1,11 +1,11 @@
-package model;
+package model.spiel;
 
 import java.util.Stack;
 
 import Logik.Spielfeld;
 import javafx.stage.Stage;
 
-public class Model {
+public class SpielModel {
 	private Stage stage;
 	private HSQLConnection dbconnect = new HSQLConnection();
 	private Spieler gegner;
@@ -15,7 +15,7 @@ public class Model {
 	private char aktuellerSpieler = 'X';
 	private Spielfeld spielfeld = new Spielfeld();
 	
-	public Model(Stage stage){
+	public SpielModel(Stage stage){
 		this.stage = stage;
 	}
 	

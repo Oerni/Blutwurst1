@@ -1,4 +1,4 @@
-package model;
+package model.spiel;
 
 public class Spieler extends DBObject{
 	private String name;

@@ -3,13 +3,13 @@ package application;
 import controller.SpielVC;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Model;
+import model.spiel.SpielModel;
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {			
-			Model model = new Model(primaryStage);
+			SpielModel model = new SpielModel(primaryStage);
 			SpielVC viewController = new SpielVC(model);
 			viewController.show();
 		} catch(Exception e) {
