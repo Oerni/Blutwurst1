@@ -6,8 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -145,7 +148,9 @@ public class SpielVC {
 	@FXML
 	private AnchorPane resetMenu;
 	@FXML
-	private ImageView spielfeldButtonOrange, resetButtonOrange, spielhistorieButtonOrange, startGewinnVerlustKuchenButtonOrange, gewinnVerlustKuchenButtonOrange;
+	private ImageView spielfeldButtonOrange, resetButtonOrange;
+	@FXML
+	private ImageView spielfeldButton;
 	
 	
 	public SpielVC(SpielModel model){
@@ -275,11 +280,12 @@ public class SpielVC {
 	
 
 	
-//	Dr�cken des Statistik anzeigen Buttons
+//	Druecken des Statistik anzeigen Buttons
 	@FXML
 	public void statistikAnzeigen(){
 		StatistikModel sModel = new StatistikModel(new Stage());
 		new StatistikViewController(sModel).show();
+		
 	}
 	
 	Color aktuelleFarbe;
@@ -357,14 +363,14 @@ public class SpielVC {
 	@FXML
 	public void resetMenuAnzeigen(){
 		resetButtonOrange.setVisible(true);
-		spielfeldButtonOrange.setVisible(false);
+		spielfeldButton.setVisible(true);
 		resetMenu.setVisible(true);
 		
 	}
 	
-	//Schließen des ResetMenus
+	//Schliessen des ResetMenus
 	@FXML
-	public void resetMenuSchließen(){
+	public void resetMenuSchliessen(){
 		resetButtonOrange.setVisible(false);
 		spielfeldButtonOrange.setVisible(true);
 		resetMenu.setVisible(false);
@@ -374,7 +380,7 @@ public class SpielVC {
 	@FXML
 	public void resetSatz(){
 		
-		resetMenuSchließen();
+		resetMenuSchliessen();
 	}
 	
 	//Spiel zuruecksetzen
@@ -385,14 +391,14 @@ public class SpielVC {
 				feld[i][j].setFill(Color.WHITE);
 		model.zuruecksetzen();
 		
-		resetMenuSchließen();
+	 resetMenuSchliessen();
 	}
 	
 	//Runde zuruecksetzen
 	@FXML
 	public void resetRunde(){
 		
-		resetMenuSchließen();
+		resetMenuSchliessen();
 	}
 	
 	//Hilfe anzeigen
@@ -412,48 +418,12 @@ public class SpielVC {
 			
 	}
 	
-	//Methoden der View: Statistik	
-		
-	//Gewinn Verlust Kuchen anzeigen
-	@FXML
-	public void gewinnVerlustKuchenAnzeigen(){
-		spielhistorieButtonOrange.setVisible(false);
-		startGewinnVerlustKuchenButtonOrange.setVisible(false);
-		gewinnVerlustKuchenButtonOrange.setVisible(true);
-	}
-	
-	
-	//Start Gewinn Verlust Kuchen anzeigen
-	@FXML
-	public void startGewinnVerlustKuchenAnzeigen(){
-		startGewinnVerlustKuchenButtonOrange.setVisible(true);
-		spielhistorieButtonOrange.setVisible(false);
-		gewinnVerlustKuchenButtonOrange.setVisible(false);
 
-	}
 	
-	//Anzahl Gewinne Verluste anzeigen
-	@FXML
-	public void anzahlGewinneVerlusteAnzeigen(){
-		spielhistorieButtonOrange.setVisible(false);
-		startGewinnVerlustKuchenButtonOrange.setVisible(false);
-		gewinnVerlustKuchenButtonOrange.setVisible(false);
-
-	}
 		
-	//Spielhistorie anzeigen
-	@FXML
-	public void spielhistorieAnzeigen(){
-		spielhistorieButtonOrange.setVisible(true);
-		startGewinnVerlustKuchenButtonOrange.setVisible(false);
-		gewinnVerlustKuchenButtonOrange.setVisible(false);
-
-	}
-	
-	@FXML
-	public void resetMenuSchliessen(){
 		
-	}
+
+
 	
 	@FXML
 	public void mouseOver(){
