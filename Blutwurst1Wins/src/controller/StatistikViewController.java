@@ -18,7 +18,7 @@ public class StatistikViewController {
 	@FXML
 	private ImageView spielfeldButtonOrange, resetButtonOrange, spielhistorieButtonOrange, startGewinnVerlustKuchenButtonOrange, gewinnVerlustKuchenButtonOrange;
 	@FXML
-	private ImageView spielfeldButton, anzahlGewinnVerlustButtonOrange;
+	private ImageView spielfeldButton, anzahlGewinnVerlustButtonOrange, startGewinnVerlustKuchenButton;
 	@FXML
 	private PieChart gewinnVerlustKuchenDiagramm, startGewinnVerlustKuchenDiagramm;
 	@FXML
@@ -81,10 +81,13 @@ public class StatistikViewController {
 			public void gewinnVerlustKuchenAnzeigen(){
 				spielhistorieTable.setVisible(false);
 				spielhistorieButtonOrange.setVisible(false);
-				startGewinnVerlustKuchenButtonOrange.setVisible(false);
+				startGewinnVerlustKuchenButton.setVisible(true);
 				gewinnVerlustKuchenButtonOrange.setVisible(true);
 				anzahlGewinnVerlustButtonOrange.setVisible(false);
 				gewinnVerlustKuchenDiagramm.setVisible(true);
+				anzahlGewinneVerlusteDiagramm.setVisible(false);
+				spielhistorieTable.setVisible(false);
+				startGewinnVerlustKuchenDiagramm.setVisible(false);
 				
 			}
 			
@@ -92,33 +95,41 @@ public class StatistikViewController {
 			//Start Gewinn Verlust Kuchen anzeigen
 			@FXML
 			public void startGewinnVerlustKuchenAnzeigen(){
+				startGewinnVerlustKuchenButton.setVisible(false);
 				startGewinnVerlustKuchenButtonOrange.setVisible(true);
 				spielhistorieButtonOrange.setVisible(false);
 				gewinnVerlustKuchenButtonOrange.setVisible(false);
 				anzahlGewinnVerlustButtonOrange.setVisible(false);
 				startGewinnVerlustKuchenDiagramm.setVisible(true);
 				spielhistorieTable.setVisible(false);
+				anzahlGewinneVerlusteDiagramm.setVisible(false);
+				gewinnVerlustKuchenDiagramm.setVisible(false);
 			}
 			
 			//Anzahl Gewinne Verluste anzeigen
 			@FXML
 			public void anzahlGewinneVerlusteAnzeigen(){
 				spielhistorieButtonOrange.setVisible(false);
-				startGewinnVerlustKuchenButtonOrange.setVisible(false);
+				startGewinnVerlustKuchenButton.setVisible(true);
 				gewinnVerlustKuchenButtonOrange.setVisible(false);
 				anzahlGewinnVerlustButtonOrange.setVisible(true);
 				anzahlGewinneVerlusteDiagramm.setVisible(true);
 				spielhistorieTable.setVisible(false);
+				gewinnVerlustKuchenDiagramm.setVisible(false);
+				startGewinnVerlustKuchenDiagramm.setVisible(false);
 			}
 				
 			//Spielhistorie anzeigen
 			@FXML
 			public void spielhistorieAnzeigen(){
 				spielhistorieButtonOrange.setVisible(true);
-				startGewinnVerlustKuchenButtonOrange.setVisible(false);
+				startGewinnVerlustKuchenButton.setVisible(true);
 				gewinnVerlustKuchenButtonOrange.setVisible(false);
 				anzahlGewinnVerlustButtonOrange.setVisible(false);
 				spielhistorieTable.setVisible(true);
+				gewinnVerlustKuchenDiagramm.setVisible(false);
+				startGewinnVerlustKuchenDiagramm.setVisible(false);
+				anzahlGewinneVerlusteDiagramm.setVisible(false);
 			}
 	
 	

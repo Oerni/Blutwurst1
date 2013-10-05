@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minWidth="750.0" prefHeight="521.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+<AnchorPane minWidth="750.0" prefHeight="521.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="21.0" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="750.0" />
@@ -27,6 +27,11 @@
         </TableView>
       </children>
     </FlowPane>
+    <ImageView id="startGewinnVerlustKuchenButtonOrange.png" fx:id="startGewinnVerlustKuchenButtonOrange" layoutX="481.0" layoutY="147.0" visible="true">
+      <image>
+        <Image url="@icons/startGewinnVerlustKuchenButtonOrange.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
     <ImageView id="HilfeButton.png" fx:id="hilfeButton" layoutX="318.0" layoutY="35.0" onMouseClicked="#hilfeAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
       <image>
         <Image url="@icons/HilfeButton.png" preserveRatio="true" smooth="true" />
@@ -40,11 +45,6 @@
     <ImageView id="gewinnVerlustKuchenButton.png" fx:id="gewinnVerlustKuchenButton" layoutX="477.0" layoutY="99.0" onMouseClicked="#gewinnVerlustKuchenAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
       <image>
         <Image url="@icons/gewinnVerlustKuchenButton.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <ImageView id="startGewinnVerlustKuchenButtonOrange.png" fx:id="startGewinnVerlustKuchenButtonOrange" layoutX="481.0" layoutY="143.0" visible="false">
-      <image>
-        <Image url="@icons/startGewinnVerlustKuchenButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <ImageView id="anzahlGewinnVerlustButton.png" fx:id="anzahlGewinnVerlustButton" layoutX="484.0" layoutY="191.0" onMouseClicked="#anzahlGewinneVerlusteAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
@@ -69,7 +69,7 @@
       </image>
     </ImageView>
     <PieChart id="PieChart" fx:id="startGewinnVerlustKuchenDiagramm" layoutX="53.0" layoutY="143.0" prefHeight="285.0" prefWidth="361.0" />
-    <ImageView id="startGewinnVerlustKuchenButton.png" fx:id="startGewinnVerlustKuchenButton" layoutX="478.0" layoutY="140.0" onMouseClicked="#startGewinnVerlustKuchenAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" visible="true">
+    <ImageView id="startGewinnVerlustKuchenButton.png" fx:id="startGewinnVerlustKuchenButton" layoutX="478.0" layoutY="144.0" onMouseClicked="#startGewinnVerlustKuchenAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" visible="true">
       <image>
         <Image url="@icons/startGewinnVerlustKuchenButton.png" preserveRatio="true" smooth="true" />
       </image>
@@ -95,7 +95,7 @@
       </image>
     </ImageView>
     <PieChart id="PieChart" fx:id="gewinnVerlustKuchenDiagramm" layoutX="54.0" layoutY="143.0" prefHeight="285.0" prefWidth="361.0" visible="false" />
-    <BarChart fx:id="anzahlGewinneVerlusteDiagramm" categoryGap="10.0" layoutX="64.0" layoutY="142.0" prefHeight="243.0" prefWidth="335.0" snapToPixel="true"  visible="true">
+    <BarChart fx:id="anzahlGewinneVerlusteDiagramm" categoryGap="10.0" layoutX="64.0" layoutY="142.0" prefHeight="243.0" prefWidth="335.0" snapToPixel="true" visible="true">
       <xAxis>
         <CategoryAxis side="BOTTOM" />
       </xAxis>
@@ -103,6 +103,11 @@
         <NumberAxis side="LEFT" />
       </yAxis>
     </BarChart>
+    <ImageView id="anzahlGewinnVerlustButtonOrange.JPG" fx:id="anzahlGewinnVerlustButtonOrange" fitHeight="33.0" fitWidth="246.00001525878906" layoutX="483.0" layoutY="194.0" visible="false">
+      <image>
+        <Image url="@icons/anzahlGewinnVerlustButtonOrange.JPG" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
   </children>
   <stylesheets>
     <URL value="@SpielStyle.css" />
