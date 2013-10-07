@@ -12,4 +12,11 @@ public class StatistikModel {
 	public Stage getStage(){
 		return stage;
 	}
+	
+	public int getAnzahlGewinne(){
+		return 5;
+	}
+	public int getAnzahlVerluste(){
+		return 3;
+	}
 }

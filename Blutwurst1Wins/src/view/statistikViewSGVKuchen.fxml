@@ -97,10 +97,10 @@
     <PieChart id="PieChart" fx:id="gewinnVerlustKuchenDiagramm" layoutX="54.0" layoutY="143.0" prefHeight="285.0" prefWidth="361.0" visible="false" />
     <BarChart fx:id="anzahlGewinneVerlusteDiagramm" categoryGap="10.0" layoutX="64.0" layoutY="142.0" prefHeight="243.0" prefWidth="335.0" snapToPixel="true" visible="true">
       <xAxis>
-        <CategoryAxis side="BOTTOM" />
+        <CategoryAxis id="xAchse" side="BOTTOM" />
       </xAxis>
       <yAxis>
-        <NumberAxis side="LEFT" />
+        <NumberAxis id="yAchse" side="LEFT" />
       </yAxis>
     </BarChart>
     <ImageView id="anzahlGewinnVerlustButtonOrange.JPG" fx:id="anzahlGewinnVerlustButtonOrange" fitHeight="33.0" fitWidth="246.00001525878906" layoutX="483.0" layoutY="194.0" visible="false">

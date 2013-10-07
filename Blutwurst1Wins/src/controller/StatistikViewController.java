@@ -1,11 +1,14 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -42,6 +45,23 @@ public class StatistikViewController {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
+		
+//		CategoryAxis xAchse = new CategoryAxis();
+//		NumberAxis yAchse = new NumberAxis();
+		anzahlGewinneVerlusteDiagramm.setTitle("Anzahl Gewinne/Verluste");
+		
+		XYChart.Series<String,Number> ergebnisse = new XYChart.Series<String,Number>();
+		ergebnisse.setName("Anzahl Spiele");
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Gewinne",model.getAnzahlGewinne()));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Verluste",model.getAnzahlVerluste()));
+		
+		anzahlGewinneVerlusteDiagramm.getData().add(ergebnisse);
+		
+//		Gewinn-Verlust-Kuchen Diagramm
+		ObservableList<PieChart.Data> gewinnVerlustData = FXCollections.observableArrayList(
+				new PieChart.Data("Gewonnen", model.getAnzahlGewinne()),
+				new PieChart.Data("Verloren",model.getAnzahlVerluste()));
+		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
 	}
 	
 	public void show(){
