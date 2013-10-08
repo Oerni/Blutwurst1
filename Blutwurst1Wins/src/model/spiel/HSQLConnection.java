@@ -5,8 +5,9 @@ import java.sql.*;
 public class HSQLConnection {
 	private Connection connection;
 	private Statement statement;
+	private static HSQLConnection instance;
 	
-	public HSQLConnection(){
+	private HSQLConnection(){
 		try{
 			Class.forName("org.hsqldb.jdbcDriver");
 		}catch(ClassNotFoundException ex){
@@ -23,16 +24,27 @@ public class HSQLConnection {
 			ex.printStackTrace();
 		}
 	}
-//	public 
-//	public DBObject executeQuery(String query,String table){
-//		if(!query.contains("timestamp")){
-//			
-//		}
-//		try{
-//			ResultSet rs = statement.executeQuery(query);
-//			
-//		}catch(SQLException ex){
-//			ex.printStackTrace();
-//		}
-//	}
+	
+	public static HSQLConnection getInstance(){
+		if(instance==null)
+			instance = new HSQLConnection();
+		return instance;
+	}
+	
+	
+	public void insert(String insert){
+		try{
+			statement.execute(insert);
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+	}
+	public ResultSet executeQuery(String query){
+		try{
+			return statement.executeQuery(query);
+		}catch(SQLException ex){
+			ex.printStackTrace();
+			return null;
+		}
+	}
 }

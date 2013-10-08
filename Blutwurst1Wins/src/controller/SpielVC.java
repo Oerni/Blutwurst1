@@ -212,6 +212,7 @@ public class SpielVC {
 	public void show(){
 		Stage primaryStage = model.getPrimaryStage();
 		primaryStage.setScene(scene);
+		spielStarten();
 		primaryStage.show();
 		System.out.println(runde.getText()+", "+satzstatus.getText());
 	}
@@ -275,7 +276,10 @@ public class SpielVC {
 //	Druecken des Spiel-Starten Buttons
 	@FXML
 	public void spielStarten(){
-
+		String eigenerName = "blutwurst1";
+		String gegnerName = "Gegner";
+		boolean heimBeginnt = true;
+		model.spielerRegistrieren(eigenerName,gegnerName,heimBeginnt);
 	}
 	
 
@@ -291,7 +295,7 @@ public class SpielVC {
 	Color aktuelleFarbe;
 	@FXML
 	public void inAHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -300,7 +304,7 @@ public class SpielVC {
 	}
 	@FXML
 	public void inBHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -309,7 +313,7 @@ public class SpielVC {
 	}
 	@FXML
 	public void inCHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -318,7 +322,7 @@ public class SpielVC {
 	}
 	@FXML
 	public void inDHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -327,7 +331,7 @@ public class SpielVC {
 	}
 	@FXML
 	public void inEHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -336,7 +340,7 @@ public class SpielVC {
 	}
 	@FXML
 	public void inFHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -345,7 +349,7 @@ public class SpielVC {
 	}
 	@FXML
 	public void inGHinzufuegen(){
-		if(model.getAktuellerSpieler() == 'X')
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;

@@ -2,10 +2,13 @@ package model.spiel;
 
 public class Zug {
 	private Spieler spieler;
+	private Satz satz;
 	private boolean freigabe;
 	private String satzstatus;
 	private int gegnerzug;
 	private String sieger;
+	private int zeile;
+	private int spalte;
 	
 	public static final int OFFEN = 1;
 	public static final int BEENDET = 2;
@@ -13,6 +16,19 @@ public class Zug {
 	public static final int SIEGER_OFFEN = 0;
 	public static final int SIEGER_O = 1;
 	public static final int SIEGER_X = 2;
+	
+	public Zug(int zeile,int spalte,Spieler spieler,Satz satz){
+		this.zeile = zeile;
+		this.spalte = spalte;
+		this.spieler = spieler;
+		this.satz = satz;
+		speichern();
+	}
+	
+	public void speichern(){
+//		String insert = "INSERT INTO zug(satznr,spielnr,zeile,spalte) VALUES("+satz.getSatzNr()+","+satz.getSpiel().getSpielNr()+","+zeile+","+spalte+");";
+//		HSQLConnection.getInstance().executeQuery(insert);
+	}
 	
 	public Zug(boolean freigabe,int satzstatus,int gegnerzug,int sieger){
 		this.freigabe = freigabe;

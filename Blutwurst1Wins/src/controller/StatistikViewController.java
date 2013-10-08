@@ -9,10 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.spiel.Spiel;
 import model.statistik.StatistikModel;
 
 public class StatistikViewController {
@@ -28,7 +31,8 @@ public class StatistikViewController {
 	private BarChart anzahlGewinneVerlusteDiagramm;
 	@FXML
 	private TableView spielhistorieTable;
-	
+	@FXML
+	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte;
 	
 	
 	public StatistikViewController(StatistikModel sModel){
@@ -52,16 +56,22 @@ public class StatistikViewController {
 		
 		XYChart.Series<String,Number> ergebnisse = new XYChart.Series<String,Number>();
 		ergebnisse.setName("Anzahl Spiele");
-		ergebnisse.getData().add(new XYChart.Data<String,Number>("Gewinne",model.getAnzahlGewinne()));
-		ergebnisse.getData().add(new XYChart.Data<String,Number>("Verluste",model.getAnzahlVerluste()));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",model.getAnzahlSiege()));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",model.getAnzahlNiederlagen()));
 		
 		anzahlGewinneVerlusteDiagramm.getData().add(ergebnisse);
 		
 //		Gewinn-Verlust-Kuchen Diagramm
 		ObservableList<PieChart.Data> gewinnVerlustData = FXCollections.observableArrayList(
-				new PieChart.Data("Gewonnen", model.getAnzahlGewinne()),
-				new PieChart.Data("Verloren",model.getAnzahlVerluste()));
+				new PieChart.Data("Gewonnen", model.getAnzahlSiege()),
+				new PieChart.Data("Verloren",model.getAnzahlNiederlagen()));
 		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
+		
+		spielhistorieTable.setEditable(false);
+		spielnummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielNr"));
+		spielstandSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielstand"));
+		gegnerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gegner"));
+		spielhistorieTable.setItems(model.getSpieldaten());
 	}
 	
 	public void show(){

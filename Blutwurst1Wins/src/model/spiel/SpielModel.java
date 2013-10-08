@@ -1,18 +1,15 @@
 package model.spiel;
 
-import java.util.Stack;
-
-import Logik.Spielfeld;
 import javafx.stage.Stage;
+import Logik.Spielfeld;
 
 public class SpielModel {
 	private Stage stage;
-	private HSQLConnection dbconnect = new HSQLConnection();
 	private Spieler gegner;
 	private Spieler selbst;
+	private Spieler aktuellerSpieler;
 	private DateiVerwaltung dateiverwaltung = new DateiVerwaltung("");
-	private Stack<Zug> spielverlauf = new Stack<Zug>();
-	private char aktuellerSpieler = 'X';
+	private Satz aktuellerSatz;
 	private Spielfeld spielfeld = new Spielfeld();
 	
 	public SpielModel(Stage stage){
@@ -21,32 +18,43 @@ public class SpielModel {
 	
 	public int chipEinwerfen(int spalte){
 		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
-		if(aktuellerSpieler == 'X')
-			aktuellerSpieler = 'O';
+		new Zug(ergebnis,spalte,aktuellerSpieler,aktuellerSatz);
+		if(aktuellerSpieler == gegner)
+			aktuellerSpieler = selbst;
 		else
-			aktuellerSpieler = 'X';
+			aktuellerSpieler = gegner;
 		return ergebnis;
 	}
-	public char getAktuellerSpieler(){
+	
+	public Spieler getAktuellerSpieler(){
 		return aktuellerSpieler;
 	}
 	
 	public void zuruecksetzen(){
 		spielfeld = new Spielfeld();
 	}
-	public void setSpieler(int eigeneKennzeichnung){
-		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
-		switch(eigeneKennzeichnung){
-			case Spieler.SPIELER_O:
-				gegner = new Spieler("Gegner",Spieler.SPIELER_X);
-				break;
-			case Spieler.SPIELER_X:
-				gegner = new Spieler("Gegner",Spieler.SPIELER_O);
-				break;
-		}
+//	public void setSpieler(int eigeneKennzeichnung){
+//		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
+//		switch(eigeneKennzeichnung){
+//			case Spieler.SPIELER_O:
+//				gegner = new Spieler("Gegner",Spieler.SPIELER_X);
+//				break;
+//			case Spieler.SPIELER_X:
+//				gegner = new Spieler("Gegner",Spieler.SPIELER_O);
+//				break;
+//		}
+//	}
+	
+	public void spielerRegistrieren(String eigenerName,String gegnerName,boolean heimBeginnt){
+		selbst = new Spieler(0,eigenerName,'X');
+		gegner = new Spieler(1,gegnerName,'O');
+		if(heimBeginnt)
+			aktuellerSpieler = selbst;
+		else
+			aktuellerSpieler = gegner;
 	}
 	
-	public int getEigeneKennzeichnung(){
+	public char getEigeneKennzeichnung(){
 		return selbst.getKennzeichnung();
 	}
 //	Zug-Informationen
@@ -64,17 +72,17 @@ public class SpielModel {
 	}
 	
 //	Punktzahlen ausgeben
-	public int getEigeneSatzpunkte(){
-		return selbst.getSatzpunkte();
-	}
-	public int getGegnerSatzpunkte(){
-		return gegner.getSatzpunkte();
-	}
+//	public int getEigeneSatzpunkte(){
+//		return selbst.getSatzpunkte();
+//	}
+//	public int getGegnerSatzpunkte(){
+//		return gegner.getSatzpunkte();
+//	}
 	
 	public Zug zugVonServer(){
 		Zug zug = dateiverwaltung.dateiLesen();
 		zug.setSpieler(gegner);
-		spielverlauf.push(zug);
+//		spielverlauf.push(zug);
 		return zug;
 	}
 	public void zugAnServer(Zug zug){

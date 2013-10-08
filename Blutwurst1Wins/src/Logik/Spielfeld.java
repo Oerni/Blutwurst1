@@ -1,5 +1,7 @@
 package Logik;
 
+import model.spiel.Spieler;
+
 public class Spielfeld {
 	private char spielfeld[][] = new char[7][6];
 	
@@ -9,10 +11,10 @@ public class Spielfeld {
 				spielfeld[i][j] = ' ';
 	}
 	
-	public int einfuegen(int spalte,char spieler){
+	public int einfuegen(int spalte,Spieler spieler){
 		for(int i=0;i<6;i++)
 			if(spielfeld[spalte][i] == ' '){
-				spielfeld[spalte][i] = spieler;
+				spielfeld[spalte][i] = spieler.getKennzeichnung();
 //				Spalte überprüfen
 				return i;
 			}
