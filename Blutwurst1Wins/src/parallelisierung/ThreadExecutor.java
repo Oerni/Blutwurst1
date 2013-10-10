@@ -1,12 +1,12 @@
-package runnable;
+package parallelisierung;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import datenhaltung.Spiel;
 import javafx.collections.ObservableList;
-import model.spiel.Spiel;
 
 public class ThreadExecutor {
 	private static ThreadExecutor instance;

@@ -1,4 +1,4 @@
-package runnable;
+package parallelisierung;
 
 public class SemaphorManager {
 //	Lösung des Leser-Schreiber-Problems ohne Priorität

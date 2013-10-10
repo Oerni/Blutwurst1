@@ -1,15 +1,15 @@
-package runnable;
+package parallelisierung;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
 
+import datenhaltung.HSQLConnection;
+import datenhaltung.Spiel;
+import datenhaltung.Spieler;
+import datenhaltung.Strings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.spiel.HSQLConnection;
-import model.spiel.Spiel;
-import model.spiel.Spieler;
-import model.spiel.Strings;
 
 public class SpieldatenCallable implements Callable<ObservableList<Spiel>>{
 	

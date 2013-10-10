@@ -1,10 +1,10 @@
-package runnable;
+package parallelisierung;
 
 import java.sql.Statement;
 
-import model.spiel.HSQLConnection;
-import model.spiel.Spieler;
-import model.spiel.Strings;
+import datenhaltung.HSQLConnection;
+import datenhaltung.Spieler;
+import datenhaltung.Strings;
 
 public class SpeichereSpielerRunnable implements Runnable{
 	private Spieler spieler;

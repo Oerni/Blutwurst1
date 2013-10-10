@@ -1,10 +1,10 @@
-package runnable;
+package parallelisierung;
 
 import java.sql.Statement;
 
-import model.spiel.HSQLConnection;
-import model.spiel.Strings;
-import model.spiel.Zug;
+import datenhaltung.HSQLConnection;
+import datenhaltung.Strings;
+import datenhaltung.Zug;
 
 public class SpeichereZugRunnable implements Runnable {
 	private Zug zug;

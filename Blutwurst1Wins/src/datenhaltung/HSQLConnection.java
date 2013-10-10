@@ -1,8 +1,11 @@
-package model.spiel;
+package datenhaltung;
 
 import java.sql.*;
 
 public class HSQLConnection {
+	/**
+	 * Singleton zur zentralen Haltung der Datenbankverbindung
+	 */
 	private Connection connection;
 	private Statement statement;
 	private static HSQLConnection instance;

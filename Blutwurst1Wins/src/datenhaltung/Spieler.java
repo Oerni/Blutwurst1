@@ -1,12 +1,15 @@
-package model.spiel;
+package datenhaltung;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import runnable.SpeichereSpielerRunnable;
-import runnable.ThreadExecutor;
+import parallelisierung.SpeichereSpielerRunnable;
+import parallelisierung.ThreadExecutor;
 
 public class Spieler extends DBObject{
+	/**
+	 * Model-Klasse: Spieler
+	 */
 	private int id;
 	private String name;
 	private char kennzeichnung;		// Spieler X oder Spieler O

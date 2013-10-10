@@ -1,4 +1,4 @@
-package model.spiel;
+package datenhaltung;
 
 import java.util.Stack;
 
@@ -6,6 +6,11 @@ import javafx.stage.Stage;
 import Logik.Spielfeld;
 
 public class SpielModel {
+	/**
+	 * SpielModel. Zentraler Ansprechpartner des SpielViewController zur Vereinheitlichung
+	 * der Kommunikation. ViewController hat keinen Einblick, was die Quelle der jeweiligen
+	 * Daten ist.
+	 */
 	private Stage stage;
 	private Spiel spiel;
 	private Stack<Satz> saetze = new Stack<Satz>();

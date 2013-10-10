@@ -1,9 +1,9 @@
 package application;
 	
 import controller.SpielViewController;
+import datenhaltung.SpielModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.spiel.SpielModel;
 
 public class Main extends Application {
 	@Override

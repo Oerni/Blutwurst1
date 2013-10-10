@@ -1,9 +1,12 @@
-package model.spiel;
+package datenhaltung;
 
-import runnable.SpeichereZugRunnable;
-import runnable.ThreadExecutor;
+import parallelisierung.SpeichereZugRunnable;
+import parallelisierung.ThreadExecutor;
 
 public class Zug extends DBObject{
+	/**
+	 * Model-Klasse: Zug
+	 */
 	private Spieler spieler;
 	private Satz satz;
 	private boolean freigabe;

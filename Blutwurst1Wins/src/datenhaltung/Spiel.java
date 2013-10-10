@@ -1,9 +1,12 @@
-package model.spiel;
+package datenhaltung;
 
-import runnable.SpeichereSpielRunnable;
-import runnable.ThreadExecutor;
+import parallelisierung.SpeichereSpielRunnable;
+import parallelisierung.ThreadExecutor;
 
 public class Spiel extends DBObject{
+	/**
+	 * Model-Klasse: Spiel
+	 */
 	private int spielNr;
 	private Spieler gegner;
 	private Spieler selbst;
@@ -12,7 +15,7 @@ public class Spiel extends DBObject{
 	private String spielstand;
 	
 	public Spiel(Spieler gegner){
-		
+		this.gegner = gegner;
 	}
 	
 	public Spiel(Spieler gegner,int punkteHeim,int punkteGegner){
@@ -23,6 +26,8 @@ public class Spiel extends DBObject{
 		this.selbst = new Spieler(Strings.NAME,'O');
 	}
 	
+	
+//	Statistik-Konstruktor
 	public Spiel(int spielNr,Spieler gegner,int punkteHeim,int punkteGegner){
 		this.spielNr = spielNr;
 		this.gegner = gegner;

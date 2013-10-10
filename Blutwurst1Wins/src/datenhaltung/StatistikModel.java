@@ -1,15 +1,14 @@
 
-package model.statistik;
+package datenhaltung;
 
 import java.util.concurrent.Future;
 
+import parallelisierung.AnzahlNiederlagenCallable;
+import parallelisierung.AnzahlSiegeCallable;
+import parallelisierung.SpieldatenCallable;
+import parallelisierung.ThreadExecutor;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import model.spiel.Spiel;
-import runnable.AnzahlNiederlagenCallable;
-import runnable.AnzahlSiegeCallable;
-import runnable.SpieldatenCallable;
-import runnable.ThreadExecutor;
 
 public class StatistikModel {
 	private Stage stage;

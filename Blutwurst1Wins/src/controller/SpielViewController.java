@@ -2,6 +2,10 @@ package controller;
 
 import java.io.IOException;
 
+import datenhaltung.SpielModel;
+import datenhaltung.Spieler;
+import datenhaltung.StatistikModel;
+import datenhaltung.Zug;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -17,10 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import model.spiel.SpielModel;
-import model.spiel.Spieler;
-import model.spiel.Zug;
-import model.statistik.StatistikModel;
 
 
 public class SpielViewController {

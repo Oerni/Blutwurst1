@@ -1,4 +1,4 @@
-package model.spiel;
+package datenhaltung;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

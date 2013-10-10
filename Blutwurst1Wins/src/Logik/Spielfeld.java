@@ -1,6 +1,6 @@
 package Logik;
 
-import model.spiel.Spieler;
+import datenhaltung.Spieler;
 
 public class Spielfeld {
 	private char spielfeld[][] = new char[7][6];

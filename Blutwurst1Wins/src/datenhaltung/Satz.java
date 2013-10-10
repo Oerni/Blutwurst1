@@ -1,9 +1,13 @@
-package model.spiel;
+package datenhaltung;
 
-import runnable.SpeichereSatzRunnable;
-import runnable.ThreadExecutor;
+import parallelisierung.SpeichereSatzRunnable;
+import parallelisierung.ThreadExecutor;
 
 public class Satz extends DBObject{
+	
+	/**
+	 * Model-Klasse: Satz
+	 */
 	private int satzNr;
 	private Spieler spielerBegonnen;
 	private Spiel spiel;
