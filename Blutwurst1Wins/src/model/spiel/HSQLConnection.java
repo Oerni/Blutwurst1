@@ -31,6 +31,9 @@ public class HSQLConnection {
 		return instance;
 	}
 	
+	public Statement getStatement(){
+		return statement;
+	}
 	
 	public void insert(String insert){
 		try{

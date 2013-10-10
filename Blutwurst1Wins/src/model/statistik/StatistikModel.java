@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import model.spiel.HSQLConnection;
 import model.spiel.Queries;
@@ -21,7 +20,7 @@ public class StatistikModel {
 	public Stage getStage(){
 		return stage;
 	}
-	
+//	Rückgabe der Anzahl der erspielten Siege
 	public int getAnzahlSiege(){
 		ResultSet anzahlSiegeSQL = HSQLConnection.getInstance().executeQuery(Queries.ANZAHL_SIEGE);
 		try{
@@ -33,6 +32,8 @@ public class StatistikModel {
 		
 		return -1;
 	}
+	
+//	Rückgabe der Anzahl der erspielten Niederlagen
 	public int getAnzahlNiederlagen(){
 		ResultSet anzahlSiegeSQL = HSQLConnection.getInstance().executeQuery(Queries.ANZAHL_NIEDERLAGEN);
 		try{
@@ -44,17 +45,20 @@ public class StatistikModel {
 		
 		return -1;
 	}
+	
+//	Spieldaten zur Anzeige aller gespielten Spiele
 	public ObservableList<Spiel> getSpieldaten(){
-		ObservableList<Spiel> spieldaten = FXCollections.observableArrayList();
-		ResultSet spieldatenSQL = HSQLConnection.getInstance().executeQuery(Queries.SPIELDATEN);
-		try{
-			while(spieldatenSQL.next()){
-				spieldaten.add(new Spiel(spieldatenSQL.getInt("spielnr"),spieldatenSQL.getString("name"),spieldatenSQL.getInt("punkteheim"),spieldatenSQL.getInt("punktegegner")));
-			}
-			return spieldaten;
-		}catch(SQLException ex){
-			ex.printStackTrace();
-			return null;
-		}
+		return null;
+//		ObservableList<Spiel> spieldaten = FXCollections.observableArrayList();
+//		ResultSet spieldatenSQL = HSQLConnection.getInstance().executeQuery(Queries.SPIELDATEN);
+//		try{
+//			while(spieldatenSQL.next()){
+//				spieldaten.add(new Spiel(spieldatenSQL.getInt("spielnr"),spieldatenSQL.getString("name"),spieldatenSQL.getInt("punkteheim"),spieldatenSQL.getInt("punktegegner")));
+//			}
+//			return spieldaten;
+//		}catch(SQLException ex){
+//			ex.printStackTrace();
+//			return null;
+//		}
 	}
 }

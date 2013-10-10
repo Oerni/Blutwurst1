@@ -1,6 +1,9 @@
 package model.spiel;
 
-public class Zug {
+import runnable.SpeichereZugRunnable;
+import runnable.ThreadExecutor;
+
+public class Zug extends DBObject{
 	private Spieler spieler;
 	private Satz satz;
 	private boolean freigabe;
@@ -26,8 +29,12 @@ public class Zug {
 	}
 	
 	public void speichern(){
-//		String insert = "INSERT INTO zug(satznr,spielnr,zeile,spalte) VALUES("+satz.getSatzNr()+","+satz.getSpiel().getSpielNr()+","+zeile+","+spalte+");";
-//		HSQLConnection.getInstance().executeQuery(insert);
+		SpeichereZugRunnable speichern = new SpeichereZugRunnable(satz.getSatzNr(),satz.getSpiel().getSpielNr(),zeile,spalte);
+		ThreadExecutor.getInstance().execute(speichern);
+	}
+	
+	public int ladeIDausDB(){
+		return -1;
 	}
 	
 	public Zug(boolean freigabe,int satzstatus,int gegnerzug,int sieger){
@@ -75,4 +82,5 @@ public class Zug {
 	public String getSieger(){
 		return sieger;
 	}
+
 }
