@@ -22,6 +22,7 @@
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Spielnr." fx:id="spielnummerSpalte" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Spielstand" fx:id="spielstandSpalte" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Gegner" fx:id="gegnerSpalte" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Sieger" fx:id="siegerSpalte" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Spielzüge" fx:id="spielzuegeSpalte" />
           </columns>
         </TableView>

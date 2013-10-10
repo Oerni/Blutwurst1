@@ -11,10 +11,6 @@ public class Spieler extends DBObject{
 	private String name;
 	private char kennzeichnung;		// Spieler X oder Spieler O
 	
-	private static int amZug = 0;
-	public static final int SPIELER_X = 0;
-	public static final int SPIELER_O = 1;
-	
 	public Spieler(int id,String name,char kennzeichnung){
 		this.id = id;
 		this.name = name;
@@ -25,10 +21,6 @@ public class Spieler extends DBObject{
 		this.kennzeichnung = kennzeichnung;
 		speichern();
 		this.id = ladeIDausDB();
-	}
-	
-	public static int getSpielerAmZug(){
-		return amZug;
 	}
 	
 	public int getID(){
@@ -44,7 +36,7 @@ public class Spieler extends DBObject{
 	}
 	
 	public void speichern(){
-		SpeichereSpielerRunnable speichern = new SpeichereSpielerRunnable(name);
+		SpeichereSpielerRunnable speichern = new SpeichereSpielerRunnable(this);
 		ThreadExecutor.getInstance().execute(speichern);
 	}
 	

@@ -32,7 +32,7 @@ public class StatistikViewController {
 	@FXML
 	private TableView spielhistorieTable;
 	@FXML
-	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte;
+	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte,siegerSpalte;
 	
 	
 	public StatistikViewController(StatistikModel sModel){
@@ -54,24 +54,29 @@ public class StatistikViewController {
 //		NumberAxis yAchse = new NumberAxis();
 		anzahlGewinneVerlusteDiagramm.setTitle("Anzahl Gewinne/Verluste");
 		
+		int anzahlSiege = model.getAnzahlSiege();
+		int anzahlNiederlagen = model.getAnzahlNiederlagen();
+		ObservableList<Spiel> spieldaten = model.getSpieldaten();
+		
 		XYChart.Series<String,Number> ergebnisse = new XYChart.Series<String,Number>();
 		ergebnisse.setName("Anzahl Spiele");
-		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",model.getAnzahlSiege()));
-		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",model.getAnzahlNiederlagen()));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",anzahlSiege));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",anzahlNiederlagen));
 		
 		anzahlGewinneVerlusteDiagramm.getData().add(ergebnisse);
 		
 //		Gewinn-Verlust-Kuchen Diagramm
 		ObservableList<PieChart.Data> gewinnVerlustData = FXCollections.observableArrayList(
-				new PieChart.Data("Gewonnen", model.getAnzahlSiege()),
-				new PieChart.Data("Verloren",model.getAnzahlNiederlagen()));
+				new PieChart.Data("Gewonnen", anzahlSiege),
+				new PieChart.Data("Verloren", anzahlNiederlagen));
 		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
 		
 		spielhistorieTable.setEditable(false);
 		spielnummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielNr"));
 		spielstandSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielstand"));
-		gegnerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gegner"));
-		spielhistorieTable.setItems(model.getSpieldaten());
+		gegnerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gegnerName"));
+		siegerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gewinnerName"));
+		spielhistorieTable.setItems(spieldaten);
 	}
 	
 	public void show(){

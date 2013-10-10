@@ -3,27 +3,28 @@ package runnable;
 import java.sql.Statement;
 
 import model.spiel.HSQLConnection;
+import model.spiel.Spiel;
 
 public class SpeichereSpielRunnable implements Runnable{
-	private int gegner,punkteHeim,punkteGegner;
+	private Spiel spiel;
 	
-	public SpeichereSpielRunnable(int gegner,int punkteHeim,int punkteGegner){
-		this.gegner = gegner;
-		this.punkteHeim = punkteHeim;
-		this.punkteGegner = punkteGegner;
+	public SpeichereSpielRunnable(Spiel spiel){
+		this.spiel = spiel;
 	}
 	
 	@Override
 	public void run() {
 		Statement statement = HSQLConnection.getInstance().getStatement();
-		String insert = String.format("spiel","gegner,punkteheim,punktegegner",gegner+","+punkteHeim+","+punkteGegner);
+		String insert = String.format("spiel","gegner,punkteheim,punktegegner",spiel.getGegner().getID()+","+spiel.getPunkteHeim()+","+spiel.getPunkteGegner());
 //		Semaphore Entry
+		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		try{
 			statement.execute(insert);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 //		Semaphore Exit
+		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 
 }

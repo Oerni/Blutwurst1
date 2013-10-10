@@ -5,28 +5,45 @@ import runnable.ThreadExecutor;
 
 public class Satz extends DBObject{
 	private int satzNr;
-	private int spielerBegonnen;
+	private Spieler spielerBegonnen;
 	private Spiel spiel;
 	private Spieler gewonnen;
 	
-	public Satz(int satzNr,int spielerBegonnen,Spiel spiel){
+	public Satz(int satzNr,Spieler spielerBegonnen,Spiel spiel){
+		this.spielerBegonnen = spielerBegonnen;
+		this.spiel = spiel;
+		this.satzNr = satzNr;
+	}
+	public Satz(int satzNr,Spieler spielerBegonnen,Spiel spiel,Spieler gewinner){
+		this.spielerBegonnen = spielerBegonnen;
+		this.spiel = spiel;
+		this.satzNr = satzNr;
+		this.gewonnen = gewinner;
+	}
+	public Satz(Spieler spielerBegonnen,Spiel spiel){
 		this.spielerBegonnen = spielerBegonnen;
 		this.spiel = spiel;
 	}
 	
+	public void setGewinner(Spieler gewinner){
+		this.gewonnen = gewinner;
+	}
 	public Spiel getSpiel(){
 		return spiel;
 	}
-	public int spielerBegonnen(){
+	public Spieler spielerBegonnen(){
 		return spielerBegonnen;
 	}
 	public int getSatzNr(){
 		return satzNr;
 	}
+	public Spieler getGewinner(){
+		return gewonnen;
+	}
 
 	@Override
 	public void speichern() {
-		SpeichereSatzRunnable speichern = new SpeichereSatzRunnable(spiel.getSpielNr(), gewonnen.getID());
+		SpeichereSatzRunnable speichern = new SpeichereSatzRunnable(this);
 		ThreadExecutor.getInstance().execute(speichern);
 	}
 

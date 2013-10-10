@@ -28,8 +28,18 @@ public class Zug extends DBObject{
 		speichern();
 	}
 	
+	public Satz getSatz(){
+		return satz;
+	}
+	public int getZeile(){
+		return zeile;
+	}
+	public int getSpalte(){
+		return spalte;
+	}
+	
 	public void speichern(){
-		SpeichereZugRunnable speichern = new SpeichereZugRunnable(satz.getSatzNr(),satz.getSpiel().getSpielNr(),zeile,spalte);
+		SpeichereZugRunnable speichern = new SpeichereZugRunnable(this);
 		ThreadExecutor.getInstance().execute(speichern);
 	}
 	

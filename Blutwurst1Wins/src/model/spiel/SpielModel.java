@@ -1,10 +1,15 @@
 package model.spiel;
 
+import java.util.Stack;
+
 import javafx.stage.Stage;
 import Logik.Spielfeld;
 
 public class SpielModel {
 	private Stage stage;
+	private Spiel spiel;
+	private Stack<Satz> saetze = new Stack<Satz>();
+	private Stack<Zug> zuege = new Stack<Zug>();
 	private Spieler gegner;
 	private Spieler selbst;
 	private Spieler aktuellerSpieler;
@@ -16,9 +21,21 @@ public class SpielModel {
 		this.stage = stage;
 	}
 	
-	public int chipEinwerfen(int spalte){
+	public void init(){
+		selbst = new Spieler(Strings.NAME,'X');
+		gegner = new Spieler("Gegner",'O');
+		aktuellerSpieler = getBeginnendenSpieler();
+		spiel = new Spiel(gegner);
+		saetze.add(new Satz(aktuellerSpieler,spiel));
+	}
+	
+	private Spieler getBeginnendenSpieler(){
+		return selbst.getKennzeichnung()=='X' ? selbst : gegner;
+	}
+	
+	public int zugDurchfuehren(int spalte){
 		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
-		new Zug(ergebnis,spalte,aktuellerSpieler,aktuellerSatz);
+		zuege.push(new Zug(ergebnis,spalte,aktuellerSpieler,aktuellerSatz));
 		if(aktuellerSpieler == gegner)
 			aktuellerSpieler = selbst;
 		else
@@ -32,26 +49,6 @@ public class SpielModel {
 	
 	public void zuruecksetzen(){
 		spielfeld = new Spielfeld();
-	}
-//	public void setSpieler(int eigeneKennzeichnung){
-//		selbst = new Spieler("blutwurst1",eigeneKennzeichnung);
-//		switch(eigeneKennzeichnung){
-//			case Spieler.SPIELER_O:
-//				gegner = new Spieler("Gegner",Spieler.SPIELER_X);
-//				break;
-//			case Spieler.SPIELER_X:
-//				gegner = new Spieler("Gegner",Spieler.SPIELER_O);
-//				break;
-//		}
-//	}
-	
-	public void spielerRegistrieren(String eigenerName,String gegnerName,boolean heimBeginnt){
-		selbst = new Spieler(0,eigenerName,'X');
-		gegner = new Spieler(1,gegnerName,'O');
-		if(heimBeginnt)
-			aktuellerSpieler = selbst;
-		else
-			aktuellerSpieler = gegner;
 	}
 	
 	public char getEigeneKennzeichnung(){
@@ -71,14 +68,6 @@ public class SpielModel {
 		return gegner.getName();
 	}
 	
-//	Punktzahlen ausgeben
-//	public int getEigeneSatzpunkte(){
-//		return selbst.getSatzpunkte();
-//	}
-//	public int getGegnerSatzpunkte(){
-//		return gegner.getSatzpunkte();
-//	}
-	
 	public Zug zugVonServer(){
 		Zug zug = dateiverwaltung.dateiLesen();
 		zug.setSpieler(gegner);
@@ -90,8 +79,9 @@ public class SpielModel {
 		dateiverwaltung.dateiSchreiben(""+zug.getGegnerzug());
 	}
 	
-	public void speichern(){
+	public void allesSpeichern(){
 		selbst.speichern();
 		gegner.speichern();
+		saetze.lastElement().speichern();
 	}
 }

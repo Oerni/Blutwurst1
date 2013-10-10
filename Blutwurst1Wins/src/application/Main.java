@@ -1,6 +1,6 @@
 package application;
 	
-import controller.SpielVC;
+import controller.SpielViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.spiel.SpielModel;
@@ -10,7 +10,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {			
 			SpielModel model = new SpielModel(primaryStage);
-			SpielVC viewController = new SpielVC(model);
+			SpielViewController viewController = new SpielViewController(model);
 			viewController.show();
 		} catch(Exception e) {
 			e.printStackTrace();

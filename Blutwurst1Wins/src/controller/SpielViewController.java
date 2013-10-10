@@ -23,7 +23,7 @@ import model.spiel.Zug;
 import model.statistik.StatistikModel;
 
 
-public class SpielVC {
+public class SpielViewController {
 	private SpielModel model;
 	private Scene scene;
 	
@@ -153,7 +153,7 @@ public class SpielVC {
 	private ImageView spielfeldButton;
 	
 	
-	public SpielVC(SpielModel model){
+	public SpielViewController(SpielModel model){
 		
 		this.model = model;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SpielView.fxml"));
@@ -212,12 +212,12 @@ public class SpielVC {
 	public void show(){
 		Stage primaryStage = model.getPrimaryStage();
 		primaryStage.setScene(scene);
-		spielStarten();
 		primaryStage.show();
 		System.out.println(runde.getText()+", "+satzstatus.getText());
 	}
-	public void spielstart() {
-		
+	@FXML
+	public void spielStarten() {
+		model.init();
 	}
 	
 	public void zugDurchfuehren(){
@@ -230,7 +230,7 @@ public class SpielVC {
 			//Spielfeld voll
 			int eigeneKennzeichnung = model.getEigeneKennzeichnung();
 			switch(eigeneKennzeichnung){
-				case Spieler.SPIELER_O:
+				case 0:
 					//als Gewinner eingetragen?
 					if(gegnerzug.getSieger().equalsIgnoreCase("Spieler O")){
 						if(gegnerzug.getGegnerzug() == -1)
@@ -272,16 +272,6 @@ public class SpielVC {
 	private void reagiereAufGewinnSituation() {
 
 	}
-	
-//	Druecken des Spiel-Starten Buttons
-	@FXML
-	public void spielStarten(){
-		String eigenerName = "blutwurst1";
-		String gegnerName = "Gegner";
-		boolean heimBeginnt = true;
-		model.spielerRegistrieren(eigenerName,gegnerName,heimBeginnt);
-	}
-	
 
 	
 //	Druecken des Statistik anzeigen Buttons
@@ -299,7 +289,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(0);
+		int ergebnis = model.zugDurchfuehren(0);
 		faerben(0,ergebnis);
 	}
 	@FXML
@@ -308,7 +298,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(1);
+		int ergebnis = model.zugDurchfuehren(1);
 		faerben(1,ergebnis);
 	}
 	@FXML
@@ -317,7 +307,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(2);
+		int ergebnis = model.zugDurchfuehren(2);
 		faerben(2,ergebnis);
 	}
 	@FXML
@@ -326,7 +316,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(3);
+		int ergebnis = model.zugDurchfuehren(3);
 		faerben(3,ergebnis);
 	}
 	@FXML
@@ -335,7 +325,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(4);
+		int ergebnis = model.zugDurchfuehren(4);
 		faerben(4,ergebnis);
 	}
 	@FXML
@@ -344,7 +334,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(5);
+		int ergebnis = model.zugDurchfuehren(5);
 		faerben(5,ergebnis);
 	}
 	@FXML
@@ -353,7 +343,7 @@ public class SpielVC {
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.chipEinwerfen(6);
+		int ergebnis = model.zugDurchfuehren(6);
 		faerben(6,ergebnis);
 	}
 	
