@@ -55,6 +55,7 @@ public class Feld {
 				bewertung = temp;
 				unserZug = k;
 			}
+			System.out.println("("+k.getSpalte()+","+k.getZeile()+"): "+temp);
 		}
 		if(unserZug!=null)
 			return unserZug.getSpalte();
@@ -63,14 +64,14 @@ public class Feld {
 	
 	public static void main(String[] args){
 		Feld feld = new Feld();
-		for(int i=0;i<7;i++)
-			for(int j=0;j<6;j++){
-				System.out.println();
-				System.out.print("Feld: " + i + "," + j + " - Nachbarn: ");
-				for(Kante k : feld.getSpielfeld()[i][j].getNachbarn()){
-					System.out.print("("+k.getNachbarn().getSpalte()+","+k.getNachbarn().getZeile()+","+getRichtung(k.getRichtung())+");");
-				}
-			}
+//		for(int i=0;i<7;i++)
+//			for(int j=0;j<6;j++){
+//				System.out.println();
+//				System.out.print("Feld: " + i + "," + j + " - Nachbarn: ");
+//				for(Kante k : feld.getSpielfeld()[i][j].getNachbarn()){
+//					System.out.print("("+k.getNachbarn().getSpalte()+","+k.getNachbarn().getZeile()+","+getRichtung(k.getRichtung())+");");
+//				}
+//			}
 		Spieler spieler = new Spieler("blutwurst 1", 'X');
 		System.out.println("Zug: " + feld.zugDurchfuehren(spieler));
 		

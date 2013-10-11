@@ -40,6 +40,16 @@ public class Knoten {
 		int vertikalOben = zaehleFreieFelder(Kante.VERTIKAL_OBEN, selbst);
 		int vertikalUnten = zaehleFreieFelder(Kante.VERTIKAL_UNTEN, selbst);
 		
+//		System.out.println("Knoten: ("+spalte+","+zeile+")");
+//		System.out.println(Feld.getRichtung(Kante.HORIZONTAL_LINKS)+": "+horizontalLinks);
+//		System.out.println(Feld.getRichtung(Kante.HORIZONTAL_RECHTS)+": "+horizontalRechts);
+//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_LINKS_OBEN)+": "+diagonalLinksOben);
+//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_RECHTS_UNTEN)+": "+diagonalRechtsUnten);
+//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_RECHTS_OBEN)+": "+diagonalRechtsOben);
+//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_UNTEN_LINKS)+": "+diagonalLinksUnten);
+//		System.out.println(Feld.getRichtung(Kante.VERTIKAL_OBEN)+": "+vertikalOben);
+//		System.out.println(Feld.getRichtung(Kante.VERTIKAL_UNTEN)+": "+vertikalUnten);
+		
 		int horizontalLinksWert = zaehleEigeneSteine(Kante.HORIZONTAL_LINKS,selbst,0);
 		int horizontalRechtsWert = zaehleEigeneSteine(Kante.HORIZONTAL_RECHTS,selbst,0);
 		int diagonalLinksObenWert = zaehleEigeneSteine(Kante.DIAGONAL_LINKS_OBEN,selbst,0);
@@ -123,13 +133,11 @@ public class Knoten {
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){
 				if(k.getNachbarn().getBesetztVon() == selbst || k.getNachbarn().getBesetztVon() == null){
-					return 1 + k.getNachbarn().zaehleFreieFelder(richtung, selbst);
+					return 1 + k.getNachbarn().zaehleFreieFelder(richtung,selbst);
 				}else
 					return 1;
 			}
-//			keine Weitere Kante mehr
-			return 1;
-			}	
+		}	
 		
 		return 0;
 	}
