@@ -1,4 +1,4 @@
-package Logik;
+package logik;
 
 public class KnotenComparator {
 	public static final int HORIZONTAL = 0;

@@ -1,7 +1,5 @@
 package controller;
 
-import datenhaltung.Spiel;
-import datenhaltung.StatistikModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,12 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import datenhaltung.Spiel;
+import datenhaltung.StatistikModel;
 
 public class StatistikViewController {
 	private Scene scene;
@@ -40,6 +41,7 @@ public class StatistikViewController {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/statistikViewSGVKuchen.fxml"));
 		fxmlLoader.setController(this);
 		
+//		spielhistorieTable.getSelectionModel().getSelectedCells();
 		
 		try{
 			Pane pane = (Pane)fxmlLoader.load();

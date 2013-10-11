@@ -1,4 +1,4 @@
-package Logik;
+package logik;
 
 import datenhaltung.Spieler;
 
@@ -19,11 +19,6 @@ public class Spielfeld {
 				return i;
 			}
 //		Spalte voll
-		return 0;
+		return -1;
 	}
-	
-//	public boolean hatGewonnen(char spieler,int aktuellerSpalte,int aktuelleReihe){
-//		boolean temp = false;
-//		
-//	}
 }

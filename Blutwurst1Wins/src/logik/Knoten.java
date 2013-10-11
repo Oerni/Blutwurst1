@@ -1,4 +1,4 @@
-package Logik;
+package logik;
 
 public class Knoten {
 	private char besetztVon;

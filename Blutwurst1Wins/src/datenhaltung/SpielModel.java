@@ -3,7 +3,7 @@ package datenhaltung;
 import java.util.Stack;
 
 import javafx.stage.Stage;
-import Logik.Spielfeld;
+import logik.Spielfeld;
 
 public class SpielModel {
 	/**
@@ -19,7 +19,6 @@ public class SpielModel {
 	private Spieler selbst;
 	private Spieler aktuellerSpieler;
 	private DateiVerwaltung dateiverwaltung = new DateiVerwaltung("");
-	private Satz aktuellerSatz;
 	private Spielfeld spielfeld = new Spielfeld();
 	
 	public SpielModel(Stage stage){
@@ -40,7 +39,7 @@ public class SpielModel {
 	
 	public int zugDurchfuehren(int spalte){
 		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
-		zuege.push(new Zug(ergebnis,spalte,aktuellerSpieler,aktuellerSatz));
+		zuege.push(new Zug(ergebnis,spalte,aktuellerSpieler,saetze.lastElement()));
 		if(aktuellerSpieler == gegner)
 			aktuellerSpieler = selbst;
 		else
