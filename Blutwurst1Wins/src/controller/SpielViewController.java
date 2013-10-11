@@ -2,25 +2,22 @@ package controller;
 
 import java.io.IOException;
 
-import datenhaltung.SpielModel;
-import datenhaltung.Spieler;
-import datenhaltung.StatistikModel;
-import datenhaltung.Zug;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import datenhaltung.SpielModel;
+import datenhaltung.StatistikModel;
+import datenhaltung.Zug;
 
 
 public class SpielViewController {
@@ -146,11 +143,15 @@ public class SpielViewController {
 	private Button gButton;
 	
 	@FXML
-	private AnchorPane resetMenu;
+	private AnchorPane resetMenu, spielstartMenu;
 	@FXML
 	private ImageView spielfeldButtonOrange, resetButtonOrange;
 	@FXML
-	private ImageView spielfeldButton;
+	private ImageView spielfeldButton, startButtonOrange;
+	@FXML
+	private ImageView simulationButtonGrau, simulationButtonBlau, simulationButtonOrange;
+	@FXML
+	private TextField gegnerNameEingabe;
 	
 	
 	public SpielViewController(SpielModel model){
@@ -215,9 +216,26 @@ public class SpielViewController {
 		primaryStage.show();
 		System.out.println(runde.getText()+", "+satzstatus.getText());
 	}
+	
+	@FXML
+	public void spielstartMenuAnzeigen(){
+		spielstartMenu.setVisible(true);
+		startButtonOrange.setVisible(true);
+		
+	}
+	
+	@FXML
+	public void spielstartMenuSchliessen(){
+		spielstartMenu.setVisible(false);
+		startButtonOrange.setVisible(false);
+	}
+	
 	@FXML
 	public void spielStarten() {
+		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
+		spielstartMenu.setVisible(false);
 		model.init();
+		
 	}
 	
 	public void zugDurchfuehren(){
