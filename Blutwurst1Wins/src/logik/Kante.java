@@ -1,31 +1,26 @@
 package logik;
 
 public class Kante {
-	private Knoten von;
-	private Knoten nach;
-	private boolean aktiv;
+	private Knoten nachbarKnoten;
+	private int richtung;
+	public static final int HORIZONTAL_LINKS = 0;
+	public static final int DIAGONAL_LINKS_OBEN = 1;
+	public static final int VERTIKAL_OBEN = 2;
+	public static final int DIAGONAL_RECHTS_OBEN = 3;
+	public static final int HORIZONTAL_RECHTS = 4;	
+	public static final int DIAGONAL_RECHTS_UNTEN = 5;
+	public static final int VERTIKAL_UNTEN = 6;
+	public static final int DIAGONAL_UNTEN_LINKS = 7;
 	
-	public Kante(Knoten von,Knoten nach){
-		this.von = von;
-		this.nach = nach;
-		aktiv = false;
-	}
-	public Kante(boolean aktiv,Knoten von,Knoten nach){
-		this.von = von;
-		this.nach = nach;
-		this.aktiv = aktiv;
-	}
-	
-	public Knoten getNachfolger(Knoten knoten){
-		if(knoten.getZeile() == von.getZeile() && knoten.getSpalte() == von.getSpalte())
-			return nach;
-		return null;
+	public Kante(Knoten nachbarKnoten,int richtung){
+		this.nachbarKnoten = nachbarKnoten;
+		this.richtung = richtung;
 	}
 	
-	public boolean istAktiv(){
-		return aktiv;
+	public Knoten getNachbarn(){
+		return nachbarKnoten;
 	}
-	public void aktiviere(){
-		this.aktiv = true;
+	public int getRichtung(){
+		return richtung;
 	}
 }

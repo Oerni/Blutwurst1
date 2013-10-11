@@ -1,19 +1,32 @@
 package logik;
 
 public class KnotenComparator {
-	public static final int HORIZONTAL = 0;
-	public static final int VERTICAL = 1;
-	public static final int DIAGONAL = 2;
 	
 //	Ist Knoten 2 ein Nachfolger von Knoten 1?
-	public static int istKnoten2Nachfolger(Knoten knoten1, Knoten knoten2) {
-		if(knoten1.getZeile()==knoten1.getZeile() && (Math.sqrt(Math.pow(knoten1.getSpalte()-knoten2.getSpalte(),2))==1))
-			return HORIZONTAL;
-		if(Math.sqrt(Math.pow(knoten1.getZeile()-knoten2.getZeile(),2))==1 && knoten1.getSpalte()==knoten2.getSpalte())
-			return VERTICAL;
-		if((knoten1.getZeile()-knoten2.getZeile())==-1 && Math.sqrt(Math.pow(knoten1.getSpalte()-knoten2.getSpalte(),2))==1)
-			return DIAGONAL;
+	public static int istKnoten2Nachbar(Knoten knoten1,Knoten knoten2) {
+		if(knoten2.getZeile()==knoten1.getZeile()){
+			if(knoten2.getSpalte()-knoten1.getSpalte()==1)
+				return Kante.HORIZONTAL_RECHTS;
+			else if(knoten2.getSpalte()-knoten1.getSpalte()==-1)
+				return Kante.HORIZONTAL_LINKS;
+		}
+		if(knoten2.getZeile()-knoten1.getZeile()==1){
+			if(knoten1.getSpalte()==knoten2.getSpalte())
+				return Kante.VERTIKAL_OBEN;
+			if(knoten2.getSpalte()-knoten1.getSpalte()==1)
+				return Kante.DIAGONAL_RECHTS_OBEN;
+			if(knoten2.getSpalte()-knoten1.getSpalte()==-1)
+				return Kante.DIAGONAL_LINKS_OBEN;
+		}
+		if(knoten2.getZeile()-knoten1.getZeile()==-1){
+			if(knoten1.getSpalte()==knoten2.getSpalte())
+				return Kante.VERTIKAL_UNTEN;
+			if(knoten2.getSpalte()-knoten1.getSpalte()==1)
+				return Kante.DIAGONAL_RECHTS_UNTEN;
+			if(knoten2.getSpalte()-knoten1.getSpalte()==-1)
+				return Kante.DIAGONAL_UNTEN_LINKS;
+		}
+//		Keine Nachbarn
 		return -1;
 	}
-
 }
