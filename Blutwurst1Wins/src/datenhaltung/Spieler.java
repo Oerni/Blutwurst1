@@ -23,7 +23,7 @@ public class Spieler extends DBObject{
 		this.name = name;
 		this.kennzeichnung = kennzeichnung;
 		speichern();
-		this.id = ladeIDausDB();
+//		this.id = ladeIDausDB();
 	}
 	
 	public int getID(){

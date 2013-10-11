@@ -1,6 +1,8 @@
 package logik;
 
-import java.util.LinkedList;
+import java.util.Stack;
+
+import datenhaltung.Spieler;
 
 public class Feld {
 	private Knoten[][] spielfeld = new Knoten[7][6];
@@ -32,6 +34,33 @@ public class Feld {
 		return spielfeld;
 	}
 	
+	public int zugDurchfuehren(Spieler spieler){
+		Stack<Knoten> zuUeberpruefen = new Stack<Knoten>();
+		int zeile=0;
+		for(int i=0;i<7;i++){
+			zeile=0;
+			while(zeile<6){
+				if(spielfeld[i][zeile].getBesetztVon()==null){
+					zuUeberpruefen.add(spielfeld[i][zeile]);
+					zeile = 6;
+				}
+				zeile++;
+			}
+		}
+		int bewertung = 0;
+		Knoten unserZug = null;
+		for(Knoten k : zuUeberpruefen){
+			int temp;
+			if((temp = k.getBewertung(spieler))>=bewertung){
+				bewertung = temp;
+				unserZug = k;
+			}
+		}
+		if(unserZug!=null)
+			return unserZug.getSpalte();
+		return -1;
+	}
+	
 	public static void main(String[] args){
 		Feld feld = new Feld();
 		for(int i=0;i<7;i++)
@@ -42,6 +71,9 @@ public class Feld {
 					System.out.print("("+k.getNachbarn().getSpalte()+","+k.getNachbarn().getZeile()+","+getRichtung(k.getRichtung())+");");
 				}
 			}
+		Spieler spieler = new Spieler("blutwurst 1", 'X');
+		System.out.println("Zug: " + feld.zugDurchfuehren(spieler));
+		
 	}
 	public static String getRichtung(int richtung){
 		switch(richtung){
