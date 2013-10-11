@@ -1,15 +1,22 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.spiel.Spiel;
 import model.statistik.StatistikModel;
 
 public class StatistikViewController {
@@ -25,8 +32,10 @@ public class StatistikViewController {
 	private BarChart anzahlGewinneVerlusteDiagramm;
 	@FXML
 	private TableView spielhistorieTable;
-	
-	
+	@FXML
+	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte,siegerSpalte;
+	@FXML
+	private Text infoSpielhistorie, infoStartGewinnVerlustKuchen, infoAnzahlGewinneVerluste, infoGewinnVerlustKuchen;
 	
 	public StatistikViewController(StatistikModel sModel){
 		this.model = sModel;
@@ -42,6 +51,34 @@ public class StatistikViewController {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
+		
+//		CategoryAxis xAchse = new CategoryAxis();
+//		NumberAxis yAchse = new NumberAxis();
+		anzahlGewinneVerlusteDiagramm.setTitle("Anzahl Gewinne/Verluste");
+		
+		int anzahlSiege = model.getAnzahlSiege();
+		int anzahlNiederlagen = model.getAnzahlNiederlagen();
+		ObservableList<Spiel> spieldaten = model.getSpieldaten();
+		
+		XYChart.Series<String,Number> ergebnisse = new XYChart.Series<String,Number>();
+		ergebnisse.setName("Anzahl Spiele");
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",anzahlSiege));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",anzahlNiederlagen));
+		
+		anzahlGewinneVerlusteDiagramm.getData().add(ergebnisse);
+		
+//		Gewinn-Verlust-Kuchen Diagramm
+		ObservableList<PieChart.Data> gewinnVerlustData = FXCollections.observableArrayList(
+				new PieChart.Data("Gewonnen", anzahlSiege),
+				new PieChart.Data("Verloren", anzahlNiederlagen));
+		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
+		
+		spielhistorieTable.setEditable(false);
+		spielnummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielNr"));
+		spielstandSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielstand"));
+		gegnerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gegnerName"));
+		siegerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gewinnerName"));
+		spielhistorieTable.setItems(spieldaten);
 	}
 	
 	public void show(){
@@ -88,6 +125,10 @@ public class StatistikViewController {
 				anzahlGewinneVerlusteDiagramm.setVisible(false);
 				spielhistorieTable.setVisible(false);
 				startGewinnVerlustKuchenDiagramm.setVisible(false);
+				infoStartGewinnVerlustKuchen.setVisible(false);
+				infoSpielhistorie.setVisible(false);
+				infoAnzahlGewinneVerluste.setVisible(false);
+				infoGewinnVerlustKuchen.setVisible(true);
 				
 			}
 			
@@ -104,6 +145,10 @@ public class StatistikViewController {
 				spielhistorieTable.setVisible(false);
 				anzahlGewinneVerlusteDiagramm.setVisible(false);
 				gewinnVerlustKuchenDiagramm.setVisible(false);
+				infoStartGewinnVerlustKuchen.setVisible(true);
+				infoSpielhistorie.setVisible(false);
+				infoAnzahlGewinneVerluste.setVisible(false);
+				infoGewinnVerlustKuchen.setVisible(false);
 			}
 			
 			//Anzahl Gewinne Verluste anzeigen
@@ -117,6 +162,10 @@ public class StatistikViewController {
 				spielhistorieTable.setVisible(false);
 				gewinnVerlustKuchenDiagramm.setVisible(false);
 				startGewinnVerlustKuchenDiagramm.setVisible(false);
+				infoStartGewinnVerlustKuchen.setVisible(false);
+				infoSpielhistorie.setVisible(false);
+				infoAnzahlGewinneVerluste.setVisible(true);
+				infoGewinnVerlustKuchen.setVisible(false);
 			}
 				
 			//Spielhistorie anzeigen
@@ -130,6 +179,10 @@ public class StatistikViewController {
 				gewinnVerlustKuchenDiagramm.setVisible(false);
 				startGewinnVerlustKuchenDiagramm.setVisible(false);
 				anzahlGewinneVerlusteDiagramm.setVisible(false);
+				infoStartGewinnVerlustKuchen.setVisible(false);
+				infoSpielhistorie.setVisible(true);
+				infoAnzahlGewinneVerluste.setVisible(false);
+				infoGewinnVerlustKuchen.setVisible(false);
 			}
 	
 	
