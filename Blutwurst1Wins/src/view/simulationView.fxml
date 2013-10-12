@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <FlowPane layoutX="8.0" layoutY="91.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld" />
+    <Circle fx:id="a6" fill="DODGERBLUE" layoutX="41.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="b6" fill="DODGERBLUE" layoutX="103.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="c6" fill="DODGERBLUE" layoutX="166.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="d6" fill="DODGERBLUE" layoutX="229.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="e6" fill="DODGERBLUE" layoutX="292.0" layoutY="125.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="a5" fill="DODGERBLUE" layoutX="41.0" layoutY="188.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="b5" fill="DODGERBLUE" layoutX="103.0" layoutY="188.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="c5" fill="DODGERBLUE" layoutX="166.0" layoutY="188.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="d5" fill="DODGERBLUE" layoutX="229.0" layoutY="188.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="e5" fill="DODGERBLUE" layoutX="292.0" layoutY="188.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="a4" fill="DODGERBLUE" layoutX="41.0" layoutY="251.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="b4" fill="DODGERBLUE" layoutX="103.0" layoutY="251.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="c4" fill="DODGERBLUE" layoutX="166.0" layoutY="251.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="d4" fill="DODGERBLUE" layoutX="229.0" layoutY="251.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="e4" fill="DODGERBLUE" layoutX="292.0" layoutY="251.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="a3" fill="DODGERBLUE" layoutX="41.0" layoutY="314.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="b3" fill="DODGERBLUE" layoutX="103.0" layoutY="314.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="c3" fill="DODGERBLUE" layoutX="166.0" layoutY="314.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="d3" fill="DODGERBLUE" layoutX="229.0" layoutY="314.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="e3" fill="DODGERBLUE" layoutX="292.0" layoutY="314.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="a2" fill="DODGERBLUE" layoutX="41.0" layoutY="377.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="b2" fill="DODGERBLUE" layoutX="103.0" layoutY="377.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="c2" fill="DODGERBLUE" layoutX="166.0" layoutY="377.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="d2" fill="DODGERBLUE" layoutX="229.0" layoutY="377.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="e2" fill="DODGERBLUE" layoutX="292.0" layoutY="377.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="a1" fill="DODGERBLUE" layoutX="41.0" layoutY="439.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="b1" fill="DODGERBLUE" layoutX="103.0" layoutY="439.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="c1" fill="DODGERBLUE" layoutX="166.0" layoutY="439.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="d1" fill="DODGERBLUE" layoutX="229.0" layoutY="439.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="e1" fill="DODGERBLUE" layoutX="292.0" layoutY="439.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="f6" fill="DODGERBLUE" layoutX="355.0" layoutY="125.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="f5" fill="DODGERBLUE" layoutX="355.0" layoutY="188.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="f4" fill="DODGERBLUE" layoutX="355.0" layoutY="251.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="f3" fill="DODGERBLUE" layoutX="355.0" layoutY="314.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="f2" fill="DODGERBLUE" layoutX="355.0" layoutY="377.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="f1" fill="DODGERBLUE" layoutX="355.0" layoutY="439.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="g6" fill="DODGERBLUE" layoutX="419.0" layoutY="125.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="g5" fill="DODGERBLUE" layoutX="419.0" layoutY="188.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="g4" fill="DODGERBLUE" layoutX="419.0" layoutY="251.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="g3" fill="DODGERBLUE" layoutX="419.0" layoutY="314.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="g2" fill="DODGERBLUE" layoutX="419.0" layoutY="377.0" radius="26.499950000001263" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Circle fx:id="g1" fill="DODGERBLUE" layoutX="419.0" layoutY="439.0" radius="26.500000408934284" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.000099999997474" layoutX="513.0" layoutY="223.0" stroke="BLACK" strokeType="INSIDE" styleClass="heim" width="200.00001525878906" />
+    <Circle fill="DODGERBLUE" layoutX="533.0" layoutY="243.0" radius="19.000049999998737" stroke="BLACK" strokeType="INSIDE" styleClass="heimKreis" />
+    <Text layoutX="567.0" layoutY="250.0" scaleX="0.9837810018841553" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" text="blutwurst1" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.000099999997474" layoutX="513.0" layoutY="272.0" stroke="BLACK" strokeType="INSIDE" styleClass="gast" width="200.00001525878906" />
+    <Circle fill="DODGERBLUE" layoutX="533.0" layoutY="292.0" radius="19.000049999998737" stroke="BLACK" strokeType="INSIDE" styleClass="gastKreis" />
+    <Text layoutX="570.0" layoutY="298.0" scaleX="1.1812728498387288" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" text="Gast" />
+    <Text layoutX="513.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satzstaus:" textAlignment="LEFT" />
+    <Text layoutX="513.0" layoutY="130.0" scaleX="1.0" scaleY="0.891542288557214" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Runde:" />
+    <Text layoutX="511.0" layoutY="152.0" scaleX="0.8848803835553889" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Spiel:" />
+    <Text layoutX="513.0" layoutY="176.0" scaleX="0.9728723600309609" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satz:" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="21.0" layoutX="0.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" width="750.0" />
+    <Text layoutX="10.0" layoutY="18.0" scaleX="0.9662648288740485" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation" />
+    <Label id="satzstatus" fx:id="simulationSatzstatus" layoutX="634.0" layoutY="88.0" styleClass="anzeigentext" text="Waiting" />
+    <Label id="runde" fx:id="simulationRunde" layoutX="691.0" layoutY="114.0" styleClass="anzeigentext" text="0" />
+    <Label id="spiel" fx:id="simulationSpiel" layoutX="691.0" layoutY="137.0" styleClass="anzeigentext" text="0" />
+    <Label id="satz" fx:id="simulationSatz" layoutX="691.0" layoutY="160.0" styleClass="anzeigentext" text="0" />
+    <Label id="spielstandHeim" fx:id="simulationSpielstandHeim" layoutX="689.0" layoutY="224.0" prefHeight="36.685638427734375" styleClass="spielstandHeim" text="0" />
+    <Label id="spielstandGast" fx:id="simulationSpielstandGast" layoutX="688.0" layoutY="270.0" prefHeight="36.685516357421875" styleClass="spielstandGast" text="0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="21.0" layoutX="0.0" layoutY="478.0" stroke="BLACK" strokeType="INSIDE" width="750.0" />
+    <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Spielnr.:" />
+    <Text layoutX="122.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Endspielstand:" />
+    <Label id="spielnummer" fx:id="simulationSpielnummer" layoutX="97.0" layoutY="48.0" styleClass="anzeigentext" text="2" />
+    <Label id="endspielstandAnzeige" fx:id="simulationEndspielstand" layoutX="266.0" layoutY="49.0" styleClass="anzeigentext" text="6:0" />
+    <Label id="zugAnzeige" fx:id="simulationZug" layoutX="318.0" layoutY="48.0" styleClass="anzeigentext" text="Gegner: Zug 2" />
+    <Button fx:id="simulationBeendenButton" layoutX="533.0" layoutY="429.0" mnemonicParsing="false" onAction="#simulationBeenden" text="Simulation beenden" />
+  </children>
+  <stylesheets>
+    <URL value="@SpielStyle.css" />
+  </stylesheets>
+</AnchorPane>
