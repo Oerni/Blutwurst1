@@ -12,17 +12,21 @@ public class DateiVerwaltung {
 	private FileReader fileReader;
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
-	private String pfad;
+	private String lesePfad;
+	private String schreibePfad;
 	private SpielModel model;
 	
-	public DateiVerwaltung(String pfad,SpielModel model){		
-		this.pfad = pfad;
+	public DateiVerwaltung(String lesePfad,String schreibePfad,SpielModel model){		
+		this.lesePfad = lesePfad;
+		this.schreibePfad = schreibePfad;
 		this.model = model;
 	}
 	
-	public boolean dateiSchreiben(String zug){
+	public boolean dateiSchreiben(Zug zug){
 		try{
-			bufferedWriter.write(zug);
+			fileWriter = new FileWriter(schreibePfad);
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(zug.getSpalte());
 			return true;
 		}catch(IOException ex){
 			ex.printStackTrace();
@@ -31,7 +35,7 @@ public class DateiVerwaltung {
 	}
 	
 	public Zug dateiLesen(){
-		File file = new File(pfad);
+		File file = new File(lesePfad);
 		while(!file.exists()){
 			try{
 				Thread.sleep(30);

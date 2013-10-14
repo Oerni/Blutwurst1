@@ -19,6 +19,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import parallelisierung.ServerZugLesenCallable;
+import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.SpielModel;
 import datenhaltung.StatistikModel;
@@ -242,6 +243,7 @@ public class SpielViewController extends Thread{
 	public void run(){
 		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
 				ServerZugLesenCallable serverZugLesen = new ServerZugLesenCallable(model);
+				ServerZugSchreibenRunnable serverZugSchreiben = new ServerZugSchreibenRunnable(model);
 				while(true){
 					System.out.println("Test");
 					Future<Zug> zugFuture = ThreadExecutor.getInstance().getDurchgefuehrtenZug(serverZugLesen);
@@ -263,6 +265,7 @@ public class SpielViewController extends Thread{
 							
 							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
 							eigenerZug.setZeile(eigeneZeile);
+							ThreadExecutor.getInstance().execute(serverZugSchreiben);
 //							eigenerZug.speichern();
 							Thread.sleep(450);
 							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile());

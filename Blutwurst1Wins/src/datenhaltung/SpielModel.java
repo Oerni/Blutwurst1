@@ -39,8 +39,8 @@ public class SpielModel {
 		return gegner;
 	}
 	
-	public void init(String pfad,String gegnerName){
-		dateiverwaltung = new DateiVerwaltung(pfad,this);
+	public void init(String lesePfad,String gegnerName){
+		dateiverwaltung = new DateiVerwaltung(lesePfad,"",this);
 		selbst = new Spieler(Strings.NAME,'X');
 		gegner = new Spieler(gegnerName,'O');
 		aktuellerSpieler = getBeginnendenSpieler();
@@ -102,7 +102,7 @@ public class SpielModel {
 	}
 	public void zugAnServer(Zug zug){
 		zug.setSpieler(selbst);
-		dateiverwaltung.dateiSchreiben(""+zug.getSpalte());
+		dateiverwaltung.dateiSchreiben(zug);
 	}
 	
 	public void allesSpeichern(){
