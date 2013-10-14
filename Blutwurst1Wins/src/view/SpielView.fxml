@@ -126,8 +126,8 @@
         <Text layoutX="55.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gegenspieler:" />
         <TextField fx:id="gegnerNameEingabe" layoutX="149.0" layoutY="32.0" prefWidth="122.55419921875" promptText="Name" />
         <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="89.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
-        <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" promptText="Pfad"/>
-        <TextField layoutX="149.0" layoutY="59.0" prefWidth="123.0" />
+        <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" />
+        <TextField layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
