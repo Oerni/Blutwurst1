@@ -60,7 +60,7 @@
     <Text layoutX="567.0" layoutY="250.0" scaleX="0.9837810018841553" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" text="blutwurst1" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.000099999997474" layoutX="513.0" layoutY="272.0" stroke="BLACK" strokeType="INSIDE" styleClass="gast" width="200.00001525878906" />
     <Circle fill="DODGERBLUE" layoutX="533.0" layoutY="292.0" radius="19.000049999998737" stroke="BLACK" strokeType="INSIDE" styleClass="gastKreis" />
-    <Text layoutX="570.0" layoutY="298.0" scaleX="1.1812728498387288" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" text="Gast" />
+    <Text fx:id="gegnerNameText" layoutX="570.0" layoutY="298.0" scaleX="1.1812728498387288" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" />
     <Text layoutX="533.0" layoutY="454.0" scaleX="1.2611762939834774" scaleY="1.297882586542054" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="gesamt" text="Gesamt" />
     <Text layoutX="513.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satzstaus:" textAlignment="LEFT" />
     <Text layoutX="513.0" layoutY="130.0" scaleX="1.0" scaleY="0.891542288557214" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Runde:" />
@@ -127,7 +127,7 @@
         <TextField fx:id="gegnerNameEingabe" layoutX="149.0" layoutY="32.0" prefWidth="122.55419921875" promptText="Name" />
         <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="89.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
         <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" />
-        <TextField layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
+        <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->

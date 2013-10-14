@@ -3,6 +3,7 @@ package logik;
 import java.util.Stack;
 
 import datenhaltung.Spieler;
+import datenhaltung.Zug;
 
 public class Feld {
 	private Knoten[][] spielfeld = new Knoten[7][6];
@@ -34,7 +35,19 @@ public class Feld {
 		return spielfeld;
 	}
 	
-	public int zugDurchfuehren(Spieler spieler){
+	public int einfuegen(Zug zug){
+		int zeile=0;
+		while(zeile<6){
+			if(spielfeld[zug.getSpalte()][zeile].getBesetztVon() == null){
+				spielfeld[zug.getSpalte()][zeile].besetzen(zug.getSpieler());
+				return zeile;
+			}
+			zeile++;
+		}
+		return -1;
+	}
+	
+	public int zugBerechnen(Spieler spieler){
 		Stack<Knoten> zuUeberpruefen = new Stack<Knoten>();
 		int zeile=0;
 		for(int i=0;i<7;i++){
@@ -63,7 +76,7 @@ public class Feld {
 	}
 	
 	public static void main(String[] args){
-		Feld feld = new Feld();
+//		Feld feld = new Feld();
 //		for(int i=0;i<7;i++)
 //			for(int j=0;j<6;j++){
 //				System.out.println();
@@ -71,9 +84,9 @@ public class Feld {
 //				for(Kante k : feld.getSpielfeld()[i][j].getNachbarn()){
 //					System.out.print("("+k.getNachbarn().getSpalte()+","+k.getNachbarn().getZeile()+","+getRichtung(k.getRichtung())+");");
 //				}
-//			}
-		Spieler spieler = new Spieler("blutwurst 1", 'X');
-		System.out.println("Zug: " + feld.zugDurchfuehren(spieler));
+////			}
+//		Spieler spieler = new Spieler("blutwurst 1", 'X');
+//		System.out.println("Zug: " + feld.zugDurchfuehren(zug));
 		
 	}
 	public static String getRichtung(int richtung){

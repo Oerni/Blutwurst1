@@ -3,6 +3,7 @@ package datenhaltung;
 import java.util.Stack;
 
 import javafx.stage.Stage;
+import logik.Feld;
 import logik.Spielfeld;
 
 public class SpielModel {
@@ -18,23 +19,37 @@ public class SpielModel {
 	private Spieler gegner;
 	private Spieler selbst;
 	private Spieler aktuellerSpieler;
-	private DateiVerwaltung dateiverwaltung = new DateiVerwaltung("");
+	private DateiVerwaltung dateiverwaltung;
 	private Spielfeld spielfeld = new Spielfeld();
+	private Feld feld = new Feld();
 	
 	public SpielModel(Stage stage){
 		this.stage = stage;
 	}
 	
-	public void init(){
+	public Feld getFeld(){
+		return feld;
+	}
+	
+	public Spieler getSelbst(){
+		return selbst;
+	}
+	
+	public Spieler getGegner(){
+		return gegner;
+	}
+	
+	public void init(String pfad,String gegnerName){
+		dateiverwaltung = new DateiVerwaltung(pfad,this);
 		selbst = new Spieler(Strings.NAME,'X');
-		gegner = new Spieler("Gegner",'O');
+		gegner = new Spieler(gegnerName,'O');
 		aktuellerSpieler = getBeginnendenSpieler();
 		spiel = new Spiel(gegner);
 		saetze.add(new Satz(aktuellerSpieler,spiel));
 	}
 	
 	private Spieler getBeginnendenSpieler(){
-		return selbst.getKennzeichnung()=='X' ? selbst : gegner;
+		return selbst.getKennzeichnung()=='O' ? selbst : gegner;
 	}
 	
 	public int zugDurchfuehren(int spalte){
@@ -45,6 +60,13 @@ public class SpielModel {
 		else
 			aktuellerSpieler = gegner;
 		return ergebnis;
+	}
+	
+	public void spielerWechsel(){
+		if(aktuellerSpieler == selbst)
+			aktuellerSpieler = gegner;
+		else
+			aktuellerSpieler = selbst;
 	}
 	
 	public Spieler getAktuellerSpieler(){
@@ -80,12 +102,16 @@ public class SpielModel {
 	}
 	public void zugAnServer(Zug zug){
 		zug.setSpieler(selbst);
-		dateiverwaltung.dateiSchreiben(""+zug.getGegnerzug());
+		dateiverwaltung.dateiSchreiben(""+zug.getSpalte());
 	}
 	
 	public void allesSpeichern(){
 		selbst.speichern();
 		gegner.speichern();
 		saetze.lastElement().speichern();
+	}
+	
+	public DateiVerwaltung getDateiVerwaltung(){
+		return dateiverwaltung;
 	}
 }

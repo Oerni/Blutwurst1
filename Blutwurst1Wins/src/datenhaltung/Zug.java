@@ -11,7 +11,6 @@ public class Zug extends DBObject{
 	private Satz satz;
 	private boolean freigabe;
 	private String satzstatus;
-	private int gegnerzug;
 	private String sieger;
 	private int zeile;
 	private int spalte;
@@ -28,7 +27,11 @@ public class Zug extends DBObject{
 		this.spalte = spalte;
 		this.spieler = spieler;
 		this.satz = satz;
-		speichern();
+	}
+	
+	public Zug(int spalte,Spieler spieler){
+		this.spalte = spalte;
+		this.spieler = spieler;
 	}
 	
 	public Satz getSatz(){
@@ -50,8 +53,11 @@ public class Zug extends DBObject{
 		return -1;
 	}
 	
-	public Zug(boolean freigabe,int satzstatus,int gegnerzug,int sieger){
+	public Zug(boolean freigabe,int satzstatus,int spalte,int sieger,Spieler spieler){
 		this.freigabe = freigabe;
+		this.spieler = spieler;
+		this.spalte = spalte;
+		
 		switch(satzstatus){
 			case OFFEN:
 				this.satzstatus = "Satz spielen";
@@ -71,7 +77,6 @@ public class Zug extends DBObject{
 				this.sieger = "SpielerX";
 				break;
 		}
-		this.gegnerzug = gegnerzug;
 	}
 	public Spieler getSpieler(){
 		return spieler;
@@ -88,12 +93,11 @@ public class Zug extends DBObject{
 		return satzstatus;
 	}
 	
-	public int getGegnerzug(){
-		return gegnerzug;
-	}
-	
 	public String getSieger(){
 		return sieger;
 	}
 
+	public void setZeile(int zeile){
+		this.zeile = zeile;
+	}
 }

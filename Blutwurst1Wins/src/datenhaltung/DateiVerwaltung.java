@@ -13,9 +13,11 @@ public class DateiVerwaltung {
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
 	private String pfad;
+	private SpielModel model;
 	
-	public DateiVerwaltung(String pfad){		
+	public DateiVerwaltung(String pfad,SpielModel model){		
 		this.pfad = pfad;
+		this.model = model;
 	}
 	
 	public boolean dateiSchreiben(String zug){
@@ -59,6 +61,7 @@ public class DateiVerwaltung {
 							freigabe = true;
 						else
 							freigabe = false;
+						i++;
 						break;
 					case 1:
 						String satzstatusString = zeile.trim().split("<satzstatus>|</satzstatus>")[1];
@@ -66,9 +69,11 @@ public class DateiVerwaltung {
 							satzstatus = Zug.BEENDET;
 						else
 							satzstatus = Zug.OFFEN;
+						i++;
 						break;
 					case 2:
 						gegnerzug = Integer.parseInt(zeile.trim().split("<gegnerzug>|</gegnerzug>")[1].trim());
+						i++;
 						break;
 					case 3:
 						String siegerString = zeile.trim().split("<sieger>|</sieger>")[1];
@@ -78,6 +83,7 @@ public class DateiVerwaltung {
 							sieger = Zug.SIEGER_X;
 						else
 							sieger = Zug.SIEGER_OFFEN;
+						i++;
 						break;
 				}
 			}
@@ -85,7 +91,7 @@ public class DateiVerwaltung {
 			bufferedReader.close();
 			fileReader.close();
 			
-			return new Zug(freigabe,satzstatus,gegnerzug,sieger);
+			return new Zug(freigabe,satzstatus,gegnerzug,sieger,model.getGegner());
 			
 		}catch(IOException ex){
 			return null;

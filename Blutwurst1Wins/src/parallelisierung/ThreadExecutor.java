@@ -5,8 +5,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import datenhaltung.Spiel;
 import javafx.collections.ObservableList;
+import datenhaltung.Spiel;
+import datenhaltung.Zug;
 
 public class ThreadExecutor {
 	private static ThreadExecutor instance;
@@ -29,6 +30,14 @@ public class ThreadExecutor {
 	}
 	
 	public Future<ObservableList<Spiel>> getSpieldaten(Callable<ObservableList<Spiel>> c){
+		return executorService.submit(c);
+	}
+	
+	public Future<Zug> getDurchgefuehrtenZug(Callable<Zug> c){
+		return executorService.submit(c);
+	}
+	
+	public Future<Object> callCallable(Callable<Object> c){
 		return executorService.submit(c);
 	}
 }

@@ -145,7 +145,7 @@ public class Knoten {
 	public Spieler getBesetztVon(){
 		return besetztVon;
 	}
-	public void besetzen(Spieler spieler) throws Exception{
+	public void besetzen(Spieler spieler){
 		this.besetztVon = spieler;
 	}
 	public int getZeile(){

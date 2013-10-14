@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import parallelisierung.ServerZugLesenCallable;
+import parallelisierung.ThreadExecutor;
 import datenhaltung.SpielModel;
 import datenhaltung.StatistikModel;
 import datenhaltung.Zug;
 
 
-public class SpielViewController {
+public class SpielViewController extends Thread{
 	private SpielModel model;
 	private Scene scene;
 	
@@ -152,6 +157,10 @@ public class SpielViewController {
 	private ImageView simulationButtonGrau, simulationButtonBlau, simulationButtonOrange;
 	@FXML
 	private TextField gegnerNameEingabe;
+	@FXML
+	private TextField pfadEingabe;
+	@FXML
+	private Text gegnerNameText;
 	
 	
 	public SpielViewController(SpielModel model){
@@ -230,15 +239,58 @@ public class SpielViewController {
 		startButtonOrange.setVisible(false);
 	}
 	
-	@FXML
-	public void spielStarten() {
+	public void run(){
 		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
-		spielstartMenu.setVisible(false);
-		model.init();
-		
+				ServerZugLesenCallable serverZugLesen = new ServerZugLesenCallable(model);
+				while(true){
+					System.out.println("Test");
+					Future<Zug> zugFuture = ThreadExecutor.getInstance().getDurchgefuehrtenZug(serverZugLesen);
+					while(!zugFuture.isDone()){}
+					try{
+						Zug gegnerZug = zugFuture.get();
+//						boolean weiterspielen = sonderfaellePruefen();
+						boolean weiterspielen = true;
+						if(weiterspielen){
+//							Gegnerzug einfuegen
+							int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
+							System.out.println("Gegner Zug: " + gegnerZeile);
+							gegnerZug.setZeile(gegnerZeile);
+							faerben(gegnerZug.getSpalte(), gegnerZug.getZeile());
+							model.spielerWechsel();
+//							Eigenen zug berechnen
+							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSelbst());
+							Zug eigenerZug = new Zug(berechneteSpalte,model.getSelbst());
+							
+							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
+							eigenerZug.setZeile(eigeneZeile);
+//							eigenerZug.speichern();
+							Thread.sleep(450);
+							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile());
+							
+							System.out.println("Eigener Zug: " + eigenerZug.getZeile());
+							break;
+						}
+					}catch(InterruptedException ex){
+						System.out.println("InterruptedException");
+						ex.printStackTrace();
+					}catch(ExecutionException ex){
+						System.out.println("ExecutionException");
+						ex.printStackTrace();
+					}
+				}
 	}
 	
-	public void zugDurchfuehren(){
+	@FXML
+	public void spielStarten() {
+		spielstartMenu.setVisible(false);
+		String pfad = pfadEingabe.getText();
+		String gegnerName = gegnerNameEingabe.getText();
+		gegnerNameText.setText(gegnerName);
+		model.init(pfad,gegnerName);
+		start();
+	}
+	
+	public boolean sonderfaellePruefen(){
 		// Zug des Gegners interpretieren
 		Zug gegnerzug = model.zugVonServer();
 		Zug eigenerZug = null;
@@ -251,28 +303,31 @@ public class SpielViewController {
 				case 0:
 					//als Gewinner eingetragen?
 					if(gegnerzug.getSieger().equalsIgnoreCase("Spieler O")){
-						if(gegnerzug.getGegnerzug() == -1)
+						if(gegnerzug.getSpalte() == -1){
 //							Spiel gewonnen
 							reagiereAufGewinnSituation();
-						else
+							return false;
+						}
+						else{
 //							Spielfeld voll
 							reagiereAufVollesSpielfeld();
+							return false;
+						}
 					}else{
-						if(gegnerzug.getGegnerzug() != -1)
+						if(gegnerzug.getSpalte() != -1){
 //							Spiel verloren
 							reagiereAufVerlustSituation();
-						else
+							return false;
+						}
+						else{
 //							Spielfeld voll
 							reagiereAufVollesSpielfeld();
+							return false;
+						}
 					}
 			}
 		}
-		
-		// Zug berechnen
-		berechneEigenenZug();
-		
-		// berechneten Zug an Server uebergeben
-		model.zugAnServer(eigenerZug);
+		return true;
 	}
 	
 	private void berechneEigenenZug() {
@@ -321,7 +376,7 @@ public class SpielViewController {
 	}
 	@FXML
 	public void inCHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
+		if(model.getAktuellerSpieler().getKennzeichnung() == model.getSelbst().getKennzeichnung())
 			aktuelleFarbe = eigeneFarbe;
 		else
 			aktuelleFarbe = gegnerFarbe;
@@ -367,7 +422,10 @@ public class SpielViewController {
 	
 	
 	private void faerben(int spalte,int zeile){
-		feld[spalte][zeile].setFill(aktuelleFarbe);
+		if(model.getAktuellerSpieler() == model.getSelbst())
+			feld[spalte][zeile].setFill(eigeneFarbe);
+		else
+			feld[spalte][zeile].setFill(gegnerFarbe);
 //		a1.setFill(aktuelleFarbe);
 	}
 	
