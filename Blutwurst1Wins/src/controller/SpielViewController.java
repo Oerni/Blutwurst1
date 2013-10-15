@@ -10,6 +10,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,8 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import parallelisierung.ServerZugLesenCallable;
-import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.SpielModel;
 import datenhaltung.StatistikModel;
@@ -162,6 +161,9 @@ public class SpielViewController extends Thread{
 	private TextField pfadEingabe;
 	@FXML
 	private Text gegnerNameText;
+	@FXML
+	private RadioButton radioButtonX, radioButtonO;
+	
 	
 	
 	public SpielViewController(SpielModel model){
