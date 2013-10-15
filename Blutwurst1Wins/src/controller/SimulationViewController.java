@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.concurrent.Future;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,8 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import parallelisierung.SpielCallable;
+import parallelisierung.ThreadExecutor;
 import datenhaltung.SimulationModel;
-import datenhaltung.StatistikModel;
+import datenhaltung.Spiel;
 
 
 
@@ -52,7 +56,14 @@ public class SimulationViewController {
 	}
 	
 	public void simulationStarten(){
-		
+		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
+		while(!spielFuture.isDone()){}
+		try{
+			Spiel spiel = spielFuture.get();
+			
+		}catch(Exception ex){
+			
+		}
 	}
 	
 	//Simulation Beenden und Fenster schliessen

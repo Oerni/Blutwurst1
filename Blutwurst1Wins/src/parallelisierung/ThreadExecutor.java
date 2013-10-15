@@ -37,7 +37,7 @@ public class ThreadExecutor {
 		return executorService.submit(c);
 	}
 	
-	public Future<Object> callCallable(Callable<Object> c){
+	public Future<Spiel> getSpiel(Callable<Spiel> c){
 		return executorService.submit(c);
 	}
 }

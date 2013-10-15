@@ -11,6 +11,7 @@ public class Strings {
 	public static final String LADE_ID = "SELECT id FROM %s WHERE %s = %s;";
 	public static final String GEGNER_ID = "SELECT id FROM spieler WHERE name='%s'";
 	public static final String SPIEL = "SELECT sp.name,s.punkteheim,s.punktegegner FROM spiel s JOIN spieler sp ON sp.id = s.gegner WHERE spielnr=%s";
-	public static final String SAETZE_EINES_SPIELS = "SELECT satznr FROM satz WHERE spielnr = %s";
+	public static final String SAETZE_EINES_SPIELS = "SELECT sp.id,s.satznr FROM satz s JOIN spieler sp ON s.beginner = sp.id WHERE spielnr = %s";
+	public static final String ZUEGE_EINES_SATZES = "SELECT zugnr,zeile,spalte,spieler FROM zug WHERE satznr = %s AND spielnr = %s";
 	public static final String NAME = "blutwurst1";
 }

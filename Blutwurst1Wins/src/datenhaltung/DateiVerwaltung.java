@@ -17,7 +17,7 @@ public class DateiVerwaltung {
 	private SpielModel model;
 	
 	public DateiVerwaltung(String lesePfad,String schreibePfad,SpielModel model){		
-		this.lesePfad = lesePfad;
+		this.lesePfad = lesePfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".txt";
 		this.schreibePfad = schreibePfad;
 		this.model = model;
 	}

@@ -34,11 +34,16 @@ public class Spiel extends DBObject{
 			this.punkteGegner = spiel.getInt("punkteGegner");
 			ResultSet saetzeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.SAETZE_EINES_SPIELS,spielnr));
 			while(saetzeSQL.next()){
-				saetze.add(new Satz(this,saetzeSQL.getInt("satznr")));
+				Spieler beginner = saetzeSQL.getInt("id") == selbst.getID() ? selbst : gegner;
+				saetze.add(new Satz(this,saetzeSQL.getInt("satznr"),beginner));
 			}
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}
+	}
+	
+	public Spieler getSpieler(int id){
+		return selbst.getID() == id ? selbst : gegner;
 	}
 	
 	public Spiel(Spieler gegner,int punkteHeim,int punkteGegner){

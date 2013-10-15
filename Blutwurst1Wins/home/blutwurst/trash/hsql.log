@@ -1,4 +1,4 @@
-/*C2*/SET SCHEMA PUBLIC
-drop table satz
-create table satz (satznr integer identity primary key,spielnr integer,beginner integer,gewinner integer)
+/*C3*/SET SCHEMA PUBLIC
+drop table zug
+create table zug (zugnr integer identity primary key,satznr integer,spielnr integer,spalte integer,zeile integer,spieler integer)
 DISCONNECT

@@ -1,5 +1,9 @@
 package datenhaltung;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Stack;
+
 import parallelisierung.SpeichereSatzRunnable;
 import parallelisierung.ThreadExecutor;
 
@@ -12,15 +16,31 @@ public class Satz extends DBObject{
 	private Spieler spielerBegonnen;
 	private Spiel spiel;
 	private Spieler gewonnen;
+	private Stack<Zug> zuege = new Stack<Zug>();
 	
 	public Satz(int satzNr,Spieler spielerBegonnen,Spiel spiel){
 		this.spielerBegonnen = spielerBegonnen;
 		this.spiel = spiel;
 		this.satzNr = satzNr;
 	}
-	public Satz(Spiel spiel,int satznr){
+	public Satz(Spiel spiel,int satzNr){
 		this.spiel = spiel;
 		this.satzNr = satzNr;
+	}
+//	Simulation
+	public Satz(Spiel spiel,int satzNr,Spieler spielerBegonnen){
+		this.spiel = spiel;
+		this.satzNr = satzNr;
+		this.spielerBegonnen = spielerBegonnen;
+		
+		ResultSet zuegeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.ZUEGE_EINES_SATZES,satzNr,spiel.getSpielNr()));
+		try{
+			while(zuegeSQL.next()){
+				zuege.add(new Zug(zuegeSQL.getInt("zeile"),zuegeSQL.getInt("spalte"),spiel.getSpieler(zuegeSQL.getInt("spieler")),this));
+			}
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
 	}
 	public Satz(int satzNr,Spieler spielerBegonnen,Spiel spiel,Spieler gewinner){
 		this.spielerBegonnen = spielerBegonnen;
