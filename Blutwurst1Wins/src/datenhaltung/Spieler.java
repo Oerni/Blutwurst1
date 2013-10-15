@@ -25,6 +25,9 @@ public class Spieler extends DBObject{
 		speichern();
 //		this.id = ladeIDausDB();
 	}
+	public Spieler(String name){
+		this.name = name;
+	}
 	
 	public int getID(){
 		return id;

@@ -1,5 +1,4 @@
-/*C5*/SET SCHEMA PUBLIC
-INSERT INTO SPIELER VALUES(152,'blutwurst1')
-COMMIT
-INSERT INTO SPIELER VALUES(153,'Gegner')
-COMMIT
+/*C2*/SET SCHEMA PUBLIC
+drop table satz
+create table satz (satznr integer identity primary key,spielnr integer,beginner integer,gewinner integer)
+DISCONNECT

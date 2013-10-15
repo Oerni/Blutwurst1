@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import datenhaltung.SimulationModel;
 import datenhaltung.Spiel;
 import datenhaltung.StatistikModel;
 
@@ -86,6 +87,13 @@ public class StatistikViewController {
 		stage.setScene(scene);
 		stage.show();
 	
+	}
+	
+	@FXML
+	public void simulationStarten(){
+		int spielnr = 0;
+		SimulationModel sModel = new SimulationModel(new Stage(),spielnr);
+		new SimulationViewController(sModel).show();
 	}
 	
 	public void hilfeAnzeigen(){

@@ -1,5 +1,9 @@
 package datenhaltung;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Stack;
+
 import parallelisierung.SpeichereSpielRunnable;
 import parallelisierung.ThreadExecutor;
 
@@ -13,9 +17,28 @@ public class Spiel extends DBObject{
 	private int punkteHeim;
 	private int punkteGegner;
 	private String spielstand;
+	private Stack<Satz> saetze = new Stack<Satz>();
 	
 	public Spiel(Spieler gegner){
 		this.gegner = gegner;
+	}
+	
+//	Simulation
+	public Spiel(int spielnr){
+		ResultSet spiel = HSQLConnection.getInstance().executeQuery(String.format(Strings.SPIEL,spielnr));
+		try{
+			spiel.next();
+			gegner = new Spieler(spiel.getString("name"));
+			this.spielNr = spielnr;
+			this.punkteHeim = spiel.getInt("punkteheim");
+			this.punkteGegner = spiel.getInt("punkteGegner");
+			ResultSet saetzeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.SAETZE_EINES_SPIELS,spielnr));
+			while(saetzeSQL.next()){
+				saetze.add(new Satz(this,saetzeSQL.getInt("satznr")));
+			}
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	public Spiel(Spieler gegner,int punkteHeim,int punkteGegner){

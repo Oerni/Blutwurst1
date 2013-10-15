@@ -10,5 +10,7 @@ public class Strings {
 	public static final String INSERT = "INSERT INTO %s(%s) VALUES(%s);";
 	public static final String LADE_ID = "SELECT id FROM %s WHERE %s = %s;";
 	public static final String GEGNER_ID = "SELECT id FROM spieler WHERE name='%s'";
+	public static final String SPIEL = "SELECT sp.name,s.punkteheim,s.punktegegner FROM spiel s JOIN spieler sp ON sp.id = s.gegner WHERE spielnr=%s";
+	public static final String SAETZE_EINES_SPIELS = "SELECT satznr FROM satz WHERE spielnr = %s";
 	public static final String NAME = "blutwurst1";
 }

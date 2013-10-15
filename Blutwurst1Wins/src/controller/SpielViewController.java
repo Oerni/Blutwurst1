@@ -355,7 +355,6 @@ public class SpielViewController extends Thread{
 	public void statistikAnzeigen(){
 		StatistikModel sModel = new StatistikModel(new Stage());
 		new StatistikViewController(sModel).show();
-		
 	}
 	
 	Color aktuelleFarbe;

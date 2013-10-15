@@ -18,6 +18,10 @@ public class Satz extends DBObject{
 		this.spiel = spiel;
 		this.satzNr = satzNr;
 	}
+	public Satz(Spiel spiel,int satznr){
+		this.spiel = spiel;
+		this.satzNr = satzNr;
+	}
 	public Satz(int satzNr,Spieler spielerBegonnen,Spiel spiel,Spieler gewinner){
 		this.spielerBegonnen = spielerBegonnen;
 		this.spiel = spiel;

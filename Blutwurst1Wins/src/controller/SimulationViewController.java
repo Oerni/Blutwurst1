@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import datenhaltung.SimulationModel;
 import datenhaltung.StatistikModel;
 
 
@@ -14,7 +15,7 @@ import datenhaltung.StatistikModel;
 public class SimulationViewController {
 		
 		private Scene scene;
-		private StatistikModel model;
+		private SimulationModel model;
 		@FXML
 		private Label simulationSpielnummer, simulationEndergebnis, simulationZug;
 		@FXML
@@ -23,8 +24,9 @@ public class SimulationViewController {
 		private Label simulationSpielstandHeim, simulationSpielstandGast;
 		@FXML
 		private Button simulationBeendenButton;
+		private int spielnr;
 		
-		public SimulationViewController(StatistikModel sModel){
+		public SimulationViewController(SimulationModel sModel){
 			this.model = sModel;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/simulationView.fxml"));
 			fxmlLoader.setController(this);
@@ -46,7 +48,11 @@ public class SimulationViewController {
 		Stage stage = model.getStage();
 		stage.setScene(scene);
 		stage.show();
+		simulationStarten();
+	}
 	
+	public void simulationStarten(){
+		
 	}
 	
 	//Simulation Beenden und Fenster schliessen

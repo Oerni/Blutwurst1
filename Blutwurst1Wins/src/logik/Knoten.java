@@ -125,7 +125,7 @@ public class Knoten {
 			}
 //			keine Weitere Kante mehr
 			return eigenerWert;
-			}	
+			}
 		
 		return 0;
 	}
