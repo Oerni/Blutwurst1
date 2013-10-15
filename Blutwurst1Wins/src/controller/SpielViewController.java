@@ -24,6 +24,7 @@ import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.SpielModel;
 import datenhaltung.StatistikModel;
+import datenhaltung.Strings;
 import datenhaltung.Zug;
 
 
@@ -245,15 +246,12 @@ public class SpielViewController extends Thread{
 	}
 	
 	public void run(){
-		
-				ServerZugLesenCallable serverZugLesen = new ServerZugLesenCallable(model);
-				ServerZugSchreibenRunnable serverZugSchreiben = new ServerZugSchreibenRunnable(model);
 				while(true){
 					System.out.println("Test");
-					Future<Zug> zugFuture = ThreadExecutor.getInstance().getDurchgefuehrtenZug(serverZugLesen);
-					while(!zugFuture.isDone()){}
+					Zug gegnerZug = model.getDateiVerwaltung().dateiLesen();
+//					while(!zugFuture.isDone()){}
 					try{
-						Zug gegnerZug = zugFuture.get();
+//						Zug gegnerZug = zugFuture.get();
 //						boolean weiterspielen = sonderfaellePruefen();
 						boolean weiterspielen = true;
 						if(weiterspielen){
@@ -269,20 +267,20 @@ public class SpielViewController extends Thread{
 							
 							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
 							eigenerZug.setZeile(eigeneZeile);
-							ThreadExecutor.getInstance().execute(serverZugSchreiben);
+//							ThreadExecutor.getInstance().execute(serverZugSchreiben);
 //							eigenerZug.speichern();
-							Thread.sleep(450);
+							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
 							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile());
 							
 							System.out.println("Eigener Zug: " + eigenerZug.getZeile());
-							break;
+							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
 						}
 					}catch(InterruptedException ex){
 						System.out.println("InterruptedException");
 						ex.printStackTrace();
-					}catch(ExecutionException ex){
-						System.out.println("ExecutionException");
-						ex.printStackTrace();
+//					}catch(ExecutionException ex){
+//						System.out.println("ExecutionException");
+//						ex.printStackTrace();
 					}
 				}
 	}

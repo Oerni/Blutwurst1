@@ -108,8 +108,4 @@ public class Spiel extends DBObject{
 			return -1;
 		}
 	}
-	
-	public int ladeIDausDB(){
-		return 1;
-	}
 }

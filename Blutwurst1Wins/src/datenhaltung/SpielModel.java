@@ -40,10 +40,10 @@ public class SpielModel {
 	}
 	
 	public void init(String lesePfad,String gegnerName,char eigeneKennzeichnung){
-		dateiverwaltung = new DateiVerwaltung(lesePfad,"",this);
 		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
 		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));
 		aktuellerSpieler = getBeginnendenSpieler();
+		dateiverwaltung = new DateiVerwaltung(lesePfad,"",this);
 		spiel = new Spiel(gegner,selbst);
 		saetze.add(new Satz(aktuellerSpieler,spiel));
 	}

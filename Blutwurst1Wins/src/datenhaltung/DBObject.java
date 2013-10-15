@@ -10,6 +10,4 @@ public abstract class DBObject {
 	
 //	Die ID des gespeicherten Objekts wird automatisch zurückgegeben
 	public abstract int speichern();
-//	aufgrund der Statistik-Funktion
-	public abstract int ladeIDausDB();
 }

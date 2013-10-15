@@ -17,9 +17,17 @@ public class DateiVerwaltung {
 	private SpielModel model;
 	
 	public DateiVerwaltung(String lesePfad,String schreibePfad,SpielModel model){		
-		this.lesePfad = lesePfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".txt";
+		this.lesePfad = lesePfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".xml";
+//		this.lesePfad = lesePfad+"server2spielero.xml";
+		System.out.println(this.lesePfad);
 		this.schreibePfad = schreibePfad;
 		this.model = model;
+	}
+	
+	public static void main(String[] args){
+		DateiVerwaltung dateiv = new DateiVerwaltung("D:\\temp\\","",null);
+		Zug zug = dateiv.dateiLesen();
+		System.out.println(zug.getFreigabe()+","+zug.getSatzstatus());
 	}
 	
 	public boolean dateiSchreiben(Zug zug){
@@ -38,7 +46,7 @@ public class DateiVerwaltung {
 		File file = new File(lesePfad);
 		while(!file.exists()){
 			try{
-				Thread.sleep(30);
+				Thread.sleep(300);
 			}catch(InterruptedException ex){
 				ex.printStackTrace();
 			}
@@ -59,7 +67,7 @@ public class DateiVerwaltung {
 			int i = 0;
 			while((zeile=bufferedReader.readLine())!=null){
 				switch(i){
-					case 0:
+					case 2:
 						String freigabeStringArray = zeile.trim().split("<freigabe>|</freigabe>")[1];
 						if(freigabeStringArray.equalsIgnoreCase("true"))
 							freigabe = true;
@@ -67,7 +75,7 @@ public class DateiVerwaltung {
 							freigabe = false;
 						i++;
 						break;
-					case 1:
+					case 3:
 						String satzstatusString = zeile.trim().split("<satzstatus>|</satzstatus>")[1];
 						if(satzstatusString.trim().equalsIgnoreCase("beendet"))
 							satzstatus = Zug.BEENDET;
@@ -75,11 +83,11 @@ public class DateiVerwaltung {
 							satzstatus = Zug.OFFEN;
 						i++;
 						break;
-					case 2:
+					case 4:
 						gegnerzug = Integer.parseInt(zeile.trim().split("<gegnerzug>|</gegnerzug>")[1].trim());
 						i++;
 						break;
-					case 3:
+					case 5:
 						String siegerString = zeile.trim().split("<sieger>|</sieger>")[1];
 						if(siegerString.trim().equalsIgnoreCase("Spieler O"))
 							sieger = Zug.SIEGER_O;
@@ -87,6 +95,9 @@ public class DateiVerwaltung {
 							sieger = Zug.SIEGER_X;
 						else
 							sieger = Zug.SIEGER_OFFEN;
+						i++;
+						break;
+					default:
 						i++;
 						break;
 				}

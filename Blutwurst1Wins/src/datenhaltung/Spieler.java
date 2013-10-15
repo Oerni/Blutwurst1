@@ -23,7 +23,7 @@ public class Spieler extends DBObject{
 	public Spieler(String name,char kennzeichnung){
 		this.name = name;
 		this.kennzeichnung = kennzeichnung;
-		this.id = speichern();
+//		this.id = speichern();
 //		this.id = ladeIDausDB();
 	}
 	public Spieler(String name){
@@ -49,17 +49,6 @@ public class Spieler extends DBObject{
 			Number id = idFuture.get();
 			return id.intValue();
 		}catch(Exception ex){
-			ex.printStackTrace();
-			return -1;
-		}
-	}
-	
-	public int ladeIDausDB(){
-		ResultSet nameSQL = HSQLConnection.getInstance().executeQuery("SELECT id FROM spieler WHERE name = '" + name + "'");
-		try{
-			nameSQL.next();
-			return nameSQL.getInt("id");
-		}catch(SQLException ex){
 			ex.printStackTrace();
 			return -1;
 		}

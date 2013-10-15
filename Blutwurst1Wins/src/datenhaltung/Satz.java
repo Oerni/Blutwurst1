@@ -88,10 +88,4 @@ public class Satz extends DBObject{
 			return -1;
 		}
 	}
-
-	@Override
-	public int ladeIDausDB() {
-
-		return 0;
-	}
 }

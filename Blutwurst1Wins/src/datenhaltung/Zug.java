@@ -50,10 +50,7 @@ public class Zug extends DBObject{
 		ThreadExecutor.getInstance().execute(speichern);
 		return -1;
 	}
-	
-	public int ladeIDausDB(){
-		return -1;
-	}
+
 	
 	public Zug(boolean freigabe,int satzstatus,int spalte,int sieger,Spieler spieler){
 		this.freigabe = freigabe;
