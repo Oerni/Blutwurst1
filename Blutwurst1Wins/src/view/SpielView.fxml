@@ -128,8 +128,12 @@
         <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="119.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
         <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" />
         <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
-        <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X" />
-        <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" />
+        <fx:define>
+        	<ToggleGroup fx:id="XOGroup"/>
+        </fx:define>
+        <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X" toggleGroup="$XOGroup" />
+        <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" toggleGroup="$XOGroup" />
+        
         <Text layoutX="55.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wir sind:" />
       </children>
     </AnchorPane>

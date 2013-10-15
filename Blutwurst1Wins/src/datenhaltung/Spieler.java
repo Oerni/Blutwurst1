@@ -2,8 +2,9 @@ package datenhaltung;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.Future;
 
-import parallelisierung.SpeichereSpielerRunnable;
+import parallelisierung.SpeichereSpielerCallable;
 import parallelisierung.ThreadExecutor;
 
 public class Spieler extends DBObject{
@@ -22,7 +23,7 @@ public class Spieler extends DBObject{
 	public Spieler(String name,char kennzeichnung){
 		this.name = name;
 		this.kennzeichnung = kennzeichnung;
-		speichern();
+		this.id = speichern();
 //		this.id = ladeIDausDB();
 	}
 	public Spieler(String name){
@@ -41,9 +42,16 @@ public class Spieler extends DBObject{
 		return name;
 	}
 	
-	public void speichern(){
-		SpeichereSpielerRunnable speichern = new SpeichereSpielerRunnable(this);
-		ThreadExecutor.getInstance().execute(speichern);
+	public int speichern(){
+		Future<Number> idFuture = ThreadExecutor.getInstance().getNumber(new SpeichereSpielerCallable(this));
+		while(!idFuture.isDone()){}
+		try{
+			Number id = idFuture.get();
+			return id.intValue();
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return -1;
+		}
 	}
 	
 	public int ladeIDausDB(){

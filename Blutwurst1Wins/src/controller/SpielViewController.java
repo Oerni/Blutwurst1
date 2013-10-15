@@ -19,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import parallelisierung.ServerZugLesenCallable;
+import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.SpielModel;
 import datenhaltung.StatistikModel;
@@ -243,7 +245,7 @@ public class SpielViewController extends Thread{
 	}
 	
 	public void run(){
-		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
+		
 				ServerZugLesenCallable serverZugLesen = new ServerZugLesenCallable(model);
 				ServerZugSchreibenRunnable serverZugSchreiben = new ServerZugSchreibenRunnable(model);
 				while(true){
@@ -287,11 +289,13 @@ public class SpielViewController extends Thread{
 	
 	@FXML
 	public void spielStarten() {
+		char eigeneKennzeichnung = radioButtonO.isSelected() ? 'o' : 'x'; 
 		spielstartMenu.setVisible(false);
 		String pfad = pfadEingabe.getText();
+		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
 		String gegnerName = gegnerNameEingabe.getText();
 		gegnerNameText.setText(gegnerName);
-		model.init(pfad,gegnerName);
+		model.init(pfad,gegnerName,eigeneKennzeichnung);
 		start();
 	}
 	
@@ -355,7 +359,7 @@ public class SpielViewController extends Thread{
 //	Druecken des Statistik anzeigen Buttons
 	@FXML
 	public void statistikAnzeigen(){
-		StatistikModel sModel = new StatistikModel(new Stage());
+		StatistikModel sModel = new StatistikModel(new Stage(),model.getSelbst(),model.getGegner());
 		new StatistikViewController(sModel).show();
 	}
 	

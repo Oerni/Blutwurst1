@@ -92,7 +92,7 @@ public class StatistikViewController {
 	@FXML
 	public void simulationStarten(){
 		int spielnr = 0;
-		SimulationModel sModel = new SimulationModel(new Stage(),spielnr);
+		SimulationModel sModel = new SimulationModel(new Stage(),spielnr,model.getSelbst(),model.getGegner());
 		new SimulationViewController(sModel).show();
 	}
 	

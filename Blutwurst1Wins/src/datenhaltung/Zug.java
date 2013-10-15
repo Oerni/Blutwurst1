@@ -44,9 +44,11 @@ public class Zug extends DBObject{
 		return spalte;
 	}
 	
-	public void speichern(){
+	@Override
+	public int speichern(){
 		SpeichereZugRunnable speichern = new SpeichereZugRunnable(this);
 		ThreadExecutor.getInstance().execute(speichern);
+		return -1;
 	}
 	
 	public int ladeIDausDB(){

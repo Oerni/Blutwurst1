@@ -39,13 +39,17 @@ public class SpielModel {
 		return gegner;
 	}
 	
-	public void init(String lesePfad,String gegnerName){
+	public void init(String lesePfad,String gegnerName,char eigeneKennzeichnung){
 		dateiverwaltung = new DateiVerwaltung(lesePfad,"",this);
-		selbst = new Spieler(Strings.NAME,'X');
-		gegner = new Spieler(gegnerName,'O');
+		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
+		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));
 		aktuellerSpieler = getBeginnendenSpieler();
-		spiel = new Spiel(gegner);
+		spiel = new Spiel(gegner,selbst);
 		saetze.add(new Satz(aktuellerSpieler,spiel));
+	}
+	
+	private char getGegnerKennzeichnung(char eigeneKennzeichnung){
+		return eigeneKennzeichnung == 'x' ? 'o' : 'x';
 	}
 	
 	private Spieler getBeginnendenSpieler(){

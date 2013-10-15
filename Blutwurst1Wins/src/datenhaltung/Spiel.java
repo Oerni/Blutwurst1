@@ -3,8 +3,9 @@ package datenhaltung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Stack;
+import java.util.concurrent.Future;
 
-import parallelisierung.SpeichereSpielRunnable;
+import parallelisierung.SpeichereSpielCallable;
 import parallelisierung.ThreadExecutor;
 
 public class Spiel extends DBObject{
@@ -19,8 +20,13 @@ public class Spiel extends DBObject{
 	private String spielstand;
 	private Stack<Satz> saetze = new Stack<Satz>();
 	
-	public Spiel(Spieler gegner){
+//	Initiales Instanziieren im Spielverlauf
+	public Spiel(Spieler gegner,Spieler selbst){
 		this.gegner = gegner;
+		this.selbst = selbst;
+		punkteHeim = 0;
+		punkteGegner = 0;
+		spielNr = speichern();
 	}
 	
 //	Simulation
@@ -40,6 +46,10 @@ public class Spiel extends DBObject{
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}
+	}
+	
+	public Stack<Satz> getSaetze(){
+		return saetze;
 	}
 	
 	public Spieler getSpieler(int id){
@@ -87,9 +97,16 @@ public class Spiel extends DBObject{
 		return gegner.getName();
 	}
 	
-	public void speichern(){
-		SpeichereSpielRunnable speichern = new SpeichereSpielRunnable(this);
-		ThreadExecutor.getInstance().execute(speichern);
+	public int speichern(){
+		Future<Number> spielNrFuture = ThreadExecutor.getInstance().getNumber(new SpeichereSpielCallable(this));
+		while(!spielNrFuture.isDone()){}
+		try{
+			Number spielNr = spielNrFuture.get();
+			return spielNr.intValue();
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return -1;
+		}
 	}
 	
 	public int ladeIDausDB(){

@@ -25,7 +25,7 @@ public class ThreadExecutor {
 		executorService.execute(r);
 	}
 	
-	public Future<Number> getAggregate(Callable<Number> c){
+	public Future<Number> getNumber(Callable<Number> c){
 		return executorService.submit(c);
 	}
 	

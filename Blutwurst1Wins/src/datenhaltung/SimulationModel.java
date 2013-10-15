@@ -1,19 +1,33 @@
 package datenhaltung;
 
-import java.util.Stack;
+import java.util.concurrent.Future;
 
-import parallelisierung.ThreadExecutor;
 import javafx.stage.Stage;
+import parallelisierung.SpielCallable;
+import parallelisierung.ThreadExecutor;
 
 public class SimulationModel {
 	private Stage stage;
 	private Spiel spiel;
-	private Stack<Satz> saetze = new Stack<Satz>();
-	private Stack<Zug> zuege = new Stack<Zug>();
+	private Spieler selbst;
+	private Spieler gegner;
 	
-	public SimulationModel(Stage stage,int spielnr){
+	public SimulationModel(Stage stage,int spielnr,Spieler selbst,Spieler gegner){
 		this.stage = stage;
-		ThreadExecutor.getInstance();
+		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
+		while(!spielFuture.isDone()){}
+		try{
+			this.spiel = spielFuture.get();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	public Spieler getSelbst(){
+		return selbst;
+	}
+	public Spieler getGegner(){
+		return gegner;
 	}
 	
 	public Stage getStage(){

@@ -3,8 +3,9 @@ package datenhaltung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Stack;
+import java.util.concurrent.Future;
 
-import parallelisierung.SpeichereSatzRunnable;
+import parallelisierung.SpeichereSatzCallable;
 import parallelisierung.ThreadExecutor;
 
 public class Satz extends DBObject{
@@ -48,11 +49,17 @@ public class Satz extends DBObject{
 		this.satzNr = satzNr;
 		this.gewonnen = gewinner;
 	}
+	
+//	Initiales Instanziieren im Spielverlauf
 	public Satz(Spieler spielerBegonnen,Spiel spiel){
 		this.spielerBegonnen = spielerBegonnen;
 		this.spiel = spiel;
+		this.satzNr = speichern();
 	}
 	
+	public Stack<Zug> getZuege(){
+		return zuege;
+	}
 	public void setGewinner(Spieler gewinner){
 		this.gewonnen = gewinner;
 	}
@@ -70,9 +77,16 @@ public class Satz extends DBObject{
 	}
 
 	@Override
-	public void speichern() {
-		SpeichereSatzRunnable speichern = new SpeichereSatzRunnable(this);
-		ThreadExecutor.getInstance().execute(speichern);
+	public int speichern() {
+		Future<Number> satzNrFuture = ThreadExecutor.getInstance().getNumber(new SpeichereSatzCallable(this));
+		while(!satzNrFuture.isDone()){}
+		try{
+			Number satzNr = satzNrFuture.get();
+			return satzNr.intValue();
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override

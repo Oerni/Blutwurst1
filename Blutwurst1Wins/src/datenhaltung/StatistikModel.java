@@ -12,9 +12,20 @@ import javafx.stage.Stage;
 
 public class StatistikModel {
 	private Stage stage;
+	private Spieler selbst;
+	private Spieler gegner;
 	
-	public StatistikModel(Stage stage){
+	public StatistikModel(Stage stage,Spieler selbst,Spieler gegner){
 		this.stage = stage;
+		this.selbst = selbst;
+		this.gegner = gegner;
+	}
+	
+	public Spieler getSelbst(){
+		return selbst;
+	}
+	public Spieler getGegner(){
+		return gegner;
 	}
 	
 	public Stage getStage(){
@@ -22,7 +33,7 @@ public class StatistikModel {
 	}
 //	Rückgabe der Anzahl der erspielten Siege
 	public int getAnzahlSiege(){
-		Future<Number> anzahlSiege = ThreadExecutor.getInstance().getAggregate(new AnzahlSiegeCallable());
+		Future<Number> anzahlSiege = ThreadExecutor.getInstance().getNumber(new AnzahlSiegeCallable());
 		while(!anzahlSiege.isDone()){}
 		try{
 			return anzahlSiege.get().intValue();
@@ -34,7 +45,7 @@ public class StatistikModel {
 	
 //	Rückgabe der Anzahl der erspielten Niederlagen
 	public int getAnzahlNiederlagen(){
-		Future<Number> anzahlNiederlagen = ThreadExecutor.getInstance().getAggregate(new AnzahlNiederlagenCallable());
+		Future<Number> anzahlNiederlagen = ThreadExecutor.getInstance().getNumber(new AnzahlNiederlagenCallable());
 		while(!anzahlNiederlagen.isDone()){}
 		try{
 			return anzahlNiederlagen.get().intValue();
