@@ -108,16 +108,6 @@
         <Image url="@icons/anzahlGewinnVerlustButtonOrange.JPG" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="SimulationButtonOrange.JPG" fx:id="simulationButtonOrange" fitHeight="44.0" fitWidth="105.0" layoutX="20.0" layoutY="476.0" visible="false">
-      <image>
-        <Image url="@icons/SimulationButtonOrange.JPG" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <ImageView id="SimulationButtonGrau.JPG" fx:id="simulationButtonGrau" fitHeight="44.0" fitWidth="105.0" layoutX="20.0" layoutY="475.0" visible="false">
-      <image>
-        <Image url="@icons/SimulationButtonGrau.JPG" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
     <ImageView id="SimulationButtonBlau.JPG" fx:id="simulationButtonBlau" fitHeight="44.0" fitWidth="105.0" layoutX="20.0" layoutY="475.0" visible="true" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" onMouseClicked="#simulationStarten">
       <image>
         <Image url="@icons/SimulationButtonBlau.JPG" preserveRatio="true" smooth="true" />

@@ -156,11 +156,15 @@ public class SpielViewController extends Thread{
 	private Button gButton;
 	
 	@FXML
-	private AnchorPane resetMenu, spielstartMenu;
+	private AnchorPane resetMenu, spielstartMenu, gewinnAnzeige, verlustAnzeige, spielfeldVollAnzeige;
 	@FXML
-	private ImageView spielfeldButtonOrange, resetButtonOrange;
+	private AnchorPane spielhilfeAnzeige, spielregelnAnzeige;
 	@FXML
-	private ImageView spielfeldButton, startButtonOrange;
+	private ImageView spielfeldButtonOrange, resetButtonOrange, spielregelnButtonOrange;
+	@FXML
+	private ImageView spielfeldButton, startButtonOrange, spielregelnButton;
+	@FXML
+	private ImageView hilfeButton, hilfeButtonOrange;
 	@FXML
 	private ImageView simulationButtonGrau, simulationButtonBlau, simulationButtonOrange;
 	@FXML
@@ -235,6 +239,7 @@ public class SpielViewController extends Thread{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		System.out.println(runde.getText()+", "+satzstatus.getText());
+		
 	}
 	
 	@FXML
@@ -304,13 +309,13 @@ public class SpielViewController extends Thread{
 	}
 	
 	private void spielGewonnen(){
-		
+		gewinnAnzeige.setVisible(true);
 	}
 	private void spielVerloren(){
-		
+		verlustAnzeige.setVisible(true);
 	}
 	private void spielfeldVoll(){
-		
+		spielfeldVollAnzeige.setVisible(true);
 	}
 	
 	@FXML
@@ -365,6 +370,22 @@ public class SpielViewController extends Thread{
 
 	}
 
+	//gewinnAnzeigeSchliessenButton pressed
+	@FXML
+	public void gewinnAnzeigeSchliessen(){
+		gewinnAnzeige.setVisible(false);
+	}
+	
+	//verlustAnzeigeSchliessenButton pressed
+	@FXML
+	public void verlustAnzeigeSchliessen(){
+		verlustAnzeige.setVisible(false);
+	}
+	
+	//spielfeldVollAnzeigeSchliessenButton pressed
+	public void spielfeldVollAnzeigeSchliessen(){
+		spielfeldVollAnzeige.setVisible(false);
+	}
 	
 //	Druecken des Statistik anzeigen Buttons
 	@FXML
@@ -426,18 +447,40 @@ public class SpielViewController extends Thread{
 	//Hilfe anzeigen
 	@FXML
 	public void hilfeAnzeigen(){
-		
+		spielhilfeAnzeige.setVisible(true);
+		spielregelnAnzeige.setVisible(false);
+		spielfeldButtonOrange.setVisible(false);
+		spielfeldButton.setVisible(true);
+		spielregelnButtonOrange.setVisible(false);
+		spielregelnButton.setVisible(true);
+		hilfeButtonOrange.setVisible(true);
+		hilfeButton.setVisible(false);
 	}
 	
 	//Spielfeld anzeigen
 	@FXML
 	public void spielfeldAnzeigen(){
-		
+		spielhilfeAnzeige.setVisible(false);
+		spielregelnAnzeige.setVisible(false);
+		spielfeldButtonOrange.setVisible(true);
+		spielfeldButton.setVisible(false);
+		spielregelnButtonOrange.setVisible(false);
+		spielregelnButton.setVisible(true);
+		hilfeButtonOrange.setVisible(false);
+		hilfeButton.setVisible(true);
 	}
+	
 	//Spielregeln anzeigen
 	@FXML
 	public void spielregelnAnzeigen(){
-			
+		spielregelnAnzeige.setVisible(true);
+		spielhilfeAnzeige.setVisible(false);
+		spielfeldButtonOrange.setVisible(false);
+		spielfeldButton.setVisible(true);
+		spielregelnButtonOrange.setVisible(true);
+		spielregelnButton.setVisible(false);
+		hilfeButtonOrange.setVisible(false);
+		hilfeButton.setVisible(true);
 	}
 	
 

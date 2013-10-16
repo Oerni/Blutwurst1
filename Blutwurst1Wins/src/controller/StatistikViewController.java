@@ -28,6 +28,8 @@ public class StatistikViewController {
 	@FXML
 	private ImageView spielfeldButton, anzahlGewinnVerlustButtonOrange, startGewinnVerlustKuchenButton;
 	@FXML
+	private ImageView simulationButtonBlau, simulationButtonGrau, simulationButtonOrange;
+	@FXML
 	private PieChart gewinnVerlustKuchenDiagramm, startGewinnVerlustKuchenDiagramm;
 	@FXML
 	private BarChart anzahlGewinneVerlusteDiagramm;
@@ -137,6 +139,8 @@ public class StatistikViewController {
 				infoSpielhistorie.setVisible(false);
 				infoAnzahlGewinneVerluste.setVisible(false);
 				infoGewinnVerlustKuchen.setVisible(true);
+				simulationButtonBlau.setVisible(false);
+				
 				
 			}
 			
@@ -157,6 +161,8 @@ public class StatistikViewController {
 				infoSpielhistorie.setVisible(false);
 				infoAnzahlGewinneVerluste.setVisible(false);
 				infoGewinnVerlustKuchen.setVisible(false);
+				simulationButtonBlau.setVisible(false);
+				
 			}
 			
 			//Anzahl Gewinne Verluste anzeigen
@@ -174,6 +180,8 @@ public class StatistikViewController {
 				infoSpielhistorie.setVisible(false);
 				infoAnzahlGewinneVerluste.setVisible(true);
 				infoGewinnVerlustKuchen.setVisible(false);
+				simulationButtonBlau.setVisible(false);
+				
 			}
 				
 			//Spielhistorie anzeigen
@@ -191,6 +199,8 @@ public class StatistikViewController {
 				infoSpielhistorie.setVisible(true);
 				infoAnzahlGewinneVerluste.setVisible(false);
 				infoGewinnVerlustKuchen.setVisible(false);
+				simulationButtonBlau.setVisible(true);
+				
 			}
 	
 	

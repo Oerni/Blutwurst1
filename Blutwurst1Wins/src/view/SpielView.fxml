@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <FlowPane layoutX="8.0" layoutY="91.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld" />
+    <FlowPane layoutX="6.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld" />
     <Circle fx:id="a6" fill="DODGERBLUE" layoutX="41.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
     <Circle fx:id="b6" fill="DODGERBLUE" layoutX="103.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
     <Circle fx:id="c6" fill="DODGERBLUE" layoutX="166.0" layoutY="125.0" radius="26.5" stroke="BLACK" strokeType="INSIDE" styleClass="kreis" />
@@ -75,13 +75,6 @@
     <Label fx:id="spielstandHeim" layoutX="689.0" layoutY="224.0" prefHeight="36.685638427734375" styleClass="spielstandHeim" text="0" />
     <Label fx:id="spielstandGast" layoutX="688.0" layoutY="270.0" prefHeight="36.685516357421875" styleClass="spielstandGast" text="0" />
     <Label fx:id="gesamt" layoutX="687.0" layoutY="428.0" prefHeight="36.685516357421875" styleClass="gesamt" text="0" />
-    <Button fx:id="aButton" layoutX="26.0" layoutY="472.0" mnemonicParsing="false" onAction="#inAHinzufuegen" text="A" />
-    <Button fx:id="bButton" layoutX="88.0" layoutY="472.0" mnemonicParsing="false" onAction="#inBHinzufuegen" text="B" />
-    <Button fx:id="cButton" layoutX="151.0" layoutY="472.0" mnemonicParsing="false" onAction="#inCHinzufuegen" text="C" />
-    <Button fx:id="dButton" layoutX="213.0" layoutY="472.0" mnemonicParsing="false" onAction="#inDHinzufuegen" text="D" />
-    <Button fx:id="eButton" layoutX="277.0" layoutY="472.0" mnemonicParsing="false" onAction="#inEHinzufuegen" text="E" />
-    <Button fx:id="fButton" layoutX="341.0" layoutY="472.0" mnemonicParsing="false" onAction="#inFHinzufuegen" text="F" />
-    <Button fx:id="gButton" layoutX="403.0" layoutY="472.0" mnemonicParsing="false" onAction="#inGHinzufuegen" text="G" />
     <ImageView id="HilfeButton.png" fx:id="hilfeButton" layoutX="314.0" layoutY="37.0" onMouseClicked="#hilfeAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
       <image>
         <Image url="@icons/HilfeButton.png" preserveRatio="true" smooth="true" />
@@ -112,6 +105,18 @@
         <Image url="@icons/startButton.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
+    <AnchorPane fx:id="spielhilfeAnzeige" layoutX="6.0" layoutY="92.0" prefHeight="380.0" prefWidth="447.0000999999975" visible="false">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="388.0000305175781" layoutX="0.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" visible="true" width="453.0" />
+        <Text layoutX="25.0" layoutY="-45.0" scaleX="1.0873207093131305" scaleY="0.7480773198099262" strokeType="OUTSIDE" strokeWidth="0.0" text="Neues Spiel beginnen&#10;Ein neues Spiel wird gestartet, indem du den Button 'Start'         &#10;in der oberen Menüleiste wählst.         &#10;Anschließend erscheint ein Pop-Up-Fenster, welches         &#10;Dich zur Eingabe des gegnerischen Teamnamens auffordert,         &#10;sowie den Kontaktpfad und die Iconwahl abfragt.         &#10;&#10;Spiel zurücksetzen&#10;Um einen Neustart während einer laufenden Partie durch-         &#10;zuführen, ist von Dir ein Anwählen der Schaltfläche 'Reset'         &#10;notwendig. Es obliegt dir, ob du nun nur die Runde, den Satz,         &#10;das Spiel oder die komplette Runde zurücksetzen möchtest.         &#10;&#10;Statistikmenü         &#10;Über “Statistik” öffnet sich für Dich eine neue Ansicht. Diese         &#10;stellt Dir verschiedene statistische Informationen zur Verfügung,         &#10;wie z.B. das Verhältnis gewonnener zu verlorenen Partien.   &#10;&#10;Außerdem besteht die Möglichkeit Spielzüge vergangener Spiele    &#10;anzuzeigen. Dazu rufst Du im rechtsbündigen Untermenü den    &#10;Reiter “Spielhistorie” auf.Nach Anwahl des Spiels ist der Button    &#10;“Spieldemo starten” verfügbar und du kannst Dir das vergangen   &#10;Spiel in einer Demo anschauen.   &#10;&#10;Der Button “Spielfeld” führt dich zurück zur aktuellen   &#10;Spielansicht bzw. zum Startbildschirm.   &#10;&#10;Regelwerk   &#10;Solltest Du nicht bereits mit den allgemein anerkannten Regeln   &#10;von Vier Gewinnt vertraut sein, so kannst Du unter “Spielregeln”   &#10;dein bisheriges Wissen auffrischen." />
+      </children>
+    </AnchorPane>
+    <AnchorPane fx:id="spielregelnAnzeige" layoutX="6.0" layoutY="92.0" prefHeight="380.0" prefWidth="447.0000999999975" visible="false">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="388.0000305175781" layoutX="0.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" visible="true" width="453.0" />
+        <Text layoutX="25.0" layoutY="-30.0" scaleX="1.0873207093131305" scaleY="0.7480773198099262" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielregeln&#10;&#10;         &#10;Satz         &#10;&#10;  Sieg: 2 Punkte         &#10;  Remis: 1 Punkt         &#10;  Niederlage: 0 Punkte         &#10;&#10;Spiel         &#10;&#10;  Ein Spiel besteht in Runde 1 aus 2 Sätzen und in Runde 2          &#10;  aus 3 Sätzen.         &#10;&#10;Runde         &#10;&#10;  Turnierergebnis wird in ein oder zwei Runden ermittelt.          &#10;  Runde 2 ist nur nötig, wenn in Runde 1 kein eindeutiges         &#10;  Ergebnis bestimmt werden kann.         &#10;&#10;  Runde 1 besteht aus 2 Sätzen und jeder spielt gegen jeden.         &#10;  Bei 6 Teams sind das 15 Spiele à 2 Sätze.   &#10;  Runde 2 besteht aus 3 Sätzen und einer verminderte Zugzeit.   &#10;  Steht es nach Satz 2 immer noch unentschieden, entscheidet    &#10;  der 3. Satz  bei zufälliger Wahl des Startspielers und    &#10;  Remisauflösung durch den Server." />
+      </children>
+    </AnchorPane>
     <AnchorPane fx:id="spielstartMenu" layoutX="219.0" layoutY="183.0" minHeight="104.50006103515625" minWidth="313.0" prefHeight="167.50006103515625" prefWidth="316.56231689453125" visible="false">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
@@ -128,12 +133,8 @@
         <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="119.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
         <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" />
         <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
-        <fx:define>
-        	<ToggleGroup fx:id="XOGroup"/>
-        </fx:define>
-        <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X" toggleGroup="$XOGroup" />
-        <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" toggleGroup="$XOGroup" />
-        
+        <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X" />
+        <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" />
         <Text layoutX="55.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wir sind:" />
       </children>
     </AnchorPane>
@@ -165,6 +166,54 @@
     <ImageView id="startButtonOrange.png" fx:id="startButtonOrange" layoutX="18.0" layoutY="35.0" visible="false">
       <image>
         <Image url="@icons/startButtonOrange.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <!-- Reset Menu begins -->
+    <AnchorPane id="resetMenu" fx:id="gewinnAnzeige" layoutX="229.0" layoutY="160.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Button id="resetSpielButton" fx:id="gewinnAnzeigeSchliessenButton" layoutX="136.0" layoutY="92.0" mnemonicParsing="false" onAction="#gewinnAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
+        <Text layoutX="93.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blutwurst1 gewinnt!" textAlignment="CENTER" />
+      </children>
+    </AnchorPane>
+    <!-- Reset Menu begins -->
+    <AnchorPane id="resetMenu" fx:id="verlustAnzeige" layoutX="239.0" layoutY="170.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Button id="resetSpielButton" fx:id="verlustAnzeigeSchliessenButton" layoutX="136.0" layoutY="96.0" mnemonicParsing="false" onAction="#verlustAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
+        <Text layoutX="130.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Verloren" textAlignment="CENTER" />
+        <Text layoutX="96.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blutwurst1 verliert!" />
+      </children>
+    </AnchorPane>
+    <!-- Reset Menu begins -->
+    <AnchorPane id="resetMenu" fx:id="spielfeldVollAnzeige" layoutX="249.0" layoutY="180.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Button id="resetSpielButton" fx:id="spielfeldVollAnzeigeSchliessenButton" layoutX="136.0" layoutY="96.0" mnemonicParsing="false" onAction="#spielfeldVollAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
+        <Text layoutX="110.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Unentschieden" textAlignment="CENTER" />
+        <Text layoutX="114.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielfeld voll!" />
+      </children>
+    </AnchorPane>
+    <ImageView id="spielregelnButtonOrange.png" fx:id="spielregelnButtonOrange" fitHeight="51.0" fitWidth="67.529296875" layoutX="384.0" layoutY="32.0" visible="false">
+      <image>
+        <Image url="@icons/spielregelnButtonOrange.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="hilfeButtonOrange.png" fx:id="hilfeButtonOrange" fitHeight="50.000099182128906" fitWidth="42.00000762939453" layoutX="315.0" layoutY="33.0" visible="false">
+      <image>
+        <Image url="@icons/hilfeButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
   </children>
