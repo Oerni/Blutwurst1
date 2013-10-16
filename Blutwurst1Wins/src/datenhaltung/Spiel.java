@@ -52,6 +52,14 @@ public class Spiel extends DBObject{
 		return saetze;
 	}
 	
+	public void satzHinzufuegen(Satz satz){
+		saetze.add(satz);
+	}
+	
+	public Satz getAktuellenSatz(){
+		return saetze.lastElement();
+	}
+	
 	public Spieler getSpieler(int id){
 		return selbst.getID() == id ? selbst : gegner;
 	}

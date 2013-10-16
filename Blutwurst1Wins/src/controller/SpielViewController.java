@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,10 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import parallelisierung.ServerZugLesenCallable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.SpielModel;
+import datenhaltung.Spieler;
 import datenhaltung.StatistikModel;
 import datenhaltung.Strings;
 import datenhaltung.Zug;
@@ -257,7 +255,6 @@ public class SpielViewController extends Thread{
 	
 	public void run(){
 				while(true){
-					System.out.println("Test");
 					Zug gegnerZug = model.getDateiVerwaltung().dateiLesen();
 //					while(!zugFuture.isDone()){}
 					try{
@@ -266,35 +263,47 @@ public class SpielViewController extends Thread{
 //						boolean weiterspielen = true;
 						if(weiterspielen == this.WEITERSPIELEN){
 //							Gegnerzug einfuegen
-							int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
-							System.out.println("Gegner Zug: " + gegnerZeile);
-							gegnerZug.setZeile(gegnerZeile);
-							faerben(gegnerZug.getSpalte(), gegnerZug.getZeile());
-							model.spielerWechsel();
+							if(gegnerZug.getSpalte() != -1){
+								int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
+								System.out.println("Gegner Zug (Spalte,Zeile): " + gegnerZug.getSpalte() + gegnerZeile);
+								gegnerZug.setZeile(gegnerZeile);
+								if(gegnerZeile != -1)
+									faerben(gegnerZug.getSpalte(),gegnerZug.getZeile(),gegnerZug.getSpieler());
+							}else
+//								Satzstart!
+								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getSelbst());
+							
+							
 //							Eigenen zug berechnen
 							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSelbst());
 							Zug eigenerZug = new Zug(berechneteSpalte,model.getSelbst());
-							
 							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
 							eigenerZug.setZeile(eigeneZeile);
-//							ThreadExecutor.getInstance().execute(serverZugSchreiben);
+							ServerZugSchreibenRunnable schreibenRunnable = new ServerZugSchreibenRunnable(model);
+							schreibenRunnable.setZug(eigenerZug);
+							ThreadExecutor.getInstance().execute(schreibenRunnable);
 //							eigenerZug.speichern();
 							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
-							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile());
+							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile(),eigenerZug.getSpieler());
 							
 							System.out.println("Eigener Zug: " + eigenerZug.getZeile());
 							model.spielerWechsel();
 							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
+							
+//							Überprüfen, ob beginnender Spieler schon gesetzt wurde
+//							Wenn nicht, muss der beginnende Spieler der Gegner gewesen sein.
+							if(model.getSpiel().getAktuellenSatz().spielerBegonnen()==null)
+								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getGegner());
 						}else{
 							switch(weiterspielen){
 							case SPIEL_GEWONNEN:
-								
+								spielGewonnen();
 								break;
 							case SPIEL_VERLOREN:
-								
+								spielVerloren();
 								break;
 							case SPIELFELD_VOLL:
-								
+								spielfeldVoll();
 								break;
 							}
 						}
@@ -353,22 +362,6 @@ public class SpielViewController extends Thread{
 		}
 		return this.WEITERSPIELEN;
 	}
-	
-	private void berechneEigenenZug() {
-		
-	}
-
-	private void reagiereAufVerlustSituation() {
-		
-	}
-
-	private void reagiereAufVollesSpielfeld() {
-		
-	}
-
-	private void reagiereAufGewinnSituation() {
-
-	}
 
 	//gewinnAnzeigeSchliessenButton pressed
 	@FXML
@@ -394,10 +387,10 @@ public class SpielViewController extends Thread{
 		new StatistikViewController(sModel).show();
 	}
 	
-	private void faerben(int spalte,int zeile){
-		if(model.getAktuellerSpieler() == model.getSelbst())
+	private void faerben(int spalte,int zeile,Spieler spieler){
+		if(spieler == model.getSelbst())
 			feld[spalte][zeile].setFill(eigeneFarbe);
-		else
+		else if(spieler == model.getGegner())
 			feld[spalte][zeile].setFill(gegnerFarbe);
 //		a1.setFill(aktuelleFarbe);
 	}
@@ -408,7 +401,6 @@ public class SpielViewController extends Thread{
 		resetButtonOrange.setVisible(true);
 		spielfeldButton.setVisible(true);
 		resetMenu.setVisible(true);
-		
 	}
 	
 	//Schliessen des ResetMenus

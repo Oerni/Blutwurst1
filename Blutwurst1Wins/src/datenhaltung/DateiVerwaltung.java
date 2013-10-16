@@ -16,25 +16,20 @@ public class DateiVerwaltung {
 	private String schreibePfad;
 	private SpielModel model;
 	
-	public DateiVerwaltung(String lesePfad,String schreibePfad,SpielModel model){		
-		this.lesePfad = lesePfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".xml";
-//		this.lesePfad = lesePfad+"server2spielero.xml";
+	public DateiVerwaltung(String pfad,SpielModel model){		
+		this.lesePfad = pfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".xml";
+		this.schreibePfad = pfad+"\\spieler"+model.getSelbst().getKennzeichnung()+"2server.txt";
 		System.out.println(this.lesePfad);
-		this.schreibePfad = schreibePfad;
 		this.model = model;
-	}
-	
-	public static void main(String[] args){
-		DateiVerwaltung dateiv = new DateiVerwaltung("D:\\temp\\","",null);
-		Zug zug = dateiv.dateiLesen();
-		System.out.println(zug.getFreigabe()+","+zug.getSatzstatus());
 	}
 	
 	public boolean dateiSchreiben(Zug zug){
 		try{
 			fileWriter = new FileWriter(schreibePfad);
 			bufferedWriter = new BufferedWriter(fileWriter);
-			bufferedWriter.write(zug.getSpalte());
+			bufferedWriter.write(""+zug.getSpalte());
+			bufferedWriter.close();
+			fileWriter.close();
 			return true;
 		}catch(IOException ex){
 			ex.printStackTrace();

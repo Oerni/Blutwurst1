@@ -75,6 +75,10 @@ public class Satz extends DBObject{
 	public Spieler getGewinner(){
 		return gewonnen;
 	}
+	
+	public void setBeginnendenSpieler(Spieler spieler){
+		spielerBegonnen = spieler;
+	}
 
 	@Override
 	public int speichern() {

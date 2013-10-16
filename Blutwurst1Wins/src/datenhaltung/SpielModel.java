@@ -14,8 +14,6 @@ public class SpielModel {
 	 */
 	private Stage stage;
 	private Spiel spiel;
-	private Stack<Satz> saetze = new Stack<Satz>();
-	private Stack<Zug> zuege = new Stack<Zug>();
 	private Spieler gegner;
 	private Spieler selbst;
 	private Spieler aktuellerSpieler;
@@ -43,13 +41,13 @@ public class SpielModel {
 		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
 	}
 	
-	public void init(String lesePfad,String gegnerName,char eigeneKennzeichnung){
+	public void init(String pfad,String gegnerName,char eigeneKennzeichnung){
 		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
 		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));
 		aktuellerSpieler = getBeginnendenSpieler();
-		dateiverwaltung = new DateiVerwaltung(lesePfad,"",this);
+		dateiverwaltung = new DateiVerwaltung(pfad,this);
 		spiel = new Spiel(gegner,selbst);
-		saetze.add(new Satz(aktuellerSpieler,spiel));
+		spiel.satzHinzufuegen(new Satz(aktuellerSpieler,spiel));
 	}
 	
 	private char getGegnerKennzeichnung(char eigeneKennzeichnung){
@@ -60,15 +58,19 @@ public class SpielModel {
 		return selbst.getKennzeichnung()=='O' ? selbst : gegner;
 	}
 	
-	public int zugDurchfuehren(int spalte){
-		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
-		zuege.push(new Zug(ergebnis,spalte,aktuellerSpieler,saetze.lastElement()));
-		if(aktuellerSpieler == gegner)
-			aktuellerSpieler = selbst;
-		else
-			aktuellerSpieler = gegner;
-		return ergebnis;
+	public Spiel getSpiel(){
+		return spiel;
 	}
+	
+//	public int zugDurchfuehren(int spalte){
+//		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
+//		zuege.push(new Zug(ergebnis,spalte,aktuellerSpieler,saetze.lastElement()));
+//		if(aktuellerSpieler == gegner)
+//			aktuellerSpieler = selbst;
+//		else
+//			aktuellerSpieler = gegner;
+//		return ergebnis;
+//	}
 	
 	public void spielerWechsel(){
 		if(aktuellerSpieler == selbst)
@@ -114,9 +116,7 @@ public class SpielModel {
 	}
 	
 	public void allesSpeichern(){
-		selbst.speichern();
-		gegner.speichern();
-		saetze.lastElement().speichern();
+
 	}
 	
 	public DateiVerwaltung getDateiVerwaltung(){
