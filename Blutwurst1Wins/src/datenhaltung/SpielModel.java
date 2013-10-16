@@ -39,6 +39,10 @@ public class SpielModel {
 		return gegner;
 	}
 	
+	public Spieler getSieger(char kennzeichnung){
+		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
+	}
+	
 	public void init(String lesePfad,String gegnerName,char eigeneKennzeichnung){
 		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
 		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));

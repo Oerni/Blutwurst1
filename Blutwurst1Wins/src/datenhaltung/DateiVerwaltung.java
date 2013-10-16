@@ -62,7 +62,7 @@ public class DateiVerwaltung {
 		boolean freigabe = false;
 		int satzstatus = -1;
 		int gegnerzug = -2;
-		int sieger = -1;
+		Spieler sieger = null;
 		try{
 			int i = 0;
 			while((zeile=bufferedReader.readLine())!=null){
@@ -90,11 +90,9 @@ public class DateiVerwaltung {
 					case 5:
 						String siegerString = zeile.trim().split("<sieger>|</sieger>")[1];
 						if(siegerString.trim().equalsIgnoreCase("Spieler O"))
-							sieger = Zug.SIEGER_O;
+							sieger = model.getSieger('o');
 						else if(siegerString.trim().equalsIgnoreCase("Spieler X"))
-							sieger = Zug.SIEGER_X;
-						else
-							sieger = Zug.SIEGER_OFFEN;
+							sieger = model.getSieger('x');
 						i++;
 						break;
 					default:

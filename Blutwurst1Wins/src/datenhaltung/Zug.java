@@ -11,7 +11,7 @@ public class Zug extends DBObject{
 	private Satz satz;
 	private boolean freigabe;
 	private String satzstatus;
-	private String sieger;
+	private Spieler sieger;
 	private int zeile;
 	private int spalte;
 	
@@ -52,10 +52,11 @@ public class Zug extends DBObject{
 	}
 
 	
-	public Zug(boolean freigabe,int satzstatus,int spalte,int sieger,Spieler spieler){
+	public Zug(boolean freigabe,int satzstatus,int spalte,Spieler sieger,Spieler spieler){
 		this.freigabe = freigabe;
 		this.spieler = spieler;
 		this.spalte = spalte;
+		this.sieger = sieger;
 		
 		switch(satzstatus){
 			case OFFEN:
@@ -63,17 +64,6 @@ public class Zug extends DBObject{
 				break;
 			case BEENDET:
 				this.satzstatus = "beendet";
-				break;
-		}
-		switch(sieger){
-			case SIEGER_OFFEN:
-				this.sieger = "offen";
-				break;
-			case SIEGER_O:
-				this.sieger = "SpielerO";
-				break;
-			case SIEGER_X:
-				this.sieger = "SpielerX";
 				break;
 		}
 	}
@@ -92,7 +82,7 @@ public class Zug extends DBObject{
 		return satzstatus;
 	}
 	
-	public String getSieger(){
+	public Spieler getSieger(){
 		return sieger;
 	}
 

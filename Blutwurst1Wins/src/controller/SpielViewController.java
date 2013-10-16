@@ -35,6 +35,11 @@ public class SpielViewController extends Thread{
 	private final Color eigeneFarbe = Color.web("0x33CC66");
 	private final Color gegnerFarbe = Color.web("0xFF3333");
 	
+	private final int WEITERSPIELEN = 0;
+	private final int SPIEL_GEWONNEN = 1;
+	private final int SPIEL_VERLOREN = 2;
+	private final int SPIELFELD_VOLL = 3;
+	
 	@FXML
 	private Label satzstatus;
 	@FXML
@@ -252,9 +257,9 @@ public class SpielViewController extends Thread{
 //					while(!zugFuture.isDone()){}
 					try{
 //						Zug gegnerZug = zugFuture.get();
-//						boolean weiterspielen = sonderfaellePruefen();
-						boolean weiterspielen = true;
-						if(weiterspielen){
+						int weiterspielen = sonderfaellePruefen(gegnerZug);
+//						boolean weiterspielen = true;
+						if(weiterspielen == this.WEITERSPIELEN){
 //							Gegnerzug einfuegen
 							int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
 							System.out.println("Gegner Zug: " + gegnerZeile);
@@ -273,7 +278,20 @@ public class SpielViewController extends Thread{
 							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile());
 							
 							System.out.println("Eigener Zug: " + eigenerZug.getZeile());
+							model.spielerWechsel();
 							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
+						}else{
+							switch(weiterspielen){
+							case SPIEL_GEWONNEN:
+								
+								break;
+							case SPIEL_VERLOREN:
+								
+								break;
+							case SPIELFELD_VOLL:
+								
+								break;
+							}
 						}
 					}catch(InterruptedException ex){
 						System.out.println("InterruptedException");
@@ -283,6 +301,16 @@ public class SpielViewController extends Thread{
 //						ex.printStackTrace();
 					}
 				}
+	}
+	
+	private void spielGewonnen(){
+		
+	}
+	private void spielVerloren(){
+		
+	}
+	private void spielfeldVoll(){
+		
 	}
 	
 	@FXML
@@ -297,44 +325,28 @@ public class SpielViewController extends Thread{
 		start();
 	}
 	
-	public boolean sonderfaellePruefen(){
-		// Zug des Gegners interpretieren
-		Zug gegnerzug = model.zugVonServer();
-		Zug eigenerZug = null;
-		
+	public int sonderfaellePruefen(Zug gegnerzug){		
 		// Pruefen auf Spezialfaelle
 		if(!gegnerzug.getFreigabe() && gegnerzug.getSatzstatus().trim().equalsIgnoreCase("beendet")){
-			//Spielfeld voll
-			int eigeneKennzeichnung = model.getEigeneKennzeichnung();
-			switch(eigeneKennzeichnung){
-				case 0:
-					//als Gewinner eingetragen?
-					if(gegnerzug.getSieger().equalsIgnoreCase("Spieler O")){
-						if(gegnerzug.getSpalte() == -1){
-//							Spiel gewonnen
-							reagiereAufGewinnSituation();
-							return false;
-						}
-						else{
-//							Spielfeld voll
-							reagiereAufVollesSpielfeld();
-							return false;
-						}
-					}else{
-						if(gegnerzug.getSpalte() != -1){
-//							Spiel verloren
-							reagiereAufVerlustSituation();
-							return false;
-						}
-						else{
-//							Spielfeld voll
-							reagiereAufVollesSpielfeld();
-							return false;
-						}
-					}
+			if(gegnerzug.getSieger() == model.getSelbst()){
+				if(gegnerzug.getSpalte() == -1){
+//					Spiel gewonnen
+					return this.SPIEL_GEWONNEN;
+				}else{
+//					Spielfeld voll
+					return this.SPIELFELD_VOLL;
+				}
+			}else{
+				if(gegnerzug.getSpalte() != -1){
+//					Spiel verloren
+					return this.SPIEL_VERLOREN;
+				}else{
+//					Spielfeld voll
+					return this.SPIELFELD_VOLL;
+				}
 			}
 		}
-		return true;
+		return this.WEITERSPIELEN;
 	}
 	
 	private void berechneEigenenZug() {
@@ -360,72 +372,6 @@ public class SpielViewController extends Thread{
 		StatistikModel sModel = new StatistikModel(new Stage(),model.getSelbst(),model.getGegner());
 		new StatistikViewController(sModel).show();
 	}
-	
-	Color aktuelleFarbe;
-	@FXML
-	public void inAHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(0);
-		faerben(0,ergebnis);
-	}
-	@FXML
-	public void inBHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(1);
-		faerben(1,ergebnis);
-	}
-	@FXML
-	public void inCHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getSelbst().getKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(2);
-		faerben(2,ergebnis);
-	}
-	@FXML
-	public void inDHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(3);
-		faerben(3,ergebnis);
-	}
-	@FXML
-	public void inEHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(4);
-		faerben(4,ergebnis);
-	}
-	@FXML
-	public void inFHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(5);
-		faerben(5,ergebnis);
-	}
-	@FXML
-	public void inGHinzufuegen(){
-		if(model.getAktuellerSpieler().getKennzeichnung() == model.getEigeneKennzeichnung())
-			aktuelleFarbe = eigeneFarbe;
-		else
-			aktuelleFarbe = gegnerFarbe;
-		int ergebnis = model.zugDurchfuehren(6);
-		faerben(6,ergebnis);
-	}
-	
 	
 	private void faerben(int spalte,int zeile){
 		if(model.getAktuellerSpieler() == model.getSelbst())
