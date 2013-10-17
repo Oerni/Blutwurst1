@@ -4,7 +4,6 @@ import java.util.Stack;
 
 import javafx.stage.Stage;
 import logik.Feld;
-import logik.Spielfeld;
 
 public class SpielModel {
 	/**
@@ -18,7 +17,6 @@ public class SpielModel {
 	private Spieler selbst;
 	private Spieler aktuellerSpieler;
 	private DateiVerwaltung dateiverwaltung;
-	private Spielfeld spielfeld = new Spielfeld();
 	private Feld feld = new Feld();
 	
 	public SpielModel(Stage stage){
@@ -81,10 +79,6 @@ public class SpielModel {
 	
 	public Spieler getAktuellerSpieler(){
 		return aktuellerSpieler;
-	}
-	
-	public void zuruecksetzen(){
-		spielfeld = new Spielfeld();
 	}
 	
 	public char getEigeneKennzeichnung(){

@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
+import datenhaltung.Satz;
 import datenhaltung.SpielModel;
 import datenhaltung.Spieler;
 import datenhaltung.StatistikModel;
@@ -318,9 +319,29 @@ public class SpielViewController extends Thread{
 	}
 	
 	private void spielGewonnen(){
+		model.getSpiel().getAktuellenSatz().setGewinner(model.getSelbst());
+		int anzahlSiege = 0;
+		for(Satz s : model.getSpiel().getSaetze()){
+			if(s.getGewinner() == model.getSelbst())
+				anzahlSiege++;
+		}
+		if(anzahlSiege > 1){}
+//			Spiel gewonnen
+		else{}
+//			Satz gewonnen
 		gewinnAnzeige.setVisible(true);
 	}
 	private void spielVerloren(){
+		model.getSpiel().getAktuellenSatz().setGewinner(model.getGegner());
+		int anzahlSiegeGegner = 0;
+		for(Satz s : model.getSpiel().getSaetze()){
+			if(s.getGewinner() == model.getGegner())
+				anzahlSiegeGegner++;
+		}
+		if(anzahlSiegeGegner > 1){}
+//		Spiel  verloren
+		else{}
+//		Satz verloren
 		verlustAnzeige.setVisible(true);
 	}
 	private void spielfeldVoll(){
@@ -392,7 +413,6 @@ public class SpielViewController extends Thread{
 			feld[spalte][zeile].setFill(eigeneFarbe);
 		else if(spieler == model.getGegner())
 			feld[spalte][zeile].setFill(gegnerFarbe);
-//		a1.setFill(aktuelleFarbe);
 	}
 	
 	//Oeffnen des ResetMenus
@@ -424,7 +444,7 @@ public class SpielViewController extends Thread{
 		for(int i=0;i<7;i++)
 			for(int j=0;j<6;j++)
 				feld[i][j].setFill(Color.WHITE);
-		model.zuruecksetzen();
+//		model.zuruecksetzen();
 		
 	 resetMenuSchliessen();
 	}
