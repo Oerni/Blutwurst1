@@ -119,7 +119,7 @@ public class Knoten {
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){
 				if(k.getNachbarn().getBesetztVon() == selbst || k.getNachbarn().getBesetztVon() == null){
-					return eigenerWert + k.getNachbarn().zaehleEigeneSteine(richtung, selbst, zaehler+1);
+					return zaehler*eigenerWert + k.getNachbarn().zaehleEigeneSteine(richtung, selbst, zaehler+1);
 				}else
 					return eigenerWert;
 			}

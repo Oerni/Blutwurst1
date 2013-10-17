@@ -74,21 +74,7 @@ public class Feld {
 			return unserZug.getSpalte();
 		return -1;
 	}
-	
-	public static void main(String[] args){
-//		Feld feld = new Feld();
-//		for(int i=0;i<7;i++)
-//			for(int j=0;j<6;j++){
-//				System.out.println();
-//				System.out.print("Feld: " + i + "," + j + " - Nachbarn: ");
-//				for(Kante k : feld.getSpielfeld()[i][j].getNachbarn()){
-//					System.out.print("("+k.getNachbarn().getSpalte()+","+k.getNachbarn().getZeile()+","+getRichtung(k.getRichtung())+");");
-//				}
-////			}
-//		Spieler spieler = new Spieler("blutwurst 1", 'X');
-//		System.out.println("Zug: " + feld.zugDurchfuehren(zug));
-		
-	}
+
 	public static String getRichtung(int richtung){
 		switch(richtung){
 		case Kante.DIAGONAL_LINKS_OBEN:
