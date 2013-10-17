@@ -32,16 +32,6 @@
         <Image url="@icons/startGewinnVerlustKuchenButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="HilfeButton.png" fx:id="hilfeButton" layoutX="318.0" layoutY="35.0" onMouseClicked="#hilfeAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
-      <image>
-        <Image url="@icons/HilfeButton.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <ImageView id="spielregelnButton.png" fx:id="spielregelnButton" layoutX="379.0" layoutY="32.0" onMouseClicked="#spielregelnAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
-      <image>
-        <Image url="@icons/spielregelnButton.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
     <ImageView id="gewinnVerlustKuchenButton.png" fx:id="gewinnVerlustKuchenButton" layoutX="477.0" layoutY="99.0" onMouseClicked="#gewinnVerlustKuchenAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
       <image>
         <Image url="@icons/gewinnVerlustKuchenButton.png" preserveRatio="true" smooth="true" />
@@ -58,12 +48,12 @@
       </image>
     </ImageView>
     <Text fx:id="infoSpielhistorie" layoutX="473.0" layoutY="402.0" scaleX="1.0" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Diese Tabelle beinhaltet alle bereits&#10;gespielten Spiele. Zu den Spielen wird&#10;der Spielstand, der Gegner, sowie&#10;auf Wunsch alle Spielzüge angezeigt." visible="false" />
-    <ImageView id="statistikButtonOrange.png" fx:id="statistikButtonOrange" layoutX="150.0" layoutY="36.0">
+    <ImageView id="statistikButtonOrange.png" fx:id="statistikButtonOrange" layoutX="18.0" layoutY="36.0">
       <image>
         <Image url="@icons/statistikButtonOrange.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="spielfeldButton.png" fx:id="spielfeldButton" layoutX="233.0" layoutY="30.0" onMouseClicked="#spielfeldAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
+    <ImageView id="spielfeldButton.png" fx:id="spielfeldButton" layoutX="101.0" layoutY="30.0" onMouseClicked="#spielfeldAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
       <image>
         <Image url="@icons/spielfeldButton.png" preserveRatio="true" smooth="true" />
       </image>
@@ -77,16 +67,6 @@
     <ImageView id="spielhistorieButtonOrange.png" fx:id="spielhistorieButtonOrange" layoutX="484.0" layoutY="241.0" visible="false">
       <image>
         <Image url="@icons/spielhistorieButtonOrange.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <ImageView id="resetButtonGrau.png" fx:id="resetButtonGrau" layoutX="87.0" layoutY="38.0">
-      <image>
-        <Image url="@icons/resetButtonGrau.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <ImageView id="startButtonGrau.png" fx:id="startButtonGrau" layoutX="15.0" layoutY="39.0">
-      <image>
-        <Image url="@icons/startButtonGrau.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <ImageView id="gewinnVerlustKuchenOrange.png" fx:id="gewinnVerlustKuchenButtonOrange" fitHeight="38.0" fitWidth="179.00001525878906" layoutX="482.0" layoutY="99.0" visible="true">
@@ -108,7 +88,7 @@
         <Image url="@icons/anzahlGewinnVerlustButtonOrange.JPG" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <ImageView id="SimulationButtonBlau.JPG" fx:id="simulationButtonBlau" fitHeight="44.0" fitWidth="105.0" layoutX="20.0" layoutY="475.0" visible="true" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" onMouseClicked="#simulationStarten">
+    <ImageView id="SimulationButtonBlau.JPG" fx:id="simulationButtonBlau" fitHeight="44.0" fitWidth="105.0" layoutX="20.0" layoutY="475.0" onMouseClicked="#simulationStarten" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" visible="true">
       <image>
         <Image url="@icons/SimulationButtonBlau.JPG" preserveRatio="true" smooth="true" />
       </image>

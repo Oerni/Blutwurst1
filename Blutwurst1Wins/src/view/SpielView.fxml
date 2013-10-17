@@ -122,22 +122,26 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="133.00000762939453" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Text layoutX="7.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielstart" textAlignment="CENTER" />
+        <Text layoutX="55.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gegenspieler:" />
+        <TextField fx:id="gegnerNameEingabe" layoutX="149.0" layoutY="32.0" prefWidth="122.55419921875" promptText="Name" />
+        <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
+        <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X">
+          <toggleGroup>
+            <ToggleGroup fx:id="XOSelection" />
+          </toggleGroup>
+        </RadioButton>
+        <fx:define>
+          <fx:reference source="XOSelection" />
+        </fx:define>
+        <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" toggleGroup="$XOSelection" />
+        <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="119.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
         <Button fx:id="spielstartMenuSchliessenButton" layoutX="286.0" layoutY="3.0" mnemonicParsing="false" onAction="#spielstartMenuSchliessen" text="X" textAlignment="CENTER">
           <font>
             <Font size="10.0" fx:id="x1" />
           </font>
         </Button>
-        <Text layoutX="7.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielstart" textAlignment="CENTER" />
-        <Text layoutX="55.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gegenspieler:" />
-        <TextField fx:id="gegnerNameEingabe" layoutX="149.0" layoutY="32.0" prefWidth="122.55419921875" promptText="Name" />
-        <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="119.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
         <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" />
-        <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
-        <fx:define>
-        	<ToggleGroup fx:id="XOSelection" />
-        </fx:define>
-        <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X" toggleGroup="$XOSelection" />
-        <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" toggleGroup="$XOSelection" />
         <Text layoutX="55.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wir sind:" />
       </children>
     </AnchorPane>
