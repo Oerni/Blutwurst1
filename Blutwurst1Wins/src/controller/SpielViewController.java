@@ -165,8 +165,6 @@ public class SpielViewController extends Thread{
 	@FXML
 	private ImageView hilfeButton, hilfeButtonOrange;
 	@FXML
-	private ImageView simulationButtonGrau, simulationButtonBlau, simulationButtonOrange;
-	@FXML
 	private TextField gegnerNameEingabe;
 	@FXML
 	private TextField pfadEingabe;
@@ -431,7 +429,9 @@ public class SpielViewController extends Thread{
 	@FXML
 	public void resetMenuSchliessen(){
 		resetButtonOrange.setVisible(false);
+		startButtonOrange.setVisible(false);
 		spielfeldButtonOrange.setVisible(true);
+		spielfeldButton.setVisible(false);
 		resetMenu.setVisible(false);
 	}
 	
