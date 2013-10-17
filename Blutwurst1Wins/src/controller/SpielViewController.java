@@ -174,6 +174,8 @@ public class SpielViewController extends Thread{
 	private Text gegnerNameText;
 	@FXML
 	private RadioButton radioButtonX, radioButtonO;
+	@FXML
+	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
 	
 	
 	
@@ -291,7 +293,7 @@ public class SpielViewController extends Thread{
 							model.spielerWechsel();
 							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
 							
-//							Überprüfen, ob beginnender Spieler schon gesetzt wurde
+//							ueberpruefen, ob beginnender Spieler schon gesetzt wurde
 //							Wenn nicht, muss der beginnende Spieler der Gegner gewesen sein.
 							if(model.getSpiel().getAktuellenSatz().spielerBegonnen()==null)
 								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getGegner());
@@ -330,6 +332,7 @@ public class SpielViewController extends Thread{
 		else{}
 //			Satz gewonnen
 		gewinnAnzeige.setVisible(true);
+		//gewinnAnzeigenLabel
 	}
 	private void spielVerloren(){
 		model.getSpiel().getAktuellenSatz().setGewinner(model.getGegner());
@@ -339,10 +342,11 @@ public class SpielViewController extends Thread{
 				anzahlSiegeGegner++;
 		}
 		if(anzahlSiegeGegner > 1){}
-//		Spiel  verloren
+		//		Spiel  verloren
 		else{}
-//		Satz verloren
+		//		Satz verloren
 		verlustAnzeige.setVisible(true);
+		//verlustAnzeigenLabel
 	}
 	private void spielfeldVoll(){
 		spielfeldVollAnzeige.setVisible(true);
