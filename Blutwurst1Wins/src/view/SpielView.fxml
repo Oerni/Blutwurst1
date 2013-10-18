@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -117,11 +118,11 @@
         <Text layoutX="25.0" layoutY="-30.0" scaleX="1.0873207093131305" scaleY="0.7480773198099262" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielregeln&#10;&#10;         &#10;Satz         &#10;&#10;  Sieg: 2 Punkte         &#10;  Remis: 1 Punkt         &#10;  Niederlage: 0 Punkte         &#10;&#10;Spiel         &#10;&#10;  Ein Spiel besteht in Runde 1 aus 2 Saetzen und in Runde 2          &#10;  aus 3 Saetzen.         &#10;&#10;Runde         &#10;&#10;  Turnierergebnis wird in ein oder zwei Runden ermittelt.          &#10;  Runde 2 ist nur noetig, wenn in Runde 1 kein eindeutiges         &#10;  Ergebnis bestimmt werden kann.         &#10;&#10;  Runde 1 besteht aus 2 Saetzen und jeder spielt gegen jeden.         &#10;  Bei 6 Teams sind das 15 Spiele a 2 Saetze.   &#10;  Runde 2 besteht aus 3 Saetzen und einer verminderte Zugzeit.   &#10;  Steht es nach Satz 2 immer noch unentschieden, entscheidet    &#10;  der 3. Satz  bei zufaelliger Wahl des Startspielers und    &#10;  Remisaufloesung durch den Server." />
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="spielstartMenu" layoutX="219.0" layoutY="183.0" minHeight="104.50006103515625" minWidth="313.0" prefHeight="167.50006103515625" prefWidth="316.56231689453125" visible="false">
+    <AnchorPane fx:id="spielstartMenu" layoutX="219.0" layoutY="183.0" minHeight="104.50006103515625" minWidth="313.0" prefHeight="191.0" prefWidth="317.0" visible="false">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="133.00000762939453" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="156.0" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="171.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="7.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielstart" textAlignment="CENTER" />
         <Text layoutX="55.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gegenspieler:" />
         <TextField fx:id="gegnerNameEingabe" layoutX="149.0" layoutY="32.0" prefWidth="122.55419921875" promptText="Name" />
@@ -135,7 +136,7 @@
           <fx:reference source="XOSelection" />
         </fx:define>
         <RadioButton fx:id="radioButtonO" layoutX="195.0" layoutY="88.0" mnemonicParsing="false" selected="false" text="O" toggleGroup="$XOSelection" />
-        <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="119.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
+        <Button fx:id="spielStartenButton" layoutX="129.0" layoutY="144.0" mnemonicParsing="false" onAction="#spielStarten" text="Start" />
         <Button fx:id="spielstartMenuSchliessenButton" layoutX="286.0" layoutY="3.0" mnemonicParsing="false" onAction="#spielstartMenuSchliessen" text="X" textAlignment="CENTER">
           <font>
             <Font size="10.0" fx:id="x1" />
@@ -143,6 +144,24 @@
         </Button>
         <Text layoutX="55.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kontaktpfad:" />
         <Text layoutX="55.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wir sind:" />
+        <Text layoutX="55.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zugzeit:" />
+        <ChoiceBox fx:id="zugzeitAuswahlBox" layoutX="149.0" layoutY="112.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="0" />
+              <String fx:value="1" />
+              <String fx:value="2" />
+              <String fx:value="3" />
+              <String fx:value="4" />
+              <String fx:value="5" />
+              <String fx:value="6" />
+              <String fx:value="7" />
+              <String fx:value="8" />
+              <String fx:value="9" />
+              <String fx:value="10" />
+            </FXCollections>
+          </items>
+        </ChoiceBox>
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
