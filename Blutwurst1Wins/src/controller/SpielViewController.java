@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -174,8 +175,8 @@ public class SpielViewController extends Thread{
 	private RadioButton radioButtonX, radioButtonO;
 	@FXML
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
-	
-	
+	@FXML
+	private ChoiceBox zugzeitAuswahlBox;
 	
 	public SpielViewController(SpielModel model){
 		
@@ -283,7 +284,10 @@ public class SpielViewController extends Thread{
 							schreibenRunnable.setZug(eigenerZug);
 							ThreadExecutor.getInstance().execute(schreibenRunnable);
 //							eigenerZug.speichern();
-							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
+							if(zugzeitAuswahlBox.getValue()!=null)
+								Thread.sleep(Integer.parseInt(zugzeitAuswahlBox.getValue().toString())*1000/2);
+							else
+								Thread.sleep(Strings.STANDARD_ZUGZEIT_S*1000/2);
 							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile(),eigenerZug.getSpieler());
 							
 							System.out.println("Eigener Zug: " + eigenerZug.getZeile());
