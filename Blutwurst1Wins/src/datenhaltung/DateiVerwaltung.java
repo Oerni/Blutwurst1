@@ -25,7 +25,8 @@ public class DateiVerwaltung {
 	
 	public boolean dateiSchreiben(Zug zug){
 		try{
-			fileWriter = new FileWriter(schreibePfad);
+			File file = new File(schreibePfad);
+			fileWriter = new FileWriter(file);
 			bufferedWriter = new BufferedWriter(fileWriter);
 			bufferedWriter.write(""+zug.getSpalte());
 			bufferedWriter.close();
@@ -95,9 +96,13 @@ public class DateiVerwaltung {
 						break;
 				}
 			}
-			
+
 			bufferedReader.close();
 			fileReader.close();
+			
+//			Serverfile löschen
+			boolean geloescht = file.delete();
+			System.out.println(geloescht ? "gelöscht" : "nicht gelöscht");
 			
 			return new Zug(freigabe,satzstatus,gegnerzug,sieger,model.getGegner());
 			

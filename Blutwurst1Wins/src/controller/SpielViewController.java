@@ -288,7 +288,6 @@ public class SpielViewController extends Thread{
 							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile(),eigenerZug.getSpieler());
 							
 							System.out.println("Eigener Zug: " + eigenerZug.getZeile());
-							Thread.sleep(Strings.ZUGZEIT_S*1000/2);
 							
 //							ueberpruefen, ob beginnender Spieler schon gesetzt wurde
 //							Wenn nicht, muss der beginnende Spieler der Gegner gewesen sein.
