@@ -129,7 +129,7 @@
         <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
         <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X">
           <toggleGroup>
-            <ToggleGroup fx:id="XOSelection"  />
+            <ToggleGroup fx:id="XOSelection" />
           </toggleGroup>
         </RadioButton>
         <fx:define>
@@ -162,6 +162,7 @@
             </FXCollections>
           </items>
         </ChoiceBox>
+        <Text layoutX="223.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sekunden" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
