@@ -257,11 +257,10 @@ public class SpielViewController extends Thread{
 	public void run(){
 				while(true){
 					Zug gegnerZug = model.getDateiVerwaltung().dateiLesen();
-//					while(!zugFuture.isDone()){}
+					
 					try{
-//						Zug gegnerZug = zugFuture.get();
 						int weiterspielen = sonderfaellePruefen(gegnerZug);
-//						boolean weiterspielen = true;
+						
 						if(weiterspielen == this.WEITERSPIELEN){
 //							Gegnerzug einfuegen
 							if(gegnerZug.getSpalte() != -1){
