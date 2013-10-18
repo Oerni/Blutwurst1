@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
@@ -244,9 +245,13 @@ public class SpielViewController extends Thread{
 	
 	@FXML
 	public void spielstartMenuAnzeigen(){
+		model.initDateiverwaltung();
+		String pfad = model.getDateiVerwaltung().pfadLesen();
+		if(!pfad.equals(""))
+			pfadEingabe.setText(pfad);
+		
 		spielstartMenu.setVisible(true);
 		startButtonOrange.setVisible(true);
-		
 	}
 	
 	@FXML
@@ -359,6 +364,7 @@ public class SpielViewController extends Thread{
 		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
 		String gegnerName = gegnerNameEingabe.getText();
 		gegnerNameText.setText(gegnerName);
+		ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
 		model.init(pfad,gegnerName,eigeneKennzeichnung);
 		start();
 	}

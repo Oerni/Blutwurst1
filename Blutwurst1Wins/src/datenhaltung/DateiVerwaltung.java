@@ -23,6 +23,15 @@ public class DateiVerwaltung {
 		this.model = model;
 	}
 	
+	public DateiVerwaltung(SpielModel model){
+		this.model = model;
+	}
+	
+	public void setPfad(String pfad){
+		this.lesePfad = pfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".xml";
+		this.schreibePfad = pfad+"\\spieler"+model.getSelbst().getKennzeichnung()+"2server.txt";
+	}
+	
 	public boolean dateiSchreiben(Zug zug){
 		try{
 			File file = new File(schreibePfad);
@@ -35,6 +44,43 @@ public class DateiVerwaltung {
 		}catch(IOException ex){
 			ex.printStackTrace();
 			return false;
+		}
+	}
+	
+	public void pfadSchreiben(String pfad){
+		if(pfad != null){
+			File file = new File("pfad.txt");
+			try{
+				fileWriter = new FileWriter(file);
+				bufferedWriter = new BufferedWriter(fileWriter);
+				bufferedWriter.write(pfad);
+				bufferedWriter.close();
+				fileWriter.close();
+			}catch(IOException ex){
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public String pfadLesen(){
+		File file = new File("pfad.txt");
+		if(!file.exists())
+			return "";
+		else{
+			try{
+				fileReader = new FileReader(file);
+				bufferedReader = new BufferedReader(fileReader);
+				String pfad = bufferedReader.readLine();
+				bufferedReader.close();
+				fileReader.close();
+				if(pfad!=null)
+					return pfad;
+				else
+					return "";
+			}catch(IOException ex){
+				ex.printStackTrace();
+				return "";
+			}
 		}
 	}
 	

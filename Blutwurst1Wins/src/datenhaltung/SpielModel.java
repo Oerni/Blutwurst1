@@ -43,9 +43,14 @@ public class SpielModel {
 		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
 		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));
 		aktuellerSpieler = getBeginnendenSpieler();
-		dateiverwaltung = new DateiVerwaltung(pfad,this);
+//		dateiverwaltung = new DateiVerwaltung(pfad,this);
+		dateiverwaltung.setPfad(pfad);
 		spiel = new Spiel(gegner,selbst);
 		spiel.satzHinzufuegen(new Satz(aktuellerSpieler,spiel));
+	}
+	
+	public void initDateiverwaltung(){
+		dateiverwaltung = new DateiVerwaltung(this);
 	}
 	
 	private char getGegnerKennzeichnung(char eigeneKennzeichnung){
