@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
@@ -27,6 +26,7 @@ import datenhaltung.Spieler;
 import datenhaltung.StatistikModel;
 import datenhaltung.Strings;
 import datenhaltung.Zug;
+
 
 
 public class SpielViewController extends Thread{
@@ -397,17 +397,20 @@ public class SpielViewController extends Thread{
 	@FXML
 	public void gewinnAnzeigeSchliessen(){
 		gewinnAnzeige.setVisible(false);
+		startButtonOrange.setVisible(false);
 	}
 	
 	//verlustAnzeigeSchliessenButton pressed
 	@FXML
 	public void verlustAnzeigeSchliessen(){
 		verlustAnzeige.setVisible(false);
+		startButtonOrange.setVisible(false);
 	}
 	
 	//spielfeldVollAnzeigeSchliessenButton pressed
 	public void spielfeldVollAnzeigeSchliessen(){
 		spielfeldVollAnzeige.setVisible(false);
+		startButtonOrange.setVisible(false);
 	}
 	
 //	Druecken des Statistik anzeigen Buttons
