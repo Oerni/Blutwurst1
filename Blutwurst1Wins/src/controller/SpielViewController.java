@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
+import parallelisierung.SpeichereZugRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
 import datenhaltung.SpielModel;
@@ -178,7 +179,7 @@ public class SpielViewController extends Thread{
 	@FXML
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
 	@FXML
-	private ChoiceBox zugzeitAuswahlBox;
+	private ChoiceBox<Number> zugzeitAuswahlBox;
 
 	
 	public SpielViewController(SpielModel model){
@@ -281,18 +282,22 @@ public class SpielViewController extends Thread{
 //								Satzstart!
 								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getSelbst());
 							
-							
+							model.getSpiel().getAktuellenSatz().zugEinfuegen(gegnerZug);
+							gegnerZug.satzZuordnen(model.getSpiel().getAktuellenSatz());
+//							Parallel kann der Zug gespeichert werden
+							ThreadExecutor.getInstance().execute(new SpeichereZugRunnable(gegnerZug));
+//							gegnerZug.speichern();
 //							Eigenen zug berechnen
 							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSelbst());
 							Zug eigenerZug = new Zug(berechneteSpalte,model.getSelbst());
+							eigenerZug.satzZuordnen(model.getSpiel().getAktuellenSatz());
 							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
 							eigenerZug.setZeile(eigeneZeile);
 							ServerZugSchreibenRunnable schreibenRunnable = new ServerZugSchreibenRunnable(model);
 							schreibenRunnable.setZug(eigenerZug);
 							ThreadExecutor.getInstance().execute(schreibenRunnable);
-//							eigenerZug.speichern();
 							if(zugzeitAuswahlBox.getValue()!=null)
-								Thread.sleep(Integer.parseInt(zugzeitAuswahlBox.getValue().toString())*1000/2);
+								Thread.sleep(zugzeitAuswahlBox.getValue().intValue()*1000/2);
 							else
 								Thread.sleep(Strings.STANDARD_ZUGZEIT_S*1000/2);
 							faerben(eigenerZug.getSpalte(),eigenerZug.getZeile(),eigenerZug.getSpieler());
@@ -303,6 +308,10 @@ public class SpielViewController extends Thread{
 //							Wenn nicht, muss der beginnende Spieler der Gegner gewesen sein.
 							if(model.getSpiel().getAktuellenSatz().spielerBegonnen()==null)
 								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getGegner());
+							
+//							Parallel kann der eigene Zug gespeichert werden
+							ThreadExecutor.getInstance().execute(new SpeichereZugRunnable(eigenerZug));
+//							eigenerZug.speichern();
 						}else{
 							switch(weiterspielen){
 							case SPIEL_GEWONNEN:
@@ -319,38 +328,45 @@ public class SpielViewController extends Thread{
 					}catch(InterruptedException ex){
 						System.out.println("InterruptedException");
 						ex.printStackTrace();
-//					}catch(ExecutionException ex){
-//						System.out.println("ExecutionException");
-//						ex.printStackTrace();
 					}
 				}
 	}
 	
 	private void spielGewonnen(){
-		model.getSpiel().getAktuellenSatz().setGewinner(model.getSelbst());
+		model.getSpiel().getAktuellenSatz().setSieger(model.getSelbst());
+		model.getSpiel().aktualisieren();
 		int anzahlSiege = 0;
 		for(Satz s : model.getSpiel().getSaetze()){
-			if(s.getGewinner() == model.getSelbst())
+			if(s.getSieger() == model.getSelbst())
 				anzahlSiege++;
 		}
-		if(anzahlSiege > 1){}
+		if(anzahlSiege > 1){
 //			Spiel gewonnen
-		else{}
+			model.getSpiel().setSieger(model.getSelbst());
+			model.getSpiel().aktualisieren();
+		}
+		else{
 //			Satz gewonnen
+		}
+
 		gewinnAnzeige.setVisible(true);
 		//gewinnAnzeigenLabel
 	}
 	private void spielVerloren(){
-		model.getSpiel().getAktuellenSatz().setGewinner(model.getGegner());
+		model.getSpiel().getAktuellenSatz().setSieger(model.getGegner());
+		model.getSpiel().getAktuellenSatz().aktualisieren();
 		int anzahlSiegeGegner = 0;
 		for(Satz s : model.getSpiel().getSaetze()){
-			if(s.getGewinner() == model.getGegner())
+			if(s.getSieger() == model.getGegner())
 				anzahlSiegeGegner++;
 		}
-		if(anzahlSiegeGegner > 1){}
-		//		Spiel  verloren
-		else{}
-		//		Satz verloren
+		if(anzahlSiegeGegner > 1){
+			//		Spiel  verloren
+			model.getSpiel().setSieger(model.getGegner());
+			model.getSpiel().aktualisieren();
+		}else{
+			//		Satz verloren
+		}
 		verlustAnzeige.setVisible(true);
 		//verlustAnzeigenLabel
 	}
@@ -528,13 +544,6 @@ public class SpielViewController extends Thread{
 		hilfeButtonOrange.setVisible(false);
 		hilfeButton.setVisible(true);
 	}
-	
-
-	
-		
-		
-
-
 	
 	@FXML
 	public void mouseOver(){

@@ -1,7 +1,5 @@
 package datenhaltung;
 
-import java.util.Stack;
-
 import javafx.stage.Stage;
 import logik.Feld;
 
@@ -41,12 +39,16 @@ public class SpielModel {
 	
 	public void init(String pfad,String gegnerName,char eigeneKennzeichnung){
 		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
+		selbst.speichern();
 		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));
+		gegner.speichern();
 		aktuellerSpieler = getBeginnendenSpieler();
-//		dateiverwaltung = new DateiVerwaltung(pfad,this);
 		dateiverwaltung.setPfad(pfad);
 		spiel = new Spiel(gegner,selbst);
-		spiel.satzHinzufuegen(new Satz(aktuellerSpieler,spiel));
+		spiel.speichern();
+		Satz ersterSatz = new Satz(aktuellerSpieler,spiel);
+		ersterSatz.speichern();
+		spiel.satzHinzufuegen(ersterSatz);
 	}
 	
 	public void initDateiverwaltung(){

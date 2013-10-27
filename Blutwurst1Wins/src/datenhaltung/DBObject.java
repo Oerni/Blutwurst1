@@ -7,7 +7,11 @@ public abstract class DBObject {
 	 * bei Instanziieren eines Objekts übergeben werden, da sie auf Datenbankebene 
 	 * automatisch generiert wird
 	 */
-	
+	protected int id = -1;
 //	Die ID des gespeicherten Objekts wird automatisch zurückgegeben
-	public abstract int speichern();
+	public abstract void speichern();
+	public abstract void aktualisieren();
+	public int getID(){
+		return id;
+	}
 }

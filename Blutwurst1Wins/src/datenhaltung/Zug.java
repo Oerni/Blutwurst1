@@ -1,7 +1,6 @@
 package datenhaltung;
 
-import parallelisierung.SpeichereZugRunnable;
-import parallelisierung.ThreadExecutor;
+import parallelisierung.SemaphorManager;
 
 public class Zug extends DBObject{
 	/**
@@ -44,14 +43,6 @@ public class Zug extends DBObject{
 		return spalte;
 	}
 	
-	@Override
-	public int speichern(){
-		SpeichereZugRunnable speichern = new SpeichereZugRunnable(this);
-		ThreadExecutor.getInstance().execute(speichern);
-		return -1;
-	}
-
-	
 	public Zug(boolean freigabe,int satzstatus,int spalte,Spieler sieger,Spieler spieler){
 		this.freigabe = freigabe;
 		this.spieler = spieler;
@@ -88,5 +79,25 @@ public class Zug extends DBObject{
 
 	public void setZeile(int zeile){
 		this.zeile = zeile;
+	}
+	
+	public void satzZuordnen(Satz satz){
+		this.satz = satz;
+	}
+	
+	@Override
+	public void speichern(){
+		SemaphorManager.getInstance().schreibzugriffAnmelden();
+		String query1 = String.format(Strings.INSERT,"zug","satznr,spielnr,spalte,zeile,spieler",satz.getID()+","+satz.getSpiel().getID()+","+spalte+","+zeile+",'"+spieler.getName()+"'");
+		String query2 = String.format(Strings.LETZTER_ZUG_NR,satz.getID(),satz.getSpiel().getID());
+		this.id = HSQLConnection.getInstance().insert(query1,query2);
+		SemaphorManager.getInstance().schreibzugriffAbmelden();
+	}
+	
+	@Override
+	public void aktualisieren(){
+		SemaphorManager.getInstance().schreibzugriffAnmelden();
+		HSQLConnection.getInstance().update(String.format(Strings.ZUG_AKTUALISIEREN,this.satz.getID(),this.satz.getSpiel().getID(),this.spalte,this.zeile,this.getSpieler().getName(),this.id));
+		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

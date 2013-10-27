@@ -8,24 +8,22 @@ import datenhaltung.Spieler;
 import datenhaltung.Strings;
 
 public class SpeichereSatzRunnable implements Runnable{
-	private int spielNr;
-	private Spieler gewinner;
+	private Satz satz;
 	
 	public SpeichereSatzRunnable(Satz satz){
-		this.spielNr = satz.getSpiel().getSpielNr();
-		this.gewinner = satz.getGewinner();
+		this.satz = satz;
 	}
 	@Override
 	public void run() {
 		Statement statement = HSQLConnection.getInstance().getStatement();
-		String insert = String.format(Strings.INSERT,"satz","spielnr,gewinner",spielNr+","+gewinner.getID());
+//		String insert = String.format(Strings.INSERT,"satz","spielnr,gewinner",satz.getSpiel().getID()+","+satz.getID());
 //		Semaphor Entry
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		try{
-			statement.execute(insert);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
+//		try{
+//			statement.execute(insert);
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//		}
 //		Semaphor Exit
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}

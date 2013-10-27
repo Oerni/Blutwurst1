@@ -3,30 +3,25 @@ package datenhaltung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Stack;
-import java.util.concurrent.Future;
 
-import parallelisierung.SpeichereSpielCallable;
-import parallelisierung.ThreadExecutor;
+import parallelisierung.SemaphorManager;
 
 public class Spiel extends DBObject{
 	/**
 	 * Model-Klasse: Spiel
 	 */
-	private int spielNr;
 	private Spieler gegner;
 	private Spieler selbst;
-	private int punkteHeim;
-	private int punkteGegner;
+	private int punkteHeim = 0;
+	private int punkteGegner = 0;
 	private String spielstand;
+	private Spieler sieger;
 	private Stack<Satz> saetze = new Stack<Satz>();
 	
 //	Initiales Instanziieren im Spielverlauf
 	public Spiel(Spieler gegner,Spieler selbst){
 		this.gegner = gegner;
 		this.selbst = selbst;
-		punkteHeim = 0;
-		punkteGegner = 0;
-		spielNr = speichern();
 	}
 	
 //	Simulation
@@ -35,7 +30,7 @@ public class Spiel extends DBObject{
 		try{
 			spiel.next();
 			gegner = new Spieler(spiel.getString("name"));
-			this.spielNr = spielnr;
+			this.id = spielnr;
 			this.punkteHeim = spiel.getInt("punkteheim");
 			this.punkteGegner = spiel.getInt("punkteGegner");
 			ResultSet saetzeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.SAETZE_EINES_SPIELS,spielnr));
@@ -75,7 +70,7 @@ public class Spiel extends DBObject{
 	
 //	Statistik-Konstruktor
 	public Spiel(int spielNr,Spieler gegner,int punkteHeim,int punkteGegner){
-		this.spielNr = spielNr;
+		this.id = spielNr;
 		this.gegner = gegner;
 		this.punkteHeim = punkteHeim;
 		this.punkteGegner = punkteGegner;
@@ -83,9 +78,6 @@ public class Spiel extends DBObject{
 		this.selbst = new Spieler(Strings.NAME,'O');
 	}
 	
-	public int getSpielNr(){
-		return spielNr;
-	}
 	public Spieler getGegner(){
 		return gegner;
 	}
@@ -95,8 +87,11 @@ public class Spiel extends DBObject{
 	public int getPunkteGegner(){
 		return punkteGegner;
 	}
-	public String getGewinnerName(){
-		return punkteHeim > punkteGegner ? selbst.getName() : gegner.getName();
+	public Spieler getSieger(){
+		return sieger;
+	}
+	public void setSieger(Spieler sieger){
+		this.sieger = sieger;
 	}
 	public String getSpielstand(){
 		return spielstand;
@@ -105,15 +100,17 @@ public class Spiel extends DBObject{
 		return gegner.getName();
 	}
 	
-	public int speichern(){
-		Future<Number> spielNrFuture = ThreadExecutor.getInstance().getNumber(new SpeichereSpielCallable(this));
-		while(!spielNrFuture.isDone()){}
-		try{
-			Number spielNr = spielNrFuture.get();
-			return spielNr.intValue();
-		}catch(Exception ex){
-			ex.printStackTrace();
-			return -1;
-		}
+	@Override
+	public void speichern(){
+		SemaphorManager.getInstance().schreibzugriffAnmelden();
+		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegner.getName()+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegner.getName()+"'"));
+		SemaphorManager.getInstance().schreibzugriffAbmelden();
+	}
+	
+	@Override
+	public void aktualisieren(){
+		SemaphorManager.getInstance().schreibzugriffAnmelden();
+		HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,this.gegner.getName(),this.punkteHeim,this.punkteGegner,this.sieger.getName(),this.id));
+		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }
