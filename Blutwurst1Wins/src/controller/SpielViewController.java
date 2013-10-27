@@ -179,6 +179,7 @@ public class SpielViewController extends Thread{
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
 	@FXML
 	private ChoiceBox zugzeitAuswahlBox;
+
 	
 	public SpielViewController(SpielModel model){
 		
@@ -470,6 +471,24 @@ public class SpielViewController extends Thread{
 		
 		resetMenuSchliessen();
 	}
+	
+	//neuen Satz starten
+	@FXML
+	public void gewinnAnzeigeNeuerSatzStarten(){
+		gewinnAnzeige.setVisible(false);
+		
+	}
+	
+	@FXML
+	public void verlustAnzeigeNeuerSatzStarten(){
+		verlustAnzeige.setVisible(false);
+	}
+	
+	@FXML
+	public void spielfeldVollAnzeigeNeuerSatzStarten(){
+		spielfeldVollAnzeige.setVisible(false);
+	}
+	
 	
 	//Hilfe anzeigen
 	@FXML

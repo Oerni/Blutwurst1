@@ -196,44 +196,47 @@
       </image>
     </ImageView>
     <!-- Reset Menu begins -->
-    <AnchorPane id="gewinnAnzeige" fx:id="gewinnAnzeige" layoutX="229.0" layoutY="160.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+    <AnchorPane fx:id="gewinnAnzeige" layoutX="229.0" layoutY="160.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
       <!-- TODO Add Nodes -->
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
-        <Button id="gewinnAnzeigeSchliessenButton" fx:id="gewinnAnzeigeSchliessenButton" layoutX="136.0" layoutY="96.0" mnemonicParsing="false" onAction="#gewinnAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
+        <Button fx:id="gewinnAnzeigeSchliessenButton" layoutX="91.0" layoutY="96.0" mnemonicParsing="false" onAction="#gewinnAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
         <Text layoutX="63.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blutwurst1 gewinnt" textAlignment="CENTER" />
         <Label fx:id="gewinnAnzeigenLabel" layoutX="189.0" layoutY="66.0" text="den Satz!" />
         <Text layoutX="123.0" layoutY="51.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Gewonnen" textAlignment="CENTER" />
+        <Button id="neuerSatzButton" fx:id="gewinnAnzeigeNeuerSatzButton" layoutX="156.0" layoutY="96.0" mnemonicParsing="false" onAction="#gewinnAnzeigeNeuerSatzStarten" text="neuer Satz" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
-    <AnchorPane id="verlustAnzeige" fx:id="verlustAnzeige" layoutX="239.0" layoutY="170.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+    <AnchorPane fx:id="verlustAnzeige" layoutX="239.0" layoutY="170.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
       <!-- TODO Add Nodes -->
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
-        <Button id="verlustAnzeigeSchliessenButton" fx:id="verlustAnzeigeSchliessenButton" layoutX="136.0" layoutY="96.0" mnemonicParsing="false" onAction="#verlustAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
+        <Button fx:id="verlustAnzeigeSchliessenButton" layoutX="87.0" layoutY="96.0" mnemonicParsing="false" onAction="#verlustAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
         <Text layoutX="130.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Verloren" textAlignment="CENTER" />
         <Text layoutX="69.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blutwurst1 verliert" />
         <Label fx:id="verlustAnzeigenLabel" layoutX="190.0" layoutY="62.0" text="den Satz!" />
+        <Button id="gewinnAnzeigeNeuerSatzButton" fx:id="verlustAnzeigeNeuerSatzButton" layoutX="147.0" layoutY="96.0" mnemonicParsing="false" onAction="#verlustAnzeigeNeuerSatzStarten" text="neuer Satz" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
-    <AnchorPane id="spielfeldVollAnzeige" fx:id="spielfeldVollAnzeige" layoutX="249.0" layoutY="180.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
+    <AnchorPane fx:id="spielfeldVollAnzeige" layoutX="249.0" layoutY="180.0" minWidth="313.0" prefHeight="141.99989318847656" prefWidth="313.0" visible="false">
       <!-- TODO Add Nodes -->
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
-        <Button id="spielfeldVollAnzeigeSchliessenButton" fx:id="spielfeldVollAnzeigeSchliessenButton" layoutX="136.0" layoutY="96.0" mnemonicParsing="false" onAction="#spielfeldVollAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
+        <Button fx:id="spielfeldVollAnzeigeSchliessenButton" layoutX="97.0" layoutY="96.0" mnemonicParsing="false" onAction="#spielfeldVollAnzeigeSchliessen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="OK" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
         <Text layoutX="110.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Unentschieden" textAlignment="CENTER" />
         <Text layoutX="114.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielfeld voll" />
+        <Button fx:id="spielfeldVollAnzeigeNeuerSatzButton" layoutX="155.0" layoutY="96.0" mnemonicParsing="false" onAction="#spielfeldVollAnzeigeNeuerSatzStarten" text="neuer Satz" />
       </children>
     </AnchorPane>
     <ImageView id="spielregelnButtonOrange.png" fx:id="spielregelnButtonOrange" fitHeight="51.0" fitWidth="67.529296875" layoutX="384.0" layoutY="32.0" visible="false">
