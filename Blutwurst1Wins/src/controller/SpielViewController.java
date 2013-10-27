@@ -18,9 +18,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import parallelisierung.AktualisierenRunnable;
 import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
-import parallelisierung.SpeichereZugRunnable;
+import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
 import datenhaltung.SpielModel;
@@ -278,14 +279,16 @@ public class SpielViewController extends Thread{
 								gegnerZug.setZeile(gegnerZeile);
 								if(gegnerZeile != -1)
 									faerben(gegnerZug.getSpalte(),gegnerZug.getZeile(),gegnerZug.getSpieler());
-							}else
+							}else{
 //								Satzstart!
 								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getSelbst());
+								ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
+							}
 							
 							model.getSpiel().getAktuellenSatz().zugEinfuegen(gegnerZug);
 							gegnerZug.satzZuordnen(model.getSpiel().getAktuellenSatz());
 //							Parallel kann der Zug gespeichert werden
-							ThreadExecutor.getInstance().execute(new SpeichereZugRunnable(gegnerZug));
+							ThreadExecutor.getInstance().execute(new SpeichernRunnable(gegnerZug));
 //							gegnerZug.speichern();
 //							Eigenen zug berechnen
 							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSelbst());
@@ -306,11 +309,13 @@ public class SpielViewController extends Thread{
 							
 //							ueberpruefen, ob beginnender Spieler schon gesetzt wurde
 //							Wenn nicht, muss der beginnende Spieler der Gegner gewesen sein.
-							if(model.getSpiel().getAktuellenSatz().spielerBegonnen()==null)
+							if(model.getSpiel().getAktuellenSatz().spielerBegonnen()==null){
 								model.getSpiel().getAktuellenSatz().setBeginnendenSpieler(model.getGegner());
+								ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
+							}
 							
 //							Parallel kann der eigene Zug gespeichert werden
-							ThreadExecutor.getInstance().execute(new SpeichereZugRunnable(eigenerZug));
+							ThreadExecutor.getInstance().execute(new SpeichernRunnable(eigenerZug));
 //							eigenerZug.speichern();
 						}else{
 							switch(weiterspielen){
@@ -491,18 +496,26 @@ public class SpielViewController extends Thread{
 	//neuen Satz starten
 	@FXML
 	public void gewinnAnzeigeNeuerSatzStarten(){
+//		Neuen Satz starten
 		gewinnAnzeige.setVisible(false);
-		
+		Satz satz = new Satz(model.getSpiel());
+		satz.speichern();
 	}
 	
 	@FXML
 	public void verlustAnzeigeNeuerSatzStarten(){
+//		Neuen Satz starten
 		verlustAnzeige.setVisible(false);
+		Satz satz = new Satz(model.getSpiel());
+		satz.speichern();
 	}
 	
 	@FXML
 	public void spielfeldVollAnzeigeNeuerSatzStarten(){
+//		Neuen Satz starten
 		spielfeldVollAnzeige.setVisible(false);
+		Satz satz = new Satz(model.getSpiel());
+		satz.speichern();
 	}
 	
 	

@@ -53,6 +53,10 @@ public class Satz extends DBObject{
 		this.spiel = spiel;
 	}
 	
+	public Satz(Spiel spiel){
+		this.spiel = spiel;
+	}
+	
 	public Stack<Zug> getZuege(){
 		return zuege;
 	}
