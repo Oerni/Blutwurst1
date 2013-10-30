@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Stack;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -174,8 +177,6 @@ public class SpielViewController extends Thread{
 	@FXML
 	private TextField pfadEingabe;
 	@FXML
-	private Text gegnerNameText;
-	@FXML
 	private RadioButton radioButtonX, radioButtonO;
 	@FXML
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
@@ -249,8 +250,16 @@ public class SpielViewController extends Thread{
 	
 	@FXML
 	public void spielstartMenuAnzeigen(){
+//		Pfad eintragen
 		model.initDateiverwaltung();
 		String pfad = model.getDateiVerwaltung().pfadLesen();
+		
+//		Spieler-Auswahlbox füllen
+		Stack<Spieler> alleSpieler = model.getAlleSpieler();
+
+		for(Spieler spieler : alleSpieler)
+			gegnerAuswahlBox.getItems().add(spieler.getName());
+		
 		if(!pfad.equals(""))
 			pfadEingabe.setText(pfad);
 		
@@ -383,9 +392,7 @@ public class SpielViewController extends Thread{
 		char eigeneKennzeichnung = radioButtonO.isSelected() ? 'o' : 'x'; 
 		spielstartMenu.setVisible(false);
 		String pfad = pfadEingabe.getText();
-		// Eingabe des Gegnernamens lesen: gegnerNameEingabe.getText();
-		String gegnerName = gegnerNameEingabe.getText();
-		gegnerNameText.setText(gegnerName);
+		String gegnerName = gegnerAuswahlBox.getValue();
 		ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
 		model.init(pfad,gegnerName,eigeneKennzeichnung);
 		start();
@@ -580,7 +587,11 @@ public class SpielViewController extends Thread{
 	//Neu angelegten Spieler speichern
 	@FXML
 	public void neuenGegnerSpeichern(){
-		gegnerAuswahlBox.getItems().add(neuerSpielerName.getText());
+		Spieler neuerSpieler = new Spieler(neuerSpielerName.getText());
+		model.spielerRegistrieren(neuerSpieler);
+		ThreadExecutor.getInstance().execute(new SpeichernRunnable(neuerSpieler));
+		gegnerAuswahlBox.getItems().add(neuerSpieler.getName());
+//		gegnerAuswahlBox.setValue(gegnerAuswahlBox.getItems().get(gegnerAuswahlBox.getItems().indexOf(neuerSpieler.getName())));
 		neuenGegnerAnlegenMenuSchliessen();
 	}
 	
