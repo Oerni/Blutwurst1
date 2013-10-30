@@ -17,7 +17,7 @@
     <Text layoutX="301.0" layoutY="17.0" scaleX="0.9662648288740485" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4Gewinnt - blutwurst1 " />
     <FlowPane layoutX="8.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld">
       <children>
-        <TableView fx:id="spielhistorieTable" prefHeight="373.0" prefWidth="447.0">
+        <TableView fx:id="spielhistorieTable" prefHeight="381.0" prefWidth="447.0">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Spielnr." fx:id="spielnummerSpalte" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Spielstand" fx:id="spielstandSpalte" />
@@ -83,6 +83,12 @@
         <NumberAxis id="yAchse" side="LEFT" />
       </yAxis>
     </BarChart>
+    <TableView fx:id="highscoreTabelle" layoutX="8.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" visible="false">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="224.0" text="Spielername" fx:id="spielernameSpalte" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="223.0" text="Anzahl Siege" fx:id="anzahlSiegeSpalte" />
+      </columns>
+    </TableView>
     <ImageView id="anzahlGewinnVerlustButtonOrange.JPG" fx:id="anzahlGewinnVerlustButtonOrange" fitHeight="33.0" fitWidth="246.00001525878906" layoutX="483.0" layoutY="194.0" visible="false">
       <image>
         <Image url="@icons/anzahlGewinnVerlustButtonOrange.JPG" preserveRatio="true" smooth="true" />
@@ -96,6 +102,7 @@
     <Text fx:id="infoStartGewinnVerlustKuchen" layoutX="473.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Dieses Diagramm zeigt an, wie viel&#10;Prozent derjenigen,die das Spiel&#10;begonnen haben, das Spiel gewonnen&#10;bzw. verloren haben." visible="false" />
     <Text fx:id="infoAnzahlGewinneVerluste" layoutX="473.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Dieses Diagramm zeigt an,&#10;wie viele Spiele der Spieler 'blutwurst1' &#10;bereits gewonnen bzw. verloren hat." visible="false" />
     <Text fx:id="infoGewinnVerlustKuchen" layoutX="473.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Dieses Diagramm sagt aus, wie viel&#10;aller bereits gespieten Spiele gewonnen&#10;bzw. verloren wurden." />
+    <Button fx:id="highscoreAnzeigenButton" layoutX="503.0" layoutY="303.0" mnemonicParsing="false" onAction="#highscoreAnzeigen" text="Highscore Anzeigen" />
   </children>
   <stylesheets>
     <URL value="@SpielStyle.css" />

@@ -34,9 +34,11 @@ public class StatistikViewController {
 	@FXML
 	private BarChart anzahlGewinneVerlusteDiagramm;
 	@FXML
-	private TableView spielhistorieTable;
+	private TableView spielhistorieTable, highscoreTabelle;
 	@FXML
 	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte,siegerSpalte;
+	@FXML
+	private TableColumn spielernameSpalte, anzahlSiegeSpalte;
 	@FXML
 	private Text infoSpielhistorie, infoStartGewinnVerlustKuchen, infoAnzahlGewinneVerluste, infoGewinnVerlustKuchen;
 	
@@ -98,9 +100,7 @@ public class StatistikViewController {
 //		new SimulationViewController(sModel).show();
 	}
 	
-	public void hilfeAnzeigen(){
-		
-	}
+
 	
 	@FXML
 	public void mouseOver(){
@@ -117,11 +117,7 @@ public class StatistikViewController {
 	public void spielfeldAnzeigen(){
 		
 	}
-	//Spielregeln anzeigen
-	@FXML
-	public void spielregelnAnzeigen(){
-			
-	}
+
 	
 	//Gewinn Verlust Kuchen anzeigen
 			@FXML
@@ -140,7 +136,7 @@ public class StatistikViewController {
 				infoAnzahlGewinneVerluste.setVisible(false);
 				infoGewinnVerlustKuchen.setVisible(true);
 				simulationButtonBlau.setVisible(false);
-				
+				highscoreTabelle.setVisible(false);
 				
 			}
 			
@@ -162,7 +158,7 @@ public class StatistikViewController {
 				infoAnzahlGewinneVerluste.setVisible(false);
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(false);
-				
+				highscoreTabelle.setVisible(false);
 			}
 			
 			//Anzahl Gewinne Verluste anzeigen
@@ -181,7 +177,7 @@ public class StatistikViewController {
 				infoAnzahlGewinneVerluste.setVisible(true);
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(false);
-				
+				highscoreTabelle.setVisible(false);
 			}
 				
 			//Spielhistorie anzeigen
@@ -200,7 +196,26 @@ public class StatistikViewController {
 				infoAnzahlGewinneVerluste.setVisible(false);
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(true);
+				highscoreTabelle.setVisible(false);
 				
+			}
+			
+			@FXML
+			public void highscoreAnzeigen(){
+				spielhistorieButtonOrange.setVisible(false);
+				startGewinnVerlustKuchenButton.setVisible(false);
+				gewinnVerlustKuchenButtonOrange.setVisible(false);
+				anzahlGewinnVerlustButtonOrange.setVisible(false);
+				spielhistorieTable.setVisible(false);
+				gewinnVerlustKuchenDiagramm.setVisible(false);
+				startGewinnVerlustKuchenDiagramm.setVisible(false);
+				anzahlGewinneVerlusteDiagramm.setVisible(false);
+				infoStartGewinnVerlustKuchen.setVisible(false);
+				infoSpielhistorie.setVisible(false);
+				infoAnzahlGewinneVerluste.setVisible(false);
+				infoGewinnVerlustKuchen.setVisible(false);
+				simulationButtonBlau.setVisible(false);
+				highscoreTabelle.setVisible(true);
 			}
 	
 	
