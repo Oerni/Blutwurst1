@@ -125,7 +125,6 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="171.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="7.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielstart" textAlignment="CENTER" />
         <Text layoutX="55.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gegenspieler:" />
-        <TextField fx:id="gegnerNameEingabe" layoutX="149.0" layoutY="32.0" prefWidth="122.55419921875" promptText="Name" />
         <TextField fx:id="pfadEingabe" layoutX="149.0" layoutY="59.0" prefWidth="123.0" promptText="Pfad" />
         <RadioButton fx:id="radioButtonX" layoutX="149.0" layoutY="88.0" mnemonicParsing="false" selected="true" text="X">
           <toggleGroup>
@@ -163,6 +162,28 @@
           </items>
         </ChoiceBox>
         <Text layoutX="223.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sekunden" />
+        <ChoiceBox id="gegnerAuswahl" fx:id="gegnerAuswahlBox" layoutX="149.0" layoutY="33.0" prefWidth="123.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ChoiceBox>
+        <Button id="neuenSpielerAnlegenButton" fx:id="neuenGegnerAnlegenButton" layoutX="276.0" layoutY="33.0" mnemonicParsing="false" onAction="#neuenGegnerAnlegenMenuOeffnen" text="+" />
+      </children>
+    </AnchorPane>
+    <AnchorPane fx:id="neuenGegnerAnlegenMenu" layoutX="203.0" layoutY="160.0" minHeight="187.50006103515625" minWidth="299.0" prefHeight="191.0" prefWidth="309.0" visible="false">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="156.0" layoutX="-7.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="-7.0" layoutY="171.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="-7.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+        <TextField fx:id="neuerSpielerName" layoutX="136.0" layoutY="83.0" prefWidth="110.4613037109375" promptText="ABC" />
+        <Text layoutX="75.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+        <Text layoutX="84.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neuen Spieler anlegen" />
+        <Button id="spielstartMenuSchliessenButton" fx:id="neuenSpielerAnlegenMenuSchliessenButton" font="$x1" layoutX="277.0" layoutY="-2.0" mnemonicParsing="false" onAction="#neuenGegnerAnlegenMenuSchliessen" text="X" textAlignment="CENTER" />
+        <Button fx:id="neuenGegnerSpeichernButton" layoutX="108.0" layoutY="136.0" mnemonicParsing="false" onAction="#neuenGegnerSpeichern" text="Speichern" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->

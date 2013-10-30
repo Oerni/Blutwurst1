@@ -162,7 +162,7 @@ public class SpielViewController extends Thread{
 	@FXML
 	private AnchorPane resetMenu, spielstartMenu, gewinnAnzeige, verlustAnzeige, spielfeldVollAnzeige;
 	@FXML
-	private AnchorPane spielhilfeAnzeige, spielregelnAnzeige;
+	private AnchorPane spielhilfeAnzeige, spielregelnAnzeige, neuenGegnerAnlegenMenu;
 	@FXML
 	private ImageView spielfeldButtonOrange, resetButtonOrange, spielregelnButtonOrange;
 	@FXML
@@ -170,7 +170,7 @@ public class SpielViewController extends Thread{
 	@FXML
 	private ImageView hilfeButton, hilfeButtonOrange;
 	@FXML
-	private TextField gegnerNameEingabe;
+	private TextField gegnerNameEingabe, neuerSpielerName;
 	@FXML
 	private TextField pfadEingabe;
 	@FXML
@@ -180,7 +180,7 @@ public class SpielViewController extends Thread{
 	@FXML
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
 	@FXML
-	private ChoiceBox<String> zugzeitAuswahlBox;
+	private ChoiceBox<String> zugzeitAuswahlBox, gegnerAuswahlBox;
 
 	
 	public SpielViewController(SpielModel model){
@@ -562,6 +562,26 @@ public class SpielViewController extends Thread{
 		spielregelnButton.setVisible(false);
 		hilfeButtonOrange.setVisible(false);
 		hilfeButton.setVisible(true);
+	}
+	
+	//Neuen Gegenspieler anlegen
+	@FXML
+	public void neuenGegnerAnlegenMenuOeffnen(){
+		neuenGegnerAnlegenMenu.setVisible(true);
+		
+	}
+	
+	//Neuen Gegenspieler anlegen abbrechen
+	@FXML
+	public void neuenGegnerAnlegenMenuSchliessen(){
+		neuenGegnerAnlegenMenu.setVisible(false);
+	}
+	
+	//Neu angelegten Spieler speichern
+	@FXML
+	public void neuenGegnerSpeichern(){
+		gegnerAuswahlBox.getItems().add(neuerSpielerName.getText());
+		neuenGegnerAnlegenMenuSchliessen();
 	}
 	
 	@FXML
