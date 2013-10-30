@@ -1,31 +1,24 @@
 
 package datenhaltung;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.Future;
 
-import parallelisierung.AnzahlNiederlagenCallable;
-import parallelisierung.AnzahlSiegeCallable;
-import parallelisierung.SpieldatenCallable;
-import parallelisierung.ThreadExecutor;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import parallelisierung.AnzahlNiederlagenCallable;
+import parallelisierung.AnzahlSiegeCallable;
+import parallelisierung.SpielDatenSaetzeRunnable;
+import parallelisierung.ThreadExecutor;
 
 public class StatistikModel {
 	private Stage stage;
-	private Spieler selbst;
-	private Spieler gegner;
+	private ObservableList<Spiel> spiele = FXCollections.observableArrayList();
 	
-	public StatistikModel(Stage stage,Spieler selbst,Spieler gegner){
+	public StatistikModel(Stage stage){
 		this.stage = stage;
-		this.selbst = selbst;
-		this.gegner = gegner;
-	}
-	
-	public Spieler getSelbst(){
-		return selbst;
-	}
-	public Spieler getGegner(){
-		return gegner;
 	}
 	
 	public Stage getStage(){
@@ -57,13 +50,26 @@ public class StatistikModel {
 	
 //	Spieldaten zur Anzeige aller gespielten Spiele
 	public ObservableList<Spiel> getSpieldaten(){
-		Future<ObservableList<Spiel>> spieldaten = ThreadExecutor.getInstance().getSpieldaten(new SpieldatenCallable());
-		while(!spieldaten.isDone()){}
+		ResultSet spieldatenSQL = HSQLConnection.getInstance().executeQuery(Strings.SPIELDATEN);
 		try{
-			return spieldaten.get();
-		}catch(Exception ex){
+			while(spieldatenSQL.next()){
+				Spiel spiel = new Spiel(spieldatenSQL.getInt("id"),new Spieler(spieldatenSQL.getString("gegner")),spieldatenSQL.getInt("punkteheim"),spieldatenSQL.getInt("punkteGegner"));
+				spiele.add(spiel);
+				ThreadExecutor.getInstance().execute(new SpielDatenSaetzeRunnable(spiel));
+			}
+			return spiele;
+		}catch(SQLException ex){
 			ex.printStackTrace();
 			return null;
 		}
+//		Future<ObservableList<Spiel>> spieldaten = ThreadExecutor.getInstance().getSpieldaten(new SpieldatenCallable());
+//		while(!spieldaten.isDone()){}
+//		try{
+//			return spieldaten.get();
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//			return null;
+//		}
+		
 	}
 }

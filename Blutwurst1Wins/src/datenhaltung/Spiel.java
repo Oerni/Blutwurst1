@@ -23,6 +23,9 @@ public class Spiel extends DBObject{
 		this.gegner = gegner;
 		this.selbst = selbst;
 	}
+	public Spiel(){
+		
+	}
 	
 //	Simulation
 	public Spiel(int spielnr){
@@ -41,6 +44,18 @@ public class Spiel extends DBObject{
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}
+	}
+	
+	public Spieler getSieger(char kennzeichnung){
+		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
+	}
+	
+	public void erhoehePunkteHeim(){
+		this.punkteHeim++;
+	}
+	
+	public void erhoehePunkteGegner(){
+		this.punkteGegner++;
 	}
 	
 	public Stack<Satz> getSaetze(){
@@ -69,18 +84,40 @@ public class Spiel extends DBObject{
 	
 	
 //	Statistik-Konstruktor
-	public Spiel(int spielNr,Spieler gegner,int punkteHeim,int punkteGegner){
-		this.id = spielNr;
+	public Spiel(int id,Spieler gegner,int punkteHeim,int punkteGegner){
+		this.id = id;
 		this.gegner = gegner;
 		this.punkteHeim = punkteHeim;
 		this.punkteGegner = punkteGegner;
 		this.spielstand = punkteHeim + ":" + punkteGegner;
 		this.selbst = new Spieler(Strings.NAME,'O');
+		this.sieger = punkteHeim > punkteGegner ? selbst : gegner;
+	}
+	
+	public Spieler getSelbst(){
+		return selbst;
+	}
+	
+	public void setSelbst(Spieler spieler){
+		this.selbst = spieler;
+	}
+	
+	public String getIdString(){
+		return ""+id;
+	}
+	
+	public Spieler getSpieler(String name){
+		return selbst.getName().equals(name) ? selbst : gegner;
 	}
 	
 	public Spieler getGegner(){
 		return gegner;
 	}
+	
+	public void setGegner(Spieler spieler){
+		this.gegner = spieler;
+	}
+	
 	public int getPunkteHeim(){
 		return punkteHeim;
 	}
@@ -89,6 +126,9 @@ public class Spiel extends DBObject{
 	}
 	public Spieler getSieger(){
 		return sieger;
+	}
+	public String getSiegerName(){
+		return sieger.getName();
 	}
 	public void setSieger(Spieler sieger){
 		this.sieger = sieger;
@@ -102,15 +142,17 @@ public class Spiel extends DBObject{
 	
 	@Override
 	public void speichern(){
+		String gegnerName = gegner != null ? gegner.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegner.getName()+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegner.getName()+"'"));
+		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegnerName+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegnerName+"'"));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 	
 	@Override
 	public void aktualisieren(){
+		String gegnerName = gegner != null ? gegner.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,this.gegner.getName(),this.punkteHeim,this.punkteGegner,this.sieger.getName(),this.id));
+		HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,gegnerName,this.punkteHeim,this.punkteGegner,gegnerName,this.id));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

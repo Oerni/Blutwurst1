@@ -83,15 +83,20 @@ public class Satz extends DBObject{
 
 	@Override
 	public void speichern() {
+		int spielnr = spiel != null ? spiel.getID() : -1;
+		String spielerName = spielerBegonnen != null ? spielerBegonnen.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"satz","spielnr,beginner",spiel.getID()+",'"+spielerBegonnen.getName()+"'"),String.format(Strings.LETZTE_SATZ_NR,spiel.getID()));
+		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"satz","spielnr,beginner",spielnr+",'"+spielerName+"'"),String.format(Strings.LETZTE_SATZ_NR,spielnr));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 	
 	@Override
 	public void aktualisieren(){
+		int spielnr = spiel != null ? spiel.getID() : -1;
+		String beginnerName = spielerBegonnen != null ? spielerBegonnen.getName() : "";
+		String gewinnerName = gewonnen != null ? gewonnen.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		HSQLConnection.getInstance().update(String.format(Strings.SATZ_AKTUALISIEREN,this.spiel.getID(),this.spielerBegonnen.getName(),this.gewonnen.getName(),this.id));
+		HSQLConnection.getInstance().update(String.format(Strings.SATZ_AKTUALISIEREN,spielnr,beginnerName,gewinnerName,this.id));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

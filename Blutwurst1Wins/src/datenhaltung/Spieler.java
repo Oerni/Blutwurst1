@@ -25,6 +25,10 @@ public class Spieler extends DBObject{
 		return name;
 	}
 	
+	public void setKennzeichnung(char kennzeichnung){
+		this.kennzeichnung = kennzeichnung;
+	}
+	
 	@Override
 	public void speichern(){
 		SemaphorManager.getInstance().schreibzugriffAnmelden();

@@ -2,6 +2,8 @@ package datenhaltung;
 
 import javafx.stage.Stage;
 import logik.Feld;
+import parallelisierung.SpeichernRunnable;
+import parallelisierung.ThreadExecutor;
 
 public class SpielModel {
 	/**
@@ -11,9 +13,6 @@ public class SpielModel {
 	 */
 	private Stage stage;
 	private Spiel spiel;
-	private Spieler gegner;
-	private Spieler selbst;
-	private Spieler aktuellerSpieler;
 	private DateiVerwaltung dateiverwaltung;
 	private Feld feld = new Feld();
 	
@@ -25,30 +24,21 @@ public class SpielModel {
 		return feld;
 	}
 	
-	public Spieler getSelbst(){
-		return selbst;
-	}
-	
-	public Spieler getGegner(){
-		return gegner;
-	}
-	
-	public Spieler getSieger(char kennzeichnung){
-		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
+	public void feldZuruecksetzen(){
+		feld = new Feld();
 	}
 	
 	public void init(String pfad,String gegnerName,char eigeneKennzeichnung){
-		selbst = new Spieler(Strings.NAME,eigeneKennzeichnung);
-		selbst.speichern();
-		gegner = new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung));
-		gegner.speichern();
-		aktuellerSpieler = getBeginnendenSpieler();
+		spiel = new Spiel();
+		spiel.setSelbst(new Spieler(Strings.NAME,eigeneKennzeichnung));
+		spiel.getSelbst().speichern();
+		spiel.setGegner(new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung)));
+		spiel.getGegner().speichern();
 		dateiverwaltung.setPfad(pfad);
-		spiel = new Spiel(gegner,selbst);
-		spiel.speichern();
-		Satz ersterSatz = new Satz(aktuellerSpieler,spiel);
-		ersterSatz.speichern();
+		Satz ersterSatz = new Satz(spiel);
+		ThreadExecutor.getInstance().execute(new SpeichernRunnable(ersterSatz));
 		spiel.satzHinzufuegen(ersterSatz);
+		ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel));
 	}
 	
 	public void initDateiverwaltung(){
@@ -59,60 +49,21 @@ public class SpielModel {
 		return eigeneKennzeichnung == 'x' ? 'o' : 'x';
 	}
 	
-	private Spieler getBeginnendenSpieler(){
-		return selbst.getKennzeichnung()=='O' ? selbst : gegner;
-	}
-	
 	public Spiel getSpiel(){
 		return spiel;
 	}
 	
-//	public int zugDurchfuehren(int spalte){
-//		int ergebnis = spielfeld.einfuegen(spalte,aktuellerSpieler);
-//		zuege.push(new Zug(ergebnis,spalte,aktuellerSpieler,saetze.lastElement()));
-//		if(aktuellerSpieler == gegner)
-//			aktuellerSpieler = selbst;
-//		else
-//			aktuellerSpieler = gegner;
-//		return ergebnis;
-//	}
-	
-	public void spielerWechsel(){
-		if(aktuellerSpieler == selbst)
-			aktuellerSpieler = gegner;
-		else
-			aktuellerSpieler = selbst;
-	}
-	
-	public Spieler getAktuellerSpieler(){
-		return aktuellerSpieler;
-	}
-	
-	public char getEigeneKennzeichnung(){
-		return selbst.getKennzeichnung();
-	}
-//	Zug-Informationen
-	
-
 	public Stage getPrimaryStage(){
 		return stage;
-	}
-//	Namen ausgeben
-	public String getEigenenNamen(){
-		return selbst.getName();
-	}
-	public String getGegnerNamen(){
-		return gegner.getName();
 	}
 	
 	public Zug zugVonServer(){
 		Zug zug = dateiverwaltung.dateiLesen();
-		zug.setSpieler(gegner);
-//		spielverlauf.push(zug);
+		zug.setSpieler(spiel.getGegner());
 		return zug;
 	}
 	public void zugAnServer(Zug zug){
-		zug.setSpieler(selbst);
+		zug.setSpieler(spiel.getSelbst());
 		dateiverwaltung.dateiSchreiben(zug);
 	}
 	

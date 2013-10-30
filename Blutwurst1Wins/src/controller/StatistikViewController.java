@@ -77,10 +77,10 @@ public class StatistikViewController {
 		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
 		
 		spielhistorieTable.setEditable(false);
-		spielnummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielNr"));
+		spielnummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("idString"));
 		spielstandSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielstand"));
 		gegnerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gegnerName"));
-		siegerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gewinnerName"));
+		siegerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("siegerName"));
 		spielhistorieTable.setItems(spieldaten);
 	}
 	
@@ -94,8 +94,8 @@ public class StatistikViewController {
 	@FXML
 	public void simulationStarten(){
 		int spielnr = 0;
-		SimulationModel sModel = new SimulationModel(new Stage(),spielnr,model.getSelbst(),model.getGegner());
-		new SimulationViewController(sModel).show();
+//		SimulationModel sModel = new SimulationModel(new Stage(),spielnr,model.getSelbst(),model.getGegner());
+//		new SimulationViewController(sModel).show();
 	}
 	
 	public void hilfeAnzeigen(){

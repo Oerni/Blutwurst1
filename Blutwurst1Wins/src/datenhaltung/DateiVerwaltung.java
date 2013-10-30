@@ -17,8 +17,8 @@ public class DateiVerwaltung {
 	private SpielModel model;
 	
 	public DateiVerwaltung(String pfad,SpielModel model){		
-		this.lesePfad = pfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".xml";
-		this.schreibePfad = pfad+"\\spieler"+model.getSelbst().getKennzeichnung()+"2server.txt";
+		this.lesePfad = pfad+"\\server2spieler"+model.getSpiel().getSelbst().getKennzeichnung()+".xml";
+		this.schreibePfad = pfad+"\\spieler"+model.getSpiel().getSelbst().getKennzeichnung()+"2server.txt";
 		System.out.println(this.lesePfad);
 		this.model = model;
 	}
@@ -28,8 +28,8 @@ public class DateiVerwaltung {
 	}
 	
 	public void setPfad(String pfad){
-		this.lesePfad = pfad+"\\server2spieler"+model.getSelbst().getKennzeichnung()+".xml";
-		this.schreibePfad = pfad+"\\spieler"+model.getSelbst().getKennzeichnung()+"2server.txt";
+		this.lesePfad = pfad+"\\server2spieler"+model.getSpiel().getSelbst().getKennzeichnung()+".xml";
+		this.schreibePfad = pfad+"\\spieler"+model.getSpiel().getSelbst().getKennzeichnung()+"2server.txt";
 	}
 	
 	public boolean dateiSchreiben(Zug zug){
@@ -132,9 +132,9 @@ public class DateiVerwaltung {
 					case 5:
 						String siegerString = zeile.trim().split("<sieger>|</sieger>")[1];
 						if(siegerString.trim().equalsIgnoreCase("Spieler O"))
-							sieger = model.getSieger('o');
+							sieger = model.getSpiel().getSieger('o');
 						else if(siegerString.trim().equalsIgnoreCase("Spieler X"))
-							sieger = model.getSieger('x');
+							sieger = model.getSpiel().getSieger('x');
 						i++;
 						break;
 					default:
@@ -150,7 +150,7 @@ public class DateiVerwaltung {
 			boolean geloescht = file.delete();
 			System.out.println(geloescht ? "gelöscht" : "nicht gelöscht");
 			
-			return new Zug(freigabe,satzstatus,gegnerzug,sieger,model.getGegner());
+			return new Zug(freigabe,satzstatus,gegnerzug,sieger,model.getSpiel().getGegner());
 			
 		}catch(IOException ex){
 			return null;

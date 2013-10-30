@@ -87,8 +87,11 @@ public class Zug extends DBObject{
 	
 	@Override
 	public void speichern(){
+		int satznr = satz != null ? satz.getID() : -1;
+		int spielnr = satz.getSpiel() != null ? satz.getSpiel().getID() : -1;
+		String spielerName = spieler != null ? spieler.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		String query1 = String.format(Strings.INSERT,"zug","satznr,spielnr,spalte,zeile,spieler",satz.getID()+","+satz.getSpiel().getID()+","+spalte+","+zeile+",'"+spieler.getName()+"'");
+		String query1 = String.format(Strings.INSERT,"zug","satznr,spielnr,spalte,zeile,spieler",satznr+","+spielnr+","+spalte+","+zeile+",'"+spielerName+"'");
 		String query2 = String.format(Strings.LETZTER_ZUG_NR,satz.getID(),satz.getSpiel().getID());
 		this.id = HSQLConnection.getInstance().insert(query1,query2);
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
@@ -96,8 +99,11 @@ public class Zug extends DBObject{
 	
 	@Override
 	public void aktualisieren(){
+		int satznr = satz != null ? satz.getID() : -1;
+		int spielnr = satz.getSpiel() != null ? satz.getSpiel().getID() : -1;
+		String spielerName = spieler != null ? spieler.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		HSQLConnection.getInstance().update(String.format(Strings.ZUG_AKTUALISIEREN,this.satz.getID(),this.satz.getSpiel().getID(),this.spalte,this.zeile,this.getSpieler().getName(),this.id));
+		HSQLConnection.getInstance().update(String.format(Strings.ZUG_AKTUALISIEREN,satznr,spielnr,this.spalte,this.zeile,spielerName,this.id));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }
