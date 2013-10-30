@@ -23,4 +23,7 @@ public class Strings {
 	public static final String SPIEL_AKTUALISIEREN = "UPDATE spiel SET gegner='%s',punkteheim=%s,punktegegner=%s,gewinner='%s' WHERE id=%s;";
 	public static final String SPIELER_AKTUALISIEREN = "UPDATE spieler SET name='%s' WHERE id=%s;";
 	public static final String NAME = "blutwurst1";
+	public static final String HIGHSCORE = "SELECT gewinner as name,COUNT(gewinner) AS anzahlsiege FROM spiel GROUP BY gewinner ORDER BY anzahlsiege DESC;";
+	public static final String ANZAHL_BGONNENER_GEWONNENER_SAETZE = "SELECT COUNT(gewinner) AS anzahlsiege FROM satz WHERE gewinner = beginner AND beginner = '" + NAME + "';";
+	public static final String ALLE_GEGNER = "SELECT name FROM spieler WHERE name <> '" + NAME + "' ORDER BY name ASC;";
 }

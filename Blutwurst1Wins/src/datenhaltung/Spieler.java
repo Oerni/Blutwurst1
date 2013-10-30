@@ -39,7 +39,7 @@ public class Spieler extends DBObject{
 	@Override
 	public void aktualisieren(){
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name,this.id));
+		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }
