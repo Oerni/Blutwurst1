@@ -3,7 +3,6 @@ package datenhaltung;
 import java.util.concurrent.Future;
 
 import javafx.stage.Stage;
-import parallelisierung.SpielCallable;
 import parallelisierung.ThreadExecutor;
 
 public class SimulationModel {
@@ -13,14 +12,14 @@ public class SimulationModel {
 	private Spieler gegner;
 	
 	public SimulationModel(Stage stage,int spielnr,Spieler selbst,Spieler gegner){
-		this.stage = stage;
-		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
-		while(!spielFuture.isDone()){}
-		try{
-			this.spiel = spielFuture.get();
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
+//		this.stage = stage;
+//		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
+//		while(!spielFuture.isDone()){}
+//		try{
+//			this.spiel = spielFuture.get();
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//		}
 	}
 	
 	public Spieler getSelbst(){

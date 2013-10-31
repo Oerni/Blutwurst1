@@ -27,4 +27,5 @@ public class Strings {
 	public static final String ANZAHL_BGONNENER_GEWONNENER_SAETZE = "SELECT COUNT(gewinner) AS anzahlsiege FROM satz WHERE gewinner = beginner AND beginner = '" + NAME + "';";
 	public static final String ALLE_GEGNER = "SELECT name FROM spieler WHERE name <> '" + NAME + "' ORDER BY name ASC;";
 	public static final String ALLE_SAETZE = "SELECT COUNT(id) AS anzahlsaetze FROM satz;";
+	public static final String OFFENE_SPIELE_MIT_GEGNER = "SELECT * FROM spiel WHERE gegner='%s' AND gewinner IS NLLL";
 }

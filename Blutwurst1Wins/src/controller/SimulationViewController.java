@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.concurrent.Future;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,13 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import parallelisierung.SpielCallable;
-import parallelisierung.ThreadExecutor;
-import datenhaltung.Satz;
 import datenhaltung.SimulationModel;
-import datenhaltung.Spiel;
 import datenhaltung.Spieler;
-import datenhaltung.Zug;
 
 
 
@@ -195,19 +188,19 @@ public class SimulationViewController {
 	}
 	
 	public void simulationStarten(){
-		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
-		while(!spielFuture.isDone()){}
-		try{
-			Spiel spiel = spielFuture.get();
-			for(Satz s : spiel.getSaetze()){
-				for(Zug z : s.getZuege()){
-					feld[z.getSpalte()][z.getZeile()].setFill(getAktuelleFarbe(z.getSpieler()));
-					Thread.sleep(300);
-				}
-			}
-		}catch(Exception ex){
-			
-		}
+//		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
+//		while(!spielFuture.isDone()){}
+//		try{
+//			Spiel spiel = spielFuture.get();
+//			for(Satz s : spiel.getSaetze()){
+//				for(Zug z : s.getZuege()){
+//					feld[z.getSpalte()][z.getZeile()].setFill(getAktuelleFarbe(z.getSpieler()));
+//					Thread.sleep(300);
+//				}
+//			}
+//		}catch(Exception ex){
+//			
+//		}
 	}
 	
 	//Simulation Beenden und Fenster schliessen

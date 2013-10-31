@@ -64,7 +64,7 @@ public class Feld {
 		Knoten unserZug = null;
 		for(Knoten k : zuUeberpruefen){
 			int temp;
-			if((temp = k.getBewertung(spieler))>=bewertung){
+			if((temp = k.getBewertung(spieler))>bewertung){
 				bewertung = temp;
 				unserZug = k;
 			}

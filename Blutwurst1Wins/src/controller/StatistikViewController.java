@@ -68,8 +68,6 @@ public class StatistikViewController {
 		
 		XYChart.Series<String,Number> ergebnisse = new XYChart.Series<String,Number>();
 		ergebnisse.setName("Anzahl Spiele");
-//		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",anzahlSiege));
-//		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",anzahlNiederlagen));
 		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",model.getSiegeNiederlagen().getAnzahlSiege()));
 		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",model.getSiegeNiederlagen().getAnzahlNiederlagen()));
 		

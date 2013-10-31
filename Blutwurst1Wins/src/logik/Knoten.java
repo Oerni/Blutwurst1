@@ -30,34 +30,24 @@ public class Knoten {
 	}
 	
 	public int getBewertung(Spieler selbst){
+//		System.out.println("Knoten: (" + spalte + "," + zeile + ")");
 		int bewertung = 0;
 		int horizontalLinks = zaehleFreieFelder(Kante.HORIZONTAL_LINKS,selbst);
+//		System.out.println("Links: " + horizontalLinks);
 		int horizontalRechts = zaehleFreieFelder(Kante.HORIZONTAL_RECHTS,selbst);
+//		System.out.println("Rechts: " + horizontalRechts);
 		int diagonalLinksOben = zaehleFreieFelder(Kante.DIAGONAL_LINKS_OBEN,selbst);
+//		System.out.println("links oben: " + diagonalLinksOben);
 		int diagonalRechtsUnten = zaehleFreieFelder(Kante.DIAGONAL_RECHTS_UNTEN, selbst);
+//		System.out.println("rechts unten: " + diagonalRechtsUnten);
 		int diagonalRechtsOben = zaehleFreieFelder(Kante.DIAGONAL_RECHTS_OBEN, selbst);
+//		System.out.println("rechts oben: " + diagonalRechtsOben);
 		int diagonalLinksUnten = zaehleFreieFelder(Kante.DIAGONAL_UNTEN_LINKS, selbst);
-		int vertikalOben = zaehleFreieFelder(Kante.VERTIKAL_OBEN, selbst);
-		int vertikalUnten = zaehleFreieFelder(Kante.VERTIKAL_UNTEN, selbst);
-		
-//		System.out.println("Knoten: ("+spalte+","+zeile+")");
-//		System.out.println(Feld.getRichtung(Kante.HORIZONTAL_LINKS)+": "+horizontalLinks);
-//		System.out.println(Feld.getRichtung(Kante.HORIZONTAL_RECHTS)+": "+horizontalRechts);
-//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_LINKS_OBEN)+": "+diagonalLinksOben);
-//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_RECHTS_UNTEN)+": "+diagonalRechtsUnten);
-//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_RECHTS_OBEN)+": "+diagonalRechtsOben);
-//		System.out.println(Feld.getRichtung(Kante.DIAGONAL_UNTEN_LINKS)+": "+diagonalLinksUnten);
-//		System.out.println(Feld.getRichtung(Kante.VERTIKAL_OBEN)+": "+vertikalOben);
-//		System.out.println(Feld.getRichtung(Kante.VERTIKAL_UNTEN)+": "+vertikalUnten);
-		
-		int horizontalLinksWert = zaehleEigeneSteine(Kante.HORIZONTAL_LINKS,selbst,0);
-		int horizontalRechtsWert = zaehleEigeneSteine(Kante.HORIZONTAL_RECHTS,selbst,0);
-		int diagonalLinksObenWert = zaehleEigeneSteine(Kante.DIAGONAL_LINKS_OBEN,selbst,0);
-		int diagonalRechtsUntenWert = zaehleEigeneSteine(Kante.DIAGONAL_RECHTS_UNTEN, selbst,0);
-		int diagonalRechtsObenWert = zaehleEigeneSteine(Kante.DIAGONAL_RECHTS_OBEN, selbst,0);
-		int diagonalLinksUntenWert = zaehleEigeneSteine(Kante.DIAGONAL_UNTEN_LINKS, selbst,0);
-		int vertikalObenWert = zaehleEigeneSteine(Kante.VERTIKAL_OBEN, selbst,0);
-		int vertikalUntenWert = zaehleEigeneSteine(Kante.VERTIKAL_UNTEN, selbst,0);
+//		System.out.println("links unten: " + diagonalLinksUnten);
+		int vertikalOben = zaehleFreieFelder(Kante.VERTIKAL_OBEN,selbst);
+//		System.out.println("oben: " + vertikalOben);
+		int vertikalUnten = zaehleFreieFelder(Kante.VERTIKAL_UNTEN,selbst);
+//		System.out.println("unten: " + vertikalUnten);
 		
 		bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks);
 		bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalRechts);
@@ -66,76 +56,95 @@ public class Knoten {
 		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben);
 		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksUnten);
 		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben);
-		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalUnten);
+		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalUnten);			
 		
-		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks,horizontalLinksWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalRechts,horizontalRechtsWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben,diagonalLinksObenWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsUnten,diagonalRechtsUntenWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben,diagonalRechtsObenWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksUnten,diagonalLinksUntenWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben,vertikalObenWert);
-		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalUnten,vertikalUntenWert);
+		if(horizontalLinks >= 3){
+			int horizontalLinksWert = wertDurchEigeneSteine(Kante.HORIZONTAL_LINKS,selbst,1);
+			bewertung += horizontalLinksWert;
+		}
+		if(horizontalRechts >= 3){
+			int horizontalRechtsWert = wertDurchEigeneSteine(Kante.HORIZONTAL_RECHTS,selbst,1);	
+			bewertung += horizontalRechtsWert;
+		}
+		if(diagonalLinksOben >= 3){
+			int diagonalLinksObenWert = wertDurchEigeneSteine(Kante.DIAGONAL_LINKS_OBEN,selbst,1);
+			bewertung += diagonalLinksObenWert;
+		}
+		if(diagonalRechtsUnten >= 3){
+			int diagonalRechtsUntenWert = wertDurchEigeneSteine(Kante.DIAGONAL_RECHTS_UNTEN, selbst,1);
+			bewertung += diagonalRechtsUntenWert;
+		}
+		if(diagonalRechtsOben >= 3){
+			int diagonalRechtsObenWert = wertDurchEigeneSteine(Kante.DIAGONAL_RECHTS_OBEN, selbst,1);
+			bewertung += diagonalRechtsObenWert;
+		}
+		if(diagonalLinksUnten >= 3){
+			int diagonalLinksUntenWert = wertDurchEigeneSteine(Kante.DIAGONAL_UNTEN_LINKS, selbst,1);
+			bewertung += diagonalLinksUntenWert;
+		}
+		if(vertikalOben >= 3){
+			int vertikalObenWert = wertDurchEigeneSteine(Kante.VERTIKAL_OBEN, selbst,1);
+			bewertung += vertikalObenWert;
+		}
 		
-		if(horizontalLinks<=3&&horizontalRechts<=3)
-			bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks+horizontalRechts);
-		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
-			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksOben+diagonalRechtsUnten);
-		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
-			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben+diagonalLinksUnten);
-		if(vertikalOben<=3&&vertikalUnten<=3)
-			bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben+vertikalUnten);
+		if(vertikalUnten >= 3){
+			int vertikalUntenWert = wertDurchEigeneSteine(Kante.VERTIKAL_UNTEN, selbst,1);
+			bewertung += vertikalUntenWert;
+		}
 		
-		if(horizontalLinks<=3&&horizontalRechts<=3)
-			bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks+horizontalRechts,horizontalLinksWert+horizontalRechtsWert);
-		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
-			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben+diagonalRechtsUnten,diagonalLinksObenWert+diagonalRechtsUntenWert);
-		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
-			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben+diagonalLinksUnten,diagonalRechtsObenWert+diagonalLinksUntenWert);
-		if(vertikalOben<=3&&vertikalUnten<=3)
-			bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben+vertikalUnten,vertikalObenWert+vertikalUntenWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks,horizontalLinksWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalRechts,horizontalRechtsWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben,diagonalLinksObenWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsUnten,diagonalRechtsUntenWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben,diagonalRechtsObenWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksUnten,diagonalLinksUntenWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben,vertikalObenWert);
+//		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalUnten,vertikalUntenWert);
 		
+//		if(horizontalLinks<=3&&horizontalRechts<=3)
+//			bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks+horizontalRechts);
+//		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
+//			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksOben+diagonalRechtsUnten);
+//		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
+//			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben+diagonalLinksUnten);
+//		if(vertikalOben<=3&&vertikalUnten<=3)
+//			bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben+vertikalUnten);
+//		
+//		if(horizontalLinks<=3&&horizontalRechts<=3)
+//			bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks+horizontalRechts,horizontalLinksWert+horizontalRechtsWert);
+//		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
+//			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben+diagonalRechtsUnten,diagonalLinksObenWert+diagonalRechtsUntenWert);
+//		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
+//			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben+diagonalLinksUnten,diagonalRechtsObenWert+diagonalLinksUntenWert);
+//		if(vertikalOben<=3&&vertikalUnten<=3)
+//			bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben+vertikalUnten,vertikalObenWert+vertikalUntenWert);
+//		
 		return bewertung;
 	}
 	
 	public int erhoeheBewertungDurchAnzahlFelder(int anzahlFelder){
 		return anzahlFelder >= 3 ? 1 : 0;
-	}
-	public int erhoeheBewertungDurchEigeneSteine(int anzahlFelder,int wert){
-		return anzahlFelder>= 3 ? wert : 0;
-	}
+	}	
 	
-	
-	public int zaehleEigeneSteine(int richtung,Spieler selbst,int zaehler){
-		int eigenerWert;
-		if(besetztVon==selbst)
-			eigenerWert=2;
-		else
-			eigenerWert=0;
-		
-		if(zaehler>2)
-			return 0;
-		
+	public int wertDurchEigeneSteine(int richtung,Spieler selbst,int zaehler){		
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){
-				if(k.getNachbarn().getBesetztVon() == selbst || k.getNachbarn().getBesetztVon() == null){
-					return zaehler*eigenerWert + k.getNachbarn().zaehleEigeneSteine(richtung, selbst, zaehler+1);
-				}else
-					return eigenerWert;
+				if(k.getNachbarn().getBesetztVon() == selbst){
+					return (zaehler-1)*2 + 1 + k.getNachbarn().wertDurchEigeneSteine(richtung, selbst, zaehler+1);
+				}
 			}
-//			keine Weitere Kante mehr
-			return eigenerWert;
-			}
-		
-		return 0;
+		}
+		if(besetztVon == selbst)
+			return (zaehler-1)*2+1;
+		else
+			return 0;
 	}
 	public int zaehleFreieFelder(int richtung,Spieler selbst){
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){
 				if(k.getNachbarn().getBesetztVon() == selbst || k.getNachbarn().getBesetztVon() == null){
 					return 1 + k.getNachbarn().zaehleFreieFelder(richtung,selbst);
-				}else
-					return 1;
+				}
 			}
 		}	
 		

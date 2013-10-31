@@ -3,8 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.Stack;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -27,6 +25,7 @@ import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
+import datenhaltung.Spiel;
 import datenhaltung.SpielModel;
 import datenhaltung.Spieler;
 import datenhaltung.StatistikModel;
@@ -405,10 +404,18 @@ public class SpielViewController extends Thread{
 			gegnerName = gegnerAuswahlBox.getValue();
 		else
 			gegnerName = "Unbenannt";
-		gegnerNameText.setText(gegnerName);
-		ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
-		model.init(pfad,gegnerName,eigeneKennzeichnung);
-		start();
+		
+//		Prüfen, ob noch offene Spiele abgelegt sind
+//		Stack<Spiel> offeneSpiele = model.getOffeneSpiele(gegnerName);
+//		if(offeneSpiele.isEmpty()){
+			gegnerNameText.setText(gegnerName);
+			ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
+			model.init(pfad,gegnerName,eigeneKennzeichnung);
+			start();
+//		}else{
+////			Neues Fenster zur Auswahl, ob ein Spiel fortgesetzt werden oder ein neues gestartet werden soll
+//			
+//		}
 	}
 	
 	public int sonderfaellePruefen(Zug gegnerzug){	

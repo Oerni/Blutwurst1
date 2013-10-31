@@ -51,6 +51,23 @@ public class SpielModel {
 		return alleSpieler;
 	}
 	
+	public Stack<Spiel> getOffeneSpiele(String gegnerName){
+		Stack<Spiel> offeneSpiele = new Stack<Spiel>();
+		ResultSet spieleSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.OFFENE_SPIELE_MIT_GEGNER,gegnerName));
+		try{
+			while(spieleSQL.next()){
+				try{
+					offeneSpiele.add(new Spiel(this.getGegner(gegnerName),spieleSQL.getInt("punkteheim"),spieleSQL.getInt("punktegegner")));
+				}catch(SQLException ex){
+					ex.printStackTrace();
+				}
+			}
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		return offeneSpiele;
+	}
+	
 	public boolean spielerRegistrieren(Spieler spieler){
 		for(Spieler vorhanden : alleSpieler){
 			if(vorhanden.getName().equals(spieler.getName()))
