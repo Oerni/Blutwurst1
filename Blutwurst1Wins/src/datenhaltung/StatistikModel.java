@@ -17,6 +17,7 @@ public class StatistikModel {
 	private BegonneneSaetzeGewonnen begonnenUndGewonnen;
 	private SiegeNiederlagen siegeNiederlagen;
 	
+//	Indikator, ob parallel initialisierte Attribute fertiggestellt sind
 	private boolean spieleFertig = false;
 	private boolean bestenlisteFertig = false;
 	private boolean begonnenUndGewonnenFertig = false;
@@ -59,20 +60,6 @@ public class StatistikModel {
 	
 //	Bestenliste
 	public ObservableList<Highscore> getBestenliste(){
-//		ResultSet bestenlisteSQL = HSQLConnection.getInstance().executeQuery(Strings.HIGHSCORE);
-//		
-//		try{
-//			while(bestenlisteSQL.next()){
-//				try{
-//					bestenliste.add(new Highscore(new Spieler(bestenlisteSQL.getString("name")),bestenlisteSQL.getInt("anzahlsiege")));
-//				}catch(SQLException ex){
-//					ex.printStackTrace();
-//				}
-//			}
-//			return bestenliste;
-//		}catch(SQLException ex){
-//			ex.printStackTrace();
-//		}
 		while(!bestenlisteFertig){}
 		return bestenliste;
 	}
@@ -94,26 +81,6 @@ public class StatistikModel {
 	
 //	Spieldaten zur Anzeige aller gespielten Spiele
 	public ObservableList<Spiel> getSpieldaten(){
-//		ResultSet spieldatenSQL = HSQLConnection.getInstance().executeQuery(Strings.SPIELDATEN);
-//		try{
-//			while(spieldatenSQL.next()){
-//				Spiel spiel = new Spiel(spieldatenSQL.getInt("id"),new Spieler(spieldatenSQL.getString("gegner")),spieldatenSQL.getInt("punkteheim"),spieldatenSQL.getInt("punkteGegner"));
-//				spiele.add(spiel);
-//				ThreadExecutor.getInstance().execute(new SpielDatenSaetzeRunnable(spiel));
-//			}
-//			return spiele;
-//		}catch(SQLException ex){
-//			ex.printStackTrace();
-//			return null;
-//		}
-//		Future<ObservableList<Spiel>> spieldaten = ThreadExecutor.getInstance().getSpieldaten(new SpieldatenCallable());
-//		while(!spieldaten.isDone()){}
-//		try{
-//			return spieldaten.get();
-//		}catch(Exception ex){
-//			ex.printStackTrace();
-//			return null;
-//		}
 		while(!spieleFertig){}
 		return spiele;
 	}
