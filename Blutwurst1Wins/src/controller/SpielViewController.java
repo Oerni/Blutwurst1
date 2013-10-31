@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +27,6 @@ import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
-import datenhaltung.Spiel;
 import datenhaltung.SpielModel;
 import datenhaltung.Spieler;
 import datenhaltung.StatistikModel;
@@ -164,7 +165,7 @@ public class SpielViewController extends Thread{
 	@FXML
 	private AnchorPane resetMenu, spielstartMenu, gewinnAnzeige, verlustAnzeige, spielfeldVollAnzeige;
 	@FXML
-	private AnchorPane spielhilfeAnzeige, spielregelnAnzeige, neuenGegnerAnlegenMenu;
+	private AnchorPane spielhilfeAnzeige, spielregelnAnzeige, neuenGegnerAnlegenMenu, offeneSpieleMenu;
 	@FXML
 	private ImageView spielfeldButtonOrange, resetButtonOrange, spielregelnButtonOrange;
 	@FXML
@@ -183,6 +184,10 @@ public class SpielViewController extends Thread{
 	private ChoiceBox<String> zugzeitAuswahlBox, gegnerAuswahlBox;
 	@FXML
 	private Text gegnerNameText;
+	@FXML
+	private TableColumn spielnummerOffeneSpieleSpalte, spielstandOffeneSpieleSpalte;
+	@FXML
+	private TableView offeneSpieleTabelle;
 
 	
 	public SpielViewController(SpielModel model){
@@ -255,7 +260,7 @@ public class SpielViewController extends Thread{
 		model.initDateiverwaltung();
 		String pfad = model.getDateiVerwaltung().pfadLesen();
 		
-//		Spieler-Auswahlbox füllen
+//		Spieler-Auswahlbox faellen
 		Stack<Spieler> alleSpieler = model.getAlleSpieler();
 
 		for(Spieler spieler : alleSpieler)
@@ -405,7 +410,7 @@ public class SpielViewController extends Thread{
 		else
 			gegnerName = "Unbenannt";
 		
-//		Prüfen, ob noch offene Spiele abgelegt sind
+//		Pruefen, ob noch offene Spiele abgelegt sind
 //		Stack<Spiel> offeneSpiele = model.getOffeneSpiele(gegnerName);
 //		if(offeneSpiele.isEmpty()){
 			gegnerNameText.setText(gegnerName);
@@ -628,6 +633,12 @@ public class SpielViewController extends Thread{
 			}
 		}
 		neuenGegnerAnlegenMenuSchliessen();
+	}
+	
+	//Tabelle mit offenen Spieler schliessen
+	@FXML
+	public void offeneSpieleMenuSchliessen(){
+		offeneSpieleMenu.setVisible(false);
 	}
 	
 	@FXML
