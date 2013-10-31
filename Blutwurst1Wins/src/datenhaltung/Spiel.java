@@ -136,13 +136,15 @@ public class Spiel extends DBObject{
 	public String getSpielstand(){
 		return spielstand;
 	}
+	
+//	Statistik
 	public String getGegnerName(){
 		return gegner.getName();
 	}
 	
 	@Override
 	public void speichern(){
-		String gegnerName = gegner != null ? gegner.getName() : "";
+		String gegnerName = gegner != null ? gegner.getName() : null;
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegnerName+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegnerName+"'"));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
@@ -151,8 +153,9 @@ public class Spiel extends DBObject{
 	@Override
 	public void aktualisieren(){
 		String gegnerName = gegner != null ? gegner.getName() : "";
+		String siegerName = sieger != null ? sieger.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,gegnerName,this.punkteHeim,this.punkteGegner,gegnerName,this.id));
+		HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,gegnerName,this.punkteHeim,this.punkteGegner,siegerName,this.id));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

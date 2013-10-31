@@ -16,6 +16,8 @@ import parallelisierung.ThreadExecutor;
 public class StatistikModel {
 	private Stage stage;
 	private ObservableList<Spiel> spiele = FXCollections.observableArrayList();
+	private ObservableList<Highscore> bestenliste = FXCollections.observableArrayList();
+	private BegonneneSaetzeGewonnen begonnenUndGewonnen;
 	
 	public StatistikModel(Stage stage){
 		this.stage = stage;
@@ -46,6 +48,42 @@ public class StatistikModel {
 			ex.printStackTrace();
 			return -1;
 		}
+	}
+	
+//	Bestenliste
+	public ObservableList<Highscore> getBestenliste(){
+		ResultSet bestenlisteSQL = HSQLConnection.getInstance().executeQuery(Strings.HIGHSCORE);
+		
+		try{
+			while(bestenlisteSQL.next()){
+				try{
+					bestenliste.add(new Highscore(new Spieler(bestenlisteSQL.getString("name")),bestenlisteSQL.getInt("anzahlsiege")));
+				}catch(SQLException ex){
+					ex.printStackTrace();
+				}
+			}
+			return bestenliste;
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		return bestenliste;
+	}
+	
+	public BegonneneSaetzeGewonnen getBegonneneSaetzeGewonnen(){
+		if(begonnenUndGewonnen==null){
+			ResultSet begonnenUndGewonnenSQL = HSQLConnection.getInstance().executeQuery(Strings.ANZAHL_BGONNENER_GEWONNENER_SAETZE);
+			ResultSet alleSaetzeSQL = HSQLConnection.getInstance().executeQuery(Strings.ALLE_SAETZE);
+			try{
+				begonnenUndGewonnenSQL.next();
+				int begonnenUndGewonnenAnzahl = begonnenUndGewonnenSQL.getInt("anzahlsiege");
+				alleSaetzeSQL.next();
+				int alleSaetze = alleSaetzeSQL.getInt("anzahlsaetze");
+				begonnenUndGewonnen = new BegonneneSaetzeGewonnen(begonnenUndGewonnenAnzahl,alleSaetze);
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+		return begonnenUndGewonnen;
 	}
 	
 //	Spieldaten zur Anzeige aller gespielten Spiele

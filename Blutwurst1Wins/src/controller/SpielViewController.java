@@ -182,6 +182,8 @@ public class SpielViewController extends Thread{
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
 	@FXML
 	private ChoiceBox<String> zugzeitAuswahlBox, gegnerAuswahlBox;
+	@FXML
+	private Text gegnerNameText;
 
 	
 	public SpielViewController(SpielModel model){
@@ -333,6 +335,12 @@ public class SpielViewController extends Thread{
 								spielGewonnen();
 								break;
 							case SPIEL_VERLOREN:
+//								Stein des Gegners muss nun noch gesetzt werden
+								int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
+								System.out.println("Gegner Zug (Spalte,Zeile): " + gegnerZug.getSpalte() + gegnerZeile);
+								gegnerZug.setZeile(gegnerZeile);
+								if(gegnerZeile != -1)
+									faerben(gegnerZug.getSpalte(),gegnerZug.getZeile(),gegnerZug.getSpieler());
 								spielVerloren();
 								break;
 							case SPIELFELD_VOLL:
@@ -392,13 +400,23 @@ public class SpielViewController extends Thread{
 		char eigeneKennzeichnung = radioButtonO.isSelected() ? 'o' : 'x'; 
 		spielstartMenu.setVisible(false);
 		String pfad = pfadEingabe.getText();
-		String gegnerName = gegnerAuswahlBox.getValue();
+		String gegnerName;
+		if(gegnerAuswahlBox.getValue()!=null)
+			gegnerName = gegnerAuswahlBox.getValue();
+		else
+			gegnerName = "Unbenannt";
+		gegnerNameText.setText(gegnerName);
 		ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
 		model.init(pfad,gegnerName,eigeneKennzeichnung);
 		start();
 	}
 	
-	public int sonderfaellePruefen(Zug gegnerzug){		
+	public int sonderfaellePruefen(Zug gegnerzug){	
+		boolean freigabe = gegnerzug.getFreigabe();
+		String satzstatus = gegnerzug.getSatzstatus();
+		int spalte = gegnerzug.getSpalte();
+		String sieger = gegnerzug.getSieger() != null ? gegnerzug.getSieger().getName() : "kein Sieger";
+		System.out.println(freigabe +","+satzstatus + "," + spalte + "," + sieger);
 		// Pruefen auf Spezialfaelle
 		if(!gegnerzug.getFreigabe() && gegnerzug.getSatzstatus().trim().equalsIgnoreCase("beendet")){
 			if(gegnerzug.getSieger() == model.getSpiel().getSelbst()){
@@ -519,6 +537,10 @@ public class SpielViewController extends Thread{
 	public void verlustAnzeigeNeuerSatzStarten(){
 //		Neuen Satz starten
 		verlustAnzeige.setVisible(false);
+		for(int i=0;i<7;i++)
+			for(int j=0;j<6;j++)
+				this.faerben(i,j,null);
+		model.feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
 		satz.speichern();
 	}
@@ -527,6 +549,10 @@ public class SpielViewController extends Thread{
 	public void spielfeldVollAnzeigeNeuerSatzStarten(){
 //		Neuen Satz starten
 		spielfeldVollAnzeige.setVisible(false);
+		for(int i=0;i<7;i++)
+			for(int j=0;j<6;j++)
+				this.faerben(i,j,null);
+		model.feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
 		satz.speichern();
 	}
@@ -587,11 +613,13 @@ public class SpielViewController extends Thread{
 	//Neu angelegten Spieler speichern
 	@FXML
 	public void neuenGegnerSpeichern(){
-		Spieler neuerSpieler = new Spieler(neuerSpielerName.getText());
-		model.spielerRegistrieren(neuerSpieler);
-		ThreadExecutor.getInstance().execute(new SpeichernRunnable(neuerSpieler));
-		gegnerAuswahlBox.getItems().add(neuerSpieler.getName());
-//		gegnerAuswahlBox.setValue(gegnerAuswahlBox.getItems().get(gegnerAuswahlBox.getItems().indexOf(neuerSpieler.getName())));
+		if(!neuerSpielerName.getText().isEmpty()){
+			Spieler neuerSpieler = new Spieler(neuerSpielerName.getText());
+			if(model.spielerRegistrieren(neuerSpieler)){
+				ThreadExecutor.getInstance().execute(new SpeichernRunnable(neuerSpieler));
+				gegnerAuswahlBox.getItems().add(neuerSpieler.getName());
+			}
+		}
 		neuenGegnerAnlegenMenuSchliessen();
 	}
 	

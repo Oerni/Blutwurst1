@@ -6,7 +6,6 @@ import java.util.Stack;
 
 import javafx.stage.Stage;
 import logik.Feld;
-import parallelisierung.AktualisierenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
 
@@ -52,17 +51,24 @@ public class SpielModel {
 		return alleSpieler;
 	}
 	
-	public void spielerRegistrieren(Spieler spieler){
+	public boolean spielerRegistrieren(Spieler spieler){
+		for(Spieler vorhanden : alleSpieler){
+			if(vorhanden.getName().equals(spieler.getName()))
+				return false;
+		}
 		alleSpieler.add(spieler);
+		return true;
 	}
 	
 	public void init(String pfad,String gegnerName,char eigeneKennzeichnung){
 		spiel = new Spiel();
 		spiel.setSelbst(new Spieler(Strings.NAME,eigeneKennzeichnung));
-//		spiel.getSelbst().speichern();
 		ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel.getSelbst()));
-//		spiel.setGegner(new Spieler(gegnerName,getGegnerKennzeichnung(eigeneKennzeichnung)));
 		Spieler gegner = this.getGegner(gegnerName);
+		if(gegner == null){
+			gegner = new Spieler(gegnerName);
+			ThreadExecutor.getInstance().execute(new SpeichernRunnable(gegner));
+		}
 		gegner.setKennzeichnung(getGegnerKennzeichnung(eigeneKennzeichnung));
 		spiel.setGegner(gegner);
 		dateiverwaltung.setPfad(pfad);

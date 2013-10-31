@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import datenhaltung.SimulationModel;
+import datenhaltung.Highscore;
 import datenhaltung.Spiel;
 import datenhaltung.StatistikModel;
 
@@ -78,12 +78,27 @@ public class StatistikViewController {
 				new PieChart.Data("Verloren", anzahlNiederlagen));
 		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
 		
+//		Gewonnene Sätze, die auch begonnen wurden
+		ObservableList<PieChart.Data> gewinnBegonnenData = FXCollections.observableArrayList(
+				new PieChart.Data("Begonnen und gewonnen",model.getBegonneneSaetzeGewonnen().getGewonneneSaetze()),
+				new PieChart.Data("Restliche Sätze",model.getBegonneneSaetzeGewonnen().getAnzahlRestSaetze()));
+		startGewinnVerlustKuchenDiagramm.setData(gewinnBegonnenData);
+		
+//		Alle Spiele
 		spielhistorieTable.setEditable(false);
 		spielnummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("idString"));
 		spielstandSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielstand"));
 		gegnerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("gegnerName"));
 		siegerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("siegerName"));
 		spielhistorieTable.setItems(spieldaten);
+		
+//		Bestenliste
+		ObservableList<Highscore> bestenliste = model.getBestenliste();
+		highscoreTabelle.setEditable(false);
+		spielernameSpalte.setCellValueFactory(new PropertyValueFactory<Highscore,String>("spielerName"));
+		anzahlSiegeSpalte.setCellValueFactory(new PropertyValueFactory<Highscore,String>("anzahlSiege"));
+		highscoreTabelle.setItems(bestenliste);
+		
 	}
 	
 	public void show(){
