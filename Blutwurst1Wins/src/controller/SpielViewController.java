@@ -641,6 +641,12 @@ public class SpielViewController extends Thread{
 		offeneSpieleMenu.setVisible(false);
 	}
 	
+	//Offenes Spiel fortsetzen
+	@FXML
+	public void offenesSpielFortsetzen(){
+		
+	}
+	
 	@FXML
 	public void mouseOver(){
 		scene.setCursor(Cursor.HAND);

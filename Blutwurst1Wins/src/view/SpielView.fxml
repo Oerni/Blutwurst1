@@ -179,7 +179,7 @@
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Spielstand" fx:id="spielstandOffeneSpieleSpalte" />
           </columns>
         </TableView>
-        <Button id="offenesSpielStartenButton" fx:id="offenesSpielFortsetzenButton" layoutX="5.0" layoutY="205.0" mnemonicParsing="false" onAction="#offenesSpielStarten" text="Fortsetzen" />
+        <Button id="offenesSpielFortsetzenButton" fx:id="offenesSpielFortsetzenButton" layoutX="5.0" layoutY="205.0" mnemonicParsing="false" onAction="#offenesSpielFortsetzen" text="Fortsetzen" />
         <Button fx:id="offeneSpieleMenuSchliessenButton" layoutX="101.0" layoutY="205.0" mnemonicParsing="false" onAction="#offeneSpieleMenuSchliessen" text="Neues Spiel" />
       </children>
     </AnchorPane>
