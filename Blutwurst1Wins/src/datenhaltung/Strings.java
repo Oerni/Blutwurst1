@@ -4,10 +4,11 @@ public class Strings {
 	/**
 	 * Zentrale Klasse zur Verwaltung von Strings wie Abfragen, Namen, ...
 	 */
+	public static final String NAME = "blutwurst1";
 	public static final int STANDARD_ZUGZEIT_S = 1;
 	public static final String SPIELDATEN = "SELECT * FROM spiel;";
-	public static final String ANZAHL_SIEGE = "SELECT COUNT(id) AS anzahlsiege FROM spiel WHERE punkteheim > punktegegner;";
-	public static final String ANZAHL_NIEDERLAGEN = "SELECT COUNT(id) AS anzahlniederlagen FROM spiel WHERE punkteheim < punktegegner;";
+	public static final String ANZAHL_SIEGE = "SELECT COUNT(id) AS anzahlsiege FROM spiel WHERE gewinner='" + NAME + "';";
+	public static final String ANZAHL_NIEDERLAGEN = "SELECT COUNT(id) AS anzahlniederlagen FROM spiel WHERE gewinner <> '" + NAME + "';";
 	public static final String INSERT = "INSERT INTO %s(%s) VALUES(%s);";
 	public static final String LADE_ID = "SELECT id FROM %s WHERE %s = %s;";
 	public static final String GEGNER_ID = "SELECT id FROM spieler WHERE name='%s';";
@@ -22,7 +23,6 @@ public class Strings {
 	public static final String SATZ_AKTUALISIEREN = "UPDATE satz SET spielnr=%s,beginner='%s',gewinner='%s' WHERE id=%s;";
 	public static final String SPIEL_AKTUALISIEREN = "UPDATE spiel SET gegner='%s',punkteheim=%s,punktegegner=%s,gewinner='%s' WHERE id=%s;";
 	public static final String SPIELER_AKTUALISIEREN = "UPDATE spieler SET name='%s' WHERE id=%s;";
-	public static final String NAME = "blutwurst1";
 	public static final String HIGHSCORE = "SELECT name,COUNT(gewinner) AS anzahlsiege FROM spiel RIGHT OUTER JOIN spieler ON gewinner = name GROUP BY name ORDER BY anzahlsiege DESC;";
 	public static final String ANZAHL_BGONNENER_GEWONNENER_SAETZE = "SELECT COUNT(gewinner) AS anzahlsiege FROM satz WHERE gewinner = beginner AND beginner = '" + NAME + "';";
 	public static final String ALLE_GEGNER = "SELECT name FROM spieler WHERE name <> '" + NAME + "' ORDER BY name ASC;";

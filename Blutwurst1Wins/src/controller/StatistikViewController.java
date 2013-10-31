@@ -46,8 +46,11 @@ public class StatistikViewController {
 		this.model = sModel;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/statistikViewSGVKuchen.fxml"));
 		fxmlLoader.setController(this);
-		
-		
+		try{
+		Thread.sleep(600);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		try{
 			Pane pane = (Pane)fxmlLoader.load();
 			scene = new Scene(pane);
@@ -61,21 +64,21 @@ public class StatistikViewController {
 //		NumberAxis yAchse = new NumberAxis();
 		anzahlGewinneVerlusteDiagramm.setTitle("Anzahl Gewinne/Verluste");
 		
-		int anzahlSiege = model.getAnzahlSiege();
-		int anzahlNiederlagen = model.getAnzahlNiederlagen();
 		ObservableList<Spiel> spieldaten = model.getSpieldaten();
 		
 		XYChart.Series<String,Number> ergebnisse = new XYChart.Series<String,Number>();
 		ergebnisse.setName("Anzahl Spiele");
-		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",anzahlSiege));
-		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",anzahlNiederlagen));
+//		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",anzahlSiege));
+//		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",anzahlNiederlagen));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Siege",model.getSiegeNiederlagen().getAnzahlSiege()));
+		ergebnisse.getData().add(new XYChart.Data<String,Number>("Niederlagen",model.getSiegeNiederlagen().getAnzahlNiederlagen()));
 		
 		anzahlGewinneVerlusteDiagramm.getData().add(ergebnisse);
 		
 //		Gewinn-Verlust-Kuchen Diagramm
 		ObservableList<PieChart.Data> gewinnVerlustData = FXCollections.observableArrayList(
-				new PieChart.Data("Gewonnen", anzahlSiege),
-				new PieChart.Data("Verloren", anzahlNiederlagen));
+				new PieChart.Data("Gewonnen", model.getSiegeNiederlagen().getAnzahlSiege()),
+				new PieChart.Data("Verloren", model.getSiegeNiederlagen().getAnzahlNiederlagen()));
 		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
 		
 //		Gewonnene Sätze, die auch begonnen wurden
