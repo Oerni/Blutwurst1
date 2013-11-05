@@ -28,7 +28,7 @@ public class StatistikViewController {
 	@FXML
 	private ImageView spielfeldButton, anzahlGewinnVerlustButtonOrange, startGewinnVerlustKuchenButton;
 	@FXML
-	private ImageView simulationButtonBlau, simulationButtonGrau, simulationButtonOrange;
+	private ImageView simulationButtonBlau, simulationButtonGrau, simulationButtonOrange, highscoreButtonOrange, highscoreButton;
 	@FXML
 	private PieChart gewinnVerlustKuchenDiagramm, startGewinnVerlustKuchenDiagramm;
 	@FXML
@@ -79,10 +79,10 @@ public class StatistikViewController {
 				new PieChart.Data("Verloren", model.getSiegeNiederlagen().getAnzahlNiederlagen()));
 		gewinnVerlustKuchenDiagramm.setData(gewinnVerlustData);
 		
-//		Gewonnene Sätze, die auch begonnen wurden
+//		Gewonnene Saetze, die auch begonnen wurden
 		ObservableList<PieChart.Data> gewinnBegonnenData = FXCollections.observableArrayList(
 				new PieChart.Data("Begonnen und gewonnen",model.getBegonneneSaetzeGewonnen().getGewonneneSaetze()),
-				new PieChart.Data("Restliche Sätze",model.getBegonneneSaetzeGewonnen().getAnzahlRestSaetze()));
+				new PieChart.Data("Restliche Saetze",model.getBegonneneSaetzeGewonnen().getAnzahlRestSaetze()));
 		startGewinnVerlustKuchenDiagramm.setData(gewinnBegonnenData);
 		
 //		Alle Spiele
@@ -153,6 +153,7 @@ public class StatistikViewController {
 				infoGewinnVerlustKuchen.setVisible(true);
 				simulationButtonBlau.setVisible(false);
 				highscoreTabelle.setVisible(false);
+				highscoreButtonOrange.setVisible(false);
 				
 			}
 			
@@ -175,6 +176,8 @@ public class StatistikViewController {
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(false);
 				highscoreTabelle.setVisible(false);
+				highscoreButtonOrange.setVisible(false);
+
 			}
 			
 			//Anzahl Gewinne Verluste anzeigen
@@ -194,6 +197,8 @@ public class StatistikViewController {
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(false);
 				highscoreTabelle.setVisible(false);
+				highscoreButtonOrange.setVisible(false);
+
 			}
 				
 			//Spielhistorie anzeigen
@@ -213,13 +218,15 @@ public class StatistikViewController {
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(true);
 				highscoreTabelle.setVisible(false);
+				highscoreButtonOrange.setVisible(false);
+
 				
 			}
 			
 			@FXML
 			public void highscoreAnzeigen(){
 				spielhistorieButtonOrange.setVisible(false);
-				startGewinnVerlustKuchenButton.setVisible(false);
+				startGewinnVerlustKuchenButton.setVisible(true);
 				gewinnVerlustKuchenButtonOrange.setVisible(false);
 				anzahlGewinnVerlustButtonOrange.setVisible(false);
 				spielhistorieTable.setVisible(false);
@@ -232,6 +239,8 @@ public class StatistikViewController {
 				infoGewinnVerlustKuchen.setVisible(false);
 				simulationButtonBlau.setVisible(false);
 				highscoreTabelle.setVisible(true);
+				highscoreButtonOrange.setVisible(true);
+
 			}
 	
 	

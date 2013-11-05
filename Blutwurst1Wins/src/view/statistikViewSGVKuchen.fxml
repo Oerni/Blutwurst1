@@ -102,7 +102,16 @@
     <Text fx:id="infoStartGewinnVerlustKuchen" layoutX="473.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Dieses Diagramm zeigt an, wie viel&#10;Prozent derjenigen,die das Spiel&#10;begonnen haben, das Spiel gewonnen&#10;bzw. verloren haben." visible="false" />
     <Text fx:id="infoAnzahlGewinneVerluste" layoutX="473.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Dieses Diagramm zeigt an,&#10;wie viele Spiele der Spieler 'blutwurst1' &#10;bereits gewonnen bzw. verloren hat." visible="false" />
     <Text fx:id="infoGewinnVerlustKuchen" layoutX="473.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:&#10;Dieses Diagramm sagt aus, wie viel&#10;aller bereits gespieten Spiele gewonnen&#10;bzw. verloren wurden." />
-    <Button fx:id="highscoreAnzeigenButton" layoutX="503.0" layoutY="303.0" mnemonicParsing="false" onAction="#highscoreAnzeigen" text="Highscore Anzeigen" />
+    <ImageView id="HighscoreButton.png" fx:id="highscoreButton" fitHeight="31.0" fitWidth="86.0" layoutX="491.0" layoutY="286.0" onMouseClicked="#highscoreAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
+      <image>
+        <Image url="@icons/HighscoreButton.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="HighscoreButtonOrange.jpg" fx:id="highscoreButtonOrange" layoutX="486.0" layoutY="284.0" visible="false">
+      <image>
+        <Image url="@icons/HighscoreButtonOrange.jpg" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
   </children>
   <stylesheets>
     <URL value="@SpielStyle.css" />
