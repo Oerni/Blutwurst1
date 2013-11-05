@@ -5,9 +5,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import spieldaten.Spiel;
+import spieldaten.Zug;
 import javafx.collections.ObservableList;
-import datenhaltung.Spiel;
-import datenhaltung.Zug;
 
 public class ThreadExecutor {
 	private static ThreadExecutor instance;

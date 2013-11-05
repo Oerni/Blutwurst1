@@ -1,5 +1,5 @@
 
-package datenhaltung;
+package statistikdaten;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +9,7 @@ import parallelisierung.BegonneneSaetzeGewonnenRunnable;
 import parallelisierung.BestenlisteRunnable;
 import parallelisierung.SpieldatenRunnable;
 import parallelisierung.ThreadExecutor;
+import spieldaten.Spiel;
 
 public class StatistikModel {
 	private Stage stage;

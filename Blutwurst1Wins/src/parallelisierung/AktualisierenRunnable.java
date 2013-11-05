@@ -1,6 +1,6 @@
 package parallelisierung;
 
-import datenhaltung.DBObject;
+import spieldaten.DBObject;
 
 public class AktualisierenRunnable implements Runnable{
 	private DBObject objekt;

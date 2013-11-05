@@ -1,6 +1,6 @@
 package parallelisierung;
 
-import datenhaltung.SpielModel;
+import spieldaten.SpielModel;
 
 public class PfadSchreibenRunnable implements Runnable{
 	private String pfad;

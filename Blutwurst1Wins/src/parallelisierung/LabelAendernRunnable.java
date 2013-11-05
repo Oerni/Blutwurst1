@@ -1,7 +1,7 @@
 package parallelisierung;
 
+import spieldaten.SpielModel;
 import javafx.scene.control.Label;
-import datenhaltung.SpielModel;
 
 public class LabelAendernRunnable implements Runnable{
 	private Label gegnerPunkte;

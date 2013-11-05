@@ -1,7 +1,7 @@
 package application;
 	
+import spieldaten.SpielModel;
 import controller.SpielViewController;
-import datenhaltung.SpielModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

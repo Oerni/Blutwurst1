@@ -1,5 +1,7 @@
 package controller;
 
+import spieldaten.SimulationModel;
+import spieldaten.Spieler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,8 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import datenhaltung.SimulationModel;
-import datenhaltung.Spieler;
 
 
 

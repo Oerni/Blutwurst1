@@ -2,8 +2,8 @@ package logik;
 
 import java.util.Stack;
 
-import datenhaltung.Spieler;
-import datenhaltung.Zug;
+import spieldaten.Spieler;
+import spieldaten.Zug;
 
 public class Feld {
 	private Knoten[][] spielfeld = new Knoten[7][6];

@@ -1,4 +1,6 @@
-package datenhaltung;
+package statistikdaten;
+
+import spieldaten.Spieler;
 
 
 public class Highscore {

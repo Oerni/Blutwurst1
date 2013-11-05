@@ -2,7 +2,8 @@ package parallelisierung;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import datenhaltung.DBObject;
+
+import spieldaten.DBObject;
 
 public class SpeichernRunnable implements Runnable{
 	private DBObject objekt;

@@ -3,10 +3,10 @@ package parallelisierung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import datenhaltung.HSQLConnection;
-import datenhaltung.Satz;
-import datenhaltung.Strings;
-import datenhaltung.Zug;
+import spieldaten.HSQLConnection;
+import spieldaten.Satz;
+import spieldaten.Strings;
+import spieldaten.Zug;
 
 public class SpielDatenZuegeRunnable implements Runnable{
 	/**

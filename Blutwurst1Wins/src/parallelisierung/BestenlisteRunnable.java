@@ -3,13 +3,13 @@ package parallelisierung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import spieldaten.HSQLConnection;
+import spieldaten.Spieler;
+import spieldaten.Strings;
+import statistikdaten.Highscore;
+import statistikdaten.StatistikModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import datenhaltung.HSQLConnection;
-import datenhaltung.Highscore;
-import datenhaltung.Spieler;
-import datenhaltung.StatistikModel;
-import datenhaltung.Strings;
 
 public class BestenlisteRunnable implements Runnable {
 	private StatistikModel model;

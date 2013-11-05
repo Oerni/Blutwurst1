@@ -1,8 +1,8 @@
 package parallelisierung;
 
-import datenhaltung.DateiVerwaltung;
-import datenhaltung.SpielModel;
-import datenhaltung.Zug;
+import spieldaten.DateiVerwaltung;
+import spieldaten.SpielModel;
+import spieldaten.Zug;
 
 public class ServerZugSchreibenRunnable implements Runnable {
 	private DateiVerwaltung dateiverwaltung;

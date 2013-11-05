@@ -34,13 +34,13 @@ import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
-import datenhaltung.Satz;
-import datenhaltung.Spiel;
-import datenhaltung.SpielModel;
-import datenhaltung.Spieler;
-import datenhaltung.StatistikModel;
-import datenhaltung.Strings;
-import datenhaltung.Zug;
+import spieldaten.Satz;
+import spieldaten.Spiel;
+import spieldaten.SpielModel;
+import spieldaten.Spieler;
+import spieldaten.Strings;
+import spieldaten.Zug;
+import statistikdaten.StatistikModel;
 
 
 

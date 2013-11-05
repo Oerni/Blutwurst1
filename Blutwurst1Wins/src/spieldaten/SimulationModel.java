@@ -1,4 +1,4 @@
-package datenhaltung;
+package spieldaten;
 
 import java.util.concurrent.Future;
 

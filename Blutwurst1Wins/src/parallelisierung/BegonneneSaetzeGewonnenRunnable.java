@@ -3,10 +3,10 @@ package parallelisierung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import datenhaltung.BegonneneSaetzeGewonnen;
-import datenhaltung.HSQLConnection;
-import datenhaltung.StatistikModel;
-import datenhaltung.Strings;
+import spieldaten.HSQLConnection;
+import spieldaten.Strings;
+import statistikdaten.BegonneneSaetzeGewonnen;
+import statistikdaten.StatistikModel;
 
 public class BegonneneSaetzeGewonnenRunnable implements Runnable {
 	private StatistikModel model;

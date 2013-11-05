@@ -1,5 +1,8 @@
 package controller;
 
+import spieldaten.Spiel;
+import statistikdaten.Highscore;
+import statistikdaten.StatistikModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,9 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import datenhaltung.Highscore;
-import datenhaltung.Spiel;
-import datenhaltung.StatistikModel;
 
 public class StatistikViewController {
 	private Scene scene;

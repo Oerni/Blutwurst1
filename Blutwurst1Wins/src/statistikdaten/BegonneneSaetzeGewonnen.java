@@ -1,4 +1,4 @@
-package datenhaltung;
+package statistikdaten;
 
 public class BegonneneSaetzeGewonnen {
 	private int gewonnen,andere;

@@ -2,7 +2,7 @@ package logik;
 
 import java.util.Stack;
 
-import datenhaltung.Spieler;
+import spieldaten.Spieler;
 
 public class Knoten {
 	private Spieler besetztVon;

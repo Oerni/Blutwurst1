@@ -1,4 +1,4 @@
-package datenhaltung;
+package spieldaten;
 
 public class Strings {
 	/**
