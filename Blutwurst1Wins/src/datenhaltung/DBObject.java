@@ -1,5 +1,7 @@
 package datenhaltung;
 
+import java.sql.SQLException;
+
 public abstract class DBObject {
 	/**
 	 * Abstrakte Klasse zur Gewährleistung der Implementierung zweier essentieller
@@ -9,7 +11,7 @@ public abstract class DBObject {
 	 */
 	protected int id = -1;
 //	Die ID des gespeicherten Objekts wird automatisch zurückgegeben
-	public abstract void speichern();
+	public abstract void speichern() throws SQLException;
 	public abstract void aktualisieren();
 	public int getID(){
 		return id;

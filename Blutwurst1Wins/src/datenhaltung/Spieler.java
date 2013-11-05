@@ -1,5 +1,7 @@
 package datenhaltung;
 
+import java.sql.SQLException;
+
 import parallelisierung.SemaphorManager;
 
 public class Spieler extends DBObject{
@@ -30,7 +32,7 @@ public class Spieler extends DBObject{
 	}
 	
 	@Override
-	public void speichern(){
+	public void speichern() throws SQLException{
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT, "spieler", "name", "'"+name+"'"),"ohne_id");
 		SemaphorManager.getInstance().schreibzugriffAbmelden();

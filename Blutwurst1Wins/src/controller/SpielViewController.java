@@ -1,19 +1,25 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Stack;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -21,12 +27,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import parallelisierung.AktualisierenRunnable;
+import parallelisierung.LabelAendernRunnable;
 import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
 import datenhaltung.Satz;
+import datenhaltung.Spiel;
 import datenhaltung.SpielModel;
 import datenhaltung.Spieler;
 import datenhaltung.StatistikModel;
@@ -181,7 +190,9 @@ public class SpielViewController extends Thread{
 	@FXML
 	private Label gewinnAnzeigenLabel, verlustAnzeigenLabel;
 	@FXML
-	private ChoiceBox<String> zugzeitAuswahlBox, gegnerAuswahlBox;
+	private ChoiceBox<String> zugzeitAuswahlBox;
+	@FXML
+	private ComboBox<Spieler> gegnerAuswahlBox;
 	@FXML
 	private Text gegnerNameText;
 	@FXML
@@ -189,6 +200,10 @@ public class SpielViewController extends Thread{
 	@FXML
 	private TableView offeneSpieleTabelle;
 
+//	Zwischenspeichern von Pfad, Gegnernamen und kennzeichnung
+	private String pfad;
+	private char kennzeichnung;
+	private Spieler gegner;
 	
 	public SpielViewController(SpielModel model){
 		
@@ -262,9 +277,29 @@ public class SpielViewController extends Thread{
 		
 //		Spieler-Auswahlbox faellen
 		Stack<Spieler> alleSpieler = model.getAlleSpieler();
-
+		
+		gegnerAuswahlBox.setCellFactory(new Callback<ListView<Spieler>, ListCell<Spieler>>() {
+			
+			@Override
+			public ListCell<Spieler> call(ListView<Spieler> listview) {
+				final ListCell<Spieler> cell = new ListCell<Spieler>(){
+					@Override
+					protected void updateItem(Spieler spieler,boolean bln){
+						super.updateItem(spieler, bln);
+						if(spieler != null)
+							setText(spieler.getName());
+						else
+							setText(null);
+					}
+				};
+				
+				return cell;
+			}
+		});
+		gegnerAuswahlBox.getItems().removeAll(model.getAlleSpieler());
+//		gegnerAuswahlBox.
 		for(Spieler spieler : alleSpieler)
-			gegnerAuswahlBox.getItems().add(spieler.getName());
+			gegnerAuswahlBox.getItems().add(spieler);
 		
 		if(!pfad.equals(""))
 			pfadEingabe.setText(pfad);
@@ -346,6 +381,8 @@ public class SpielViewController extends Thread{
 								if(gegnerZeile != -1)
 									faerben(gegnerZug.getSpalte(),gegnerZug.getZeile(),gegnerZug.getSpieler());
 								spielVerloren();
+								this.wait();
+								this.labelsAktualisieren();
 								break;
 							case SPIELFELD_VOLL:
 								spielfeldVoll();
@@ -359,7 +396,13 @@ public class SpielViewController extends Thread{
 				}
 	}
 	
+	private void labelsAktualisieren(){
+//		ThreadExecutor.getInstance().execute(new LabelAendernRunnable(spielstandGast,model));
+		this.spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
+	}
+	
 	private void spielGewonnen(){
+		System.out.println("Spiel ID: " + model.getSpiel().getID());
 		model.getSpiel().getAktuellenSatz().setSieger(model.getSpiel().getSelbst());
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
 		model.getSpiel().erhoehePunkteHeim();
@@ -374,6 +417,7 @@ public class SpielViewController extends Thread{
 //			Satz gewonnen
 		}
 		System.out.println("Spiel gewonnen");
+		labelsAktualisieren();
 		gewinnAnzeige.setVisible(true);
 		//gewinnAnzeigenLabel
 	}
@@ -391,6 +435,7 @@ public class SpielViewController extends Thread{
 			//		Satz verloren
 		}
 		System.out.println("Spiel verloren");
+		labelsAktualisieren();
 		verlustAnzeige.setVisible(true);
 		//verlustAnzeigenLabel
 	}
@@ -404,23 +449,36 @@ public class SpielViewController extends Thread{
 		char eigeneKennzeichnung = radioButtonO.isSelected() ? 'o' : 'x'; 
 		spielstartMenu.setVisible(false);
 		String pfad = pfadEingabe.getText();
-		String gegnerName;
-		if(gegnerAuswahlBox.getValue()!=null)
-			gegnerName = gegnerAuswahlBox.getValue();
-		else
-			gegnerName = "Unbenannt";
+
+		if(gegnerAuswahlBox.getSelectionModel().getSelectedItem()!=null)
+			this.gegner = gegnerAuswahlBox.getSelectionModel().getSelectedItem();
+		else{
+			Spieler unbenannterSpieler = model.getGegner("Unbenannt");
+			if(unbenannterSpieler != null)
+				this.gegner = unbenannterSpieler;
+			else{
+				this.gegner = new Spieler("Unbenannt");
+				System.out.println(this.gegner);
+				ThreadExecutor.getInstance().execute(new SpeichernRunnable(this.gegner));
+			}
+		}
 		
+		gegnerNameText.setText(this.gegner.getName());
+		ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
 //		Pruefen, ob noch offene Spiele abgelegt sind
-//		Stack<Spiel> offeneSpiele = model.getOffeneSpiele(gegnerName);
-//		if(offeneSpiele.isEmpty()){
-			gegnerNameText.setText(gegnerName);
-			ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
-			model.init(pfad,gegnerName,eigeneKennzeichnung);
+		ObservableList<Spiel> offeneSpiele = model.getOffeneSpiele(this.gegner);
+		if(offeneSpiele.isEmpty()){
+			model.init(pfad,this.gegner,eigeneKennzeichnung);
 			start();
-//		}else{
-////			Neues Fenster zur Auswahl, ob ein Spiel fortgesetzt werden oder ein neues gestartet werden soll
-//			
-//		}
+		}else{
+			this.pfad = pfad;
+			this.kennzeichnung = eigeneKennzeichnung;
+//			Neues Fenster zur Auswahl, ob ein Spiel fortgesetzt werden oder ein neues gestartet werden soll
+			offeneSpieleMenu.setVisible(true);
+			spielnummerOffeneSpieleSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("idString"));
+			spielstandOffeneSpieleSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielstand"));
+			offeneSpieleTabelle.setItems(offeneSpiele);
+		}
 	}
 	
 	public int sonderfaellePruefen(Zug gegnerzug){	
@@ -542,7 +600,11 @@ public class SpielViewController extends Thread{
 		model.feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
 		model.getSpiel().satzHinzufuegen(satz);
-		satz.speichern();
+		try{
+			satz.speichern();
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -554,7 +616,11 @@ public class SpielViewController extends Thread{
 				this.faerben(i,j,null);
 		model.feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
-		satz.speichern();
+		try{
+			satz.speichern();
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -566,7 +632,12 @@ public class SpielViewController extends Thread{
 				this.faerben(i,j,null);
 		model.feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
-		satz.speichern();
+		try{
+			satz.speichern();
+		}catch(SQLException ex){
+			
+		}
+
 	}
 	
 	
@@ -629,22 +700,30 @@ public class SpielViewController extends Thread{
 			Spieler neuerSpieler = new Spieler(neuerSpielerName.getText());
 			if(model.spielerRegistrieren(neuerSpieler)){
 				ThreadExecutor.getInstance().execute(new SpeichernRunnable(neuerSpieler));
-				gegnerAuswahlBox.getItems().add(neuerSpieler.getName());
+				gegnerAuswahlBox.getItems().add(neuerSpieler);
 			}
 		}
 		neuenGegnerAnlegenMenuSchliessen();
 	}
 	
-	//Tabelle mit offenen Spieler schliessen
+	//Tabelle mit offenen Spielen schliessen
 	@FXML
 	public void offeneSpieleMenuSchliessen(){
+		model.init(this.pfad, this.gegner, this.kennzeichnung);
+		start();
 		offeneSpieleMenu.setVisible(false);
 	}
 	
 	//Offenes Spiel fortsetzen
 	@FXML
 	public void offenesSpielFortsetzen(){
-		
+		Spiel spiel = (Spiel)offeneSpieleTabelle.getSelectionModel().getSelectedItem();
+		model.setSpiel(spiel);
+		model.getSpiel().ladeSaetze();
+		labelsAktualisieren();
+		model.init(this.pfad,this.gegner,this.kennzeichnung);
+		offeneSpieleMenu.setVisible(false);
+		start();
 	}
 	
 	@FXML

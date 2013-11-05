@@ -1,5 +1,7 @@
 package datenhaltung;
 
+import java.sql.SQLException;
+
 import parallelisierung.SemaphorManager;
 
 public class Zug extends DBObject{
@@ -86,7 +88,7 @@ public class Zug extends DBObject{
 	}
 	
 	@Override
-	public void speichern(){
+	public void speichern() throws SQLException{
 		int satznr = satz != null ? satz.getID() : -1;
 		int spielnr = satz.getSpiel() != null ? satz.getSpiel().getID() : -1;
 		String spielerName = spieler != null ? spieler.getName() : "";

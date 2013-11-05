@@ -137,25 +137,53 @@ public class Spiel extends DBObject{
 		return spielstand;
 	}
 	
+	public void ladeSaetze(){
+		ResultSet saetzeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.SAETZE_EINES_SPIELS,this.id));
+		try{
+			while(saetzeSQL.next()){
+				int satznr = saetzeSQL.getInt("id");
+				String beginnerName = saetzeSQL.getString("beginner");
+				Spieler beginner = null;
+				if(beginnerName != null)
+					beginner = selbst.getName().equals(beginnerName) ? selbst : gegner;
+				Spieler gewinner = null;
+				String gewinnerName = saetzeSQL.getString("gewinner");
+				if(gewinnerName != null)
+					gewinner = selbst.getName().equals(gewinnerName) ? selbst : gegner;
+				
+				Satz satz = new Satz(this,satznr);
+				if(beginner != null)
+					satz.setBeginnendenSpieler(beginner);
+				if(gewinner != null)
+					satz.setSieger(gewinner);
+				this.saetze.add(satz);
+			}
+		}catch(SQLException ex){
+			
+		}
+	}
+	
 //	Statistik
 	public String getGegnerName(){
 		return gegner.getName();
 	}
 	
 	@Override
-	public void speichern(){
-		String gegnerName = gegner != null ? gegner.getName() : null;
+	public void speichern() throws SQLException{
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegnerName+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegnerName+"'"));
+		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegner.getName()+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegner.getName()+"'"));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 	
 	@Override
 	public void aktualisieren(){
-		String gegnerName = gegner != null ? gegner.getName() : "";
-		String siegerName = sieger != null ? sieger.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
-		HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,gegnerName,this.punkteHeim,this.punkteGegner,siegerName,this.id));
+	
+		if(sieger != null)
+			HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,gegner.getName(),this.punkteHeim,this.punkteGegner,sieger.getName(),this.id));
+		else
+			HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN_OHNE_SIEGER,gegner.getName(),this.punkteHeim,this.punkteGegner,this.id));
+		
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

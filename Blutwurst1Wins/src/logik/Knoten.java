@@ -9,6 +9,8 @@ public class Knoten {
 	private int zeile;
 	private int spalte;
 	private Stack<Kante> nachbarn = new Stack<Kante>();
+	private boolean spielGewonnen = false;
+	public static final int GEWONNEN = Integer.MAX_VALUE;
 	
 	public Knoten(int spalte,int zeile){
 		this.zeile = zeile;
@@ -119,7 +121,13 @@ public class Knoten {
 //		if(vertikalOben<=3&&vertikalUnten<=3)
 //			bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben+vertikalUnten,vertikalObenWert+vertikalUntenWert);
 //		
+		if(this.spielGewonnen)
+			return GEWONNEN;
 		return bewertung;
+	}
+	
+	public boolean spielGewonnen(){
+		return spielGewonnen;
 	}
 	
 	public int erhoeheBewertungDurchAnzahlFelder(int anzahlFelder){
@@ -127,6 +135,8 @@ public class Knoten {
 	}	
 	
 	public int wertDurchEigeneSteine(int richtung,Spieler selbst,int zaehler){		
+		if(zaehler == 3)
+			this.spielGewonnen = true;
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){
 				if(k.getNachbarn().getBesetztVon() == selbst){
@@ -134,11 +144,13 @@ public class Knoten {
 				}
 			}
 		}
+		
 		if(besetztVon == selbst)
 			return (zaehler-1)*2+1;
 		else
 			return 0;
 	}
+	
 	public int zaehleFreieFelder(int richtung,Spieler selbst){
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){

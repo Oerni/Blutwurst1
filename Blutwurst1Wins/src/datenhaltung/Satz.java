@@ -82,7 +82,7 @@ public class Satz extends DBObject{
 	}
 
 	@Override
-	public void speichern() {
+	public void speichern() throws SQLException{
 		int spielnr = spiel != null ? spiel.getID() : -1;
 		String spielerName = spielerBegonnen != null ? spielerBegonnen.getName() : "";
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
@@ -98,5 +98,20 @@ public class Satz extends DBObject{
 		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		HSQLConnection.getInstance().update(String.format(Strings.SATZ_AKTUALISIEREN,spielnr,beginnerName,gewinnerName,this.id));
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
+	}
+	
+	public void ladeZuege(){
+		ResultSet zuegeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.ZUEGE_EINES_SATZES,this.id,spiel.getID()));
+		try{
+			while(zuegeSQL.next()){
+				int zeile = zuegeSQL.getInt("zeile");
+				int spalte = zuegeSQL.getInt("spalte");
+				String spielerName = zuegeSQL.getString("spieler");
+				Spieler spieler = spiel.getSelbst().getName().equals(spielerName) ? spiel.getSelbst() : spiel.getGegner();
+				zuege.add(new Zug(zeile,spalte,spieler,this));
+			}
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
 	}
 }

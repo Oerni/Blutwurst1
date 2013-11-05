@@ -1,5 +1,7 @@
 package parallelisierung;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import datenhaltung.DBObject;
 
 public class SpeichernRunnable implements Runnable{
@@ -9,8 +11,16 @@ public class SpeichernRunnable implements Runnable{
 		this.objekt = objekt;
 	}
 	@Override
-	public void run() {
-		objekt.speichern();
+	public void run(){
+		System.out.println("Klasse: " + objekt.getClass());
+		try{
+			objekt.speichern();
+		}
+		catch(SQLIntegrityConstraintViolationException ex){
+			
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
 	}
-
 }

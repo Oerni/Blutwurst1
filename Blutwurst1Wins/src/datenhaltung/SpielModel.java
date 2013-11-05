@@ -4,8 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Stack;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import logik.Feld;
+import parallelisierung.AktualisierenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
 
@@ -51,13 +54,13 @@ public class SpielModel {
 		return alleSpieler;
 	}
 	
-	public Stack<Spiel> getOffeneSpiele(String gegnerName){
-		Stack<Spiel> offeneSpiele = new Stack<Spiel>();
-		ResultSet spieleSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.OFFENE_SPIELE_MIT_GEGNER,gegnerName));
+	public ObservableList<Spiel> getOffeneSpiele(Spieler gegner){
+		ObservableList<Spiel> offeneSpiele = FXCollections.observableArrayList();
+		ResultSet spieleSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.OFFENE_SPIELE_MIT_GEGNER,gegner.getName()));
 		try{
 			while(spieleSQL.next()){
 				try{
-					offeneSpiele.add(new Spiel(this.getGegner(gegnerName),spieleSQL.getInt("punkteheim"),spieleSQL.getInt("punktegegner")));
+					offeneSpiele.add(new Spiel(spieleSQL.getInt("id"),this.getGegner(gegner.getName()),spieleSQL.getInt("punkteheim"),spieleSQL.getInt("punktegegner")));
 				}catch(SQLException ex){
 					ex.printStackTrace();
 				}
@@ -66,6 +69,10 @@ public class SpielModel {
 			ex.printStackTrace();
 		}
 		return offeneSpiele;
+	}
+	
+	public void setSpiel(Spiel spiel){
+		this.spiel = spiel;
 	}
 	
 	public boolean spielerRegistrieren(Spieler spieler){
@@ -77,25 +84,25 @@ public class SpielModel {
 		return true;
 	}
 	
-	public void init(String pfad,String gegnerName,char eigeneKennzeichnung){
-		spiel = new Spiel();
-		spiel.setSelbst(new Spieler(Strings.NAME,eigeneKennzeichnung));
-		ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel.getSelbst()));
-		Spieler gegner = this.getGegner(gegnerName);
-		if(gegner == null){
-			gegner = new Spieler(gegnerName);
-			ThreadExecutor.getInstance().execute(new SpeichernRunnable(gegner));
+	public void init(String pfad,Spieler gegner,char eigeneKennzeichnung){
+//		System.out.println("Spiel-ID: " + spiel.getID());
+		if(spiel == null){
+			spiel = new Spiel();
+			ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel));
 		}
+		spiel.setSelbst(new Spieler(Strings.NAME,eigeneKennzeichnung));
+
+		ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel.getSelbst()));
 		gegner.setKennzeichnung(getGegnerKennzeichnung(eigeneKennzeichnung));
 		spiel.setGegner(gegner);
 		dateiverwaltung.setPfad(pfad);
 		Satz ersterSatz = new Satz(spiel);
 		ThreadExecutor.getInstance().execute(new SpeichernRunnable(ersterSatz));
 		spiel.satzHinzufuegen(ersterSatz);
-		ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel));
+		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(spiel));
 	}
 	
-	private Spieler getGegner(String name){
+	public Spieler getGegner(String name){
 		for(Spieler gegner : alleSpieler)
 			if(gegner.getName().equals(name))
 				return gegner;

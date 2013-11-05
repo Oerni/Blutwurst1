@@ -22,10 +22,11 @@ public class Strings {
 	public static final String ZUG_AKTUALISIEREN = "UPDATE zug SET satznr=%s,spielnr=%s,spalte=%s,zeile=%s,spieler='%s' WHERE id=%s;";
 	public static final String SATZ_AKTUALISIEREN = "UPDATE satz SET spielnr=%s,beginner='%s',gewinner='%s' WHERE id=%s;";
 	public static final String SPIEL_AKTUALISIEREN = "UPDATE spiel SET gegner='%s',punkteheim=%s,punktegegner=%s,gewinner='%s' WHERE id=%s;";
+	public static final String SPIEL_AKTUALISIEREN_OHNE_SIEGER = "UPDATE spiel SET gegner='%s',punkteheim=%s,punktegegner=%s WHERE id=%s;";
 	public static final String SPIELER_AKTUALISIEREN = "UPDATE spieler SET name='%s' WHERE id=%s;";
 	public static final String HIGHSCORE = "SELECT name,COUNT(gewinner) AS anzahlsiege FROM spiel RIGHT OUTER JOIN spieler ON gewinner = name GROUP BY name ORDER BY anzahlsiege DESC;";
 	public static final String ANZAHL_BGONNENER_GEWONNENER_SAETZE = "SELECT COUNT(gewinner) AS anzahlsiege FROM satz WHERE gewinner = beginner AND beginner = '" + NAME + "';";
 	public static final String ALLE_GEGNER = "SELECT name FROM spieler WHERE name <> '" + NAME + "' ORDER BY name ASC;";
 	public static final String ALLE_SAETZE = "SELECT COUNT(id) AS anzahlsaetze FROM satz;";
-	public static final String OFFENE_SPIELE_MIT_GEGNER = "SELECT * FROM spiel WHERE gegner='%s' AND gewinner IS NLLL";
+	public static final String OFFENE_SPIELE_MIT_GEGNER = "SELECT * FROM spiel WHERE gegner='%s' AND gewinner IS NULL";
 }

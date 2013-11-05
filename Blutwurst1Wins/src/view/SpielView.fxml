@@ -162,11 +162,11 @@
           </items>
         </ChoiceBox>
         <Text layoutX="223.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sekunden" />
-        <ChoiceBox id="gegnerAuswahl" fx:id="gegnerAuswahlBox" layoutX="149.0" layoutY="33.0" prefWidth="123.0">
+        <ComboBox id="gegnerAuswahl" fx:id="gegnerAuswahlBox" layoutX="149.0" layoutY="33.0" prefWidth="123.0">
           <items>
             <FXCollections fx:factory="observableArrayList" />
           </items>
-        </ChoiceBox>
+        </ComboBox>
         <Button id="neuenSpielerAnlegenButton" fx:id="neuenGegnerAnlegenButton" layoutX="276.0" layoutY="33.0" mnemonicParsing="false" onAction="#neuenGegnerAnlegenMenuOeffnen" text="+" />
       </children>
     </AnchorPane>

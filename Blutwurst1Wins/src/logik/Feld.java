@@ -7,6 +7,7 @@ import datenhaltung.Zug;
 
 public class Feld {
 	private Knoten[][] spielfeld = new Knoten[7][6];
+	private boolean spielGewonnen = false;
 	
 	public Feld(){
 		for(int i=0;i<7;i++)
@@ -29,6 +30,10 @@ public class Feld {
 				if(richtung!=-1)
 					knoten.nachbarnHinzufuegen(spielfeld[l][m],richtung);
 		}
+	}
+	
+	public boolean spielGewonnen(){
+		return spielGewonnen;
 	}
 	
 	public Knoten[][] getSpielfeld(){
@@ -70,8 +75,11 @@ public class Feld {
 			}
 			System.out.println("("+k.getSpalte()+","+k.getZeile()+"): "+temp);
 		}
-		if(unserZug!=null)
+		
+		if(unserZug!=null){
+			this.spielGewonnen = unserZug.spielGewonnen();
 			return unserZug.getSpalte();
+		}
 		return -1;
 	}
 

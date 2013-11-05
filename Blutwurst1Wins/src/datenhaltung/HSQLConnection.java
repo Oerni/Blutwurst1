@@ -38,19 +38,14 @@ public class HSQLConnection {
 		return statement;
 	}
 	
-	public int insert(String insert,String fetchID){
-		try{
-			statement.execute(insert);
-			if(!fetchID.equals("ohne_id")){
-				ResultSet idSet = statement.executeQuery(fetchID);
-				idSet.next();
-				return idSet.getInt("id");
-			}else
-				return -1;
-		}catch(SQLException ex){
-			ex.printStackTrace();
+	public int insert(String insert,String fetchID) throws SQLException{
+		statement.execute(insert);
+		if(!fetchID.equals("ohne_id")){
+			ResultSet idSet = statement.executeQuery(fetchID);
+			idSet.next();
+			return idSet.getInt("id");
+		}else
 			return -1;
-		}
 	}
 	
 	public void update(String update){
