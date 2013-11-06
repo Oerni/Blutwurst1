@@ -4,8 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Stack;
 
-import parallelisierung.SemaphorManager;
-
 public class Spiel extends DBObject{
 	/**
 	 * Model-Klasse: Spiel
@@ -91,7 +89,14 @@ public class Spiel extends DBObject{
 		this.punkteGegner = punkteGegner;
 		this.spielstand = punkteHeim + ":" + punkteGegner;
 		this.selbst = new Spieler(Strings.NAME,'O');
-		this.sieger = punkteHeim > punkteGegner ? selbst : gegner;
+		if(punkteHeim == 2)
+			this.sieger = selbst;
+		else if(punkteGegner == 2)
+			this.sieger = gegner;
+	}
+	
+	public Spiel(int id,Spieler gegner,int punkteHeim,int punkteGegner,Spieler sieger){
+		
 	}
 	
 	public Spieler getSelbst(){
@@ -157,6 +162,7 @@ public class Spiel extends DBObject{
 				if(gewinner != null)
 					satz.setSieger(gewinner);
 				this.saetze.add(satz);
+				satz.ladeZuege();
 			}
 		}catch(SQLException ex){
 			
@@ -170,20 +176,14 @@ public class Spiel extends DBObject{
 	
 	@Override
 	public void speichern() throws SQLException{
-		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT,"spiel","gegner,punkteheim,punktegegner","'"+gegner.getName()+"',"+punkteHeim+","+punkteGegner),String.format(Strings.LETZTES_SPIEL_NR,"'"+gegner.getName()+"'"));
-		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 	
 	@Override
 	public void aktualisieren(){
-		SemaphorManager.getInstance().schreibzugriffAnmelden();
-	
 		if(sieger != null)
 			HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN,gegner.getName(),this.punkteHeim,this.punkteGegner,sieger.getName(),this.id));
 		else
 			HSQLConnection.getInstance().update(String.format(Strings.SPIEL_AKTUALISIEREN_OHNE_SIEGER,gegner.getName(),this.punkteHeim,this.punkteGegner,this.id));
-		
-		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

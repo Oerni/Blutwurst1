@@ -340,7 +340,6 @@ public class SpielViewController extends Thread{
 //							Parallel kann der Zug gespeichert werden
 							if(gegnerZug.getSpalte()!=-1)
 								ThreadExecutor.getInstance().execute(new SpeichernRunnable(gegnerZug));
-//							gegnerZug.speichern();
 //							Eigenen zug berechnen
 							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSpiel().getSelbst());
 							Zug eigenerZug = new Zug(berechneteSpalte,model.getSpiel().getSelbst());
@@ -367,7 +366,6 @@ public class SpielViewController extends Thread{
 							
 //							Parallel kann der eigene Zug gespeichert werden
 							ThreadExecutor.getInstance().execute(new SpeichernRunnable(eigenerZug));
-//							eigenerZug.speichern();
 						}else{
 							switch(weiterspielen){
 							case SPIEL_GEWONNEN:
@@ -718,11 +716,13 @@ public class SpielViewController extends Thread{
 	@FXML
 	public void offenesSpielFortsetzen(){
 		Spiel spiel = (Spiel)offeneSpieleTabelle.getSelectionModel().getSelectedItem();
-		model.setSpiel(spiel);
-		model.getSpiel().ladeSaetze();
-		labelsAktualisieren();
-		model.init(this.pfad,this.gegner,this.kennzeichnung);
+		spiel.ladeSaetze();
+		model.spielFortsetzen(spiel,this.pfad,this.kennzeichnung,false);
 		offeneSpieleMenu.setVisible(false);
+		for(Zug zug : model.getSpiel().getAktuellenSatz().getZuege()){
+			faerben(zug.getSpalte(),zug.getZeile(),zug.getSpieler());
+			model.getFeld().einfuegen(zug);
+		}
 		start();
 	}
 	

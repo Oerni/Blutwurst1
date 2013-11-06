@@ -10,8 +10,6 @@ public class AktualisierenRunnable implements Runnable{
 	}
 	
 	public void run(){
-		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		objekt.aktualisieren();
-		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

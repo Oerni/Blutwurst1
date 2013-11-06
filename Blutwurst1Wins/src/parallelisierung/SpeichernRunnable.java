@@ -13,15 +13,13 @@ public class SpeichernRunnable implements Runnable{
 	}
 	@Override
 	public void run(){
-		System.out.println("Klasse: " + objekt.getClass());
-		
 		try{
-			SemaphorManager.getInstance().schreibzugriffAnmelden();
+//			System.out.println(objekt +" speichern");
 			objekt.speichern();
-			SemaphorManager.getInstance().schreibzugriffAbmelden();
+//			System.out.println(objekt +" gespeichert");
 		}
 		catch(SQLIntegrityConstraintViolationException ex){
-			
+//			ex.printStackTrace();
 		}
 		catch(SQLException ex){
 			ex.printStackTrace();

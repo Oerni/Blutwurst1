@@ -2,8 +2,6 @@ package spieldaten;
 
 import java.sql.SQLException;
 
-import parallelisierung.SemaphorManager;
-
 public class Spieler extends DBObject{
 	/**
 	 * Model-Klasse: Spieler
@@ -33,15 +31,11 @@ public class Spieler extends DBObject{
 	
 	@Override
 	public void speichern() throws SQLException{
-		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		this.id = HSQLConnection.getInstance().insert(String.format(Strings.INSERT, "spieler", "name", "'"+name+"'"),"ohne_id");
-		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 	
 	@Override
 	public void aktualisieren(){
-		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name));
-		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}
 }

@@ -92,9 +92,9 @@ public class Zug extends DBObject{
 		int satznr = satz != null ? satz.getID() : -1;
 		int spielnr = satz.getSpiel() != null ? satz.getSpiel().getID() : -1;
 		String spielerName = spieler != null ? spieler.getName() : "";
-		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		String query1 = String.format(Strings.INSERT,"zug","satznr,spielnr,spalte,zeile,spieler",satznr+","+spielnr+","+spalte+","+zeile+",'"+spielerName+"'");
 		String query2 = String.format(Strings.LETZTER_ZUG_NR,satz.getID(),satz.getSpiel().getID());
+		SemaphorManager.getInstance().schreibzugriffAnmelden();
 		this.id = HSQLConnection.getInstance().insert(query1,query2);
 		SemaphorManager.getInstance().schreibzugriffAbmelden();
 	}

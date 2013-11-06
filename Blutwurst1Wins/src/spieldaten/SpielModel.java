@@ -20,12 +20,15 @@ public class SpielModel {
 	 */
 	private Stage stage;
 	private Spiel spiel;
+	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung;
 	private Feld feld = new Feld();
 	private Stack<Spieler> alleSpieler = new Stack<Spieler>();
 	
 	public SpielModel(Stage stage){
 		this.stage = stage;
+		this.selbst = new Spieler(Strings.NAME);
+		ThreadExecutor.getInstance().execute(new SpeichernRunnable(selbst));
 	}
 	
 	public Feld getFeld(){
@@ -88,18 +91,30 @@ public class SpielModel {
 //		System.out.println("Spiel-ID: " + spiel.getID());
 		if(spiel == null){
 			spiel = new Spiel();
+			spiel.setSelbst(selbst);
+			spiel.setGegner(gegner);
 			ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel));
 		}
-		spiel.setSelbst(new Spieler(Strings.NAME,eigeneKennzeichnung));
-
-		ThreadExecutor.getInstance().execute(new SpeichernRunnable(spiel.getSelbst()));
+		selbst.setKennzeichnung(eigeneKennzeichnung);
 		gegner.setKennzeichnung(getGegnerKennzeichnung(eigeneKennzeichnung));
-		spiel.setGegner(gegner);
 		dateiverwaltung.setPfad(pfad);
 		Satz ersterSatz = new Satz(spiel);
+		System.out.println("Spiel ID: " + spiel.getID());
+		System.out.println("Satz speichern. Spiel-ID: " + ersterSatz.getSpiel().getID());
 		ThreadExecutor.getInstance().execute(new SpeichernRunnable(ersterSatz));
 		spiel.satzHinzufuegen(ersterSatz);
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(spiel));
+	}
+	
+	public void spielFortsetzen(Spiel spiel,String pfad,char eigeneKennzeichnung,boolean neuerSatz){
+		this.spiel = spiel;
+		this.spiel.getSelbst().setKennzeichnung(eigeneKennzeichnung);
+		this.spiel.getGegner().setKennzeichnung(getGegnerKennzeichnung(eigeneKennzeichnung));
+		this.dateiverwaltung.setPfad(pfad);
+		if(neuerSatz){
+			spiel.satzHinzufuegen(new Satz(this.spiel));
+			ThreadExecutor.getInstance().execute(new SpeichernRunnable(this.spiel.getAktuellenSatz()));
+		}
 	}
 	
 	public Spieler getGegner(String name){
