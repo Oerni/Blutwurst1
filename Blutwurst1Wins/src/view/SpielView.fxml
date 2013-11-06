@@ -170,17 +170,18 @@
         <Button id="neuenSpielerAnlegenButton" fx:id="neuenGegnerAnlegenButton" layoutX="276.0" layoutY="33.0" mnemonicParsing="false" onAction="#neuenGegnerAnlegenMenuOeffnen" text="+" />
       </children>
     </AnchorPane>
-    <AnchorPane id="neuenGegnerAnlegenMenu" fx:id="offeneSpieleMenu" layoutX="213.0" layoutY="170.0" minHeight="187.50006103515625" minWidth="200.0" prefHeight="233.49993896484375" prefWidth="200.0" visible="false">
+    <AnchorPane id="neuenGegnerAnlegenMenu" fx:id="offeneSpieleMenu" layoutX="213.0" layoutY="170.0" minHeight="187.50006103515625" minWidth="200.0" prefHeight="258.0" prefWidth="200.0" visible="true">
       <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="36.685546875" layoutX="0.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="0.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
         <TableView fx:id="offeneSpieleTabelle" layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="200.0">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Spielnr." fx:id="spielnummerOffeneSpieleSpalte" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Spielstand" fx:id="spielstandOffeneSpieleSpalte" />
           </columns>
         </TableView>
-        <Button id="offenesSpielFortsetzenButton" fx:id="offenesSpielFortsetzenButton" layoutX="5.0" layoutY="205.0" mnemonicParsing="false" onAction="#offenesSpielFortsetzen" text="Fortsetzen" />
+        <Button fx:id="offenesSpielFortsetzenButton" layoutX="5.0" layoutY="205.0" mnemonicParsing="false" onAction="#offenesSpielFortsetzen" text="Fortsetzen" />
         <Button fx:id="offeneSpieleMenuSchliessenButton" layoutX="101.0" layoutY="205.0" mnemonicParsing="false" onAction="#offeneSpieleMenuSchliessen" text="Neues Spiel" />
+        <Button fx:id="neuerSatzFortsetzenButton" layoutX="19.0" layoutY="232.0" mnemonicParsing="false" text="Weiter mit neuem Satz" />
       </children>
     </AnchorPane>
     <AnchorPane fx:id="neuenGegnerAnlegenMenu" layoutX="203.0" layoutY="160.0" minHeight="187.50006103515625" minWidth="299.0" prefHeight="191.0" prefWidth="309.0" visible="false">
