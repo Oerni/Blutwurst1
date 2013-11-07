@@ -44,7 +44,7 @@ import statistikdaten.StatistikModel;
 
 
 
-public class SpielViewController extends Thread{
+public class SpielViewController implements Runnable{
 	private SpielModel model;
 	private Scene scene;
 	
@@ -341,7 +341,8 @@ public class SpielViewController extends Thread{
 							if(gegnerZug.getSpalte()!=-1)
 								ThreadExecutor.getInstance().execute(new SpeichernRunnable(gegnerZug));
 //							Eigenen zug berechnen
-							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSpiel().getSelbst());
+//							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSpiel().getSelbst());
+							int berechneteSpalte = model.getFeld().zugBerechnen();
 							Zug eigenerZug = new Zug(berechneteSpalte,model.getSpiel().getSelbst());
 							eigenerZug.satzZuordnen(model.getSpiel().getAktuellenSatz());
 							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
@@ -369,6 +370,7 @@ public class SpielViewController extends Thread{
 						}else{
 							switch(weiterspielen){
 							case SPIEL_GEWONNEN:
+								ThreadExecutor.getInstance().shutdown(this);
 								spielGewonnen();
 								break;
 							case SPIEL_VERLOREN:
@@ -395,7 +397,6 @@ public class SpielViewController extends Thread{
 	}
 	
 	private void labelsAktualisieren(){
-//		ThreadExecutor.getInstance().execute(new LabelAendernRunnable(spielstandGast,model));
 		this.spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
 	}
 	
@@ -405,7 +406,8 @@ public class SpielViewController extends Thread{
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
 		model.getSpiel().erhoehePunkteHeim();
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
-
+//		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+//		spielstandHeim.
 		if(model.getSpiel().getPunkteHeim() >= 2){
 //			Spiel gewonnen
 			model.getSpiel().setSieger(model.getSpiel().getSelbst());
@@ -467,7 +469,8 @@ public class SpielViewController extends Thread{
 		ObservableList<Spiel> offeneSpiele = model.getOffeneSpiele(this.gegner);
 		if(offeneSpiele.isEmpty()){
 			model.init(pfad,this.gegner,eigeneKennzeichnung);
-			start();
+//			start();
+			ThreadExecutor.getInstance().spielStarten(this);
 		}else{
 			this.pfad = pfad;
 			this.kennzeichnung = eigeneKennzeichnung;
@@ -708,7 +711,8 @@ public class SpielViewController extends Thread{
 	@FXML
 	public void offeneSpieleMenuSchliessen(){
 		model.init(this.pfad, this.gegner, this.kennzeichnung);
-		start();
+		ThreadExecutor.getInstance().spielStarten(this);
+//		start();
 		offeneSpieleMenu.setVisible(false);
 	}
 	
@@ -723,7 +727,10 @@ public class SpielViewController extends Thread{
 			faerben(zug.getSpalte(),zug.getZeile(),zug.getSpieler());
 			model.getFeld().einfuegen(zug);
 		}
-		start();
+		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+		spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
+//		start();
+		ThreadExecutor.getInstance().spielStarten(this);
 	}
 	
 	@FXML

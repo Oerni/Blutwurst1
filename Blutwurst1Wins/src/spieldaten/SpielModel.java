@@ -22,7 +22,7 @@ public class SpielModel {
 	private Spiel spiel;
 	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung;
-	private Feld feld = new Feld();
+	private Feld feld = new Feld(this);
 	private Stack<Spieler> alleSpieler = new Stack<Spieler>();
 	
 	public SpielModel(Stage stage){
@@ -36,7 +36,7 @@ public class SpielModel {
 	}
 	
 	public void feldZuruecksetzen(){
-		feld = new Feld();
+		feld = new Feld(this);
 	}
 	
 	public Stack<Spieler> getAlleSpieler(){

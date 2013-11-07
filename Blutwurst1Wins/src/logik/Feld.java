@@ -2,14 +2,16 @@ package logik;
 
 import java.util.Stack;
 
-import spieldaten.Spieler;
+import spieldaten.SpielModel;
 import spieldaten.Zug;
 
 public class Feld {
 	private Knoten[][] spielfeld = new Knoten[7][6];
 	private boolean spielGewonnen = false;
+	private SpielModel model;
 	
-	public Feld(){
+	public Feld(SpielModel model){
+		this.model = model;
 		for(int i=0;i<7;i++)
 			for(int j=0;j<6;j++){
 				Knoten knoten = new Knoten(i,j);
@@ -52,7 +54,72 @@ public class Feld {
 		return -1;
 	}
 	
-	public int zugBerechnen(Spieler spieler){
+	public int zugBerechnen(){
+//		Stack<Knoten> zuUeberpruefen = new Stack<Knoten>();
+//		int zeile=0;
+//		for(int i=0;i<7;i++){
+//			zeile=0;
+//			while(zeile<6){
+//				if(spielfeld[i][zeile].getBesetztVon()==null){
+//					zuUeberpruefen.add(spielfeld[i][zeile]);
+//					zeile = 6;
+//				}
+//				zeile++;
+//			}
+//		}
+	
+//		int bewertung = 0;
+//		Knoten unserZug = null;
+		int[] bewertungen = new int[7];
+		
+		for(Knoten k : this.zuUeberpruefendeKnoten()){
+			k.bewerten(true,model.getSpiel().getSelbst());
+//			int temp;
+//			if((temp = k.getBewertung(spieler))>bewertung){
+//				bewertung = temp;
+//				unserZug = k;
+//			}
+			
+			/**
+			 * Probe!
+			 */
+			k.besetzen(model.getSpiel().getSelbst());
+			int gegnerBewertungGesamt = 0;
+//			Gegnerzug überprüfen
+			for(Knoten j : this.zuUeberpruefendeKnoten()){
+				j.bewerten(false,model.getSpiel().getGegner());
+				gegnerBewertungGesamt += j.getMin();
+				j.minZuruecksetzen();
+			}
+			k.spielerEntfernen();
+			
+			bewertungen[k.getSpalte()] = k.getMax() - gegnerBewertungGesamt;
+			
+			/**
+			 * Ende der Probe!
+			 */
+		}
+		
+		int unserZug = 0;
+		int maxBewertung = Integer.MIN_VALUE;
+		
+		for(int i=0;i<bewertungen.length;i++){
+			if(bewertungen[i] >= maxBewertung){
+				unserZug = i;
+				maxBewertung = bewertungen[i];	
+			}
+			System.out.println("Bewertung der Spalte " + i + ": " + bewertungen[i]);
+		}
+		return unserZug;
+		
+//		if(unserZug!=null){
+//			this.spielGewonnen = unserZug.spielGewonnen();
+//			return unserZug.getSpalte();
+//		}
+//		return -1;
+	}
+	
+	private Stack<Knoten> zuUeberpruefendeKnoten(){
 		Stack<Knoten> zuUeberpruefen = new Stack<Knoten>();
 		int zeile=0;
 		for(int i=0;i<7;i++){
@@ -65,22 +132,7 @@ public class Feld {
 				zeile++;
 			}
 		}
-		int bewertung = 0;
-		Knoten unserZug = null;
-		for(Knoten k : zuUeberpruefen){
-			int temp;
-			if((temp = k.getBewertung(spieler))>bewertung){
-				bewertung = temp;
-				unserZug = k;
-			}
-			System.out.println("("+k.getSpalte()+","+k.getZeile()+"): "+temp);
-		}
-		
-		if(unserZug!=null){
-			this.spielGewonnen = unserZug.spielGewonnen();
-			return unserZug.getSpalte();
-		}
-		return -1;
+		return zuUeberpruefen;
 	}
 
 	public static String getRichtung(int richtung){
