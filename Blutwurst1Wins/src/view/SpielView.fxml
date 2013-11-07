@@ -63,7 +63,7 @@
     <Circle fill="DODGERBLUE" layoutX="510.0" layoutY="292.0" radius="19.000049999998737" stroke="BLACK" strokeType="INSIDE" styleClass="gastKreis" />
     <Text fx:id="gegnerNameText" layoutX="547.0" layoutY="298.0" scaleX="1.1812728498387288" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="teamName" />
     <Text layoutX="510.0" layoutY="454.0" scaleX="1.2611762939834774" scaleY="1.297882586542054" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="gesamt" text="Gesamt" />
-    <Text layoutX="490.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satzstaus:" textAlignment="LEFT" />
+    <Text layoutX="490.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satzstatus:" textAlignment="LEFT" />
     <Text layoutX="490.0" layoutY="130.0" scaleX="1.0" scaleY="0.891542288557214" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Runde:" />
     <Text layoutX="488.0" layoutY="152.0" scaleX="0.8848803835553889" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Spiel:" />
     <Text layoutX="490.0" layoutY="176.0" scaleX="0.9728723600309609" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="anzeigentext" text="Satz:" />
@@ -252,7 +252,7 @@
         <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
         <Text layoutX="130.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Verloren" textAlignment="CENTER" />
         <Text layoutX="69.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blutwurst1 verliert" />
-        <Label fx:id="verlustAnzeigenLabel" layoutX="190.0" layoutY="62.0" text="den Satz!" />
+        <Label fx:id="verlustAnzeigenLabel" layoutX="188.0" layoutY="62.0" text="den Satz!" />
         <Button id="gewinnAnzeigeNeuerSatzButton" fx:id="verlustAnzeigeNeuerSatzButton" layoutX="147.0" layoutY="96.0" mnemonicParsing="false" onAction="#verlustAnzeigeNeuerSatzStarten" text="neuer Satz" />
       </children>
     </AnchorPane>
