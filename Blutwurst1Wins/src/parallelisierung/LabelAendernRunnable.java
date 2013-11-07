@@ -1,5 +1,6 @@
 package parallelisierung;
 
+import spieldaten.Spiel;
 import spieldaten.SpielModel;
 import controller.SpielViewController;
 
@@ -13,11 +14,22 @@ public class LabelAendernRunnable implements Runnable{
 	}
 	
 	public void run(){
-		controller.setGegnerPunkte(""+model.getSpiel().getPunkteGegner());
-		controller.setHeimPunkte(""+model.getSpiel().getPunkteHeim());
+		Spiel spiel = model.getSpiel();
+		if(spiel != null){
+			controller.setGegnerPunkte(""+model.getSpiel().getPunkteGegner());
+			controller.setHeimPunkte(""+model.getSpiel().getPunkteHeim());
+			controller.setSpielNr(""+model.getSpiel().getID());
+			controller.setSatz(""+model.getSpiel().getAnzahlSaetze());
+			controller.setRunde(""+model.getRunde());
+		}else{
+			controller.setGegnerPunkte("");
+			controller.setHeimPunkte("");
+			controller.setSpielNr("");
+			controller.setSatz("");
+			controller.setRunde("");
+		}
 		controller.setSatzStatus(model.getSatzStatus());
-		controller.setRunde(""+model.getRunde());
-		controller.setSpielNr(""+model.getSpiel().getID());
-		controller.setSatz(""+model.getSpiel().getAnzahlSaetze());
+		
+		
 	}
 }

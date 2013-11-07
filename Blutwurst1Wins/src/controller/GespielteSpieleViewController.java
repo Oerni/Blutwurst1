@@ -185,16 +185,18 @@ public class GespielteSpieleViewController {
 			feld[5][5] = f6;
 			feld[6][5] = g6;
 			
+			simulationSpielnummer.setText(""+this.model.getSpiel().getID());
 			satzauswahlBoxSimulation.setConverter(new StringConverter<Satz>() {
 				
 				@Override
 				public String toString(Satz satz) {
-					return "text";
+					return "Satz " + satz.getSatzX();
 				}
 				
 				@Override
-				public Satz fromString(String text) {
-					return null;
+				public Satz fromString(String satzX) {
+					String[] satznr = satzX.split(" ");
+					return model.getSpiel().getSatz(Integer.parseInt(satznr[1]));
 				}
 			});
 			
@@ -211,6 +213,7 @@ public class GespielteSpieleViewController {
 				@Override
 				public void changed(ObservableValue<? extends Satz> ov,Satz alt,Satz neu){
 					satzauswahlBoxSimulation.setValue(neu);
+					simulationStarten();
 				}
 			});
 	}
