@@ -55,49 +55,47 @@ public class Feld {
 	}
 	
 	public int zugBerechnen(){
-//		Stack<Knoten> zuUeberpruefen = new Stack<Knoten>();
-//		int zeile=0;
-//		for(int i=0;i<7;i++){
-//			zeile=0;
-//			while(zeile<6){
-//				if(spielfeld[i][zeile].getBesetztVon()==null){
-//					zuUeberpruefen.add(spielfeld[i][zeile]);
-//					zeile = 6;
-//				}
-//				zeile++;
-//			}
-//		}
-	
-//		int bewertung = 0;
-//		Knoten unserZug = null;
 		int[] bewertungen = new int[7];
-		
+		int ueberprueft = 0;
 		for(Knoten k : this.zuUeberpruefendeKnoten()){
+//			eigene Bewertung
 			k.bewerten(true,model.getSpiel().getSelbst());
-//			int temp;
-//			if((temp = k.getBewertung(spieler))>bewertung){
-//				bewertung = temp;
-//				unserZug = k;
-//			}
-			
-			/**
-			 * Probe!
-			 */
+			bewertungen[ueberprueft] = k.getMax();
 			k.besetzen(model.getSpiel().getSelbst());
-			int gegnerBewertungGesamt = 0;
+			
+	
+			Knoten gegnerZug = null;
+			int bewertungGegner = 0;
 //			Gegnerzug überprüfen
 			for(Knoten j : this.zuUeberpruefendeKnoten()){
 				j.bewerten(false,model.getSpiel().getGegner());
-				gegnerBewertungGesamt += j.getMin();
-				j.minZuruecksetzen();
+				if(j.getMin() > bewertungGegner){
+					if(gegnerZug!=null)
+						gegnerZug.minZuruecksetzen();
+					gegnerZug = j;
+				}else{
+					j.minZuruecksetzen();
+				}
 			}
+			gegnerZug.besetzen(model.getSpiel().getGegner());
+			bewertungen[ueberprueft] -= gegnerZug.getMin();
+			gegnerZug.minZuruecksetzen();
+			
+			Knoten eigenerZug = null;
+			int eigeneBewertung = 0;
+			for(Knoten l : this.zuUeberpruefendeKnoten()){
+				l.bewerten(true,model.getSpiel().getSelbst());
+				if(l.getMax() > eigeneBewertung){
+					if(eigenerZug!=null)
+						eigenerZug.maxZuruecksetzen();
+					eigenerZug = l;
+				}
+			}
+			bewertungen[ueberprueft] += eigenerZug.getMax();
+			
 			k.spielerEntfernen();
-			
-			bewertungen[k.getSpalte()] = k.getMax() - gegnerBewertungGesamt;
-			
-			/**
-			 * Ende der Probe!
-			 */
+			gegnerZug.spielerEntfernen();
+			ueberprueft++;
 		}
 		
 		int unserZug = 0;

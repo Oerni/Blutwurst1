@@ -1,9 +1,5 @@
 package controller;
 
-import spieldaten.SimulationModel;
-import spieldaten.Spiel;
-import statistikdaten.Highscore;
-import statistikdaten.StatistikModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +16,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import parallelisierung.AnzahlSiegeNiederlagenRunnable;
+import spieldaten.SimulationModel;
+import spieldaten.Spiel;
+import statistikdaten.Highscore;
+import statistikdaten.StatistikModel;
 
 public class StatistikViewController {
 	private Scene scene;
@@ -33,9 +34,9 @@ public class StatistikViewController {
 	@FXML
 	private PieChart gewinnVerlustKuchenDiagramm, startGewinnVerlustKuchenDiagramm;
 	@FXML
-	private BarChart anzahlGewinneVerlusteDiagramm;
+	private BarChart<String,Number> anzahlGewinneVerlusteDiagramm;
 	@FXML
-	private TableView highscoreTabelle;
+	private TableView<Highscore> highscoreTabelle;
 	@FXML
 	private TableView<Spiel> spielhistorieTable;
 	@FXML

@@ -70,114 +70,17 @@ public class Knoten {
 			min = this.getBewertung(spieler);
 	}
 	
-//	public void bewerten(Spieler spieler){
-//		int horizontalLinks = zaehleFreieFelder(Kante.HORIZONTAL_LINKS,spieler);
-////		System.out.println("Links: " + horizontalLinks);
-//		int horizontalRechts = zaehleFreieFelder(Kante.HORIZONTAL_RECHTS,spieler);
-////		System.out.println("Rechts: " + horizontalRechts);
-//		int diagonalLinksOben = zaehleFreieFelder(Kante.DIAGONAL_LINKS_OBEN,spieler);
-////		System.out.println("links oben: " + diagonalLinksOben);
-//		int diagonalRechtsUnten = zaehleFreieFelder(Kante.DIAGONAL_RECHTS_UNTEN, spieler);
-////		System.out.println("rechts unten: " + diagonalRechtsUnten);
-//		int diagonalRechtsOben = zaehleFreieFelder(Kante.DIAGONAL_RECHTS_OBEN, spieler);
-////		System.out.println("rechts oben: " + diagonalRechtsOben);
-//		int diagonalLinksUnten = zaehleFreieFelder(Kante.DIAGONAL_UNTEN_LINKS, spieler);
-////		System.out.println("links unten: " + diagonalLinksUnten);
-//		int vertikalOben = zaehleFreieFelder(Kante.VERTIKAL_OBEN,spieler);
-////		System.out.println("oben: " + vertikalOben);
-//		int vertikalUnten = zaehleFreieFelder(Kante.VERTIKAL_UNTEN,spieler);
-////		System.out.println("unten: " + vertikalUnten);
-//		
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalRechts);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksOben);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsUnten);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksUnten);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben);
-//		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalUnten);			
-//		
-//		if(horizontalLinks >= 3){
-//			int horizontalLinksWert = wertDurchEigeneSteine(Kante.HORIZONTAL_LINKS,spieler,1);
-//			bewertung += horizontalLinksWert;
-//		}
-//		if(horizontalRechts >= 3){
-//			int horizontalRechtsWert = wertDurchEigeneSteine(Kante.HORIZONTAL_RECHTS,spieler,1);	
-//			bewertung += horizontalRechtsWert;
-//		}
-//		if(diagonalLinksOben >= 3){
-//			int diagonalLinksObenWert = wertDurchEigeneSteine(Kante.DIAGONAL_LINKS_OBEN,spieler,1);
-//			bewertung += diagonalLinksObenWert;
-//		}
-//		if(diagonalRechtsUnten >= 3){
-//			int diagonalRechtsUntenWert = wertDurchEigeneSteine(Kante.DIAGONAL_RECHTS_UNTEN, spieler,1);
-//			bewertung += diagonalRechtsUntenWert;
-//		}
-//		if(diagonalRechtsOben >= 3){
-//			int diagonalRechtsObenWert = wertDurchEigeneSteine(Kante.DIAGONAL_RECHTS_OBEN, spieler,1);
-//			bewertung += diagonalRechtsObenWert;
-//		}
-//		if(diagonalLinksUnten >= 3){
-//			int diagonalLinksUntenWert = wertDurchEigeneSteine(Kante.DIAGONAL_UNTEN_LINKS, spieler,1);
-//			bewertung += diagonalLinksUntenWert;
-//		}
-//		if(vertikalOben >= 3){
-//			int vertikalObenWert = wertDurchEigeneSteine(Kante.VERTIKAL_OBEN, spieler,1);
-//			bewertung += vertikalObenWert;
-//		}
-//		
-//		if(vertikalUnten >= 3){
-//			int vertikalUntenWert = wertDurchEigeneSteine(Kante.VERTIKAL_UNTEN, spieler,1);
-//			bewertung += vertikalUntenWert;
-//		}
-//		
-////		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks,horizontalLinksWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalRechts,horizontalRechtsWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben,diagonalLinksObenWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsUnten,diagonalRechtsUntenWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben,diagonalRechtsObenWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksUnten,diagonalLinksUntenWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben,vertikalObenWert);
-////		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalUnten,vertikalUntenWert);
-//		
-////		if(horizontalLinks<=3&&horizontalRechts<=3)
-////			bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks+horizontalRechts);
-////		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
-////			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksOben+diagonalRechtsUnten);
-////		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
-////			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben+diagonalLinksUnten);
-////		if(vertikalOben<=3&&vertikalUnten<=3)
-////			bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben+vertikalUnten);
-////		
-////		if(horizontalLinks<=3&&horizontalRechts<=3)
-////			bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks+horizontalRechts,horizontalLinksWert+horizontalRechtsWert);
-////		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
-////			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben+diagonalRechtsUnten,diagonalLinksObenWert+diagonalRechtsUntenWert);
-////		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
-////			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben+diagonalLinksUnten,diagonalRechtsObenWert+diagonalLinksUntenWert);
-////		if(vertikalOben<=3&&vertikalUnten<=3)
-////			bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben+vertikalUnten,vertikalObenWert+vertikalUntenWert);
-//	}
-	
 	public int getBewertung(Spieler spieler){
 		int bewertung = 0;
 		
 		int horizontalLinks = zaehleFreieFelder(Kante.HORIZONTAL_LINKS,spieler);
-//		System.out.println("Links: " + horizontalLinks);
 		int horizontalRechts = zaehleFreieFelder(Kante.HORIZONTAL_RECHTS,spieler);
-//		System.out.println("Rechts: " + horizontalRechts);
 		int diagonalLinksOben = zaehleFreieFelder(Kante.DIAGONAL_LINKS_OBEN,spieler);
-//		System.out.println("links oben: " + diagonalLinksOben);
 		int diagonalRechtsUnten = zaehleFreieFelder(Kante.DIAGONAL_RECHTS_UNTEN, spieler);
-//		System.out.println("rechts unten: " + diagonalRechtsUnten);
 		int diagonalRechtsOben = zaehleFreieFelder(Kante.DIAGONAL_RECHTS_OBEN, spieler);
-//		System.out.println("rechts oben: " + diagonalRechtsOben);
 		int diagonalLinksUnten = zaehleFreieFelder(Kante.DIAGONAL_UNTEN_LINKS, spieler);
-//		System.out.println("links unten: " + diagonalLinksUnten);
 		int vertikalOben = zaehleFreieFelder(Kante.VERTIKAL_OBEN,spieler);
-//		System.out.println("oben: " + vertikalOben);
 		int vertikalUnten = zaehleFreieFelder(Kante.VERTIKAL_UNTEN,spieler);
-//		System.out.println("unten: " + vertikalUnten);
 		
 		bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks);
 		bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalRechts);
@@ -186,7 +89,7 @@ public class Knoten {
 		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben);
 		bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksUnten);
 		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben);
-		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalUnten);			
+		bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalUnten);
 		
 		if(horizontalLinks >= 3){
 			int horizontalLinksWert = wertDurchEigeneSteine(Kante.HORIZONTAL_LINKS,spieler,1);
@@ -222,35 +125,6 @@ public class Knoten {
 			bewertung += vertikalUntenWert;
 		}
 		
-//		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks,horizontalLinksWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(horizontalRechts,horizontalRechtsWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben,diagonalLinksObenWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsUnten,diagonalRechtsUntenWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben,diagonalRechtsObenWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksUnten,diagonalLinksUntenWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben,vertikalObenWert);
-//		bewertung += erhoeheBewertungDurchEigeneSteine(vertikalUnten,vertikalUntenWert);
-		
-//		if(horizontalLinks<=3&&horizontalRechts<=3)
-//			bewertung += erhoeheBewertungDurchAnzahlFelder(horizontalLinks+horizontalRechts);
-//		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
-//			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalLinksOben+diagonalRechtsUnten);
-//		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
-//			bewertung += erhoeheBewertungDurchAnzahlFelder(diagonalRechtsOben+diagonalLinksUnten);
-//		if(vertikalOben<=3&&vertikalUnten<=3)
-//			bewertung += erhoeheBewertungDurchAnzahlFelder(vertikalOben+vertikalUnten);
-//		
-//		if(horizontalLinks<=3&&horizontalRechts<=3)
-//			bewertung += erhoeheBewertungDurchEigeneSteine(horizontalLinks+horizontalRechts,horizontalLinksWert+horizontalRechtsWert);
-//		if(diagonalLinksOben<=3&&diagonalRechtsUnten<=3)
-//			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalLinksOben+diagonalRechtsUnten,diagonalLinksObenWert+diagonalRechtsUntenWert);
-//		if(diagonalRechtsOben<=3&&diagonalLinksUnten<=3)
-//			bewertung += erhoeheBewertungDurchEigeneSteine(diagonalRechtsOben+diagonalLinksUnten,diagonalRechtsObenWert+diagonalLinksUntenWert);
-//		if(vertikalOben<=3&&vertikalUnten<=3)
-//			bewertung += erhoeheBewertungDurchEigeneSteine(vertikalOben+vertikalUnten,vertikalObenWert+vertikalUntenWert);
-//		
-		if(this.spielGewonnen)
-			return GEWONNEN;
 		return bewertung;
 	}
 	

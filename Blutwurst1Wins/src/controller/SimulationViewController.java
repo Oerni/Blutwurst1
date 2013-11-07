@@ -210,11 +210,7 @@ public class SimulationViewController {
 	}
 	
 	public void simulationStarten(){
-//		String ausgewaehlterSatz = satzauswahlBoxSimulation.getSelectionModel().getSelectedItem();
 		Satz ausgewaehlterSatz = satzauswahlBoxSimulation.getSelectionModel().getSelectedItem();
-//		String[] satznr = ausgewaehlterSatz.split(" ");
-		
-//		for(Zug zug : model.getSpiel().getSatz(Integer.parseInt(satznr[1])).getZuege())
 		for(int i=0;i<7;i++)
 			for(int j=0;j<6;j++)
 				feld[i][j].setFill(Color.WHITE);
