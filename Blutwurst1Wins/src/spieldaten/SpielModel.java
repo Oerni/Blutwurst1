@@ -22,21 +22,12 @@ public class SpielModel {
 	private Spiel spiel;
 	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung;
-	private Feld feld = new Feld(this);
 	private Stack<Spieler> alleSpieler = new Stack<Spieler>();
 	
 	public SpielModel(Stage stage){
 		this.stage = stage;
 		this.selbst = new Spieler(Strings.NAME);
 		ThreadExecutor.getInstance().execute(new SpeichernRunnable(selbst));
-	}
-	
-	public Feld getFeld(){
-		return feld;
-	}
-	
-	public void feldZuruecksetzen(){
-		feld = new Feld(this);
 	}
 	
 	public Stack<Spieler> getAlleSpieler(){

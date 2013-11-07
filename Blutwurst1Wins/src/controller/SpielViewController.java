@@ -28,6 +28,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import logik.Feld;
 import parallelisierung.AktualisierenRunnable;
 import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
@@ -52,6 +53,8 @@ public class SpielViewController implements Runnable{
 	private final int SPIEL_GEWONNEN = 1;
 	private final int SPIEL_VERLOREN = 2;
 	private final int SPIELFELD_VOLL = 3;
+
+	private Feld spielfeld;
 	
 	@FXML
 	private Label satzstatus;
@@ -214,6 +217,8 @@ public class SpielViewController implements Runnable{
 			ex.printStackTrace();
 		}
 		
+		this.spielfeld = new Feld(model);
+		
 		feld[0][0] = a1;
 		feld[1][0] = b1;
 		feld[2][0] = c1;
@@ -321,7 +326,7 @@ public class SpielViewController implements Runnable{
 						if(weiterspielen == this.WEITERSPIELEN){
 //							Gegnerzug einfuegen
 							if(gegnerZug.getSpalte() != -1){
-								int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
+								int gegnerZeile = spielfeld.einfuegen(gegnerZug);
 								System.out.println("Gegner Zug (Spalte,Zeile): " + gegnerZug.getSpalte() + gegnerZeile);
 								gegnerZug.setZeile(gegnerZeile);
 								if(gegnerZeile != -1)
@@ -339,10 +344,10 @@ public class SpielViewController implements Runnable{
 								ThreadExecutor.getInstance().execute(new SpeichernRunnable(gegnerZug));
 //							Eigenen zug berechnen
 //							int berechneteSpalte = model.getFeld().zugBerechnen(model.getSpiel().getSelbst());
-							int berechneteSpalte = model.getFeld().zugBerechnen();
+							int berechneteSpalte = spielfeld.zugBerechnen();
 							Zug eigenerZug = new Zug(berechneteSpalte,model.getSpiel().getSelbst());
 							eigenerZug.satzZuordnen(model.getSpiel().getAktuellenSatz());
-							int eigeneZeile = model.getFeld().einfuegen(eigenerZug);
+							int eigeneZeile = spielfeld.einfuegen(eigenerZug);
 							eigenerZug.setZeile(eigeneZeile);
 							ServerZugSchreibenRunnable schreibenRunnable = new ServerZugSchreibenRunnable(model);
 							schreibenRunnable.setZug(eigenerZug);
@@ -372,7 +377,7 @@ public class SpielViewController implements Runnable{
 								break;
 							case SPIEL_VERLOREN:
 //								Stein des Gegners muss nun noch gesetzt werden
-								int gegnerZeile = model.getFeld().einfuegen(gegnerZug);
+								int gegnerZeile = spielfeld.einfuegen(gegnerZug);
 								System.out.println("Gegner Zug (Spalte,Zeile): " + gegnerZug.getSpalte() + gegnerZeile);
 								gegnerZug.setZeile(gegnerZeile);
 								if(gegnerZeile != -1)
@@ -592,10 +597,7 @@ public class SpielViewController implements Runnable{
 	public void gewinnAnzeigeNeuerSatzStarten(){
 //		Neuen Satz starten
 		gewinnAnzeige.setVisible(false);
-		for(int i=0;i<7;i++)
-			for(int j=0;j<6;j++)
-				this.faerben(i,j,null);
-		model.feldZuruecksetzen();
+		feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
 		model.getSpiel().satzHinzufuegen(satz);
 		try{
@@ -605,14 +607,18 @@ public class SpielViewController implements Runnable{
 		}
 	}
 	
+	public void feldZuruecksetzen(){
+		for(int i=0;i<7;i++)
+			for(int j=0;j<6;j++)
+				this.faerben(i,j,null);
+		this.spielfeld = new Feld(model);
+	}
+	
 	@FXML
 	public void verlustAnzeigeNeuerSatzStarten(){
 //		Neuen Satz starten
 		verlustAnzeige.setVisible(false);
-		for(int i=0;i<7;i++)
-			for(int j=0;j<6;j++)
-				this.faerben(i,j,null);
-		model.feldZuruecksetzen();
+		feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
 		try{
 			satz.speichern();
@@ -625,10 +631,7 @@ public class SpielViewController implements Runnable{
 	public void spielfeldVollAnzeigeNeuerSatzStarten(){
 //		Neuen Satz starten
 		spielfeldVollAnzeige.setVisible(false);
-		for(int i=0;i<7;i++)
-			for(int j=0;j<6;j++)
-				this.faerben(i,j,null);
-		model.feldZuruecksetzen();
+		feldZuruecksetzen();
 		Satz satz = new Satz(model.getSpiel());
 		try{
 			satz.speichern();
@@ -722,7 +725,7 @@ public class SpielViewController implements Runnable{
 		offeneSpieleMenu.setVisible(false);
 		for(Zug zug : model.getSpiel().getAktuellenSatz().getZuege()){
 			faerben(zug.getSpalte(),zug.getZeile(),zug.getSpieler());
-			model.getFeld().einfuegen(zug);
+			spielfeld.einfuegen(zug);
 		}
 		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
 		spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
