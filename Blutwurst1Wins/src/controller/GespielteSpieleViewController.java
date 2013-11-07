@@ -13,16 +13,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import spieldaten.Satz;
-import spieldaten.SimulationModel;
+import spieldaten.GespielteSpieleModel;
 import spieldaten.Spieler;
 import spieldaten.Zug;
 
 
 
-public class SimulationViewController {
+public class GespielteSpieleViewController {
 		
 		private Scene scene;
-		private SimulationModel model;
+		private GespielteSpieleModel model;
 		private final Color eigeneFarbe = Color.web("0x33CC66");
 		private final Color gegnerFarbe = Color.web("0xFF3333");
 		@FXML
@@ -124,7 +124,7 @@ public class SimulationViewController {
 		@FXML
 		private ChoiceBox<Satz> satzauswahlBoxSimulation;
 		
-		public SimulationViewController(SimulationModel sModel){
+		public GespielteSpieleViewController(GespielteSpieleModel sModel){
 			this.model = sModel;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/simulationView.fxml"));
 			fxmlLoader.setController(this);

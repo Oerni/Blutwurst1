@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import parallelisierung.AnzahlSiegeNiederlagenRunnable;
-import spieldaten.SimulationModel;
+import spieldaten.GespielteSpieleModel;
 import spieldaten.Spiel;
 import statistikdaten.Highscore;
 import statistikdaten.StatistikModel;
@@ -118,8 +118,8 @@ public class StatistikViewController {
 	public void simulationStarten(){
 		Spiel ausgewaehltesSpiel = spielhistorieTable.getSelectionModel().getSelectedItem();
 		if(ausgewaehltesSpiel != null){
-			SimulationModel simModel = new SimulationModel(new Stage(),ausgewaehltesSpiel);
-			SimulationViewController controller = new SimulationViewController(simModel);
+			GespielteSpieleModel simModel = new GespielteSpieleModel(new Stage(),ausgewaehltesSpiel);
+			GespielteSpieleViewController controller = new GespielteSpieleViewController(simModel);
 			controller.show();
 		}
 	}
