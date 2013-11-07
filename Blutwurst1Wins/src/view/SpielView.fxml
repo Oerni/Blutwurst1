@@ -239,6 +239,7 @@
         <Label fx:id="gewinnAnzeigenLabel" layoutX="189.0" layoutY="66.0" text="den Satz!" />
         <Text layoutX="123.0" layoutY="51.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Gewonnen" textAlignment="CENTER" />
         <Button id="neuerSatzButton" fx:id="gewinnAnzeigeNeuerSatzButton" layoutX="156.0" layoutY="96.0" mnemonicParsing="false" onAction="#gewinnAnzeigeNeuerSatzStarten" text="neuer Satz" />
+        <Button fx:id="gewinnAnzeigeNeueRundeButton" layoutX="156.0" layoutY="96.0" mnemonicParsing="false" onAction="#neueRundeStarten" text="neue Runde" visible="false" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
@@ -254,6 +255,7 @@
         <Text layoutX="69.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blutwurst1 verliert" />
         <Label fx:id="verlustAnzeigenLabel" layoutX="188.0" layoutY="62.0" text="den Satz!" />
         <Button id="gewinnAnzeigeNeuerSatzButton" fx:id="verlustAnzeigeNeuerSatzButton" layoutX="147.0" layoutY="96.0" mnemonicParsing="false" onAction="#verlustAnzeigeNeuerSatzStarten" text="neuer Satz" />
+        <Button fx:id="verlustAnzeigeNeueRundeButton" layoutX="146.0" layoutY="96.0" mnemonicParsing="false" onAction="#neueRundeStarten" text="neue Runde" visible="false" />
       </children>
     </AnchorPane>
     <!-- Reset Menu begins -->
@@ -268,6 +270,7 @@
         <Text layoutX="110.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Unentschieden" textAlignment="CENTER" />
         <Text layoutX="114.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielfeld voll" />
         <Button fx:id="spielfeldVollAnzeigeNeuerSatzButton" layoutX="155.0" layoutY="96.0" mnemonicParsing="false" onAction="#spielfeldVollAnzeigeNeuerSatzStarten" text="neuer Satz" />
+        <Button fx:id="spielfeldvollAnzeigeNeueRundeButton" layoutX="152.0" layoutY="95.0" mnemonicParsing="false" onAction="#neueRundeStarten" text="neue Runde" visible="false" />
       </children>
     </AnchorPane>
     <ImageView id="spielregelnButtonOrange.png" fx:id="spielregelnButtonOrange" fitHeight="51.0" fitWidth="67.529296875" layoutX="384.0" layoutY="32.0" visible="false">
