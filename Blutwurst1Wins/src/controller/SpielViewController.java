@@ -471,13 +471,13 @@ public class SpielViewController implements Runnable{
 		}else{
 			if(model.getRunde() == 1 && model.getSpiel().getAnzahlSaetze() == 2){
 //				Ende der 1. Runde -> Neue Runde
-//				Schlieﬂen oder neue Runde klicken
+//				Schliessen oder neue Runde klicken
 			}else if(model.getRunde() == 2 && model.getSpiel().getAnzahlSaetze() == 3){
 //				Ende der 2. Runde; kein Sieger
 				
 			}else{
 //				weiterspielen
-//				Schlieﬂen oder neuer Satz
+//				Schliessen oder neuer Satz
 				gewinnAnzeigeNeuerSatzButton.setVisible(true);
 			}
 		}
@@ -870,6 +870,14 @@ public class SpielViewController implements Runnable{
 		this.spielfeld = new Feld(model);
 		Platform.runLater(new LabelAendernRunnable(this,model));
 		resetMenuSchliessen();
+	}
+	
+	@FXML
+	public void neueRundeStarten(){
+		gewinnAnzeige.setVisible(false);
+		verlustAnzeige.setVisible(false);
+		spielfeldVollAnzeige.setVisible(false);
+		
 	}
 	
 	@FXML
