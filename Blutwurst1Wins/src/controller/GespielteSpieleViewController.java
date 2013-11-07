@@ -6,14 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import spieldaten.Satz;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import spieldaten.GespielteSpieleModel;
+import spieldaten.Satz;
 import spieldaten.Spieler;
 import spieldaten.Zug;
 
@@ -122,7 +127,7 @@ public class GespielteSpieleViewController {
 		private Circle feld[][] = new Circle[7][6];
 		
 		@FXML
-		private ChoiceBox<Satz> satzauswahlBoxSimulation;
+		private ComboBox<Satz> satzauswahlBoxSimulation;
 		
 		public GespielteSpieleViewController(GespielteSpieleModel sModel){
 			this.model = sModel;
@@ -180,6 +185,19 @@ public class GespielteSpieleViewController {
 			feld[5][5] = f6;
 			feld[6][5] = g6;
 			
+			satzauswahlBoxSimulation.setConverter(new StringConverter<Satz>() {
+				
+				@Override
+				public String toString(Satz satz) {
+					return "text";
+				}
+				
+				@Override
+				public Satz fromString(String text) {
+					return null;
+				}
+			});
+			
 			for(Satz satz : model.getSpiel().getSaetze())
 				satzauswahlBoxSimulation.getItems().add(satz);
 			
@@ -189,13 +207,12 @@ public class GespielteSpieleViewController {
 			
 			simulationStarten();
 			
-			satzauswahlBoxSimulation.getSelectionModel().selectedIndexProperty().addListener(
-					new ChangeListener<Number>() {
-						public void changed(ObservableValue ov,Number alterSatz,Number neuerSatz){
-							simulationStarten();
-						}
-					}
-			);
+			satzauswahlBoxSimulation.valueProperty().addListener(new ChangeListener<Satz>() {
+				@Override
+				public void changed(ObservableValue<? extends Satz> ov,Satz alt,Satz neu){
+					satzauswahlBoxSimulation.setValue(neu);
+				}
+			});
 	}
 	
 	public void show(){

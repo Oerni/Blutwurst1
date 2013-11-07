@@ -1,18 +1,23 @@
 package parallelisierung;
 
 import spieldaten.SpielModel;
-import javafx.scene.control.Label;
+import controller.SpielViewController;
 
 public class LabelAendernRunnable implements Runnable{
-	private Label gegnerPunkte;
+	private SpielViewController controller;
 	private SpielModel model;
 	
-	public LabelAendernRunnable(Label gegnerPunkte,SpielModel model){
-		this.gegnerPunkte = gegnerPunkte;
+	public LabelAendernRunnable(SpielViewController controller,SpielModel model){
+		this.controller = controller;
 		this.model = model;
 	}
 	
 	public void run(){
-		gegnerPunkte.setText(""+model.getSpiel().getPunkteGegner());
+		controller.setGegnerPunkte(""+model.getSpiel().getPunkteGegner());
+		controller.setHeimPunkte(""+model.getSpiel().getPunkteHeim());
+		controller.setSatzStatus(model.getSatzStatus());
+		controller.setRunde(""+model.getRunde());
+		controller.setSpielNr(""+model.getSpiel().getID());
+		controller.setSatz(""+model.getSpiel().getAnzahlSaetze());
 	}
 }

@@ -22,6 +22,8 @@ public class SpielModel {
 	private Spieler selbst;
 	private DateiVerwaltung dateiverwaltung;
 	private Stack<Spieler> alleSpieler = new Stack<Spieler>();
+	private String satzStatus = "";
+	private int runde = 1;
 	
 	public SpielModel(Stage stage){
 		this.stage = stage;
@@ -33,6 +35,22 @@ public class SpielModel {
 			this.selbst = new Spieler(Strings.NAME);
 			ThreadExecutor.getInstance().execute(new SpeichernRunnable(selbst));
 		}
+	}
+	
+	public int getRunde(){
+		return runde;
+	}
+	
+	public void naechsteRunde(){
+		this.runde++;
+	}
+	
+	public void setSatzStatus(String satzStatus){
+		this.satzStatus = satzStatus;
+	}
+	
+	public String getSatzStatus(){
+		return satzStatus;
 	}
 	
 	public Spieler getSelbst(){
@@ -150,8 +168,13 @@ public class SpielModel {
 		dateiverwaltung.dateiSchreiben(zug);
 	}
 	
-	public void allesSpeichern(){
-
+	public void allesZuruecksetzen(){
+		HSQLConnection.getInstance().loeschen(Strings.SPIELER_ZURUECKSETZEN);
+		HSQLConnection.getInstance().loeschen(Strings.SPIEL_ZURUECKSETZEN);
+		HSQLConnection.getInstance().loeschen(Strings.SATZ_ZURUECKSETZEN);
+		HSQLConnection.getInstance().loeschen(Strings.ZUG_ZURUECKSETZEN);
+		this.spiel = null;
+		this.runde = 1;
 	}
 	
 	public DateiVerwaltung getDateiVerwaltung(){

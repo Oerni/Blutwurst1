@@ -70,11 +70,11 @@
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="21.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="750.0" />
     <Text layoutX="324.0" layoutY="16.0" scaleX="0.9662648288740485" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4Gewinnt - blutwurst1 " />
     <Label fx:id="satzstatus" layoutX="649.0" layoutY="88.0" styleClass="anzeigentext" text="Waiting" />
-    <Label fx:id="runde" layoutX="706.0" layoutY="114.0" styleClass="anzeigentext" text="0" />
-    <Label fx:id="spiel" layoutX="706.0" layoutY="137.0" styleClass="anzeigentext" text="0" />
-    <Label fx:id="satz" layoutX="706.0" layoutY="160.0" styleClass="anzeigentext" text="0" />
-    <Label fx:id="spielstandHeim" layoutX="704.0" layoutY="224.0" prefHeight="36.685638427734375" styleClass="spielstandHeim" text="0" />
-    <Label fx:id="spielstandGast" layoutX="703.0" layoutY="270.0" prefHeight="36.685516357421875" styleClass="spielstandGast" text="0" />
+    <Label fx:id="runde" layoutX="706.0" layoutY="114.0" styleClass="anzeigentext" text="" />
+    <Label fx:id="spiel" layoutX="706.0" layoutY="137.0" styleClass="anzeigentext" text="" />
+    <Label fx:id="satz" layoutX="706.0" layoutY="160.0" styleClass="anzeigentext" text="" />
+    <Label fx:id="spielstandHeim" layoutX="704.0" layoutY="224.0" prefHeight="36.685638427734375" styleClass="spielstandHeim" text="" />
+    <Label fx:id="spielstandGast" layoutX="703.0" layoutY="270.0" prefHeight="36.685516357421875" styleClass="spielstandGast" text="" />
     <Label fx:id="gesamt" layoutX="702.0" layoutY="428.0" prefHeight="36.685516357421875" styleClass="gesamt" text="0" />
     <ImageView id="HilfeButton.png" fx:id="hilfeButton" layoutX="314.0" layoutY="37.0" onMouseClicked="#hilfeAnzeigen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit">
       <image>

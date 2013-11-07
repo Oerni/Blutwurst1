@@ -48,6 +48,10 @@ public class Spiel extends DBObject{
 		return saetze.get(i-1);
 	}
 	
+	public int getAnzahlSaetze(){
+		return saetze.size();
+	}
+	
 	public Spieler getSieger(char kennzeichnung){
 		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
 	}

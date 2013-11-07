@@ -15,21 +15,25 @@ public class Satz extends DBObject{
 	private Spiel spiel;
 	private Spieler gewonnen;
 	private Stack<Zug> zuege = new Stack<Zug>();
+	private int satzX;
 	
 	public Satz(int satzNr,Spieler spielerBegonnen,Spiel spiel){
 		this.spielerBegonnen = spielerBegonnen;
 		this.spiel = spiel;
 		this.id = satzNr;
+		this.satzX = spiel.getAnzahlSaetze();
 	}
 	public Satz(Spiel spiel,int satzNr){
 		this.spiel = spiel;
 		this.id = satzNr;
+		this.satzX = spiel.getAnzahlSaetze();
 	}
 //	Simulation
 	public Satz(Spiel spiel,int satzNr,Spieler spielerBegonnen){
 		this.spiel = spiel;
 		this.id = satzNr;
 		this.spielerBegonnen = spielerBegonnen;
+		this.satzX = spiel.getAnzahlSaetze();
 		
 		ResultSet zuegeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.ZUEGE_EINES_SATZES,satzNr,spiel.getID()));
 		try{
@@ -45,12 +49,22 @@ public class Satz extends DBObject{
 		this.spiel = spiel;
 		this.id = satzNr;
 		this.gewonnen = gewinner;
+		this.satzX = spiel.getAnzahlSaetze();
 	}
 	
 //	Initiales Instanziieren im Spielverlauf
 	public Satz(Spieler spielerBegonnen,Spiel spiel){
 		this.spielerBegonnen = spielerBegonnen;
 		this.spiel = spiel;
+		this.satzX = spiel.getAnzahlSaetze();
+	}
+	
+	public void setSatzX(int satzX){
+		this.satzX = satzX;
+	}
+	
+	public int getSatzX(){
+		return satzX;
 	}
 	
 	public Satz(Spiel spiel){

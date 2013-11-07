@@ -64,4 +64,12 @@ public class HSQLConnection {
 			return null;
 		}
 	}
+	
+	public void loeschen(String query){
+		try{
+			statement.execute(query);
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+	}
 }

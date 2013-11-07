@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import logik.Feld;
 import parallelisierung.AktualisierenRunnable;
+import parallelisierung.LabelAendernRunnable;
 import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.SpeichernRunnable;
@@ -57,6 +59,10 @@ public class SpielViewController implements Runnable{
 
 	private Feld spielfeld;
 	
+	@FXML
+	private Button gewinnAnzeigeNeuerSatzButton;
+	@FXML
+	private Button verlustAnzeigeNeuerSatzButton;
 	@FXML
 	private Label satzstatus;
 	@FXML
@@ -219,6 +225,7 @@ public class SpielViewController implements Runnable{
 		
 		this.spielfeld = new Feld(model);
 		this.gesamt.setText(""+model.getSelbst().getPunktzahl());
+		this.satzstatus.setText(model.getSatzStatus());
 		
 		feld[0][0] = a1;
 		feld[1][0] = b1;
@@ -289,18 +296,21 @@ public class SpielViewController implements Runnable{
 					@Override
 					protected void updateItem(Spieler spieler,boolean bln){
 						super.updateItem(spieler, bln);
+						setContentDisplay(ContentDisplay.TEXT_ONLY);
 						if(spieler != null)
 							setText(spieler.getName());
 						else
 							setText(null);
 					}
+					
+					
 				};
 				
 				return cell;
 			}
 		});
 		gegnerAuswahlBox.getItems().removeAll(model.getAlleSpieler());
-//		gegnerAuswahlBox.
+
 		for(Spieler spieler : alleSpieler)
 			gegnerAuswahlBox.getItems().add(spieler);
 		
@@ -317,10 +327,32 @@ public class SpielViewController implements Runnable{
 		startButtonOrange.setVisible(false);
 	}
 	
+	public void setGegnerPunkte(String gegnerPunkte){
+		this.spielstandGast.setText("" + gegnerPunkte);
+	}
+	public void setHeimPunkte(String heimPunkte){
+		this.spielstandHeim.setText("" + heimPunkte);;
+	}
+	public void setSatzStatus(String satzStatus){
+		this.satzstatus.setText(satzStatus);
+	}
+	public void setRunde(String runde){
+		this.runde.setText(runde);
+	}
+	public void setSpielNr(String spielNr){
+		this.spiel.setText(spielNr);
+	}
+	public void setSatz(String satz){
+		this.satz.setText(satz);
+	}
+	
 	public void run(){
+				model.setSatzStatus("spielen");
+				Platform.runLater(new LabelAendernRunnable(this,model));
 				while(true){
 					Zug gegnerZug = model.getDateiVerwaltung().dateiLesen();
-					
+					this.model.setSatzStatus(gegnerZug.getSatzstatus());
+					Platform.runLater(new LabelAendernRunnable(this,model));
 					try{
 						int weiterspielen = sonderfaellePruefen(gegnerZug);
 						
@@ -373,7 +405,6 @@ public class SpielViewController implements Runnable{
 						}else{
 							switch(weiterspielen){
 							case SPIEL_GEWONNEN:
-//								ThreadExecutor.getInstance().shutdown(this);
 								spielGewonnen();
 								break;
 							case SPIEL_VERLOREN:
@@ -410,26 +441,42 @@ public class SpielViewController implements Runnable{
 		model.getSpiel().erhoehePunkteHeim();
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
 //		Thread-Wechsel
-		Platform.runLater(new Runnable(){
-			@Override
-			public void run(){
-				spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
-			}
-		
-		});
+		Platform.runLater(new LabelAendernRunnable(this,model));
 //		spielstandHeim.
 		if(model.getSpiel().getPunkteHeim() >= 2){
 //			Spiel gewonnen
 			model.getSpiel().setSieger(model.getSpiel().getSelbst());
 			model.getSpiel().aktualisieren();
+//			Gesamtpunkt um 2 erhöhen
+			model.getSpiel().getSelbst().erhoehePunktzahl(2);
+			ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getSelbst()));
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					gewinnAnzeigenLabel.setText("das Spiel");
+				}
+			});
+			gewinnAnzeigeNeuerSatzButton.setVisible(false);
 		}
 		else{
 //			Satz gewonnen
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					gewinnAnzeigenLabel.setText("den Satz");
+				}
+			});
+			
+			if(model.getRunde()==1 && model.getSpiel().getAnzahlSaetze()==2){
+//				Neue Runde
+				model.getSpiel().getSelbst().erhoehePunktzahl(1);
+				ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getSelbst()));
+			}else
+				gewinnAnzeigeNeuerSatzButton.setVisible(true);
 		}
-		System.out.println("Spiel gewonnen");
-		labelsAktualisieren();
+
 		gewinnAnzeige.setVisible(true);
-		//gewinnAnzeigenLabel
+		
 	}
 	private void spielVerloren(){
 		model.getSpiel().getAktuellenSatz().setSieger(model.getSpiel().getGegner());
@@ -441,11 +488,34 @@ public class SpielViewController implements Runnable{
 			//		Spiel  verloren
 			model.getSpiel().setSieger(model.getSpiel().getGegner());
 			model.getSpiel().aktualisieren();
+			model.getSpiel().getGegner().erhoehePunktzahl(2);
+			ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getGegner()));
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					gewinnAnzeigenLabel.setText("das Spiel");
+				}
+			});
+			gewinnAnzeigeNeuerSatzButton.setVisible(false);
 		}else{
 			//		Satz verloren
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					verlustAnzeigenLabel.setText("den Satz");
+				}
+			});
+			
+			if(model.getRunde()==1 && model.getSpiel().getAnzahlSaetze()==2){
+//				Neue Runde
+				model.naechsteRunde();
+				model.getSpiel().getGegner().erhoehePunktzahl(1);
+				ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getGegner()));
+			}
+			else
+				verlustAnzeigeNeuerSatzButton.setVisible(true);
 		}
-		System.out.println("Spiel verloren");
-		labelsAktualisieren();
+
 		verlustAnzeige.setVisible(true);
 		//verlustAnzeigenLabel
 	}
@@ -479,7 +549,6 @@ public class SpielViewController implements Runnable{
 		ObservableList<Spiel> offeneSpiele = model.getOffeneSpiele(this.gegner);
 		if(offeneSpiele.isEmpty()){
 			model.init(pfad,this.gegner,eigeneKennzeichnung);
-//			start();
 			ThreadExecutor.getInstance().spielStarten(this);
 		}else{
 			this.pfad = pfad;
@@ -596,7 +665,6 @@ public class SpielViewController implements Runnable{
 	//Runde zuruecksetzen
 	@FXML
 	public void resetRunde(){
-		
 		resetMenuSchliessen();
 	}
 	
@@ -731,14 +799,29 @@ public class SpielViewController implements Runnable{
 		spiel.ladeSaetze();
 		model.spielFortsetzen(spiel,this.pfad,this.kennzeichnung,false);
 		offeneSpieleMenu.setVisible(false);
-		for(Zug zug : model.getSpiel().getAktuellenSatz().getZuege()){
-			faerben(zug.getSpalte(),zug.getZeile(),zug.getSpieler());
-			spielfeld.einfuegen(zug);
+		if(model.getSpiel().getAktuellenSatz().getSieger()==null){
+			for(Zug zug : model.getSpiel().getAktuellenSatz().getZuege()){
+				faerben(zug.getSpalte(),zug.getZeile(),zug.getSpieler());
+				spielfeld.einfuegen(zug);
+			}
+			spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+			spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
+			ThreadExecutor.getInstance().spielStarten(this);
+		}else{
+			Satz neuerSatz = new Satz(model.getSpiel());
+			ThreadExecutor.getInstance().execute(new SpeichernRunnable(neuerSatz));
+			model.getSpiel().satzHinzufuegen(neuerSatz);
+			spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+			spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
+			ThreadExecutor.getInstance().spielStarten(this);
 		}
-		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
-		spielstandGast.setText(""+model.getSpiel().getPunkteGegner());
-//		start();
-		ThreadExecutor.getInstance().spielStarten(this);
+	}
+	
+	@FXML
+	public void allesZuruecksetzen(){
+		model.allesZuruecksetzen();
+		this.spielfeld = new Feld(model);
+		ThreadExecutor.getInstance().execute(new LabelAendernRunnable(this,model));
 	}
 	
 	@FXML

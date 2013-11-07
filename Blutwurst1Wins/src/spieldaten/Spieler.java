@@ -28,6 +28,10 @@ public class Spieler extends DBObject{
 		return this.punktzahl;
 	}
 	
+	public void erhoehePunktzahl(int punktzahl){
+		this.punktzahl += punktzahl;
+	}
+	
 	public char getKennzeichnung(){
 		return kennzeichnung;
 	}
@@ -47,6 +51,6 @@ public class Spieler extends DBObject{
 	
 	@Override
 	public void aktualisieren(){
-		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name));
+		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name,this.punktzahl));
 	}
 }
