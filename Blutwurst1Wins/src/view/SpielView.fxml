@@ -203,7 +203,7 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.5" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Button id="resetSatzButton" layoutX="26.0" layoutY="83.0" mnemonicParsing="false" onAction="#resetSatz" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="Der Satz" />
         <Button id="resetSpielButton" layoutX="111.0" layoutY="84.0" mnemonicParsing="false" onAction="#resetSpiel" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="Das Spiel" />
-        <Button id="resetRundeButton" layoutX="200.0" layoutY="84.0" mnemonicParsing="false" onAction="#resetRunde" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" text="Die Runde" />
+        <Button id="resetRundeButton" layoutX="200.0" layoutY="84.0" mnemonicParsing="false" onAction="#allesZuruecksetzen" onMouseEntered="#mouseOver" onMouseExited="#mouseExit" prefWidth="75.0" text="Alles" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset" />
