@@ -139,7 +139,10 @@ public class StatistikViewController {
 	//Spielfeld anzeigen
 	@FXML
 	public void spielfeldAnzeigen(){
-		
+		//Statistik View schliessen
+		Stage stage = (Stage) spielfeldButton.getScene().getWindow();
+	    
+	    stage.close();
 	}
 
 	
