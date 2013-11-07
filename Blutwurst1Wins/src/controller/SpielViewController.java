@@ -29,7 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import parallelisierung.AktualisierenRunnable;
-import parallelisierung.LabelAendernRunnable;
 import parallelisierung.PfadSchreibenRunnable;
 import parallelisierung.ServerZugSchreibenRunnable;
 import parallelisierung.SpeichernRunnable;
@@ -41,8 +40,6 @@ import spieldaten.Spieler;
 import spieldaten.Strings;
 import spieldaten.Zug;
 import statistikdaten.StatistikModel;
-
-
 
 public class SpielViewController implements Runnable{
 	private SpielModel model;
@@ -370,7 +367,7 @@ public class SpielViewController implements Runnable{
 						}else{
 							switch(weiterspielen){
 							case SPIEL_GEWONNEN:
-								ThreadExecutor.getInstance().shutdown(this);
+//								ThreadExecutor.getInstance().shutdown(this);
 								spielGewonnen();
 								break;
 							case SPIEL_VERLOREN:

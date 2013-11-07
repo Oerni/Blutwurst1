@@ -6,10 +6,16 @@ import spieldaten.Spieler;
 public class Highscore {
 	private Spieler spieler;
 	private int anzahlSiege;
+	private int rang;
 	
-	public Highscore(Spieler spieler,int anzahlSiege){
+	public Highscore(int rang,Spieler spieler,int anzahlSiege){
+		this.rang = rang;
 		this.spieler = spieler;
 		this.anzahlSiege = anzahlSiege;
+	}
+	
+	public String getRang(){
+		return ""+rang;
 	}
 	
 	public String getSpielerName(){

@@ -22,9 +22,11 @@ public class BestenlisteRunnable implements Runnable {
 		ResultSet bestenlisteSQL = HSQLConnection.getInstance().executeQuery(Strings.HIGHSCORE);
 		ObservableList<Highscore> bestenliste = FXCollections.observableArrayList();
 		try{
+			int rang = 1;
 			while(bestenlisteSQL.next()){
 				try{
-					bestenliste.add(new Highscore(new Spieler(bestenlisteSQL.getString("name")),bestenlisteSQL.getInt("anzahlsiege")));
+					bestenliste.add(new Highscore(rang,new Spieler(bestenlisteSQL.getString("name")),bestenlisteSQL.getInt("anzahlsiege")));
+					rang++;
 				}catch(SQLException ex){
 					ex.printStackTrace();
 				}

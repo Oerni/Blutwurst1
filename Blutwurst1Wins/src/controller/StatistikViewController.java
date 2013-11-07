@@ -96,6 +96,7 @@ public class StatistikViewController {
 //		Bestenliste
 		ObservableList<Highscore> bestenliste = model.getBestenliste();
 		highscoreTabelle.setEditable(false);
+		rankingSpalte.setCellValueFactory(new PropertyValueFactory<Highscore,String>("rang"));
 		spielernameSpalte.setCellValueFactory(new PropertyValueFactory<Highscore,String>("spielerName"));
 		anzahlSiegeSpalte.setCellValueFactory(new PropertyValueFactory<Highscore,String>("anzahlSiege"));
 		highscoreTabelle.setItems(bestenliste);
