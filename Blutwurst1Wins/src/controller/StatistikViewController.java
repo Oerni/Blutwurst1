@@ -1,5 +1,6 @@
 package controller;
 
+import spieldaten.SimulationModel;
 import spieldaten.Spiel;
 import statistikdaten.Highscore;
 import statistikdaten.StatistikModel;
@@ -34,7 +35,9 @@ public class StatistikViewController {
 	@FXML
 	private BarChart anzahlGewinneVerlusteDiagramm;
 	@FXML
-	private TableView spielhistorieTable, highscoreTabelle;
+	private TableView highscoreTabelle;
+	@FXML
+	private TableView<Spiel> spielhistorieTable;
 	@FXML
 	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte,siegerSpalte;
 	@FXML
@@ -112,9 +115,12 @@ public class StatistikViewController {
 	
 	@FXML
 	public void simulationStarten(){
-		int spielnr = 0;
-//		SimulationModel sModel = new SimulationModel(new Stage(),spielnr,model.getSelbst(),model.getGegner());
-//		new SimulationViewController(sModel).show();
+		Spiel ausgewaehltesSpiel = spielhistorieTable.getSelectionModel().getSelectedItem();
+		if(ausgewaehltesSpiel != null){
+			SimulationModel simModel = new SimulationModel(new Stage(),ausgewaehltesSpiel);
+			SimulationViewController controller = new SimulationViewController(simModel);
+			controller.show();
+		}
 	}
 	
 

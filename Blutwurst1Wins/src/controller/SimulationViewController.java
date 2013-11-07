@@ -1,16 +1,21 @@
 package controller;
 
-import spieldaten.SimulationModel;
-import spieldaten.Spieler;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import spieldaten.Satz;
+import spieldaten.SimulationModel;
+import spieldaten.Spieler;
+import spieldaten.Zug;
 
 
 
@@ -28,7 +33,6 @@ public class SimulationViewController {
 		private Label simulationSpielstandHeim, simulationSpielstandGast;
 		@FXML
 		private Button simulationBeendenButton;
-		private int spielnr;
 		
 		@FXML
 		private Circle a1;
@@ -117,17 +121,18 @@ public class SimulationViewController {
 		
 		private Circle feld[][] = new Circle[7][6];
 		
+		@FXML
+		private ChoiceBox<Satz> satzauswahlBoxSimulation;
+		
 		public SimulationViewController(SimulationModel sModel){
 			this.model = sModel;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/simulationView.fxml"));
 			fxmlLoader.setController(this);
-			
-			
+						
 			try{
 				Pane pane = (Pane)fxmlLoader.load();
 				scene = new Scene(pane);
-				
-				
+						
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
@@ -174,6 +179,23 @@ public class SimulationViewController {
 			feld[4][5] = e6;
 			feld[5][5] = f6;
 			feld[6][5] = g6;
+			
+			for(Satz satz : model.getSpiel().getSaetze())
+				satzauswahlBoxSimulation.getItems().add(satz);
+			
+			
+			if(!satzauswahlBoxSimulation.getItems().isEmpty())
+				satzauswahlBoxSimulation.getSelectionModel().select(satzauswahlBoxSimulation.getItems().get(0));
+			
+			simulationStarten();
+			
+			satzauswahlBoxSimulation.getSelectionModel().selectedIndexProperty().addListener(
+					new ChangeListener<Number>() {
+						public void changed(ObservableValue ov,Number alterSatz,Number neuerSatz){
+							simulationStarten();
+						}
+					}
+			);
 	}
 	
 	public void show(){
@@ -184,28 +206,26 @@ public class SimulationViewController {
 	}
 	
 	private Color getAktuelleFarbe(Spieler spieler){
-		return spieler.getID() == model.getSelbst().getID() ? eigeneFarbe : gegnerFarbe;
+		return spieler == model.getSpiel().getSelbst() ? eigeneFarbe : gegnerFarbe;
 	}
 	
 	public void simulationStarten(){
-//		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
-//		while(!spielFuture.isDone()){}
-//		try{
-//			Spiel spiel = spielFuture.get();
-//			for(Satz s : spiel.getSaetze()){
-//				for(Zug z : s.getZuege()){
-//					feld[z.getSpalte()][z.getZeile()].setFill(getAktuelleFarbe(z.getSpieler()));
-//					Thread.sleep(300);
-//				}
-//			}
-//		}catch(Exception ex){
-//			
-//		}
+//		String ausgewaehlterSatz = satzauswahlBoxSimulation.getSelectionModel().getSelectedItem();
+		Satz ausgewaehlterSatz = satzauswahlBoxSimulation.getSelectionModel().getSelectedItem();
+//		String[] satznr = ausgewaehlterSatz.split(" ");
+		
+//		for(Zug zug : model.getSpiel().getSatz(Integer.parseInt(satznr[1])).getZuege())
+		for(int i=0;i<7;i++)
+			for(int j=0;j<6;j++)
+				feld[i][j].setFill(Color.WHITE);
+		for(Zug zug : ausgewaehlterSatz.getZuege())
+			feld[zug.getSpalte()][zug.getZeile()].setFill(this.getAktuelleFarbe(zug.getSpieler()));
+		
 	}
 	
 	//Simulation Beenden und Fenster schliessen
 	@FXML
 	public void simulationBeenden(){
-		
+		model.getStage().close();
 	}
 }

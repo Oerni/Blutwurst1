@@ -20,16 +20,13 @@ public class SpielDatenSaetzeRunnable implements Runnable{
 	}
 	
 	public void run(){
-		SemaphorManager.getInstance().lesezugriffAnmelden();
 		ResultSet saetzeSQL = HSQLConnection.getInstance().executeQuery(String.format(Strings.SAETZE_EINES_SPIELS,spiel.getID()));
-		SemaphorManager.getInstance().lesezugriffAbmelden();
 		
 		try{
 			while(saetzeSQL.next()){
 				try{
 					Satz satz = new Satz(saetzeSQL.getInt("id"),spiel.getSpieler(saetzeSQL.getString("beginner")),spiel,spiel.getSpieler(saetzeSQL.getString("gewinner")));
 					spiel.satzHinzufuegen(satz);
-					System.out.println(satz);
 					ThreadExecutor.getInstance().execute(new SpielDatenZuegeRunnable(satz));
 				}catch(Exception ex){
 					ex.printStackTrace();

@@ -44,6 +44,10 @@ public class Spiel extends DBObject{
 		}
 	}
 	
+	public Satz getSatz(int i){
+		return saetze.get(i-1);
+	}
+	
 	public Spieler getSieger(char kennzeichnung){
 		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
 	}

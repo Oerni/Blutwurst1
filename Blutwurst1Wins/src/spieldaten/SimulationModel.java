@@ -1,34 +1,16 @@
 package spieldaten;
 
-import java.util.concurrent.Future;
-
 import javafx.stage.Stage;
-import parallelisierung.ThreadExecutor;
 
 public class SimulationModel {
 	private Stage stage;
 	private Spiel spiel;
-	private Spieler selbst;
-	private Spieler gegner;
 	
-	public SimulationModel(Stage stage,int spielnr,Spieler selbst,Spieler gegner){
-//		this.stage = stage;
-//		Future<Spiel> spielFuture = ThreadExecutor.getInstance().getSpiel(new SpielCallable(spielnr));
-//		while(!spielFuture.isDone()){}
-//		try{
-//			this.spiel = spielFuture.get();
-//		}catch(Exception ex){
-//			ex.printStackTrace();
-//		}
+	public SimulationModel(Stage stage,Spiel spiel){
+		this.stage = stage;
+		this.spiel = spiel;
 	}
-	
-	public Spieler getSelbst(){
-		return selbst;
-	}
-	public Spieler getGegner(){
-		return gegner;
-	}
-	
+
 	public Stage getStage(){
 		return stage;
 	}
