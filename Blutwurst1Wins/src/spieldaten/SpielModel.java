@@ -7,7 +7,6 @@ import java.util.Stack;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import logik.Feld;
 import parallelisierung.AktualisierenRunnable;
 import parallelisierung.SpeichernRunnable;
 import parallelisierung.ThreadExecutor;
@@ -26,8 +25,18 @@ public class SpielModel {
 	
 	public SpielModel(Stage stage){
 		this.stage = stage;
-		this.selbst = new Spieler(Strings.NAME);
-		ThreadExecutor.getInstance().execute(new SpeichernRunnable(selbst));
+		ResultSet eigenerSpieler = HSQLConnection.getInstance().executeQuery(Strings.EIGENER_SPIELER);
+		try{
+			eigenerSpieler.next();
+			this.selbst = new Spieler(eigenerSpieler.getString("name"),eigenerSpieler.getInt("punktzahl"));
+		}catch(SQLException ex){
+			this.selbst = new Spieler(Strings.NAME);
+			ThreadExecutor.getInstance().execute(new SpeichernRunnable(selbst));
+		}
+	}
+	
+	public Spieler getSelbst(){
+		return selbst;
 	}
 	
 	public Stack<Spieler> getAlleSpieler(){
@@ -36,7 +45,7 @@ public class SpielModel {
 			try{
 				while(alleSpielerSQL.next()){
 					try{
-						alleSpieler.add(new Spieler(alleSpielerSQL.getString("name")));
+						alleSpieler.add(new Spieler(alleSpielerSQL.getString("name"),alleSpielerSQL.getInt("punktzahl")));
 					}catch(SQLException ex){
 						ex.printStackTrace();
 					}

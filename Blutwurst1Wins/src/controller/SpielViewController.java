@@ -207,7 +207,6 @@ public class SpielViewController implements Runnable{
 	private Spieler gegner;
 	
 	public SpielViewController(SpielModel model){
-		
 		this.model = model;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SpielView.fxml"));
 		fxmlLoader.setController(this);
@@ -219,6 +218,7 @@ public class SpielViewController implements Runnable{
 		}
 		
 		this.spielfeld = new Feld(model);
+		this.gesamt.setText(""+model.getSelbst().getPunktzahl());
 		
 		feld[0][0] = a1;
 		feld[1][0] = b1;

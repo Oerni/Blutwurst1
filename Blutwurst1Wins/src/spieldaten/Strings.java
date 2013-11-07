@@ -29,4 +29,5 @@ public class Strings {
 	public static final String ALLE_GEGNER = "SELECT name FROM spieler WHERE name <> '" + NAME + "' ORDER BY name ASC;";
 	public static final String ALLE_SAETZE = "SELECT COUNT(id) AS anzahlsaetze FROM satz;";
 	public static final String OFFENE_SPIELE_MIT_GEGNER = "SELECT * FROM spiel WHERE gegner='%s' AND gewinner IS NULL";
+	public static final String EIGENER_SPIELER = "SELECT * FROM spieler WHERE name = '" + NAME + "';";
 }

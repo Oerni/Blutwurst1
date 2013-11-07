@@ -8,6 +8,7 @@ public class Spieler extends DBObject{
 	 */
 	private String name;
 	private char kennzeichnung;		// Spieler X oder Spieler O
+	private int punktzahl;
 	
 	public Spieler(String name,char kennzeichnung){
 		this.name = name;
@@ -15,6 +16,16 @@ public class Spieler extends DBObject{
 	}
 	public Spieler(String name){
 		this.name = name;
+		this.punktzahl = 0;
+	}
+	
+	public Spieler(String name,int punktzahl){
+		this.name = name;
+		this.punktzahl = punktzahl;
+	}
+	
+	public int getPunktzahl(){
+		return this.punktzahl;
 	}
 	
 	public char getKennzeichnung(){
