@@ -51,6 +51,6 @@ public class Spieler extends DBObject{
 	
 	@Override
 	public void aktualisieren(){
-		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name,this.punktzahl));
+		HSQLConnection.getInstance().update(String.format(Strings.SPIELER_AKTUALISIEREN,this.name,this.punktzahl,this.name));
 	}
 }

@@ -45,6 +45,10 @@ public class SpielModel {
 		this.runde++;
 	}
 	
+	public void rundeZuruecksetzen(){
+		this.runde = 1;
+	}
+	
 	public void setSatzStatus(String satzStatus){
 		this.satzStatus = satzStatus;
 	}
@@ -166,6 +170,19 @@ public class SpielModel {
 	public void zugAnServer(Zug zug){
 		zug.setSpieler(spiel.getSelbst());
 		dateiverwaltung.dateiSchreiben(zug);
+	}
+	
+	public void neuesSpielStarten(){
+		Spieler gegner = spiel.getGegner();
+		satzStatus = "";
+		this.spiel = new Spiel(gegner,selbst);
+		this.spiel.satzHinzufuegen(new Satz(spiel));
+	}
+	
+	public void spielZuruecksetzen(){
+		this.spiel = null;
+		this.runde = 1;
+		this.satzStatus = "";
 	}
 	
 	public void allesZuruecksetzen(){

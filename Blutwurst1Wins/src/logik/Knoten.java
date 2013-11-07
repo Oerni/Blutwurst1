@@ -13,8 +13,6 @@ public class Knoten {
 //	Bewertung des gegnerischen Wurfs
 	private int min;
 	private Stack<Kante> nachbarn = new Stack<Kante>();
-	private boolean spielGewonnen = false;
-	public static final int GEWONNEN = Integer.MAX_VALUE;
 	
 	public Knoten(int spalte,int zeile){
 		this.zeile = zeile;
@@ -127,18 +125,12 @@ public class Knoten {
 		
 		return bewertung;
 	}
-	
-	public boolean spielGewonnen(){
-		return spielGewonnen;
-	}
-	
+
 	public int erhoeheBewertungDurchAnzahlFelder(int anzahlFelder){
 		return anzahlFelder >= 3 ? 1 : 0;
 	}	
 	
 	public int wertDurchEigeneSteine(int richtung,Spieler spieler,int zaehler){		
-		if(zaehler == 3)
-			this.spielGewonnen = true;
 		for(Kante k : nachbarn){
 			if(k.getRichtung() == richtung){
 				if(k.getNachbarn().getBesetztVon() == spieler){

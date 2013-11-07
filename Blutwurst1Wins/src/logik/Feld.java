@@ -94,7 +94,10 @@ public class Feld {
 			bewertungen[ueberprueft] += eigenerZug.getMax();
 			
 			k.spielerEntfernen();
+			k.maxZuruecksetzen();
 			gegnerZug.spielerEntfernen();
+			gegnerZug.minZuruecksetzen();
+			eigenerZug.maxZuruecksetzen();
 			ueberprueft++;
 		}
 		
@@ -109,12 +112,6 @@ public class Feld {
 			System.out.println("Bewertung der Spalte " + i + ": " + bewertungen[i]);
 		}
 		return unserZug;
-		
-//		if(unserZug!=null){
-//			this.spielGewonnen = unserZug.spielGewonnen();
-//			return unserZug.getSpalte();
-//		}
-//		return -1;
 	}
 	
 	private Stack<Knoten> zuUeberpruefendeKnoten(){
