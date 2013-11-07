@@ -133,7 +133,7 @@ public class Spiel extends DBObject{
 		return sieger;
 	}
 	public String getSiegerName(){
-		return sieger.getName();
+		return sieger!=null ? sieger.getName() : "";
 	}
 	public void setSieger(Spieler sieger){
 		this.sieger = sieger;
