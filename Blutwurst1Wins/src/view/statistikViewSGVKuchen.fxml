@@ -15,7 +15,7 @@
   <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="21.0" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="750.0" />
     <Text layoutX="301.0" layoutY="17.0" scaleX="0.9662648288740485" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4Gewinnt - blutwurst1 " />
-    <FlowPane layoutX="8.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld">
+    <FlowPane layoutX="8.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" styleClass="spielfeld" visible="true">
       <children>
         <TableView fx:id="spielhistorieTable" prefHeight="381.0" prefWidth="447.0">
           <columns>
@@ -83,9 +83,10 @@
         <NumberAxis id="yAchse" side="LEFT" />
       </yAxis>
     </BarChart>
-    <TableView fx:id="highscoreTabelle" layoutX="8.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" visible="false">
+    <TableView fx:id="highscoreTabelle" layoutX="8.0" layoutY="88.0" prefHeight="381.0" prefWidth="447.0" visible="true">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="224.0" text="Spielername" fx:id="spielernameSpalte" />
+        <TableColumn prefWidth="75.0" text="Rank." fx:id="rankingSpalte" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="174.0" text="Spielername" fx:id="spielernameSpalte" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="223.0" text="Anzahl Siege" fx:id="anzahlSiegeSpalte" />
       </columns>
     </TableView>

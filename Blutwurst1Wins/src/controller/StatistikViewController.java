@@ -38,7 +38,7 @@ public class StatistikViewController {
 	@FXML
 	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte,siegerSpalte;
 	@FXML
-	private TableColumn spielernameSpalte, anzahlSiegeSpalte;
+	private TableColumn rankingSpalte, spielernameSpalte, anzahlSiegeSpalte;
 	@FXML
 	private Text infoSpielhistorie, infoStartGewinnVerlustKuchen, infoAnzahlGewinneVerluste, infoGewinnVerlustKuchen;
 	
