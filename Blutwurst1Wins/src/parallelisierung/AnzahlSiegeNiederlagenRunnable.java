@@ -14,10 +14,8 @@ public class AnzahlSiegeNiederlagenRunnable implements Runnable{
 		this.model = model;
 	}
 	public void run(){
-		SemaphorManager.getInstance().lesezugriffAnmelden();
 		ResultSet anzahlNiederlagenSQL = HSQLConnection.getInstance().executeQuery(Strings.ANZAHL_NIEDERLAGEN);
 		ResultSet anzahlSiegeSQL = HSQLConnection.getInstance().executeQuery(Strings.ANZAHL_SIEGE);
-		SemaphorManager.getInstance().lesezugriffAbmelden();
 		
 		try{
 			anzahlNiederlagenSQL.next();

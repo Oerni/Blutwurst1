@@ -14,12 +14,9 @@ public class SpeichernRunnable implements Runnable{
 	@Override
 	public void run(){
 		try{
-//			System.out.println(objekt +" speichern");
 			objekt.speichern();
-//			System.out.println(objekt +" gespeichert");
 		}
 		catch(SQLIntegrityConstraintViolationException ex){
-//			ex.printStackTrace();
 		}
 		catch(SQLException ex){
 			ex.printStackTrace();

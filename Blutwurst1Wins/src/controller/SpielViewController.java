@@ -408,7 +408,7 @@ public class SpielViewController implements Runnable{
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
 		model.getSpiel().erhoehePunkteHeim();
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
-//		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
 //		spielstandHeim.
 		if(model.getSpiel().getPunkteHeim() >= 2){
 //			Spiel gewonnen
