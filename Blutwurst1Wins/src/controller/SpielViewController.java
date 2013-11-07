@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Stack;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -408,7 +409,14 @@ public class SpielViewController implements Runnable{
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
 		model.getSpiel().erhoehePunkteHeim();
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
-		spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+//		Thread-Wechsel
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run(){
+				spielstandHeim.setText(""+model.getSpiel().getPunkteHeim());
+			}
+		
+		});
 //		spielstandHeim.
 		if(model.getSpiel().getPunkteHeim() >= 2){
 //			Spiel gewonnen
