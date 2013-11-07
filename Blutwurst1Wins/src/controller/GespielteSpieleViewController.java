@@ -126,7 +126,7 @@ public class GespielteSpieleViewController {
 		
 		public GespielteSpieleViewController(GespielteSpieleModel sModel){
 			this.model = sModel;
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/simulationView.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/GespielteSpieleView.fxml"));
 			fxmlLoader.setController(this);
 						
 			try{

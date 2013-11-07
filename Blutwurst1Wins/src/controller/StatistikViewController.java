@@ -48,7 +48,7 @@ public class StatistikViewController {
 	
 	public StatistikViewController(StatistikModel sModel){
 		this.model = sModel;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/statistikViewSGVKuchen.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/StatistikView.fxml"));
 		fxmlLoader.setController(this);
 		try{
 		Thread.sleep(600);
