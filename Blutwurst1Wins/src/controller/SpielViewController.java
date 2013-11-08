@@ -67,6 +67,12 @@ public class SpielViewController implements Runnable{
 	@FXML
 	private Button spielfeldVollAnzeigeNeuerSatzButton;
 	@FXML
+	private Button gewinnAnzeigeNeueRundeButton;
+	@FXML
+	private Button verlustAnzeigeNeueRundeButton;
+	@FXML
+	private Button spielfeldVollAnzeigeNeueRundeButton;
+	@FXML
 	private Label satzstatus;
 	@FXML
 	private Label runde;
@@ -361,6 +367,9 @@ public class SpielViewController implements Runnable{
 	public void setSatz(String satz){
 		this.satz.setText(satz);
 	}
+	public void setGesamtPunkte(String gesamt){
+		this.gesamt.setText(gesamt);
+	}
 	
 	public void run(){
 				model.setSatzStatus("spielen");
@@ -455,6 +464,7 @@ public class SpielViewController implements Runnable{
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
 		model.getSpiel().erhoehePunkteHeim(2);
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
+		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getSelbst()));
 //		Thread-Wechsel
 		Platform.runLater(new LabelAendernRunnable(this,model));
 		
@@ -472,8 +482,10 @@ public class SpielViewController implements Runnable{
 			if(model.getRunde() == 1 && model.getSpiel().getAnzahlSaetze() == 2){
 //				Ende der 1. Runde -> Neue Runde
 //				Schließen oder neue Runde klicken
+				gewinnAnzeigeNeueRundeButton.setVisible(true);
 			}else if(model.getRunde() == 2 && model.getSpiel().getAnzahlSaetze() == 3){
 //				Ende der 2. Runde; kein Sieger
+//				gleichstandAnzeige.setVisible(true);
 			}else{
 //				weiterspielen
 //				Schließen oder neuer Satz
@@ -510,6 +522,7 @@ public class SpielViewController implements Runnable{
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
 		model.getSpiel().erhoehePunkteGegner(2);
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
+		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getGegner()));
 		
 		Spieler sieger = ermittleSieger();
 		if(sieger!=null){
@@ -524,9 +537,10 @@ public class SpielViewController implements Runnable{
 		}else{
 			if(model.getRunde() == 1 && model.getSpiel().getAnzahlSaetze() == 2){
 //				Ende der 1. Runde -> Neue Runde
-				
+				verlustAnzeigeNeueRundeButton.setVisible(true);
 			}else if(model.getRunde() == 2 && model.getSpiel().getAnzahlSaetze() == 3){
 //				Ende der 2. Runde; kein Sieger
+//				gleichstandAnzeige.setVisible(true);
 			}else{
 //				weiterspielen
 				verlustAnzeigeNeuerSatzButton.setVisible(true);
@@ -541,10 +555,10 @@ public class SpielViewController implements Runnable{
 		model.getSpiel().erhoehePunkteGegner(1);
 		if(model.getRunde() == 1 && model.getSpiel().getAnzahlSaetze() == 2){
 //				Ende der 1. Runde -> Neue Runde
-			ThreadExecutor.getInstance().spielStarten(this);
+			spielfeldVollAnzeigeNeueRundeButton.setVisible(true);
 		}else if(model.getRunde() == 2 && model.getSpiel().getAnzahlSaetze() == 3){
 //				Ende der 2. Runde; kein Sieger
-				
+//				gleichstandAnzeige.setVisible(true);
 		}else{
 //				weiterspielen
 			spielfeldVollAnzeigeNeuerSatzButton.setVisible(true);
@@ -858,6 +872,7 @@ public class SpielViewController implements Runnable{
 	
 	public void spielZuruecksetzen(){
 		model.spielZuruecksetzen();
+		Platform.runLater(new LabelAendernRunnable(this,model));
 		spielfeld = new Feld(model);
 		for(int i=0;i<7;i++)
 			for(int j=0;j<6;j++)
@@ -866,10 +881,24 @@ public class SpielViewController implements Runnable{
 	
 	@FXML
 	public void allesZuruecksetzen(){
+		gegnerAuswahlBox.getItems().removeAll(model.getAlleSpieler());
 		model.allesZuruecksetzen();
 		this.spielfeld = new Feld(model);
 		Platform.runLater(new LabelAendernRunnable(this,model));
 		resetMenuSchliessen();
+	}
+	
+	@FXML
+	public void neueRundeStarten(){
+		gewinnAnzeige.setVisible(false);
+		verlustAnzeige.setVisible(false);
+		spielfeldVollAnzeige.setVisible(false);
+		gewinnAnzeigeNeueRundeButton.setVisible(false);
+		verlustAnzeigeNeueRundeButton.setVisible(false);
+		spielfeldVollAnzeigeNeueRundeButton.setVisible(false);
+		
+		this.spielZuruecksetzen();
+		model.naechsteRunde();
 	}
 	
 	@FXML

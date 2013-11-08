@@ -192,6 +192,9 @@ public class SpielModel {
 		HSQLConnection.getInstance().loeschen(Strings.ZUG_ZURUECKSETZEN);
 		this.spiel = null;
 		this.runde = 1;
+		selbst.punktzahlZuruecksetzen();
+		alleSpieler = new Stack<Spieler>();	
+		ThreadExecutor.getInstance().execute(new SpeichernRunnable(selbst));
 	}
 	
 	public DateiVerwaltung getDateiVerwaltung(){

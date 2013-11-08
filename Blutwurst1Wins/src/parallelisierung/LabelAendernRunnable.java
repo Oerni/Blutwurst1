@@ -29,7 +29,7 @@ public class LabelAendernRunnable implements Runnable{
 			controller.setRunde("");
 		}
 		controller.setSatzStatus(model.getSatzStatus());
-		
+		controller.setGesamtPunkte(""+model.getSelbst().getPunktzahl());
 		
 	}
 }

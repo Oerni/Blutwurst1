@@ -28,6 +28,10 @@ public class Spieler extends DBObject{
 		return this.punktzahl;
 	}
 	
+	public void punktzahlZuruecksetzen(){
+		this.punktzahl = 0;
+	}
+	
 	public void erhoehePunktzahl(int punktzahl){
 		this.punktzahl += punktzahl;
 	}
