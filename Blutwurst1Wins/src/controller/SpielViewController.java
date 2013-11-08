@@ -200,7 +200,9 @@ public class SpielViewController implements Runnable{
 	@FXML
 	private TextField gegnerNameEingabe, neuerSpielerName;
 	@FXML
-	private TextField pfadEingabe, siegerEintrag;
+	private TextField pfadEingabe;
+	@FXML
+	private ComboBox<Spieler> siegerEintrag;
 	@FXML
 	private RadioButton radioButtonX, radioButtonO;
 	@FXML
@@ -594,6 +596,24 @@ public class SpielViewController implements Runnable{
 		ThreadExecutor.getInstance().execute(new PfadSchreibenRunnable(pfad,model));
 //		Pruefen, ob noch offene Spiele abgelegt sind
 		ObservableList<Spiel> offeneSpiele = model.getOffeneSpiele(this.gegner);
+		
+		siegerEintrag.setConverter(new StringConverter<Spieler>() {
+			@Override
+			public String toString(Spieler spieler){
+				return spieler.getName();
+			}
+
+			@Override
+			public Spieler fromString(String name) {
+				Spieler spieler = model.getGegner(name);
+				return spieler != null ? spieler : model.getSelbst();
+			}
+			
+		});
+		
+		siegerEintrag.getItems().add(this.gegner);
+		siegerEintrag.getItems().add(model.getSelbst());
+		
 		if(offeneSpiele.isEmpty()){
 			model.init(pfad,this.gegner,eigeneKennzeichnung);
 			ThreadExecutor.getInstance().spielStarten(this);
@@ -909,8 +929,11 @@ public class SpielViewController implements Runnable{
 	
 	@FXML
 	public void gleichstandAnzeigeSchliessen(){
-		gleichstandAnzeige.setVisible(false);
-		//siegerEintrag
+		Spieler spieler = siegerEintrag.getSelectionModel().getSelectedItem();
+		if(spieler!=null){
+			model.getSpiel().setSieger(spieler);
+			gleichstandAnzeige.setVisible(false);
+		}	
 	}
 	
 	@FXML
