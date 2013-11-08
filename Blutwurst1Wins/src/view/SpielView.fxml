@@ -118,7 +118,7 @@
         <Text layoutX="25.0" layoutY="-30.0" scaleX="1.0873207093131305" scaleY="0.7480773198099262" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielregeln&#10;&#10;         &#10;Satz         &#10;&#10;  Sieg: 2 Punkte         &#10;  Remis: 1 Punkt         &#10;  Niederlage: 0 Punkte         &#10;&#10;Spiel         &#10;&#10;  Ein Spiel besteht in Runde 1 aus 2 Saetzen und in Runde 2          &#10;  aus 3 Saetzen.         &#10;&#10;Runde         &#10;&#10;  Turnierergebnis wird in ein oder zwei Runden ermittelt.          &#10;  Runde 2 ist nur noetig, wenn in Runde 1 kein eindeutiges         &#10;  Ergebnis bestimmt werden kann.         &#10;&#10;  Runde 1 besteht aus 2 Saetzen und jeder spielt gegen jeden.         &#10;  Bei 6 Teams sind das 15 Spiele a 2 Saetze.   &#10;  Runde 2 besteht aus 3 Saetzen und einer verminderte Zugzeit.   &#10;  Steht es nach Satz 2 immer noch unentschieden, entscheidet    &#10;  der 3. Satz  bei zufaelliger Wahl des Startspielers und    &#10;  Remisaufloesung durch den Server." />
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="spielstartMenu" layoutX="219.0" layoutY="183.0" minHeight="104.50006103515625" minWidth="313.0" prefHeight="220.5" prefWidth="317.0" visible="true">
+    <AnchorPane fx:id="spielstartMenu" layoutX="219.0" layoutY="183.0" minHeight="104.50006103515625" minWidth="313.0" prefHeight="220.5" prefWidth="317.0" visible="false">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="185.49993896484375" layoutX="0.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
