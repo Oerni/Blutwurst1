@@ -275,12 +275,12 @@
         <Button fx:id="spielfeldvollAnzeigeNeueRundeButton" layoutX="152.0" layoutY="95.0" mnemonicParsing="false" onAction="#neueRundeStarten" text="neue Runde" visible="false" />
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="gleichstandAnzeige" layoutX="235.0" layoutY="185.0" prefHeight="115.5" prefWidth="280.0" visible="true">
+    <AnchorPane fx:id="gleichstandAnzeige" layoutX="235.0" layoutY="185.0" prefHeight="115.5" prefWidth="280.0" visible="false">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="126.00006103515625" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="279.37689208984375" />
         <Text layoutX="103.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gleichstand" underline="true" />
         <Text layoutX="24.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gewinner wird nun zufällig generiert" />
-        <Button fx:id="gleichstandAnzeigeButton" layoutX="119.0" layoutY="93.0" mnemonicParsing="false" text="OK" />
+        <Button fx:id="gleichstandAnzeigeButton" layoutX="119.0" layoutY="93.0" mnemonicParsing="false" onAction="#gleichstandAnzeigeSchliessen" text="OK" />
       </children>
     </AnchorPane>
     <ImageView id="spielregelnButtonOrange.png" fx:id="spielregelnButtonOrange" fitHeight="51.0" fitWidth="67.529296875" layoutX="384.0" layoutY="32.0" visible="false">
