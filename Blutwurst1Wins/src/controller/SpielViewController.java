@@ -453,7 +453,7 @@ public class SpielViewController implements Runnable{
 	private void spielGewonnen(){
 		model.getSpiel().getAktuellenSatz().setSieger(model.getSpiel().getSelbst());
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
-		model.getSpiel().erhoehePunkteHeim();
+		model.getSpiel().erhoehePunkteHeim(2);
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
 //		Thread-Wechsel
 		Platform.runLater(new LabelAendernRunnable(this,model));
@@ -474,7 +474,6 @@ public class SpielViewController implements Runnable{
 //				Schließen oder neue Runde klicken
 			}else if(model.getRunde() == 2 && model.getSpiel().getAnzahlSaetze() == 3){
 //				Ende der 2. Runde; kein Sieger
-				
 			}else{
 //				weiterspielen
 //				Schließen oder neuer Satz
@@ -509,7 +508,7 @@ public class SpielViewController implements Runnable{
 	private void spielVerloren(){
 		model.getSpiel().getAktuellenSatz().setSieger(model.getSpiel().getGegner());
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel().getAktuellenSatz()));
-		model.getSpiel().erhoehePunkteGegner();
+		model.getSpiel().erhoehePunkteGegner(2);
 		ThreadExecutor.getInstance().execute(new AktualisierenRunnable(model.getSpiel()));
 		
 		Spieler sieger = ermittleSieger();
@@ -528,7 +527,6 @@ public class SpielViewController implements Runnable{
 				
 			}else if(model.getRunde() == 2 && model.getSpiel().getAnzahlSaetze() == 3){
 //				Ende der 2. Runde; kein Sieger
-				
 			}else{
 //				weiterspielen
 				verlustAnzeigeNeuerSatzButton.setVisible(true);
@@ -539,6 +537,8 @@ public class SpielViewController implements Runnable{
 		//verlustAnzeigenLabel
 	}
 	private void spielfeldVoll(){
+		model.getSpiel().erhoehePunkteHeim(1);
+		model.getSpiel().erhoehePunkteGegner(1);
 		if(model.getRunde() == 1 && model.getSpiel().getAnzahlSaetze() == 2){
 //				Ende der 1. Runde -> Neue Runde
 			ThreadExecutor.getInstance().spielStarten(this);
