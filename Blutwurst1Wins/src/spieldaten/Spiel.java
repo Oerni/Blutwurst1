@@ -56,12 +56,14 @@ public class Spiel extends DBObject{
 		return selbst.getKennzeichnung() == kennzeichnung ? selbst : gegner;
 	}
 	
-	public void erhoehePunkteHeim(){
-		this.punkteHeim++;
+	public void erhoehePunkteHeim(int punkte){
+		this.punkteHeim += punkte;
+		this.selbst.erhoehePunktzahl(punkte);
 	}
 	
-	public void erhoehePunkteGegner(){
-		this.punkteGegner++;
+	public void erhoehePunkteGegner(int punkte){
+		this.punkteGegner += punkte;
+		this.gegner.erhoehePunktzahl(punkte);
 	}
 	
 	public Stack<Satz> getSaetze(){
