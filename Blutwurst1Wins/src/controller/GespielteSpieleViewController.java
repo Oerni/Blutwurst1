@@ -1,21 +1,20 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.stage.WindowEvent;
 import javafx.util.StringConverter;
 import spieldaten.GespielteSpieleModel;
 import spieldaten.Satz;
@@ -137,7 +136,13 @@ public class GespielteSpieleViewController {
 			try{
 				Pane pane = (Pane)fxmlLoader.load();
 				scene = new Scene(pane);
-						
+				model.getStage().setOnCloseRequest(new EventHandler<WindowEvent>(){
+					@Override
+					public void handle(WindowEvent event){
+						Platform.exit();
+						model.getStage().close();
+					}
+				});
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}

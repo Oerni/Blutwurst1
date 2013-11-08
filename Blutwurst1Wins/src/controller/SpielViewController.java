@@ -6,6 +6,7 @@ import java.util.Stack;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -29,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import logik.Feld;
@@ -214,9 +216,9 @@ public class SpielViewController implements Runnable{
 	@FXML
 	private Text gegnerNameText;
 	@FXML
-	private TableColumn spielnummerOffeneSpieleSpalte, spielstandOffeneSpieleSpalte;
+	private TableColumn<Spiel,String> spielnummerOffeneSpieleSpalte, spielstandOffeneSpieleSpalte;
 	@FXML
-	private TableView offeneSpieleTabelle;
+	private TableView<Spiel> offeneSpieleTabelle;
 
 //	Zwischenspeichern von Pfad, Gegnernamen und kennzeichnung
 	private String pfad;
@@ -230,6 +232,14 @@ public class SpielViewController implements Runnable{
 		try{
 			Pane pane = (Pane)fxmlLoader.load();
 			scene = new Scene(pane);
+			model.getPrimaryStage().setOnCloseRequest(new EventHandler<WindowEvent>(){
+				@Override
+				public void handle(WindowEvent event){
+					Platform.exit();
+					model.getPrimaryStage().close();
+					System.exit(0);
+				}
+			});
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}

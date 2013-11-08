@@ -1,7 +1,9 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -16,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import parallelisierung.AnzahlSiegeNiederlagenRunnable;
+import javafx.stage.WindowEvent;
 import spieldaten.GespielteSpieleModel;
 import spieldaten.Spiel;
 import statistikdaten.Highscore;
@@ -40,9 +42,9 @@ public class StatistikViewController {
 	@FXML
 	private TableView<Spiel> spielhistorieTable;
 	@FXML
-	private TableColumn spielnummerSpalte,spielstandSpalte,gegnerSpalte,spielzuegeSpalte,siegerSpalte;
+	private TableColumn<Spiel,String> spielnummerSpalte,spielstandSpalte,gegnerSpalte,siegerSpalte;
 	@FXML
-	private TableColumn rankingSpalte, spielernameSpalte, anzahlSiegeSpalte;
+	private TableColumn<Highscore,String> rankingSpalte, spielernameSpalte, anzahlSiegeSpalte;
 	@FXML
 	private Text infoSpielhistorie, infoStartGewinnVerlustKuchen, infoAnzahlGewinneVerluste, infoGewinnVerlustKuchen;
 	
@@ -59,13 +61,17 @@ public class StatistikViewController {
 			Pane pane = (Pane)fxmlLoader.load();
 			scene = new Scene(pane);
 			gewinnVerlustKuchenAnzeigen();
-			
+			model.getStage().setOnCloseRequest(new EventHandler<WindowEvent>(){
+				@Override
+				public void handle(WindowEvent event){
+					Platform.exit();
+					model.getStage().close();
+				}
+			});
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 		
-//		CategoryAxis xAchse = new CategoryAxis();
-//		NumberAxis yAchse = new NumberAxis();
 		anzahlGewinneVerlusteDiagramm.setTitle("Anzahl Gewinne/Verluste");
 		
 		ObservableList<Spiel> spieldaten = model.getSpieldaten();

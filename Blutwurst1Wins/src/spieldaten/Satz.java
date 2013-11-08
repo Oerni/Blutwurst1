@@ -4,8 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Stack;
 
-import parallelisierung.SemaphorManager;
-
 public class Satz extends DBObject{
 	
 	/**
