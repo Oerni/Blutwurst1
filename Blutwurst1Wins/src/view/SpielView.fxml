@@ -271,9 +271,16 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.999893188476562" layoutX="0.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
         <Text layoutX="9.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satz beendet" />
         <Text layoutX="110.0" layoutY="48.0" scaleX="1.235155436153298" scaleY="1.371595547901518" strokeType="OUTSIDE" strokeWidth="0.0" text="Unentschieden" textAlignment="CENTER" />
-        <Text layoutX="114.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielfeld voll" />
         <Button fx:id="spielfeldVollAnzeigeNeuerSatzButton" layoutX="155.0" layoutY="96.0" mnemonicParsing="false" onAction="#spielfeldVollAnzeigeNeuerSatzStarten" text="neuer Satz" />
         <Button fx:id="spielfeldvollAnzeigeNeueRundeButton" layoutX="152.0" layoutY="95.0" mnemonicParsing="false" onAction="#neueRundeStarten" text="neue Runde" visible="false" />
+      </children>
+    </AnchorPane>
+    <AnchorPane fx:id="gleichstandAnzeige" layoutX="235.0" layoutY="185.0" prefHeight="115.5" prefWidth="280.0" visible="true">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="126.00006103515625" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="279.37689208984375" />
+        <Text layoutX="103.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gleichstand" underline="true" />
+        <Text layoutX="24.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gewinner wird nun zufällig generiert" />
+        <Button fx:id="gleichstandAnzeigeButton" layoutX="119.0" layoutY="93.0" mnemonicParsing="false" text="OK" />
       </children>
     </AnchorPane>
     <ImageView id="spielregelnButtonOrange.png" fx:id="spielregelnButtonOrange" fitHeight="51.0" fitWidth="67.529296875" layoutX="384.0" layoutY="32.0" visible="false">
