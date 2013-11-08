@@ -200,7 +200,7 @@ public class SpielViewController implements Runnable{
 	@FXML
 	private TextField gegnerNameEingabe, neuerSpielerName;
 	@FXML
-	private TextField pfadEingabe;
+	private TextField pfadEingabe, siegerEintrag;
 	@FXML
 	private RadioButton radioButtonX, radioButtonO;
 	@FXML
@@ -910,6 +910,7 @@ public class SpielViewController implements Runnable{
 	@FXML
 	public void gleichstandAnzeigeSchliessen(){
 		gleichstandAnzeige.setVisible(false);
+		//siegerEintrag
 	}
 	
 	@FXML
