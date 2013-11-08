@@ -280,7 +280,15 @@
         <Text layoutX="103.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gleichstand" underline="true" />
         <Text layoutX="24.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gewinner wird nun zufällig generiert" />
         <Button fx:id="gleichstandAnzeigeButton" layoutX="119.0" layoutY="131.0" mnemonicParsing="false" onAction="#gleichstandAnzeigeSchliessen" text="OK" />
-        <TextField fx:id="siegerEintrag" layoutX="66.0" layoutY="96.0" prefWidth="149.0" promptText="Sieger ..." />
+        <ComboBox fx:id="siegerEintrag" layoutX="101.0" layoutY="95.0" promptText="Sieger">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
       </children>
     </AnchorPane>
     <ImageView id="spielregelnButtonOrange.png" fx:id="spielregelnButtonOrange" fitHeight="51.0" fitWidth="67.529296875" layoutX="384.0" layoutY="32.0" visible="false">
